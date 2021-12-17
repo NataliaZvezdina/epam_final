@@ -21,7 +21,7 @@ public class LoginUserCommand implements Command {
     public Router execute(HttpServletRequest request) {
         String login = request.getParameter(RequestParameter.LOGIN);
         String password = request.getParameter(RequestParameter.PASSWORD);
-        logger.log(Level.INFO, "req attr login: {}, password:{}", login, password);
+        logger.log(Level.INFO, "reqг attr login: {}, password:{}", login, password);
 
         Optional<User> optionalUser = null;
         try {
