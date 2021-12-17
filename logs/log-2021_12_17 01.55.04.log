@@ -1,0 +1,3 @@
+2021-12-17 01:55:06 [main] [takeConnection] [82] DEBUG zvezdina.bodyartsalon.model.pool.CustomConnectionPool - Taken connection
+2021-12-17 01:55:06 [main] [releaseConnection] [98] DEBUG zvezdina.bodyartsalon.model.pool.CustomConnectionPool - Released connection
+2021-12-17 01:55:06 [main] [findByLogin] [146] DEBUG bodyartsalon.model.dao.impl.UserDaoImpl - Found user: User{userId=5, login='leo_leshij', password='********', firstName='leonid', lastName='leonidych', email='leo@gmail.com', phone='+375 25 5566911', role=PIERCER, userStatus=ACTIVE}
