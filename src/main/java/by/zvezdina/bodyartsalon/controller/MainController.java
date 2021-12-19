@@ -40,11 +40,11 @@ public class MainController extends HttpServlet {
         switch (router.getRouterType()) {
             case FORWARD:
                 request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                logger.log(Level.DEBUG, "forward to" + router.getPagePath());
+                logger.log(Level.DEBUG, "forward to " + router.getPagePath());
                 break;
             case REDIRECT:
                 response.sendRedirect(router.getPagePath());
-                logger.log(Level.DEBUG, "redirect to" + router.getPagePath());
+                logger.log(Level.DEBUG, "redirect to " + router.getPagePath());
                 break;
             default:
                 logger.log(Level.ERROR, "incorrect router type: {}", router.getRouterType());

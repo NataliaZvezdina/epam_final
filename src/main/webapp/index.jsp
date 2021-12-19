@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<c:redirect url="jsp/login-page.jsp"/>
-
+<%--<c:redirect url="jsp/login-page.jsp"/>--%>
+<a href="jsp/main.jsp">To main</a>
 </body>
 </html>
