@@ -1,6 +1,4 @@
 
-O
-src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 v
 Fsrc/main/java/by/zvezdina/bodyartsalon/model/pool/ProxyConnection.java,6\e\6e089f44bda36ccc1d79da0e7018c630a84eceb3
 w
@@ -63,10 +61,6 @@ v
 Fsrc/main/java/by/zvezdina/bodyartsalon/exception/ServiceException.java,e\0\e034d02384d2fee8debb8a21cf35ff22510ebfeb
 v
 Fsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/UserDaoImpl.java,1\f\1f477364ffc9fd12afa5ea7a6dbdde70e5c0e642
-{
-Ksrc/main/java/by/zvezdina/bodyartsalon/model/pool/CustomConnectionPool.java,9\e\9e4cd4b41e8642e1840d18237b0335fdfd7a01bf
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 P
  logs/log-2021_12_17 01.55.04.log,0\f\0fd85d1bd7d27b52bd8eb7b819ba7e9347fcbdb7
 O
@@ -81,3 +75,9 @@ t
 Dsrc/main/java/by/zvezdina/bodyartsalon/command/RequestParameter.java,4\3\43115b5be420b21053251a3e0ed840d5a12ba5cc
 t
 Dsrc/main/java/by/zvezdina/bodyartsalon/command/RequestAttribute.java,6\f\6f0ed3620d42a332cd2d330c2add97daf67cf240
+}
+Msrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToLoginPageCommand.java,8\c\8cc48daccf527f11398c497f227789522411e48b
+
+Osrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToProfilePageCommand.java,f\5\f55af4c89bcc8514842a0d3f928c790dadceead5
+y
+Isrc/main/java/by/zvezdina/bodyartsalon/command/impl/LoginUserCommand.java,b\4\b44b0dbae9e01406a0119e5ec131db2c668a0385
