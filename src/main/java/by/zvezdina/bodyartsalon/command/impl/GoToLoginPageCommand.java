@@ -6,7 +6,7 @@ import by.zvezdina.bodyartsalon.command.Router;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-public class GoToLoginPageCommand implements Command {
+public class GoToLoginPageCommand implements Command {  // to delete
 
     @Override
     public Router execute(HttpServletRequest request) {

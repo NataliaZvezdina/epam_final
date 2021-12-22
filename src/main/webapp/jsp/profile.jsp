@@ -11,6 +11,6 @@
     <title>Profile page</title>
 </head>
 <body>
-Hi ${user.login}
+Hi ${sessionScope.user_name} !!
 </body>
 </html>

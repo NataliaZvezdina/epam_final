@@ -9,8 +9,10 @@ public final class RequestAttribute {
 
     public static final String EXCEPTION = "exception";
     public static final String MESSAGE = "message";
+    public static final String ERROR_MESSAGE = "error_message";
 
     public static final String USER = "user";
+    public static final String LOGIN = "login";
 
     private RequestAttribute() {
     }

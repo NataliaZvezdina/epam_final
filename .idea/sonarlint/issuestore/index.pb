@@ -63,13 +63,7 @@ v
 Fsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/UserDaoImpl.java,1\f\1f477364ffc9fd12afa5ea7a6dbdde70e5c0e642
 P
  logs/log-2021_12_17 01.55.04.log,0\f\0fd85d1bd7d27b52bd8eb7b819ba7e9347fcbdb7
-O
-src/main/webapp/jsp/profile.jsp,8\8\88f74945605bf391410b846b2dbe1ab590185fbc
 u
 Esrc/main/java/by/zvezdina/bodyartsalon/model/service/UserService.java,9\0\90c272993283b47fd998200572ae908d9c16e7b3
 ~
 Nsrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/UserServiceImpl.java,c\5\c5970cb3dfb3277c4b2fed7bf214a519d53b5444
-
-Osrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToProfilePageCommand.java,f\5\f55af4c89bcc8514842a0d3f928c790dadceead5
-y
-Isrc/main/java/by/zvezdina/bodyartsalon/command/impl/LoginUserCommand.java,b\4\b44b0dbae9e01406a0119e5ec131db2c668a0385

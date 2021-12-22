@@ -5,7 +5,7 @@ import by.zvezdina.bodyartsalon.command.PagePath;
 import by.zvezdina.bodyartsalon.command.Router;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class GoToProfilePageCommand implements Command {
+public class GoToProfilePageCommand implements Command { // to delete
 
     @Override
     public Router execute(HttpServletRequest request) {

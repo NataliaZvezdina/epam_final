@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class LoginUserCommand implements Command {
+public class LoginUserCommand implements Command { // to delete
     private static final Logger logger = LogManager.getLogger();
     private UserService userService = UserServiceImpl.getInstance();
 
