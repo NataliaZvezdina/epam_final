@@ -2,6 +2,8 @@ package by.zvezdina.bodyartsalon.command;
 
 public final class RequestParameter {
 
+    public static final String LOCALE = "locale";
+
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
 

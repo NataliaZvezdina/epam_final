@@ -1,9 +1,6 @@
 package by.zvezdina.bodyartsalon.command;
 
-import by.zvezdina.bodyartsalon.command.impl.DefaultCommand;
-import by.zvezdina.bodyartsalon.command.impl.GoToLoginPageCommand;
-import by.zvezdina.bodyartsalon.command.impl.GoToProfilePageCommand;
-import by.zvezdina.bodyartsalon.command.impl.LoginUserCommand;
+import by.zvezdina.bodyartsalon.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +11,7 @@ public class CommandProvider {
     private final Map<CommandType, Command> commands = new HashMap<>();
 
     private CommandProvider() {
+        commands.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
         commands.put(CommandType.DEFAULT, new DefaultCommand());
         commands.put(CommandType.GO_TO_LOGIN, new GoToLoginPageCommand());
         commands.put(CommandType.LOGIN_USER, new LoginUserCommand());

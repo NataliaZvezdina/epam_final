@@ -69,14 +69,6 @@ u
 Esrc/main/java/by/zvezdina/bodyartsalon/model/service/UserService.java,9\0\90c272993283b47fd998200572ae908d9c16e7b3
 ~
 Nsrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/UserServiceImpl.java,c\5\c5970cb3dfb3277c4b2fed7bf214a519d53b5444
-j
-:src/main/java/by/zvezdina/bodyartsalon/command/Router.java,3\a\3a0885ca0e9e9a7271c4a7b6b3e7367103aeb4ab
-t
-Dsrc/main/java/by/zvezdina/bodyartsalon/command/RequestParameter.java,4\3\43115b5be420b21053251a3e0ed840d5a12ba5cc
-t
-Dsrc/main/java/by/zvezdina/bodyartsalon/command/RequestAttribute.java,6\f\6f0ed3620d42a332cd2d330c2add97daf67cf240
-}
-Msrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToLoginPageCommand.java,8\c\8cc48daccf527f11398c497f227789522411e48b
 
 Osrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToProfilePageCommand.java,f\5\f55af4c89bcc8514842a0d3f928c790dadceead5
 y

@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: natal
@@ -6,6 +7,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+<fmt:message key="navigation.home" var="home"/>
+<fmt:message key="navigation.jewelry" var="jewelry"/>
+<fmt:message key="navigation.facilities" var="facilities"/>
+<fmt:message key="navigation.contacts" var="contacts"/>
+<fmt:message key="navigation.about" var="about"/>
+<fmt:message key="navigation.signIn" var="signIn"/>
+<fmt:message key="navigation.signUp" var="signUp"/>
+<fmt:message key="navigation.language" var="language"/>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,32 +33,39 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
 <%--        <a class="navbar-brand" href="#">Navbar</a>--%>
-    <img width="150" src="https://icon-library.com/images/piercing-icon/piercing-icon-2.jpg">--%>
+    <img width="150" src="https://icon-library.com/images/piercing-icon/piercing-icon-2.jpg">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    <a class="nav-link active" aria-current="page" href="#">${jewelry}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Make appointment</a>
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">${contacts}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">${about}</a>
+                </li>
+<%--                <li class="nav-item dropdown">--%>
+<%--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                        Dropdown--%>
+<%--                    </a>--%>
+<%--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
+<%--                        <li><a class="dropdown-item" href="#">Action</a></li>--%>
+<%--                        <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+<%--                        <li><hr class="dropdown-divider"></li>--%>
+<%--                        <li><a class="dropdown-item" href="#">Something else here</a></li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
+
             </ul>
 <%--            <form class="d-flex">--%>
 <%--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
@@ -52,11 +73,26 @@
 <%--            </form>--%>
             <ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign in</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-in.jsp">${signIn}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
+                    <a class="nav-link" href="#">${signUp}</a>
                 </li>
+
+                <li class="nav-item dropdown"><a
+                        class="nav-link dropdown-toggle" href="#"
+                        id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"> ${language} </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item"
+                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=en">EN (English)</a>
+
+                        <a class="dropdown-item"
+                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=ru">RU (Русский)
+                        </a>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -92,6 +128,10 @@
         <div class="my-popover-content">Here is some hidden content 3</div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
