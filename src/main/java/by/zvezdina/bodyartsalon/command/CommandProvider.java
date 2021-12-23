@@ -13,12 +13,13 @@ public class CommandProvider {
     private CommandProvider() {
         commands.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
         commands.put(CommandType.SIGN_IN, new SignInCommand());
+        commands.put(CommandType.LOGOUT, new LogOutCommand());
+
         commands.put(CommandType.DEFAULT, new DefaultCommand());
         commands.put(CommandType.GO_TO_LOGIN, new GoToLoginPageCommand());
         commands.put(CommandType.LOGIN_USER, new LoginUserCommand());
         commands.put(CommandType.GO_TO_PROFILE, new GoToProfilePageCommand());
     }
-
 
     public static CommandProvider getInstance() {
         if (instance == null) {
