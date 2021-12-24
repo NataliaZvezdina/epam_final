@@ -6,6 +6,8 @@ public final class PagePath {
     public static final String ERROR_500_PAGE = "jsp/error500.jsp";
 
     public static final String INDEX = "index.jsp";
+    public static final String HOME = "jsp/home.jsp";
+    public static final String SIGN_UP = "jsp/sign-up.jsp";
     public static final String VERIFICATION = "jsp/verification.jsp";
 
     public static final String LOGIN_PAGE = "jsp/sign-in.jsp";

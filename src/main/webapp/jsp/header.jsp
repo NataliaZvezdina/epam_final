@@ -113,7 +113,7 @@
                             <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-in.jsp">${signIn}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">${signUp}</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-up.jsp">${signUp}</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
