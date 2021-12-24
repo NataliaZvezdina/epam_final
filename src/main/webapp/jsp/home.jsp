@@ -13,15 +13,15 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="navigation.homePage" var="homePage"/>
-<fmt:message key="navigation.home" var="home"/>
-<fmt:message key="navigation.jewelry" var="jewelry"/>
-<fmt:message key="navigation.facilities" var="facilities"/>
-<fmt:message key="navigation.contacts" var="contacts"/>
-<fmt:message key="navigation.about" var="about"/>
-<fmt:message key="navigation.logOut" var="logOut"/>
-<fmt:message key="navigation.signIn" var="signIn"/>
-<fmt:message key="navigation.signUp" var="signUp"/>
-<fmt:message key="navigation.language" var="language"/>
+<%--<fmt:message key="navigation.home" var="home"/>--%>
+<%--<fmt:message key="navigation.jewelry" var="jewelry"/>--%>
+<%--<fmt:message key="navigation.facilities" var="facilities"/>--%>
+<%--<fmt:message key="navigation.contacts" var="contacts"/>--%>
+<%--<fmt:message key="navigation.about" var="about"/>--%>
+<%--<fmt:message key="navigation.logOut" var="logOut"/>--%>
+<%--<fmt:message key="navigation.signIn" var="signIn"/>--%>
+<%--<fmt:message key="navigation.signUp" var="signUp"/>--%>
+<%--<fmt:message key="navigation.language" var="language"/>--%>
 
 <!doctype html>
 <html lang="en">
@@ -77,6 +77,35 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </button>
+</div>
+
+<div class="container">
+    <div class="row" style="justify-content: space-between">
+        <div class="card" style="width: 15rem;">
+            <img src="https://i.ebayimg.com/thumbs/images/g/bI4AAOSwq4VejxQO/s-l300.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 15rem;">
+            <img src="https://images.squarespace-cdn.com/content/v1/5546cbc9e4b08d5dd934fccc/1526100470195-TABC88QOJM1BUJLGPYVG/EarPiercingDiagram-Website.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 15rem;">
+            <img src="https://cdn.shopify.com/s/files/1/0131/2368/2363/articles/Pierce_of_Art_Price_List_large_93837fcd-2cd1-4452-9f38-15f8f646c5d2_410x.jpg?v=1546814831" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 15rem;">
+            <img src="https://ae01.alicdn.com/kf/H3d6c5c1961c148ba805760a8f80ea7fag/1PC-Disposable-Sterile-Ear-Piercing-Unit-For-Baby-Ear-Tragus-Piercing-Gun-Little-Children-NO-PAIN.jpg_Q90.jpg_.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <c:import url="footer.jsp"/>

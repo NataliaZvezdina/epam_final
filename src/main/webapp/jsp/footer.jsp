@@ -6,11 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="navigation.home" var="home"/>
+<fmt:message key="navigation.jewelry" var="jewelry"/>
+<fmt:message key="navigation.facilities" var="facilities"/>
+<fmt:message key="navigation.contacts" var="contacts"/>
+<fmt:message key="navigation.about" var="about"/>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <%--        <a class="navbar-brand" href="#">Navbar</a>--%>
-        <img width="120" src="https://icon-library.com/images/piercing-icon/piercing-icon-2.jpg" alt="">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContentf"
                 aria-controls="navbarSupportedContentf" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,6 +44,7 @@
                 </li>
 
             </ul>
+            <p>All rights reserved</p>
         </div>
     </div>
 </nav>
