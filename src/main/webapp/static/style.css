@@ -26,3 +26,29 @@ ul{
 .navbar-collapse{
     justify-content: inherit;
 }
+
+.contact-info p {
+    font-weight: bold;
+    font-size: 28px;
+}
+.contact-phone__item a {
+    display: inline-block;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #bfe796;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+.contact-phone__item a:hover {
+    color: #63a17c;
+}
+.contact-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.contact-social__item img {
+    width: 36px;
+    max-width: 100%;
+    height: 36px;
+}

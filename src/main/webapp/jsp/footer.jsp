@@ -24,27 +24,27 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContentf">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
-                       href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">${jewelry}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">${contacts}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">${about}</a>
-                </li>
+<%--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">--%>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link active" aria-current="page"--%>
+<%--                       href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>--%>
+<%--                </li>--%>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link active" aria-current="page" href="#">${jewelry}</a>--%>
+<%--                </li>--%>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link active"--%>
+<%--                       href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>--%>
+<%--                </li>--%>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link active" aria-current="page" href="#">${contacts}</a>--%>
+<%--                </li>--%>
+<%--                <li class="nav-item">--%>
+<%--                    <a class="nav-link active" aria-current="page" href="#">${about}</a>--%>
+<%--                </li>--%>
 
-            </ul>
-            <p>All rights reserved</p>
+<%--            </ul>--%>
+            <p align="center">All rights reserved</p>
         </div>
     </div>
 </nav>

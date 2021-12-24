@@ -51,7 +51,7 @@
                        href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">${contacts}</a>
+                    <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/jsp/contacts.jsp">${contacts}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">${about}</a>
