@@ -18,3 +18,11 @@ a {
 .nav-link a {
     font-size: 18px;
 }
+
+ul{
+    padding-left: 0;
+    list-style: none;
+}
+.navbar-collapse{
+    justify-content: inherit;
+}

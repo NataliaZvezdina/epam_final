@@ -29,12 +29,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-    <%--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">--%>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <%--    <link href="${pageContext.request.contextPath}/static/home-panels.css" rel="stylesheet">--%>
+
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
     <title>${homePage}</title>
 </head>
@@ -42,113 +39,46 @@
 
 <c:import url="header.jsp"/>
 
-<%--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">--%>
-<%--    <div class="container-fluid">--%>
-<%--        <img width="120" src="https://icon-library.com/images/piercing-icon/piercing-icon-2.jpg" alt="">--%>
-<%--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"--%>
-<%--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--            <span class="navbar-toggler-icon"></span>--%>
-<%--        </button>--%>
-<%--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--%>
-<%--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">--%>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link active" aria-current="page"--%>
-<%--                       href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>--%>
-<%--                </li>--%>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link active" aria-current="page" href="#">${jewelry}</a>--%>
-<%--                </li>--%>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link active"--%>
-<%--                       href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>--%>
-<%--                </li>--%>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link active" aria-current="page" href="#">${contacts}</a>--%>
-<%--                </li>--%>
-<%--                <li class="nav-item">--%>
-<%--                    <a class="nav-link active" aria-current="page" href="#">${about}</a>--%>
-<%--                </li>--%>
-
-
-<%--            </ul>--%>
-
-<%--            <ul>--%>
-<%--                <c:choose>--%>
-<%--                    <c:when test="${sessionScope.authorization}">--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link"--%>
-<%--                               href="${pageContext.request.contextPath}/controller?command=logout">${logOut}</a>--%>
-<%--                        </li>--%>
-<%--                    </c:when>--%>
-<%--                    <c:otherwise>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-in.jsp">${signIn}</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="#">${signUp}</a>--%>
-<%--                        </li>--%>
-<%--                    </c:otherwise>--%>
-<%--                </c:choose>--%>
-
-<%--                <li class="nav-item dropdown"><a--%>
-<%--                        class="nav-link dropdown-toggle" href="#"--%>
-<%--                        id="navbarDropdownMenuLink" data-toggle="dropdown"--%>
-<%--                        aria-haspopup="true" aria-expanded="false"> ${language} </a>--%>
-<%--                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--%>
-<%--                        <a class="dropdown-item"--%>
-<%--                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=en">EN--%>
-<%--                            (English)</a>--%>
-
-<%--                        <a class="dropdown-item"--%>
-<%--                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=ru">RU--%>
-<%--                            (Русский)--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</nav>--%>
-
-
 Бред полный
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel title 1</h3>
-
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="..." class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+            </div>
         </div>
-        <div class="panel-body">For more straightforward sizing in CSS, we switch the global box-sizing value from
-            content-box to border-box. This ensures padding does not affect the final computed width of an element, but
-            it can cause problems with some third-party software like Google Maps and Google Custom Search Engine.
-
-            On the rare occasion you need to override it, use something like the following:
+        <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+            </div>
         </div>
-        <div class="my-popover-content">For more straightforward sizing in CSS, we switch the global box-sizing value
-            from content-box to border-box. This ensures padding does not affect the final computed width of an element,
-            but it can cause problems with some third-party software like Google Maps and Google Custom Search Engine.
-
-            On the rare occasion you need to override it, use something like the following:
+        <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+            </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel title 2</h3>
-
-        </div>
-        <div class="panel-body">Panel content 2</div>
-        <div class="my-popover-content">Here is some hidden content 2</div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Panel title 3</h3>
-
-        </div>
-        <div class="panel-body">Panel content 3</div>
-        <div class="my-popover-content">Here is some hidden content 3</div>
-    </div>
+    <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </button>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -159,23 +89,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-
-<%--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"--%>
-<%--        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"--%>
-<%--        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"--%>
-<%--        crossorigin="anonymous"></script>--%>
-
-<%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--%>
-<%--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"--%>
-<%--        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"--%>
-<%--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"--%>
-<%--        crossorigin="anonymous"></script>--%>
 
 </body>
 </html>

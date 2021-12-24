@@ -22,13 +22,13 @@
 <fmt:message key="navigation.signUp" var="signUp"/>
 <fmt:message key="navigation.language" var="language"/>
 
-<!doctype html>
-<html lang="en">
-<head>
+<%--<!doctype html>--%>
+<%--<html lang="en">--%>
+<%--<head>--%>
 
-    <title></title>
-</head>
-<body>
+<%--    <title></title>--%>
+<%--</head>--%>
+<%--<body>--%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <%--        <a class="navbar-brand" href="#">Navbar</a>--%>
@@ -58,6 +58,42 @@
                 </li>
 
             </ul>
+
+<%--            <ul>--%>
+<%--                <c:choose>--%>
+<%--                    <c:when test="${sessionScope.authorization}">--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link"--%>
+<%--                               href="${pageContext.request.contextPath}/controller?command=logout">${logOut}</a>--%>
+<%--                        </li>--%>
+<%--                    </c:when>--%>
+<%--                    <c:otherwise>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-in.jsp">${signIn}</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="#">${signUp}</a>--%>
+<%--                        </li>--%>
+<%--                    </c:otherwise>--%>
+<%--                </c:choose>--%>
+
+<%--                <li class="nav-item dropdown"><a--%>
+<%--                        class="nav-link dropdown-toggle" href="#"--%>
+<%--                        data-toggle="dropdown"--%>
+<%--                        aria-haspopup="true" aria-expanded="false"> ${language} </a>--%>
+<%--                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--%>
+<%--                        <a class="dropdown-item"--%>
+<%--                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=en">EN--%>
+<%--                            (English)</a>--%>
+
+<%--                        <a class="dropdown-item"--%>
+<%--                           href="${pageContext.request.contextPath}/controller?command=change_locale&amp;locale=ru">RU--%>
+<%--                            (Русский)--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+
+<%--            </ul>--%>
 
             <ul>
                 <c:choose>
@@ -108,5 +144,5 @@
 <%--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"--%>
 <%--        crossorigin="anonymous"></script>--%>
 
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>
