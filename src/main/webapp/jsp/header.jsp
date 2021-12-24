@@ -15,6 +15,7 @@
 <fmt:message key="navigation.home" var="home"/>
 <fmt:message key="navigation.jewelry" var="jewelry"/>
 <fmt:message key="navigation.facilities" var="facilities"/>
+<fmt:message key="navigation.gallery" var="gallery"/>
 <fmt:message key="navigation.contacts" var="contacts"/>
 <fmt:message key="navigation.about" var="about"/>
 <fmt:message key="navigation.logOut" var="logOut"/>
@@ -49,6 +50,10 @@
                 <li class="nav-item">
                     <a class="nav-link active"
                        href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="${pageContext.request.contextPath}/jsp/gallery.jsp">${gallery}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/jsp/contacts.jsp">${contacts}</a>

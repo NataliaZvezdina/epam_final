@@ -11,6 +11,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
+<fmt:message key="footer.copyright" var="message"/>
 <fmt:message key="navigation.home" var="home"/>
 <fmt:message key="navigation.jewelry" var="jewelry"/>
 <fmt:message key="navigation.facilities" var="facilities"/>
@@ -44,7 +45,7 @@
 <%--                </li>--%>
 
 <%--            </ul>--%>
-            <p align="center">All rights reserved</p>
+            <p>${message}</p>
         </div>
     </div>
 </nav>
