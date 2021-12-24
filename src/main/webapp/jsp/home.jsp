@@ -26,10 +26,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link href="${pageContext.request.contextPath}/static/home-panels.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<%--    <link href="${pageContext.request.contextPath}/static/home-panels.css" rel="stylesheet">--%>
+    <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
     <title>${homePage}</title>
 </head>
 <body>
+
 <c:import url="header.jsp"/>
 
 <%--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">--%>
@@ -140,35 +148,16 @@
     </div>
 </div>
 
-<%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--%>
-<%--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"--%>
-<%--        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"--%>
-<%--        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"--%>
-<%--        crossorigin="anonymous"></script>--%>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
 
-<%--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">--%>
-<%--    <div class="container-fluid">--%>
-<%--        &lt;%&ndash;        <a class="navbar-brand" href="#">Navbar</a>&ndash;%&gt;--%>
-<%--        <img width="150" src="https://icon-library.com/images/piercing-icon/piercing-icon-2.jpg">--%>
-<%--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--            <span class="navbar-toggler-icon">это ты?</span>--%>
-<%--        </button>--%>
-<%--        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">--%>
-<%--            <div class="navbar-nav">--%>
-<%--                <a class="nav-link active" aria-current="page" href="#">Home</a>--%>
-<%--                <a class="nav-link" href="#">Jewelry</a>--%>
-<%--                <a class="nav-link" href="#">Pricing</a>--%>
-<%--                <a class="nav-link">Piercers</a>--%>
-<%--                <a class="nav-link">Facilities</a>--%>
-<%--                <a class="nav-link">Make appointment</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</nav>--%>
