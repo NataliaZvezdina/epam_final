@@ -11,12 +11,13 @@ public class User extends AbstractEntity {
     private String phone;
     private Role role;
     private UserStatus userStatus;
+    private boolean isVerified;
 
     public User() {
     }
 
     public User(long userId, String login, String password, String firstName, String lastName, String email,
-                String phone, Role role, UserStatus userStatus) {
+                String phone, Role role, UserStatus userStatus, boolean isVerified) {
         this.userId = userId;
         this.login = login;
         this.password = password;
@@ -26,6 +27,7 @@ public class User extends AbstractEntity {
         this.phone = phone;
         this.role = role;
         this.userStatus = userStatus;
+        this.isVerified = isVerified;
     }
 
     public static class Builder {
@@ -73,6 +75,11 @@ public class User extends AbstractEntity {
 
         public Builder userStatus(UserStatus userStatus) {
             user.userStatus = userStatus;
+            return this;
+        }
+
+        public Builder isVerified(boolean isVerified) {
+            user.isVerified = isVerified;
             return this;
         }
 
@@ -151,6 +158,14 @@ public class User extends AbstractEntity {
 
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 
     @Override

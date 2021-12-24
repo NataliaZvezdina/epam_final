@@ -74,8 +74,8 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public void create(Appointment appointment) throws DaoException {
-
+    public Appointment create(Appointment appointment) throws DaoException {
+        return null;
     }
 
     @Override

@@ -13,6 +13,7 @@ public final class RequestAttribute {
 
     public static final String USER = "user";
     public static final String LOGIN = "login";
+    public static final String VERIFICATION = "verification";
 
     private RequestAttribute() {
     }

@@ -21,12 +21,12 @@ public class ClientDaoImpl implements ClientDao {
     private static ClientDaoImpl instance;
 
     private static final String CREATE_USER_QUERY = """
-            INSERT INTO users (login, password, first_name, last_name, email, phone, role, status) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
+            INSERT INTO users (login, password, first_name, last_name, email, phone) 
+            VALUES (?, ?, ?, ?, ?, ?);""";
 
     private static final String CREATE_CLIENT_QUERY = """
-            INSERT INTO clients (client_id, registration_date, birth_date, money, discount_id) 
-            VALUES (?, ?, ?, ?, ?);""";
+            INSERT INTO clients (client_id, money) 
+            VALUES (?, ?);""";
 
     private static final String FIND_BY_ID_QUERY = """
             SELECT client_id, login, password, first_name, last_name, email, phone, role, status,  
@@ -40,6 +40,11 @@ public class ClientDaoImpl implements ClientDao {
                 registration_date, birth_date, money, discount_id   
             FROM users JOIN clients 
             ON users.user_id = clients.client_id;""";
+
+    private static final String VERIFY_QUERY = """
+            UPDATE users 
+            SET is_verified = true 
+            WHERE user_id = ? AND is_verified = false;""";
 
     private ClientDaoImpl() {
     }
@@ -94,7 +99,7 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public void create(Client client) throws DaoException {
+    public Client create(Client client) throws DaoException {
 
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement userStatement = connection.prepareStatement(CREATE_USER_QUERY,
@@ -109,8 +114,6 @@ public class ClientDaoImpl implements ClientDao {
                 userStatement.setString(4, client.getLastName());
                 userStatement.setString(5, client.getEmail());
                 userStatement.setString(6, client.getPhone());
-                userStatement.setString(7, client.getRole().name().toLowerCase());
-                userStatement.setString(8, client.getUserStatus().name().toLowerCase());
 
                 userStatement.executeUpdate();
                 try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
@@ -120,10 +123,7 @@ public class ClientDaoImpl implements ClientDao {
                     }
 
                     clientStatement.setLong(1, client.getUserId());
-                    clientStatement.setDate(2, client.getRegistrationDate());
-                    clientStatement.setDate(3, client.getBirthDate());
-                    clientStatement.setBigDecimal(4, client.getMoney());
-                    clientStatement.setLong(5, client.getDiscountId());
+                    clientStatement.setBigDecimal(2, client.getMoney());
                     clientStatement.executeUpdate();
                     connection.commit();
                 }
@@ -138,6 +138,7 @@ public class ClientDaoImpl implements ClientDao {
         }
 
         logger.log(Level.DEBUG, "Client created: {}", client);
+        return client;
     }
 
     @Override
@@ -148,6 +149,19 @@ public class ClientDaoImpl implements ClientDao {
     @Override
     public void deleteById(Long id) throws DaoException {
 
+    }
+
+    @Override
+    public int verify(long id) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_QUERY)) {
+            statement.setLong(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+            return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("verify() - Failed to verify client: ", e);
+        }
     }
 
     private Client extract(ResultSet resultSet) throws SQLException {
@@ -161,10 +175,10 @@ public class ClientDaoImpl implements ClientDao {
                 .phone(resultSet.getString(PHONE))
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
-                .registrationDate(resultSet.getDate(REGISTRATION_DATE))
-                .birthDate(resultSet.getDate(BIRTH_DATE))
                 .money(resultSet.getBigDecimal(MONEY))
                 .discountId(resultSet.getLong(DISCOUNT_ID))
                 .build();
     }
+
+
 }

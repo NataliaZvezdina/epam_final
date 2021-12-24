@@ -110,7 +110,7 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public void create(Admin admin) throws DaoException {
+    public Admin create(Admin admin) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
         PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -134,6 +134,7 @@ public class AdminDaoImpl implements AdminDao {
         }
 
         logger.log(Level.DEBUG, "Admin created: {}", admin);
+        return admin;
     }
 
     @Override

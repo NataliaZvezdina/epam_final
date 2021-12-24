@@ -114,7 +114,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
     }
 
     @Override
-    public void create(Feedback feedback) throws DaoException {
+    public Feedback create(Feedback feedback) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
 
@@ -129,6 +129,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
         }
 
         logger.log(Level.DEBUG, "Feedback created: {}", feedback);
+        return feedback;
     }
 
     @Override

@@ -120,7 +120,7 @@ public class ServiceDaoImpl implements ServiceDao {
     }
 
     @Override
-    public void create(Service service) throws DaoException {
+    public Service create(Service service) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
         PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
             statement.setString(1, service.getName());
@@ -131,6 +131,7 @@ public class ServiceDaoImpl implements ServiceDao {
         }
 
         logger.log(Level.DEBUG, "Service created: {}", service);
+        return service;
     }
 
     @Override

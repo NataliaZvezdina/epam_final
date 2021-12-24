@@ -62,7 +62,7 @@ public class PiercerDaoImpl implements PiercerDao {
     }
 
     @Override
-    public void create(Piercer piercer) throws DaoException {
+    public Piercer create(Piercer piercer) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement userStatement = connection.prepareStatement(CREATE_USER_QUERY,
                      Statement.RETURN_GENERATED_KEYS);
@@ -103,6 +103,7 @@ public class PiercerDaoImpl implements PiercerDao {
         }
 
         logger.log(Level.DEBUG, "Piercer created: {}", piercer);
+        return piercer;
     }
 
     @Override

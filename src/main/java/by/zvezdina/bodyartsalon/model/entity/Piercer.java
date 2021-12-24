@@ -15,10 +15,8 @@ public class Piercer extends User {
         this.rating = rating;
     }
 
-    public Piercer(long userId, String login, String password, String firstName, String lastName, String email,
-                   String phone, Role role, UserStatus userStatus, String photoUrl, Category category,
-                   int rating) {
-        super(userId, login, password, firstName, lastName, email, phone, role, userStatus);
+    public Piercer(long userId, String login, String password, String firstName, String lastName, String email, String phone, Role role, UserStatus userStatus, boolean isVerified, String photoUrl, Category category, int rating) {
+        super(userId, login, password, firstName, lastName, email, phone, role, userStatus, isVerified);
         this.photoUrl = photoUrl;
         this.category = category;
         this.rating = rating;

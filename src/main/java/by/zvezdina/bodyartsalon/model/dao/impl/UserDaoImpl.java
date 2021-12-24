@@ -115,8 +115,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void create(User user) {
-
+    public User create(User user) {
+        return null;
     }
 
     @Override
