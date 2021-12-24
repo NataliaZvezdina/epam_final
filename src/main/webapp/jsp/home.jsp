@@ -26,7 +26,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link href="../static/home-panels.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/home-panels.css" rel="stylesheet">
     <title>${homePage}</title>
 </head>
 <body>
