@@ -1,19 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: natal
-  Date: 16/12/2021
-  Time: 22:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="error404.page" var="title"/>
+<fmt:message key="error404.message" var="message"/>
+<fmt:message key="error404.backHome" var="home"/>
+
+<!doctype html>
 <html lang="en">
 <head>
-<%--    <title>Error 404 page</title>--%>
-    <title>404</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <title>${title}</title>
 </head>
 <body>
-<h1 align="center">404 Page not found</h1>
+
+<h1 align="center">${message}</h1><br/><br/>
+<h3 align="center"><a href="${pageContext.request.contextPath}/index.jsp">${home}</a></h3>
 
 </body>
 </html>
