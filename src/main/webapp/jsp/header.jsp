@@ -32,7 +32,8 @@
                        href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">${jewelry}</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="${pageContext.request.contextPath}/controller?command=show_all_jewelry">${jewelry}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"

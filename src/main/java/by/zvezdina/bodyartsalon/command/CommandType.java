@@ -7,6 +7,7 @@ public enum CommandType {
     LOGOUT,
     SIGN_UP,
     VERIFY,
+    SHOW_ALL_JEWELRY,
 
     GO_TO_LOGIN,
     LOGIN_USER,
