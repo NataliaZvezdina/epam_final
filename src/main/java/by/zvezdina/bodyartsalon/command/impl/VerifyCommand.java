@@ -23,7 +23,6 @@ public class VerifyCommand implements Command {
             logger.log(Level.ERROR, "Error to verify client in VerifyCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
-
         request.setAttribute(RequestAttribute.VERIFICATION, verified);
         return new Router(PagePath.VERIFICATION, Router.RouterType.FORWARD);
     }
