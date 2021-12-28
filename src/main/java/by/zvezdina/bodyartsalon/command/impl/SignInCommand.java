@@ -2,9 +2,12 @@ package by.zvezdina.bodyartsalon.command.impl;
 
 import by.zvezdina.bodyartsalon.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
+import by.zvezdina.bodyartsalon.model.entity.Client;
 import by.zvezdina.bodyartsalon.model.entity.Role;
 import by.zvezdina.bodyartsalon.model.entity.User;
+import by.zvezdina.bodyartsalon.model.service.ClientService;
 import by.zvezdina.bodyartsalon.model.service.UserService;
+import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import by.zvezdina.bodyartsalon.model.util.FormValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class SignInCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final UserService userService = UserServiceImpl.getInstance();
+    private final ClientService clientService = ClientServiceImpl.getInstance();
     private final FormValidator validator = FormValidator.getInstance();
 
     @Override
@@ -30,16 +34,45 @@ public class SignInCommand implements Command {
         String currentPage = (String) session.getAttribute(SessionAttribute.CURRENT_PAGE);
 
         if (!validator.checkLogin(login) || !validator.checkPassword(password)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Invalid login or password");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "login.or.password.is.not.valid");
             return new Router(currentPage, Router.RouterType.FORWARD);
         }
 
         Optional<User> optionalUser = null;
         try {
             optionalUser = userService.login(login, password);
-            if (optionalUser.isEmpty()) {
+//            if (optionalUser.isEmpty()) {
+//                logger.log(Level.ERROR, "Failed to execute request LoginUserCommand: Invalid login or password");
+//                request.setAttribute(RequestAttribute.ERROR_MESSAGE, "wrong.login.or.password");
+//                return new Router(currentPage, Router.RouterType.FORWARD);
+//            }
+
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                if (!user.isVerified()) {
+                    request.setAttribute(RequestAttribute.ERROR_MESSAGE, "verification.error");
+                    logger.log(Level.ERROR, "Failed to execute request SignInCommand: User is not verified");
+                    return new Router(currentPage, Router.RouterType.FORWARD);
+                }
+
+                session.setAttribute(SessionAttribute.AUTHORIZATION, Boolean.TRUE);
+                session.setAttribute(SessionAttribute.USER_ID, user.getUserId());
+                session.setAttribute(SessionAttribute.USER_LOGIN, user.getLogin());
+                session.setAttribute(SessionAttribute.USER_NAME, user.getFirstName());
+                session.setAttribute(SessionAttribute.USER_LAST_NAME, user.getLastName());
+                session.setAttribute(SessionAttribute.USER_ROLE, user.getRole());
+                session.setAttribute(SessionAttribute.USER_EMAIL, user.getEmail());
+                switch (user.getRole()) {
+                    case ADMIN -> {return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);}
+                    case CLIENT -> {
+                        Client client = clientService.findById(user.getUserId());
+                        session.setAttribute(SessionAttribute.USER_MONEY, client.getMoney());
+                        return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);
+                    }
+                }
+            } else {
                 logger.log(Level.ERROR, "Failed to execute request LoginUserCommand: Invalid login or password");
-                request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Invalid login or password");
+                request.setAttribute(RequestAttribute.ERROR_MESSAGE, "wrong.login.or.password");
                 return new Router(currentPage, Router.RouterType.FORWARD);
             }
 
@@ -47,21 +80,6 @@ public class SignInCommand implements Command {
             logger.log(Level.ERROR, "Failed to execute request SignInCommand: ", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
-        }
-
-        session.setAttribute(SessionAttribute.AUTHORIZATION, Boolean.TRUE);
-        User user = optionalUser.get();
-        Role role = user.getRole();
-        switch (role) {
-            case ADMIN: {
-                session.setAttribute(SessionAttribute.USER_PHONE, user.getPhone());
-                session.setAttribute(SessionAttribute.USER_NAME, user.getFirstName());
-                return new Router(PagePath.PROFILE, Router.RouterType.REDIRECT);  // todo
-            }
-            case CLIENT: {
-                session.setAttribute(SessionAttribute.USER_PHONE, user.getPhone());
-                return new Router(PagePath.PROFILE, Router.RouterType.REDIRECT);  // todo
-            }
         }
 
         return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);

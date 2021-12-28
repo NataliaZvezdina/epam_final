@@ -119,9 +119,9 @@ public class AdminDaoImpl implements AdminDao {
             statement.setString(3, admin.getFirstName());
             statement.setString(4, admin.getLastName());
             statement.setString(5, admin.getEmail());
-            statement.setString(6, admin.getPhone());
-            statement.setString(7, admin.getRole().name().toLowerCase());
-            statement.setString(8, admin.getUserStatus().name().toLowerCase());
+
+            statement.setString(6, admin.getRole().name().toLowerCase());
+            statement.setString(7, admin.getUserStatus().name().toLowerCase());
             statement.executeUpdate();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
@@ -156,7 +156,7 @@ public class AdminDaoImpl implements AdminDao {
                 .firstName(resultSet.getString(FIRST_NAME))
                 .lastName(resultSet.getString(LAST_NAME))
                 .email(resultSet.getString(EMAIL))
-                .phone(resultSet.getString(PHONE))
+
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
                 .build();

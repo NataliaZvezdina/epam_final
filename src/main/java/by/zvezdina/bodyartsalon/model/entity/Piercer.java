@@ -15,8 +15,8 @@ public class Piercer extends User {
         this.rating = rating;
     }
 
-    public Piercer(long userId, String login, String password, String firstName, String lastName, String email, String phone, Role role, UserStatus userStatus, boolean isVerified, String photoUrl, Category category, int rating) {
-        super(userId, login, password, firstName, lastName, email, phone, role, userStatus, isVerified);
+    public Piercer(long userId, String login, String password, String firstName, String lastName, String email, Role role, UserStatus userStatus, boolean isVerified, String photoUrl, Category category, int rating) {
+        super(userId, login, password, firstName, lastName, email, role, userStatus, isVerified);
         this.photoUrl = photoUrl;
         this.category = category;
         this.rating = rating;
@@ -52,11 +52,6 @@ public class Piercer extends User {
 
         public Builder email(String email) {
             piercer.setEmail(email);
-            return this;
-        }
-
-        public Builder phone(String phone) {
-            piercer.setPhone(phone);
             return this;
         }
 
@@ -146,7 +141,6 @@ public class Piercer extends User {
         sb.append(", firstName='").append(getFirstName());
         sb.append(", lastName='").append(getLastName());
         sb.append(", email='").append(getEmail());
-        sb.append(", phone='").append(getPhone());
         sb.append(", role=").append(getRole());
         sb.append(", userStatus=").append(getUserStatus());
         sb.append("photoUrl='").append(photoUrl);

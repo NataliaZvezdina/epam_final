@@ -38,11 +38,6 @@ public class Admin extends User {
             return this;
         }
 
-        public Builder phone(String phone) {
-            admin.setPhone(phone);
-            return this;
-        }
-
         public Builder role(Role role) {
             admin.setRole(role);
             return this;
@@ -77,7 +72,6 @@ public class Admin extends User {
         sb.append(", firstName='").append(getFirstName());
         sb.append(", lastName='").append(getLastName());
         sb.append(", email='").append(getEmail());
-        sb.append(", phone='").append(getPhone());
         sb.append(", role=").append(getRole());
         sb.append(", userStatus=").append(getUserStatus());
         sb.append('}');

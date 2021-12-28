@@ -13,6 +13,17 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="signUp.page" var="title"/>
+<fmt:message key="signUp.page.login" var="login"/>
+<fmt:message key="signUp.page.password" var="password"/>
+<fmt:message key="signUp.page.conformPassword" var="confirm"/>
+<fmt:message key="signUp.page.firstName" var="name"/>
+<fmt:message key="signUp.page.lastName" var="surname"/>
+<fmt:message key="signUp.page.email" var="email"/>
+
+<fmt:message key="signUp.page.valid" var="good"/>
+<fmt:message key="signUp.page.invalid" var="bad"/>
+
+<fmt:message key="signUp.button" var="signUp"/>
 
 <!doctype html>
 <html lang="en">
@@ -31,46 +42,68 @@
 
 <div class="container">
     <div class="row">
-        <form>
-            <div class="form-group row">
-                <label for="inputLogin3" class="col-sm-2 col-form-label">Login</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputLogin3">
-                </div>
-            </div>
+        <form action="${pageContext.request.contextPath}/controller" method="post">
+            <input type="hidden" name="command" value="sign_up">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="validationServer01">${login}</label>
+                    <input type="text" name="login" class="form-control is-valid" id="validationServer01" required
+                           pattern="[A-Za-z0-9]{3,20}">
 
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer02">${password}</label>
+                    <input type="password" name="password" class="form-control is-valid" id="validationServer02"
+                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                     <small id="passwordHelpBlock" class="form-text text-muted">
-                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                        spaces, special characters, or emoji.
                     </small>
+
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer002">${confirm}</label>
+                    <input type="password" name="repeatPassword" class="form-control is-valid" id="validationServer002"
+                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="validationServer03">${name}</label>
+                    <input type="text" name="firstName" class="form-control is-valid" id="validationServer03" required
+                           pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer04">${surname}</label>
+                    <input type="text" name="lastName" class="form-control is-valid" id="validationServer04" required
+                           pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer05">${email}</label>
+                    <input type="email" name="email" class="form-control is-valid" id="validationServer05" required
+                           pattern="[_0-9a-z][-_.0-9a-z]*@[0-9a-z][-.0-9a-z]*[0-9a-z]\.[a-z]{2,}">
+
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1">
-                            Example checkbox
-                        </label>
+            <div class="row">
+                <c:if test="${requestScope.errorMessage != null}">
+                    <div class="form-group">
+                        <div class="col-md-6 mb-3">
+                            <div class="err-message-from-server">
+                                <fmt:setBundle basename="bundle/locale" var="rb"/>
+                                <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </c:if>
+
             </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
-                </div>
-            </div>
+
+            <button class="btn btn-primary" type="submit">${signUp}</button>
         </form>
     </div>
 </div>

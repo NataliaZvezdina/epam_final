@@ -75,9 +75,9 @@ public class PiercerDaoImpl implements PiercerDao {
                 userStatement.setString(3, piercer.getFirstName());
                 userStatement.setString(4, piercer.getLastName());
                 userStatement.setString(5, piercer.getEmail());
-                userStatement.setString(6, piercer.getPhone());
-                userStatement.setString(7, piercer.getRole().name());
-                userStatement.setString(8, piercer.getUserStatus().name());
+
+                userStatement.setString(6, piercer.getRole().name());
+                userStatement.setString(7, piercer.getUserStatus().name());
                 userStatement.execute();
 
                 try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
@@ -124,7 +124,6 @@ public class PiercerDaoImpl implements PiercerDao {
                 .firstName(resultSet.getString(FIRST_NAME))
                 .lastName(resultSet.getString(LAST_NAME))
                 .email(resultSet.getString(EMAIL))
-                .phone(resultSet.getString(PHONE))
                 .category(Category.valueOf(resultSet.getString(CATEGORY).toUpperCase()))
                 .photoUrl(resultSet.getString(PHOTO_URL))
                 .rating(resultSet.getInt(RATING))

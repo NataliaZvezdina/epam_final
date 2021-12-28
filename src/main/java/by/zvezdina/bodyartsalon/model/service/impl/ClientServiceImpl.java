@@ -34,13 +34,14 @@ public class ClientServiceImpl implements ClientService {
         client.setPassword(PasswordEncoder.encode(client.getPassword()));
         try {
             createdClient = clientDao.create(client);
+            System.out.println(createdClient);
         } catch (DaoException e) {
             throw new ServiceException("Failed to create client: ", e);
         }
 
         MailSender mailSender = new MailSender();
         String message = "To verify account follow the link: " +
-                "<a href='http://localhost:8081/bodyartsalon_war_exploded/controller?command=verify&id=" +
+                "<a href='http://localhost:8080/bodyartsalon_war_exploded/controller?command=verify&id=" +
                 client.getUserId() + "'>verification</a>";
         mailSender.send(client.getEmail(), message);
         return createdClient;
@@ -57,5 +58,16 @@ public class ClientServiceImpl implements ClientService {
 
         logger.log(Level.DEBUG, "Client by id {} was verified: ", rowsUpdated == 1);
         return rowsUpdated == 1;
+    }
+
+    @Override
+    public Client findById(long id) throws ServiceException {
+        Client client;
+        try {
+            client = clientDao.findById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to find client by id " + id, e);
+        }
+        return client;
     }
 }

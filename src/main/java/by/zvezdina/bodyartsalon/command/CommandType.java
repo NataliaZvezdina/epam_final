@@ -5,6 +5,7 @@ public enum CommandType {
     CHANGE_LOCALE,
     SIGN_IN,
     LOGOUT,
+    SIGN_UP,
     VERIFY,
 
     GO_TO_LOGIN,

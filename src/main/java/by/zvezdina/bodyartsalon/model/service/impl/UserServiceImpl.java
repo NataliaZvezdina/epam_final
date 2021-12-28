@@ -6,6 +6,7 @@ import by.zvezdina.bodyartsalon.model.dao.UserDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.UserDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.User;
 import by.zvezdina.bodyartsalon.model.service.UserService;
+import by.zvezdina.bodyartsalon.model.util.PasswordEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
         }
 
         String passwordToCheck = foundUser.getPassword();
-        if (!passwordToCheck.equals(password)) {
+        if (!passwordToCheck.equals(PasswordEncoder.encode(password))) {
             return Optional.empty();
         }
 

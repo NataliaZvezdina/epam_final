@@ -17,8 +17,8 @@ public class Client extends User {
         this.discountId = discountId;
     }
 
-    public Client(long userId, String login, String password, String firstName, String lastName, String email, String phone, Role role, UserStatus userStatus, boolean isVerified, BigDecimal money, long discountId) {
-        super(userId, login, password, firstName, lastName, email, phone, role, userStatus, isVerified);
+    public Client(long userId, String login, String password, String firstName, String lastName, String email, Role role, UserStatus userStatus, boolean isVerified, BigDecimal money, long discountId) {
+        super(userId, login, password, firstName, lastName, email, role, userStatus, isVerified);
         this.money = money;
         this.discountId = discountId;
     }
@@ -53,11 +53,6 @@ public class Client extends User {
 
         public Builder email(String email) {
             client.setEmail(email);
-            return this;
-        }
-
-        public Builder phone(String phone) {
-            client.setPhone(phone);
             return this;
         }
 

@@ -21,16 +21,15 @@ public class ClientDaoImpl implements ClientDao {
     private static ClientDaoImpl instance;
 
     private static final String CREATE_USER_QUERY = """
-            INSERT INTO users (login, password, first_name, last_name, email, phone) 
-            VALUES (?, ?, ?, ?, ?, ?);""";
+            INSERT INTO users (login, password, first_name, last_name, email) 
+            VALUES (?, ?, ?, ?, ?);""";
 
     private static final String CREATE_CLIENT_QUERY = """
-            INSERT INTO clients (client_id, money) 
-            VALUES (?, ?);""";
+            INSERT INTO clients (client_id) 
+            VALUES (?);""";
 
     private static final String FIND_BY_ID_QUERY = """
-            SELECT client_id, login, password, first_name, last_name, email, phone, role, status,  
-                registration_date, birth_date, money, discount_id   
+            SELECT client_id, login, password, first_name, last_name, email, role, status, money, discount_id   
             FROM users JOIN clients 
             ON users.user_id = clients.client_id 
             WHERE client_id = ?;""";
@@ -113,7 +112,6 @@ public class ClientDaoImpl implements ClientDao {
                 userStatement.setString(3, client.getFirstName());
                 userStatement.setString(4, client.getLastName());
                 userStatement.setString(5, client.getEmail());
-                userStatement.setString(6, client.getPhone());
 
                 userStatement.executeUpdate();
                 try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
@@ -123,12 +121,12 @@ public class ClientDaoImpl implements ClientDao {
                     }
 
                     clientStatement.setLong(1, client.getUserId());
-                    clientStatement.setBigDecimal(2, client.getMoney());
                     clientStatement.executeUpdate();
                     connection.commit();
                 }
             } catch (SQLException e) {
                 connection.rollback();
+                System.out.println("failed to create client");
                 throw new DaoException("Failed to create client: " + client, e);
             } finally {
                 connection.setAutoCommit(true);
@@ -172,13 +170,10 @@ public class ClientDaoImpl implements ClientDao {
                 .firstName(resultSet.getString(FIRST_NAME))
                 .lastName(resultSet.getString(LAST_NAME))
                 .email(resultSet.getString(EMAIL))
-                .phone(resultSet.getString(PHONE))
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
                 .money(resultSet.getBigDecimal(MONEY))
                 .discountId(resultSet.getLong(DISCOUNT_ID))
                 .build();
     }
-
-
 }

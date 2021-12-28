@@ -6,53 +6,85 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="signIn.page" var="title"/>
+<fmt:message key="signIn.page.login" var="login"/>
+<fmt:message key="signIn.page.invalidLogin" var="invalidLogin"/>
+<fmt:message key="signIn.page.password" var="password"/>
+<fmt:message key="signIn.page.invalidPassword" var="invalidPassword"/>
+<fmt:message key="signIn.buttonLogin" var="buttonLogin"/>
 
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>SignIn page</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <title>${title}</title>
 </head>
 <body>
-${message}
-<br/>
+<c:import url="header.jsp"/>
 
-<%--<form action="../controller?command=login_user" method="post">--%>
-<%--    Input login<br/>--%>
-<%--    <input type="text" name="login" required="required"/><br/>--%>
-<%--    Input password<br/>--%>
-<%--    <input type="password" name="password" required="required"/><br/>--%>
-<%--    <input type="submit" value="submit">--%>
-<%--</form>--%>
 <div class="container">
     <div class="row">
         <form class="row g-3 needs-validation" novalidate
               action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="sign_in">
-            <div class="col-md-4">
-                <label for="validationCustom01" class="form-label">Login</label>
-                <input type="text" name="login" class="form-control" id="validationCustom01" required pattern="[A-Za-z0-9]{3,20}">
-                <div class="invalid-feedback">
-                    Incorrect login :(
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Password</label>
-                <input type="text" name="password" class="form-control" id="validationCustom02" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}">
-                <div class="invalid-feedback">
-                    Incorrect password :(
-                </div>
-            </div>
 
+            <div class="col-md-4">
+                <label for="validationCustom01" class="form-label">${login}</label>
+                <input type="text" name="login" class="form-control" id="validationCustom01" required
+                       pattern="[A-Za-z0-9]{3,20}">
+                <div class="invalid-feedback">
+                    ${invalidLogin}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">${password}</label>
+                <input type="password" name="password" class="form-control" id="validationCustom02" required
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                <div class="invalid-feedback">
+                    ${invalidPassword}
+                </div>
+            </div>
+            <c:if test="${requestScope.errorMessage != null}">
+                <div class="form-group">
+                    <div class="col-md-6 mb-3">
+                        <div class="err-message-from-server">
+                            <fmt:setBundle basename="bundle/locale" var="rb"/>
+                            <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+            <br>
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">${buttonLogin}</button>
             </div>
 
         </form>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<c:import url="footer.jsp"/>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
 </body>
 </html>

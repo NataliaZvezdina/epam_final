@@ -9,6 +9,7 @@ public final class PagePath {
     public static final String HOME = "jsp/home.jsp";
     public static final String SIGN_UP = "jsp/sign-up.jsp";
     public static final String VERIFICATION = "jsp/verification.jsp";
+    public static final String WELCOME = "jsp/welcome.jsp";
 
     public static final String LOGIN_PAGE = "jsp/sign-in.jsp";
     public static final String PROFILE = "jsp/profile.jsp";

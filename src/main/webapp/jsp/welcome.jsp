@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: natal
-  Date: 23/12/2021
-  Time: 15:44
+  Date: 28/12/2021
+  Time: 02:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,13 +12,12 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
-<fmt:message key="verification.page" var="title"/>
-<fmt:message key="verification.message" var="message"/>
-<fmt:message key="verification.approved" var="approved"/>
-<fmt:message key="verification.notApproved" var="not_approved"/>
+<fmt:message key="welcome.page" var="title"/>
+<fmt:message key="welcome.registration" var="registration"/>
+<fmt:message key="welcome.role" var="role"/>
+<fmt:message key="welcome.backHomePage" var="home"/>
 
-<!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,26 +26,26 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <meta http-equiv="refresh" content="6;${pageContext.request.contextPath}/index.jsp">
     <title>${title}</title>
 </head>
 <body>
+<c:import url="header.jsp"/>
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-5 offset-lg-1">
-            <div class="main-title">
-                <h2>${message}</h2>
-            </div>
-            <c:choose>
-                <c:when test="${requestScope.verification}">
-                    <p>${approved}</p>
-                </c:when>
-                <c:otherwise>
-                    <p>${not_approved}</p>
-                </c:otherwise>
-            </c:choose>
-        </div>
+        <p>${registration} ${sessionScope.userName} ${sessionScope.userLastName}</p>
+        <br/>
+    <div class="row">
+        <p>${role} ${sessionScope.userRole}</p>
+        <br/>
+    </div>
+    <div class="row">
+        <a href="${pageContext.request.contextPath}/index.jsp">${home}</a>
     </div>
 </div>
+
+<c:import url="footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

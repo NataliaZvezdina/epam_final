@@ -11,18 +11,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class MailSender {
     private static final Logger logger = LogManager.getLogger();
-    private static final String MAIL_PROPERTIES_PATH = "src/main/resources/mail.properties";
+    private static final String MAIL_PROPERTIES_PATH = "mail.properties";
     private static final String MAIL_SUBJECT = "Verification";
     private final Properties properties = new Properties();
     private MimeMessage message;
 
     public void send(String userMail, String messageText) {
         try {
-            properties.load(new FileReader(MAIL_PROPERTIES_PATH));
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(MAIL_PROPERTIES_PATH);
+            properties.load(inputStream);
         } catch (IOException e) {
             logger.log(Level.ERROR, "Failed to load properties from file {}: {}", MAIL_PROPERTIES_PATH, e );
         }

@@ -11,6 +11,7 @@ public final class TableColumnName {
     public static final String PHONE = "phone";
     public static final String ROLE = "role";
     public static final String STATUS = "status";
+    public static final String IS_VERIFIED = "is_verified";
 
     public static final String CLIENT_ID = "client_id";
     public static final String REGISTRATION_DATE = "registration_date";

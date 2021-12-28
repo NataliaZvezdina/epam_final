@@ -8,7 +8,6 @@ public class User extends AbstractEntity {
     private String firstName;
     private String lastName;
     private String email;
-    private String phone;
     private Role role;
     private UserStatus userStatus;
     private boolean isVerified;
@@ -17,14 +16,13 @@ public class User extends AbstractEntity {
     }
 
     public User(long userId, String login, String password, String firstName, String lastName, String email,
-                String phone, Role role, UserStatus userStatus, boolean isVerified) {
+                 Role role, UserStatus userStatus, boolean isVerified) {
         this.userId = userId;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phone = phone;
         this.role = role;
         this.userStatus = userStatus;
         this.isVerified = isVerified;
@@ -60,11 +58,6 @@ public class User extends AbstractEntity {
 
         public Builder email(String email) {
             user.email = email;
-            return this;
-        }
-
-        public Builder phone(String phone) {
-            user.phone = phone;
             return this;
         }
 
@@ -136,14 +129,6 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -181,7 +166,6 @@ public class User extends AbstractEntity {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
         if (role != user.role) return false;
         return userStatus == user.userStatus;
     }
@@ -194,7 +178,6 @@ public class User extends AbstractEntity {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (userStatus != null ? userStatus.hashCode() : 0);
         return result;
@@ -209,7 +192,6 @@ public class User extends AbstractEntity {
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", phone='").append(phone).append('\'');
         sb.append(", role=").append(role);
         sb.append(", userStatus=").append(userStatus);
         sb.append('}');

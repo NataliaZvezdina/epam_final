@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static final String FIND_BY_ID_QUERY = """
-            SELECT user_id, login, password, first_name, last_name, email, phone, role, status 
+            SELECT user_id, login, password, first_name, last_name, email, phone, role, status, is_verified 
             FROM users 
             WHERE user_id = ?;""";
 
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     private static final int ELEMENTS_ON_PAGE = 10;
 
     private static final String FIND_BY_LOGIN_QUERY = """
-            SELECT user_id, login, password, first_name, last_name, email, phone, role, status 
+            SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified  
             FROM users 
             WHERE login = ?;""";
 
@@ -155,9 +155,9 @@ public class UserDaoImpl implements UserDao {
                 .firstName(resultSet.getString(FIRST_NAME))
                 .lastName(resultSet.getString(LAST_NAME))
                 .email(resultSet.getString(EMAIL))
-                .phone(resultSet.getString(PHONE))
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
+                .isVerified(resultSet.getBoolean(IS_VERIFIED))
                 .build();
     }
 }

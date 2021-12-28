@@ -25,32 +25,32 @@ public class SignUpCommand implements Command {
         String email = request.getParameter(RequestParameter.EMAIL);
 
         if (!validator.checkLogin(login)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Incorrect input login");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "incorrect.login");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
         if (!validator.checkPassword(password)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Incorrect input password");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "incorrect.password");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
         if (!repeatPassword.equals(password)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Wrong password repeated");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "password.notrepeated");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
         if (!validator.checkFirstName(firstName)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Incorrect input first name");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "incorrect.firstname");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
         if (!validator.checkLastName(lastName)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Incorrect input last name");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "incorrect.lastname");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
         if (!validator.checkEmail(email)) {
-            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "Incorrect input email");
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, "incorrect.email");
             return new Router(PagePath.SIGN_UP, Router.RouterType.FORWARD);
         }
 
