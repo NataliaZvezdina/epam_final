@@ -1,13 +1,14 @@
-
-<%--
-  Created by IntelliJ IDEA.
-  User: natal
-  Date: 24/12/2021
-  Time: 23:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="contacts.page" var="title"/>
+<fmt:message key="contacts.address" var="address"/>
+<fmt:message key="contacts.phones" var="call"/>
+<fmt:message key="contacts.social" var="social"/>
 
 <!doctype html>
 <html lang="en">
@@ -19,14 +20,14 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
-    <title>Title</title>
+    <title>${title}</title>
 </head>
 <body>
 <c:import url="header.jsp"/>
 
 <div class="container contact bg-dark">
     <div class="row">
-        <h2 class="contact-title">Контакты</h2>
+        <h2 class="contact-title">${title}</h2>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-12">
@@ -36,15 +37,15 @@
         </div>
         <div class="col-lg-6 col-md-12 ">
             <div class="contact-info">
-                <p>Наш адрес: ул. ********* дом ***</p>
+                <p>${address}</p>
                 <div class="contact-phone">
-                    <p>Наши телефоны:</p>
+                    <p>${call}</p>
                     <div class="contact-phone__item"><a href="#"><span class="mts"></span>+375(99)999-99-99</a></div>
                     <div class="contact-phone__item"><a href="#"><span class="mts"></span>+375(99)999-99-99</a></div>
                     <div class="contact-phone__item"><a href="#"><span class="mts"></span>+375(99)999-99-99</a></div>
                 </div>
                 <div class="contact-social">
-                    <h4>Мы в социальных сетях:</h4>
+                    <h4>${social}</h4>
                     <a href="#" class="contact-social__item">
                         <img src="${pageContext.request.contextPath}/image/vk.png" alt="">
                     </a>
