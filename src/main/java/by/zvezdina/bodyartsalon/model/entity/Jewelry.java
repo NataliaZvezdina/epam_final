@@ -10,18 +10,20 @@ public class Jewelry {
     private String description;
     private String manufacturer;
     private BigDecimal price;
+    private boolean isAvailable;
 
     public Jewelry() {
     }
 
     public Jewelry(long jewelryId, String type, String imageUrl, String description, String manufacturer,
-                   BigDecimal price) {
+                   BigDecimal price, boolean isAvailable) {
         this.jewelryId = jewelryId;
         this.type = type;
         this.imageUrl = imageUrl;
         this.description = description;
         this.manufacturer = manufacturer;
         this.price = price;
+        this.isAvailable = isAvailable;
     }
 
     public static class Builder {
@@ -54,6 +56,11 @@ public class Jewelry {
 
         public Builder price(BigDecimal price) {
             jewelry.price = price;
+            return this;
+        }
+
+        public Builder isAvailable(boolean isAvailable) {
+            jewelry.isAvailable = isAvailable;
             return this;
         }
 
@@ -110,6 +117,14 @@ public class Jewelry {
         this.price = price;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,6 +133,7 @@ public class Jewelry {
         Jewelry jewelry = (Jewelry) o;
 
         if (jewelryId != jewelry.jewelryId) return false;
+        if (isAvailable != jewelry.isAvailable) return false;
         if (type != null ? !type.equals(jewelry.type) : jewelry.type != null) return false;
         if (imageUrl != null ? !imageUrl.equals(jewelry.imageUrl) : jewelry.imageUrl != null) return false;
         if (description != null ? !description.equals(jewelry.description) : jewelry.description != null) return false;
@@ -134,6 +150,7 @@ public class Jewelry {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (isAvailable ? 1 : 0);
         return result;
     }
 
@@ -146,6 +163,7 @@ public class Jewelry {
         sb.append(", description='").append(description).append('\'');
         sb.append(", manufacturer='").append(manufacturer).append('\'');
         sb.append(", price=").append(price);
+        sb.append(", isAvailable=").append(isAvailable);
         sb.append('}');
         return sb.toString();
     }

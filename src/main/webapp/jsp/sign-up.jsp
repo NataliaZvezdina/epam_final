@@ -47,13 +47,13 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="validationServer01">${login}</label>
-                    <input type="text" name="login" class="form-control is-valid" id="validationServer01" required
+                    <input type="text" name="login" class="form-control" id="validationServer01" required
                            pattern="[A-Za-z0-9]{3,20}">
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer02">${password}</label>
-                    <input type="password" name="password" class="form-control is-valid" id="validationServer02"
+                    <input type="password" name="password" class="form-control" id="validationServer02"
                            required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                     <small id="passwordHelpBlock" class="form-text text-muted">
                         Your password must be 8-20 characters long, contain letters and numbers, and must not contain
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer002">${confirm}</label>
-                    <input type="password" name="repeatPassword" class="form-control is-valid" id="validationServer002"
+                    <input type="password" name="repeatPassword" class="form-control" id="validationServer002"
                            required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
 
                 </div>
@@ -71,21 +71,20 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="validationServer03">${name}</label>
-                    <input type="text" name="firstName" class="form-control is-valid" id="validationServer03" required
+                    <input type="text" name="firstName" class="form-control" id="validationServer03" required
                            pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer04">${surname}</label>
-                    <input type="text" name="lastName" class="form-control is-valid" id="validationServer04" required
+                    <input type="text" name="lastName" class="form-control" id="validationServer04" required
                            pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer05">${email}</label>
-                    <input type="email" name="email" class="form-control is-valid" id="validationServer05" required
+                    <input type="email" name="email" class="form-control" id="validationServer05" required
                            pattern="[_0-9a-z][-_.0-9a-z]*@[0-9a-z][-.0-9a-z]*[0-9a-z]\.[a-z]{2,}">
-
                 </div>
             </div>
 
@@ -119,5 +118,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 </body>
 </html>

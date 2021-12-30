@@ -48,6 +48,8 @@ public final class TableColumnName {
     public static final String MANUFACTURER = "manufacturer";
     public static final String JEWELRY_DESCRIPTION = "jewelry_description";
     public static final String PRICE = "price";
+    public static final String IS_AVAILABLE = "is_available";
+
 
     public static final String QUANTITY = "quantity";
 

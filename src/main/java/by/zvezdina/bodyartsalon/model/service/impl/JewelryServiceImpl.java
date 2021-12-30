@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JewelryServiceImpl implements JewelryService {
@@ -38,5 +39,31 @@ public class JewelryServiceImpl implements JewelryService {
 
         logger.log(Level.DEBUG, "All found jewelry: {}", allJewelry);
         return allJewelry;
+    }
+
+    @Override
+    public List<Jewelry> findAll(int page) throws ServiceException {
+        List<Jewelry> jewelryOnPage = new ArrayList<>();
+        try {
+            jewelryOnPage = jewelryDao.findAll(page);
+        } catch (DaoException e) {
+            throw new ServiceException("findAll() - Failed to find all jewelry on page " + page, e);
+        }
+
+        logger.log(Level.DEBUG, "All found jewelry on page {}: {}", page, jewelryOnPage);
+        return jewelryOnPage;
+    }
+
+    @Override
+    public boolean deleteById(long id) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = jewelryDao.deleteById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to delete jewelry by id " + id, e);
+        }
+
+        logger.log(Level.DEBUG, "Jewelry by id {} was deleted: ", rowsUpdated == 1);
+        return rowsUpdated == 1;
     }
 }

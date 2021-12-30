@@ -13,11 +13,11 @@ public final class RequestParameter {
 
     public static final String ID = "id";
 
-    public static final String PAGE = "page";
     public static final String COMMAND = "command";
 
     public static final String JEWELRY_ID = "jewelryId";
     public static final String JEWELRY_IMAGE_PATH = "imagePath";
+    public static final String PAGE = "page";
 
     private RequestParameter() {
     }

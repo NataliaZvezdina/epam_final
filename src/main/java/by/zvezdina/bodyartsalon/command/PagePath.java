@@ -12,6 +12,7 @@ public final class PagePath {
     public static final String WELCOME = "jsp/welcome.jsp";
 
     public static final String JEWELRY = "jsp/jewelry.jsp";
+    public static final String GO_TO_JEWELRY_DEFINED_PAGE = "controller?command=show_all_jewelry&page=";
 
     public static final String LOGIN_PAGE = "jsp/sign-in.jsp";
     public static final String PROFILE = "jsp/profile.jsp";

@@ -26,23 +26,30 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
-    <meta http-equiv="refresh" content="6;${pageContext.request.contextPath}/index.jsp">
+<%--    <meta http-equiv="refresh" content="6;${pageContext.request.contextPath}/index.jsp">--%>
+
+    <SCRIPT type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </SCRIPT>
+
     <title>${title}</title>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="header.jsp"/>
 
 <div class="container">
-    <div class="row">
+<%--    <div class="row">--%>
         <p>${registration} ${sessionScope.userName} ${sessionScope.userLastName}</p>
-        <br/>
-    <div class="row">
+
         <p>${role} ${sessionScope.userRole}</p>
         <br/>
-    </div>
-    <div class="row">
+
+
         <a href="${pageContext.request.contextPath}/index.jsp">${home}</a>
-    </div>
+<%--    </div>--%>
 </div>
 
 <c:import url="footer.jsp"/>

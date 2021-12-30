@@ -8,6 +8,9 @@ public enum CommandType {
     SIGN_UP,
     VERIFY,
     SHOW_ALL_JEWELRY,
+    ADD_JEWELRY,
+    EDIT_JEWELRY,
+    DELETE_JEWELRY,
 
     GO_TO_LOGIN,
     LOGIN_USER,

@@ -29,54 +29,63 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+
+    <SCRIPT type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </SCRIPT>
+
     <title>${title}</title>
 </head>
-<body>
-<c:import url="header.jsp"/>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<div class="sign" style="height: 67vh">
+    <c:import url="header.jsp"/>
 
-<div class="container">
-    <div class="row">
-        <form class="row g-3 needs-validation" novalidate
-              action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="command" value="sign_in">
+        <div class="container" style="height: inherit">
+            <div class="row">
+                <form class="row g-3 needs-validation" novalidate
+                      action="${pageContext.request.contextPath}/controller" method="post">
+                    <input type="hidden" name="command" value="sign_in">
 
-            <div class="col-md-4">
-                <label for="validationCustom01" class="form-label">${login}</label>
-                <input type="text" name="login" class="form-control" id="validationCustom01" required
-                       pattern="[A-Za-z0-9]{3,20}">
-                <div class="invalid-feedback">
-                    ${invalidLogin}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">${password}</label>
-                <input type="password" name="password" class="form-control" id="validationCustom02" required
-                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                <div class="invalid-feedback">
-                    ${invalidPassword}
-                </div>
-            </div>
-            <c:if test="${requestScope.errorMessage != null}">
-                <div class="form-group">
-                    <div class="col-md-6 mb-3">
-                        <div class="err-message-from-server">
-                            <fmt:setBundle basename="bundle/locale" var="rb"/>
-                            <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
+                    <div class="col-md-4">
+                        <label for="validationCustom01" class="form-label">${login}</label>
+                        <input type="text" name="login" class="form-control" id="validationCustom01" required
+                               pattern="[A-Za-z0-9]{3,20}">
+                        <div class="invalid-feedback">
+                            ${invalidLogin}
                         </div>
                     </div>
-                </div>
-            </c:if>
-            <br>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">${buttonLogin}</button>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">${password}</label>
+                        <input type="password" name="password" class="form-control" id="validationCustom02" required
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                        <div class="invalid-feedback">
+                            ${invalidPassword}
+                        </div>
+                    </div>
+                    <c:if test="${requestScope.errorMessage != null}">
+                        <div class="form-group">
+                            <div class="col-md-6 mb-3">
+                                <div class="err-message-from-server">
+                                    <fmt:setBundle basename="bundle/locale" var="rb"/>
+                                    <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    <br>
+                    <div class="col-12">
+                        <button class="btn btn-primary mt-4" type="submit">${buttonLogin}</button>
+                    </div>
+
+                </form>
             </div>
+        </div>
 
-        </form>
-    </div>
+    <c:import url="footer.jsp"/>
 </div>
-
-<c:import url="footer.jsp"/>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

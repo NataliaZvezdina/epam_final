@@ -16,6 +16,7 @@ public final class RequestAttribute {
     public static final String VERIFICATION = "verification";
 
     public static final String JEWELRY_LIST = "jewelryList";
+    public static final String PAGE = "page";
 
     private RequestAttribute() {
     }
