@@ -2,13 +2,12 @@ package by.zvezdina.bodyartsalon.command;
 
 import by.zvezdina.bodyartsalon.command.impl.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 public class CommandProvider {
 
     private static CommandProvider instance;
-    private final Map<CommandType, Command> commands = new HashMap<>();
+    private final EnumMap<CommandType, Command> commands = new EnumMap<>(CommandType.class);
 
     private CommandProvider() {
         commands.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());

@@ -16,7 +16,6 @@ import java.io.IOException;
 @WebServlet(name = "mainController", urlPatterns = {"/controller"})
 public class MainController extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
-    CommandProvider commandProvider = CommandProvider.getInstance();
 
     public void init() {
     }
@@ -33,7 +32,7 @@ public class MainController extends HttpServlet {
 
     private void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND);
-        Command command = commandProvider.getCommand(commandName);
+        Command command = CommandProvider.getInstance().getCommand(commandName);
         Router router = command.execute(request);
 
         switch (router.getRouterType()) {
