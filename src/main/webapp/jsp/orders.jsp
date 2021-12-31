@@ -1,7 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="orders.page" var="title"/>
+
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,14 +23,16 @@
             window.history.forward();
         }
     </script>
-    <title>Title</title>
+    <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<div class="sign" style="height: 100vh">
+<c:import url="header.jsp"/>
 
-<a href="${pageContext.request.contextPath}/controller?command=show_all_orders">Show all orders</a>
 
 
 <c:import url="footer.jsp"/>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

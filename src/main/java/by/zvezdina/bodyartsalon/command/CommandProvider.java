@@ -19,6 +19,8 @@ public class CommandProvider {
         commands.put(CommandType.ADD_JEWELRY, new AddJewelryCommand());
         commands.put(CommandType.DELETE_JEWELRY, new DeleteJewelryCommand());
 
+        commands.put(CommandType.SHOW_ALL_ORDERS, new ShowAllOrdersCommand());
+
         commands.put(CommandType.DEFAULT, new DefaultCommand());
         commands.put(CommandType.GO_TO_LOGIN, new GoToLoginPageCommand());
         commands.put(CommandType.LOGIN_USER, new LoginUserCommand());

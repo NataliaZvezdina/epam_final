@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: natal
-  Date: 16/12/2021
-  Time: 22:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -30,12 +23,12 @@
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
 
-    <SCRIPT type="text/javascript">
+    <script type="text/javascript">
         window.history.forward();
         function noBack() {
             window.history.forward();
         }
-    </SCRIPT>
+    </script>
 
     <title>${title}</title>
 </head>

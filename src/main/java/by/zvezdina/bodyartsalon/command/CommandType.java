@@ -12,6 +12,8 @@ public enum CommandType {
     EDIT_JEWELRY,
     DELETE_JEWELRY,
 
+    SHOW_ALL_ORDERS,
+
     GO_TO_LOGIN,
     LOGIN_USER,
     GO_TO_PROFILE,
