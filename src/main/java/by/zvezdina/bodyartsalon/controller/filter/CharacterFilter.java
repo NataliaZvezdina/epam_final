@@ -15,8 +15,6 @@ public class CharacterFilter implements Filter {
         code = config.getInitParameter("encoding");
     }
 
-
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws ServletException, IOException {

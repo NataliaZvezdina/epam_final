@@ -1,0 +1,15 @@
+
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.( Üó
+—
+java:S11867"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚“¶î
+P
+java:S1161":Add the "@Override" annotation above this method signature( Üó
+W
+java:S3457)"AFormat specifiers should be used instead of string concatenation.(ë‡İÕ
+\
+java:S3457-"AFormat specifiers should be used instead of string concatenation.(‹ÇŒõùÿÿÿÿ
+\
+java:S34572"AFormat specifiers should be used instead of string concatenation.(‹ÇŒõùÿÿÿÿ
+P
+java:S11617":Add the "@Override" annotation above this method signature(‚“¶î

@@ -41,11 +41,6 @@ public class SignInCommand implements Command {
         Optional<User> optionalUser = null;
         try {
             optionalUser = userService.login(login, password);
-//            if (optionalUser.isEmpty()) {
-//                logger.log(Level.ERROR, "Failed to execute request LoginUserCommand: Invalid login or password");
-//                request.setAttribute(RequestAttribute.ERROR_MESSAGE, "wrong.login.or.password");
-//                return new Router(currentPage, Router.RouterType.FORWARD);
-//            }
 
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();

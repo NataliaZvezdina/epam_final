@@ -24,9 +24,15 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
     <title>${title}</title>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <div class="sign" style="height: 67vh">
     <c:import url="header.jsp"/>
 
@@ -39,6 +45,9 @@
             <th scope="col">${manufacturer}</th>
             <th scope="col">${price}</th>
             <c:if test="${sessionScope.userRole=='ADMIN'}">
+                <th scope="col">Add to basket</th>
+            </c:if>
+            <c:if test="${sessionScope.userRole=='CLIENT'}">
                 <th scope="col">${delete}</th>
             </c:if>
         </tr>
@@ -71,6 +80,9 @@
                             <td><a href="#"></a>${deleted}</td>
                         </c:when>
                     </c:choose>
+                </c:if>
+                <c:if test="${sessionScope.userRole=='CLIENT'}">
+                    <td></td>
                 </c:if>
             </tr>
         </c:forEach>
