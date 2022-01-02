@@ -13,6 +13,7 @@ public enum CommandType {
     DELETE_JEWELRY,
 
     SHOW_ALL_ORDERS,
+    ADD_ITEM_TO_BASKET,
 
     GO_TO_LOGIN,
     LOGIN_USER,

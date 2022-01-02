@@ -10,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @WebServlet(name = "uploadImageController", urlPatterns = {"/uploadImage"})
-//@MultipartConfig(fileSizeThreshold = 1024 * 1024,
-//        maxFileSize = 1024 * 1024 * 5,
-//        maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadImageController extends HttpServlet {
     private static final String CONTENT_TYPE = "image/jpeg";
 

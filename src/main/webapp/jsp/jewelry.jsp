@@ -45,10 +45,10 @@
             <th scope="col">${manufacturer}</th>
             <th scope="col">${price}</th>
             <c:if test="${sessionScope.userRole=='ADMIN'}">
-                <th scope="col">Add to basket</th>
+                <th scope="col">${delete}</th>
             </c:if>
             <c:if test="${sessionScope.userRole=='CLIENT'}">
-                <th scope="col">${delete}</th>
+                <th scope="col">Add to basket</th>
             </c:if>
         </tr>
         </thead>
@@ -66,7 +66,7 @@
                         <td>${element.price}</td>
                     </c:when>
                     <c:when test="${!element.available}">
-                        <td>out of stock</td>
+                        <td>-</td>
                     </c:when>
                 </c:choose>
                 <c:if test="${sessionScope.userRole=='ADMIN'}">
@@ -82,7 +82,15 @@
                     </c:choose>
                 </c:if>
                 <c:if test="${sessionScope.userRole=='CLIENT'}">
-                    <td></td>
+                    <c:choose>
+                        <c:when test="${element.available}">
+<%--                            <td>&#10010;</td>--%>
+                            <td><a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.jewelryId}&page=${requestScope.page}">&#10010;</a></td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>Not available</td>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
             </tr>
         </c:forEach>

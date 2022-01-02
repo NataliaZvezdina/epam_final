@@ -17,6 +17,8 @@ public final class SessionAttribute {
     public static final String USER_EMAIL = "userEmail";
     public static final String USER_MONEY = "userMoney";
 
+    public static final String BASKET = "basket";
+
     private SessionAttribute() {
     }
 }
