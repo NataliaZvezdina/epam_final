@@ -45,6 +45,11 @@ public class ClientDaoImpl implements ClientDao {
             SET is_verified = true 
             WHERE user_id = ? AND is_verified = false;""";
 
+    private static final String FIND_DISCOUNT_BY_CLIENT_ID = """
+            SELECT value 
+            FROM clients JOIN discount ON clients.discount_id = discount.discount_id 
+            WHERE client_id = ?;""";
+
     private ClientDaoImpl() {
     }
 
@@ -157,6 +162,24 @@ public class ClientDaoImpl implements ClientDao {
             int rowsUpdated = statement.executeUpdate();
             logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
             return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("verify() - Failed to verify client: ", e);
+        }
+    }
+
+    @Override
+    public int findDiscountByClientId(long id) throws DaoException {
+        int discount = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_DISCOUNT_BY_CLIENT_ID)) {
+            statement.setLong(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    discount = resultSet.getInt(VALUE);
+                }
+            }
+            logger.log(Level.DEBUG, "Discount of client with id {}: {}", id, discount);
+            return discount;
         } catch (SQLException e) {
             throw new DaoException("verify() - Failed to verify client: ", e);
         }

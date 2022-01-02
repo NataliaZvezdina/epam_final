@@ -22,6 +22,7 @@ public class LocaleFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+
         if (httpRequest.getSession(false) != null
                 && httpRequest.getSession(false).getAttribute(RequestAttribute.LOCALE) == null) {
             httpRequest.getSession().setAttribute(RequestAttribute.LOCALE, EN);

@@ -14,6 +14,7 @@
 
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -24,9 +25,59 @@
 <c:import url="header.jsp"/>
 
 </br></br>
-<c:if test="${sessionScope.basket == null}">
-    <h3 align="center">Basket is empty</h3>
-</c:if>
+<c:choose>
+    <c:when test="${sessionScope.basket == null}">
+        <h3 align="center">Basket is empty</h3>
+    </c:when>
+    <c:otherwise>
+        <table class="table table-striped" style="height: inherit">
+            <thead>
+            <tr>
+                <th scope="col">${image}</th>
+                <th scope="col">${type}</th>
+                <th scope="col">${description}</th>
+                <th scope="col">${manufacturer}</th>
+                <th scope="col">${price}</th>
+                <c:if test="${sessionScope.userRole=='CLIENT'}">
+                    <th scope="col">Add to basket</th>
+                </c:if>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="element" items="${requestScope.jewelryList}" varStatus="status">
+
+                <tr>
+                    <td><img width="100" src="${pageContext.request.contextPath}/uploadImage?imagePath=${element.imageUrl}"
+                             alt=""></td>
+                    <td>${element.type}</td>
+                    <td>${element.description}</td>
+                    <td>${element.manufacturer}</td>
+                    <c:choose>
+                        <c:when test="${element.available}">
+                            <td>${element.price}</td>
+                        </c:when>
+                        <c:when test="${!element.available}">
+                            <td>-</td>
+                        </c:when>
+                    </c:choose>
+
+                    <c:if test="${sessionScope.userRole=='CLIENT'}">
+                        <c:choose>
+                            <c:when test="${element.available}">
+                                <%--                            <td>&#10010;</td>--%>
+                                <td><a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.jewelryId}&page=${requestScope.page}">&#10010;</a></td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>Not available</td>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:otherwise>
+</c:choose>
 
 
 <c:import url="footer.jsp"/>

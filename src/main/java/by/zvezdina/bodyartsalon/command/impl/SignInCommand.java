@@ -3,7 +3,6 @@ package by.zvezdina.bodyartsalon.command.impl;
 import by.zvezdina.bodyartsalon.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Client;
-import by.zvezdina.bodyartsalon.model.entity.Role;
 import by.zvezdina.bodyartsalon.model.entity.User;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
 import by.zvezdina.bodyartsalon.model.service.UserService;
@@ -61,7 +60,10 @@ public class SignInCommand implements Command {
                     case ADMIN -> {return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);}
                     case CLIENT -> {
                         Client client = clientService.findById(user.getUserId());
+                        // todo findDiscountByClientId + session.setAttribute()
+                        int discount = clientService.findDiscountByClientId(user.getUserId());
                         session.setAttribute(SessionAttribute.USER_MONEY, client.getMoney());
+                        session.setAttribute(SessionAttribute.USER_DISCOUNT, discount);
                         return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);
                     }
                 }

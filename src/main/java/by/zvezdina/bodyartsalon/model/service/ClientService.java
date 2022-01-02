@@ -8,4 +8,5 @@ public interface ClientService {
     Client create(Client client) throws ServiceException;
     boolean verify(long id) throws ServiceException;
     Client findById(long id) throws ServiceException;
+    int findDiscountByClientId(long id) throws ServiceException;
 }

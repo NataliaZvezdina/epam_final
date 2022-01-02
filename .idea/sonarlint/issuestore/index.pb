@@ -7,10 +7,6 @@ m
 =src/main/java/by/zvezdina/bodyartsalon/model/entity/User.java,1\9\190136025622d521aef8009b78a3c5bc36c3fea6
 v
 Fsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/UserDaoImpl.java,1\f\1f477364ffc9fd12afa5ea7a6dbdde70e5c0e642
-x
-Hsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/ClientDaoImpl.java,0\2\02550b310f56c7cb217e47d5b6d31fceac56e7d7
-€
-Psrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/ClientServiceImpl.java,5\c\5c30a6b78f3dd88a151cb7afd8d304d81308d893
 v
 Fsrc/main/java/by/zvezdina/bodyartsalon/command/impl/VerifyCommand.java,a\f\af0a4dc6163242596112f5bd475cd2833552883c
 z

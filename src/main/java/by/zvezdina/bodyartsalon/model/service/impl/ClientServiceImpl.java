@@ -70,4 +70,15 @@ public class ClientServiceImpl implements ClientService {
         }
         return client;
     }
+
+    @Override
+    public int findDiscountByClientId(long id) throws ServiceException {
+        try {
+            int discount = clientDao.findDiscountByClientId(id);
+            logger.log(Level.DEBUG, "Found discount of client with id {} : {}", id, discount);
+            return discount;
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to find client's discount by id " + id, e);
+        }
+    }
 }

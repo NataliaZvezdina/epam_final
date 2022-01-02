@@ -7,7 +7,7 @@ public final class SessionAttribute {
 
     public static final String USER_PHONE = "user_phone";
    // public static final String USER_NAME = "user_name";
-    public static final String USER_DISCOUNT = "user_discount";
+    //public static final String USER_DISCOUNT = "user_discount";
 
     public static final String USER_ID = "userId";
     public static final String USER_NAME = "userName";
@@ -16,6 +16,7 @@ public final class SessionAttribute {
     public static final String USER_ROLE = "userRole";
     public static final String USER_EMAIL = "userEmail";
     public static final String USER_MONEY = "userMoney";
+    public static final String USER_DISCOUNT = "userDiscount";
 
     public static final String BASKET = "basket";
 

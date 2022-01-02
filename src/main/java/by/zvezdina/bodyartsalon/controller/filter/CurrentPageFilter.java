@@ -15,6 +15,7 @@ public class CurrentPageFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         String currentPage = httpRequest.getRequestURL().toString();
+
         if (currentPage.contains("jsp/")) {
             int index = currentPage.indexOf("jsp/");
             currentPage = currentPage.substring(index);
