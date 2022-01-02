@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="jewelry.image" var="image"/>
+<fmt:message key="jewelry.type" var="type"/>
+<fmt:message key="jewelry.description" var="description"/>
+<fmt:message key="jewelry.manufacturer" var="manufacturer"/>
 
 <!doctype html>
 <html lang="en">
@@ -38,14 +47,11 @@
                 <th scope="col">${description}</th>
                 <th scope="col">${manufacturer}</th>
                 <th scope="col">${price}</th>
-                <c:if test="${sessionScope.userRole=='CLIENT'}">
-                    <th scope="col">Add to basket</th>
-                </c:if>
+
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="element" items="${requestScope.jewelryList}" varStatus="status">
-
+            <c:forEach var="element" items="${requestScope.jewelryList}">
                 <tr>
                     <td><img width="100" src="${pageContext.request.contextPath}/uploadImage?imagePath=${element.imageUrl}"
                              alt=""></td>
@@ -61,17 +67,6 @@
                         </c:when>
                     </c:choose>
 
-                    <c:if test="${sessionScope.userRole=='CLIENT'}">
-                        <c:choose>
-                            <c:when test="${element.available}">
-                                <%--                            <td>&#10010;</td>--%>
-                                <td><a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.jewelryId}&page=${requestScope.page}">&#10010;</a></td>
-                            </c:when>
-                            <c:otherwise>
-                                <td>Not available</td>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>
