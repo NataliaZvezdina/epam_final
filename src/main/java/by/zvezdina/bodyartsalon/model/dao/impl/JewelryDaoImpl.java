@@ -2,6 +2,7 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.JewelryDao;
+import by.zvezdina.bodyartsalon.model.entity.Feedback;
 import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.Level;
@@ -30,6 +31,11 @@ public class JewelryDaoImpl implements JewelryDao {
             LIMIT ?, ?;""";
 
     private static final int ELEMENTS_ON_PAGE = 3;
+
+    private static final String FIND_BY_ID_QUERY = """
+            SELECT jewelry_id, type, image_url, manufacturer, jewelry_description, price, is_available 
+            FROM jewelry 
+            WHERE jewelry_id = ?;""";
 
     private static final String DELETE_BY_ID_QUERY = """
             UPDATE jewelry 
@@ -85,6 +91,24 @@ public class JewelryDaoImpl implements JewelryDao {
 
         logger.log(Level.DEBUG, "All jewelry on page {}: {}", page, jewelryOnPage);
         return jewelryOnPage;
+    }
+
+    @Override
+    public Jewelry findById(long id) throws DaoException {
+        Jewelry foundJewelry = null;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    foundJewelry = extract(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to find jewelry by id: ", e);
+        }
+        logger.log(Level.DEBUG, "Found jewelry by id {}: {}", id, foundJewelry);
+        return foundJewelry;
     }
 
     @Override

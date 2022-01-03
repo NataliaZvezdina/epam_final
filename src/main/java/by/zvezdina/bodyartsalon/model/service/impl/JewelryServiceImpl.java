@@ -55,6 +55,19 @@ public class JewelryServiceImpl implements JewelryService {
     }
 
     @Override
+    public Jewelry findById(long id) throws ServiceException {
+        Jewelry jewelry = null;
+        try {
+            jewelry = jewelryDao.findById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("findById() - Failed to find jewelry by id " + id, e);
+        }
+
+        logger.log(Level.DEBUG, "Found jewelry by id {}: {}", id, jewelry);
+        return jewelry;
+    }
+
+    @Override
     public boolean deleteById(long id) throws ServiceException {
         int rowsUpdated = 0;
         try {

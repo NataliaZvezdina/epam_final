@@ -15,6 +15,8 @@ public final class PagePath {
     public static final String GO_TO_JEWELRY_DEFINED_PAGE = "controller?command=show_all_jewelry&page=";
 
     public static final String ORDERS = "jsp/orders.jsp";
+    public static final String BASKET = "jsp/basket.jsp";
+    public static final String ORDER_CREATED_NOTIFICATION = "jsp/order-created-notification.jsp";
 
     public static final String LOGIN_PAGE = "jsp/sign-in.jsp";
     public static final String PROFILE = "jsp/profile.jsp";

@@ -13,6 +13,7 @@ public class AddItemToBasketCommand implements Command {
     public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Map<Long, Integer> basket = (Map<Long, Integer>) session.getAttribute(SessionAttribute.BASKET);
+
         if (basket == null) {
             basket = new HashMap<>();
             session.setAttribute(SessionAttribute.BASKET, basket);
@@ -23,12 +24,11 @@ public class AddItemToBasketCommand implements Command {
             basket.put(jewelryId, 0);
         }
         Integer currentItemQuantity = basket.get(jewelryId);
-        System.out.println("previous quantity: " + currentItemQuantity);
         basket.put(jewelryId, ++currentItemQuantity);
-        basket.forEach((k, v) -> System.out.println(k + " : " + v));
+
 
         String page = request.getParameter(RequestParameter.PAGE);
-        System.out.println("current page: " + page);
+
         int currentPageNumber = 0;
         if (page != null) {
             currentPageNumber = Integer.parseInt(page);

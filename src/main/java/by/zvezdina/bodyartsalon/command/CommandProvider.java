@@ -21,6 +21,10 @@ public class CommandProvider {
 
         commands.put(CommandType.SHOW_ALL_ORDERS, new ShowAllOrdersCommand());
         commands.put(CommandType.ADD_ITEM_TO_BASKET, new AddItemToBasketCommand());
+        commands.put(CommandType.SHOW_BASKET, new ShowBasketCommand());
+        commands.put(CommandType.CREATE_ORDER, new CreateOrderCommand());
+        commands.put(CommandType.RECOUNT_ORDER_WHILE_ADDING_ITEM, new RecountOrderWhileAddingItemCommand());
+        commands.put(CommandType.RECOUNT_ORDER_WHILE_REMOVING_ITEM, new RecountOrderWhileRemovingItemCommand());
 
         commands.put(CommandType.DEFAULT, new DefaultCommand());
         commands.put(CommandType.GO_TO_LOGIN, new GoToLoginPageCommand());

@@ -60,7 +60,7 @@
                     </li>
                     <c:if test="${sessionScope.userRole == 'CLIENT'}">
                         <li class="nav-item">
-                            <p>Balance: ${sessionScope.userMoney} £ <a href="${pageContext.request.contextPath}/jsp/basket.jsp">&#128722</a>
+                            <p>Balance: ${sessionScope.userMoney} £ <a href="${pageContext.request.contextPath}/controller?command=show_basket">&#128722</a>
                             </p>
                         </li>
                         <c:if test="${sessionScope.userDiscount != 0}">

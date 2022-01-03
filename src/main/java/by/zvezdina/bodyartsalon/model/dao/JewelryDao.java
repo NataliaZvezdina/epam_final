@@ -9,5 +9,6 @@ public interface JewelryDao {
 
     List<Jewelry> findAll() throws DaoException;
     List<Jewelry> findAll(int page) throws DaoException;
+    Jewelry findById(long id) throws DaoException;
     int deleteById(long id) throws DaoException;
 }
