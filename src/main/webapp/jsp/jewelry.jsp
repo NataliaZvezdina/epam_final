@@ -88,7 +88,7 @@
                     </c:choose>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}">
                             &#9998;
                         </a>
                     </td>

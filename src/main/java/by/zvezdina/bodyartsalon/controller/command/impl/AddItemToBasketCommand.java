@@ -28,13 +28,7 @@ public class AddItemToBasketCommand implements Command {
 
 
         String page = request.getParameter(RequestParameter.PAGE);
-
-        int currentPageNumber = 0;
-        if (page != null) {
-            currentPageNumber = Integer.parseInt(page);
-        } else {
-            currentPageNumber = 1;
-        }
+        int currentPageNumber = page != null ? Integer.parseInt(page) : 1;
 
         return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPageNumber, Router.RouterType.FORWARD);
     }

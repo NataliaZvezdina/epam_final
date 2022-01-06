@@ -18,6 +18,8 @@ public final class RequestAttribute {
     public static final String JEWELRY_LIST = "jewelryList";
     public static final String PAGE = "page";
 
+    public static final String JEWELRY_TO_EDIT = "jewelryToEdit";
+
     public static final String BASKET_ITEMS_LIST = "basketItemsList";
     public static final String TOTAL_COST = "totalCost";
 

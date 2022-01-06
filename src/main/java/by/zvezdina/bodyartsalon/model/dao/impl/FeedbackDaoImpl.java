@@ -135,8 +135,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
     @Override
     public Feedback update(Feedback feedback) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY,
-                     Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
             statement.setString(1, feedback.getContent());
             statement.setDate(2, feedback.getCreatedAt());

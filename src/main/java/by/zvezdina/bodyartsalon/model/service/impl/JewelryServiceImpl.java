@@ -68,6 +68,17 @@ public class JewelryServiceImpl implements JewelryService {
     }
 
     @Override
+    public Jewelry update(Jewelry jewelry) throws ServiceException {
+        try {
+            jewelryDao.update(jewelry);
+        } catch (DaoException e) {
+            throw new ServiceException("update() - Failed to update jewelry ", e);
+        }
+        logger.log(Level.DEBUG, "Jewelry was updated: {}", jewelry);
+        return jewelry;
+    }
+
+    @Override
     public boolean deleteById(long id) throws ServiceException {
         int rowsUpdated = 0;
         try {

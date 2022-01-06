@@ -88,7 +88,8 @@
 
                             </div>
                             <div class="form-group col-md-3">
-                                <button type="submit" class="btn btn-primary" style="background-color: forestgreen">${update}</button>
+                                <button type="submit" class="btn btn-primary"
+                                        style="background-color: forestgreen">${update}</button>
                             </div>
                         </form>
                         </p>

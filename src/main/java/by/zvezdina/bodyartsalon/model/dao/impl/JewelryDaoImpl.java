@@ -8,10 +8,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +31,11 @@ public class JewelryDaoImpl implements JewelryDao {
     private static final String FIND_BY_ID_QUERY = """
             SELECT jewelry_id, type, image_url, manufacturer, jewelry_description, price, is_available 
             FROM jewelry 
+            WHERE jewelry_id = ?;""";
+
+    private static final String UPDATE_QUERY = """
+            UPDATE jewelry 
+            SET type = ?, image_url = ?, manufacturer = ?, jewelry_description = ?, price = ?, is_available = ? 
             WHERE jewelry_id = ?;""";
 
     private static final String DELETE_BY_ID_QUERY = """
@@ -113,6 +115,27 @@ public class JewelryDaoImpl implements JewelryDao {
         }
         logger.log(Level.DEBUG, "Found jewelry by id {}: {}", id, foundJewelry);
         return foundJewelry;
+    }
+
+    @Override
+    public Jewelry update(Jewelry jewelry) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+            statement.setString(1, jewelry.getType());
+            statement.setString(2, jewelry.getImageUrl());
+            statement.setString(3, jewelry.getManufacturer());
+            statement.setString(4, jewelry.getDescription());
+            statement.setBigDecimal(5, jewelry.getPrice());
+            statement.setBoolean(6, jewelry.isAvailable());
+            statement.setLong(7, jewelry.getJewelryId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Failed to update jewelry: ", e);
+        }
+
+        logger.log(Level.DEBUG, "Jewelry updated: {}", jewelry);
+        return jewelry;
     }
 
     @Override

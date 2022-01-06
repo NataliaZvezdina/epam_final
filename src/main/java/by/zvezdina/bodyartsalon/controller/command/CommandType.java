@@ -11,6 +11,7 @@ public enum CommandType {
     SHOW_ALL_JEWELRY,
     ADD_JEWELRY,
     EDIT_JEWELRY,
+    GO_TO_EDIT_JEWELRY,
     DELETE_JEWELRY,
     RESTORE_JEWELRY,
 

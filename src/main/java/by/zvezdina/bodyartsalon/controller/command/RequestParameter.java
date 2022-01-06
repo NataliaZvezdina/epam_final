@@ -24,6 +24,13 @@ public final class RequestParameter {
     public static final String NEW_DISCOUNT_ID = "newDiscountId";
     public static final String CLIENT_ID = "clientId";
 
+    public static final String IMAGE_URL = "imageUrl";
+    public static final String TYPE = "type";
+    public static final String MANUFACTURER = "manufacturer";
+    public static final String DESCRIPTION = "description";
+    public static final String PRICE = "price";
+    public static final String IS_AVAILABLE = "isAvailable";
+
     private RequestParameter() {
     }
 }
