@@ -11,5 +11,6 @@ public interface JewelryService {
     List<Jewelry> findAll(int page) throws ServiceException;
     Jewelry findById(long id) throws ServiceException;
     boolean deleteById(long id) throws ServiceException;
+    boolean restoreById(long id) throws ServiceException;
 
 }

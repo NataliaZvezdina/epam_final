@@ -79,4 +79,17 @@ public class JewelryServiceImpl implements JewelryService {
         logger.log(Level.DEBUG, "Jewelry by id {} was deleted: ", rowsUpdated == 1);
         return rowsUpdated == 1;
     }
+
+    @Override
+    public boolean restoreById(long id) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = jewelryDao.restoreById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to restore jewelry by id " + id, e);
+        }
+
+        logger.log(Level.DEBUG, "Jewelry by id {} was restored: ", rowsUpdated == 1);
+        return rowsUpdated == 1;
+    }
 }

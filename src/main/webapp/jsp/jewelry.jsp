@@ -12,7 +12,9 @@
 <fmt:message key="jewelry.manufacturer" var="manufacturer"/>
 <fmt:message key="jewelry.price" var="price"/>
 <fmt:message key="jewelry.delete" var="delete"/>
+<fmt:message key="jewelry.restore" var="restore"/>
 <fmt:message key="jewelry.deleted" var="deleted"/>
+<fmt:message key="jewelry.edit" var="edit"/>
 
 <!doctype html>
 <html lang="en">
@@ -46,7 +48,8 @@
             <th scope="col">${manufacturer}</th>
             <th scope="col">${price}</th>
             <c:if test="${sessionScope.userRole=='ADMIN'}">
-                <th scope="col">${delete}</th>
+                <th scope="col">${delete} / ${restore}</th>
+                <th scope="col">${edit}</th>
             </c:if>
             <c:if test="${sessionScope.userRole=='CLIENT'}">
                 <th scope="col">Add to basket</th>
@@ -54,8 +57,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="element" items="${requestScope.jewelryList}" varStatus="status">
-
+        <c:forEach var="element" items="${requestScope.jewelryList}">
             <tr>
                 <td><img width="100" src="${pageContext.request.contextPath}/uploadImage?imagePath=${element.imageUrl}"
                          alt=""></td>
@@ -71,16 +73,25 @@
                     </c:when>
                 </c:choose>
                 <c:if test="${sessionScope.userRole=='ADMIN'}">
+                    <td>
                     <c:choose>
                         <c:when test="${element.available}">
-                            <td>
-                                <a href="${pageContext.request.contextPath}/controller?command=delete_jewelry&jewelryId=${element.jewelryId}">${delete}</a>
-                            </td>
+                                <a href="${pageContext.request.contextPath}/controller?command=delete_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}"
+                                   style="color: crimson">
+                                        ${delete}</a>
                         </c:when>
-                        <c:when test="${!element.available}">
-                            <td><a href="#"></a>${deleted}</td>
-                        </c:when>
+                        <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/controller?command=restore_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}"
+                                   style="color: darkslateblue">
+                                        ${restore}</a>
+                        </c:otherwise>
                     </c:choose>
+                    </td>
+                    <td>
+                        <a href="#">
+                            &#9998;
+                        </a>
+                    </td>
                 </c:if>
                 <c:if test="${sessionScope.userRole=='CLIENT'}">
                     <c:choose>
@@ -112,13 +123,13 @@
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </c:when>
-                            <c:when test="${requestScope.page < 1}">
+                            <c:otherwise>
                                 <a class="page-link"
                                    href="#"
-                                   aria-label="Previous">
+                                   aria-label="Previous" hidden>
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
-                            </c:when>
+                            </c:otherwise>
                         </c:choose>
                     </li>
                     <li class="page-item"><span class="page-link">${requestScope.page}</span></li>
@@ -135,84 +146,6 @@
     </div>
 
     <br/>
-    <hr/>
-    <br/>
-    <h2>Add new jewelry to list: </h2>
-    <c:if test="${sessionScope.userRole=='ADMIN'}">
-        <div class="container">
-            <div class="row">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input type="hidden" name="command" value="add_jewelry">
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationServer01">${login}</label>
-                            <input type="text" name="login" class="form-control is-valid" id="validationServer01"
-                                   required
-                                   pattern="[A-Za-z0-9]{3,20}">
-
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer02">${password}</label>
-                            <input type="password" name="password" class="form-control is-valid" id="validationServer02"
-                                   required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                            <small id="passwordHelpBlock" class="form-text text-muted">
-                                Your password must be 8-20 characters long, contain letters and numbers, and must not
-                                contain
-                                spaces, special characters, or emoji.
-                            </small>
-
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer002">${confirm}</label>
-                            <input type="password" name="repeatPassword" class="form-control is-valid"
-                                   id="validationServer002"
-                                   required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationServer03">${name}</label>
-                            <input type="text" name="firstName" class="form-control is-valid" id="validationServer03"
-                                   required
-                                   pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
-
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">${surname}</label>
-                            <input type="text" name="lastName" class="form-control is-valid" id="validationServer04"
-                                   required
-                                   pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
-
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer05">${email}</label>
-                            <input type="email" name="email" class="form-control is-valid" id="validationServer05"
-                                   required
-                                   pattern="[_0-9a-z][-_.0-9a-z]*@[0-9a-z][-.0-9a-z]*[0-9a-z]\.[a-z]{2,}">
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <c:if test="${requestScope.errorMessage != null}">
-                            <div class="form-group">
-                                <div class="col-md-6 mb-3">
-                                    <div class="err-message-from-server">
-                                        <fmt:setBundle basename="bundle/locale" var="rb"/>
-                                        <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:if>
-
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">${signUp}</button>
-                </form>
-            </div>
-        </div>
-    </c:if>
 
     <c:import url="fragment/footer.jsp"/>
 </div>

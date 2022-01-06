@@ -19,6 +19,8 @@ public class CommandProvider {
         commands.put(CommandType.SHOW_ALL_JEWELRY, new ShowAllJewelryCommand());
         commands.put(CommandType.ADD_JEWELRY, new AddJewelryCommand());
         commands.put(CommandType.DELETE_JEWELRY, new DeleteJewelryCommand());
+        commands.put(CommandType.RESTORE_JEWELRY, new RestoreJewelryCommand());
+        commands.put(CommandType.EDIT_JEWELRY, new EditJewelryCommand());
 
         commands.put(CommandType.SHOW_ALL_ORDERS, new ShowAllOrdersCommand());
         commands.put(CommandType.ADD_ITEM_TO_BASKET, new AddItemToBasketCommand());

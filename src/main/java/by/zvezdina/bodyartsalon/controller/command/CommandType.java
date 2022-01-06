@@ -12,6 +12,7 @@ public enum CommandType {
     ADD_JEWELRY,
     EDIT_JEWELRY,
     DELETE_JEWELRY,
+    RESTORE_JEWELRY,
 
     SHOW_ALL_ORDERS,
     ADD_ITEM_TO_BASKET,

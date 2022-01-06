@@ -2,7 +2,6 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.JewelryDao;
-import by.zvezdina.bodyartsalon.model.entity.Feedback;
 import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.Level;
@@ -40,6 +39,11 @@ public class JewelryDaoImpl implements JewelryDao {
     private static final String DELETE_BY_ID_QUERY = """
             UPDATE jewelry 
             SET is_available = false 
+            WHERE jewelry_id = ?;""";
+
+    private static final String RESTORE_BY_ID_QUERY = """
+            UPDATE jewelry 
+            SET is_available = true 
             WHERE jewelry_id = ?;""";
 
     private static JewelryDaoImpl instance;
@@ -117,10 +121,23 @@ public class JewelryDaoImpl implements JewelryDao {
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
             statement.setLong(1, id);
             int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
             return rowsUpdated;
         } catch (SQLException e) {
             throw new DaoException("deleteById() - Failed to delete jewelry by id " + id + " : ", e);
+        }
+    }
+
+    @Override
+    public int restoreById(long id) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(RESTORE_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+            return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("restoreById() - Failed to restore jewelry by id " + id + " : ", e);
         }
     }
 
