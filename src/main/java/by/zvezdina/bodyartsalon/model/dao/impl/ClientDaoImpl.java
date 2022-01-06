@@ -3,6 +3,7 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.ClientDao;
 import by.zvezdina.bodyartsalon.model.entity.Client;
+import by.zvezdina.bodyartsalon.model.entity.Discount;
 import by.zvezdina.bodyartsalon.model.entity.Role;
 import by.zvezdina.bodyartsalon.model.entity.UserStatus;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
@@ -48,6 +49,15 @@ public class ClientDaoImpl implements ClientDao {
     private static final String FIND_DISCOUNT_BY_CLIENT_ID = """
             SELECT value 
             FROM clients JOIN discount ON clients.discount_id = discount.discount_id 
+            WHERE client_id = ?;""";
+
+    private static final String FIND_ALL_DISCOUNT_QUERY = """
+            SELECT discount_id, value 
+            FROM discount;""";
+
+    private static final String UPDATE_CLIENT_DISCOUNT = """
+            UPDATE clients 
+            SET discount_id = ? 
             WHERE client_id = ?;""";
 
     private ClientDaoImpl() {
@@ -182,6 +192,40 @@ public class ClientDaoImpl implements ClientDao {
             return discount;
         } catch (SQLException e) {
             throw new DaoException("verify() - Failed to verify client: ", e);
+        }
+    }
+
+    @Override
+    public List<Discount> findAllDiscounts() throws DaoException {
+        List<Discount> allDiscounts = new ArrayList<>();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_DISCOUNT_QUERY);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Discount foundDiscount = new Discount();
+                foundDiscount.setDiscountId(resultSet.getLong(DISCOUNT_ID));
+                foundDiscount.setValue(resultSet.getInt(VALUE));
+                allDiscounts.add(foundDiscount);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to find all discounts: ", e);
+        }
+
+        logger.log(Level.DEBUG, "All discounts: {}", allDiscounts);
+        return allDiscounts;
+    }
+
+    @Override
+    public int updateClientDiscount(long clientId, long discountId) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENT_DISCOUNT)) {
+            statement.setLong(1, discountId);
+            statement.setLong(2, clientId);
+            int rowsUpdated = statement.executeUpdate();
+            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+            return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("updateClientDiscount() - Failed to update client discount ", e);
         }
     }
 

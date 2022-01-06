@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
             WHERE user_id = ?;""";
 
     private static final String FIND_ALL_QUERY = """
-            SELECT user_id, login, password, first_name, last_name, email, phone, role, status 
+            SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified  
             FROM users;""";
 
     private static final String FIND_PAGE_QUERY = """
@@ -42,6 +42,16 @@ public class UserDaoImpl implements UserDao {
             SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified  
             FROM users 
             WHERE login = ?;""";
+
+    private static final String DELETE_BY_ID_QUERY = """
+            UPDATE users 
+            SET status = 'inactive' 
+            WHERE user_id = ?;""";
+
+    private static final String RESTORE_BY_ID_QUERY = """
+            UPDATE users 
+            SET status = 'active' 
+            WHERE user_id = ?;""";
 
     private static UserDaoImpl instance;
 
@@ -81,9 +91,11 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 User foundUser = extract(resultSet);
+                System.out.println(foundUser);
                 allUsers.add(foundUser);
             }
         } catch (SQLException e) {
+            System.out.println(e);
             throw new DaoException("Failed to find all users: ", e);
         }
 
@@ -115,18 +127,29 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User create(User user) {
-        return null;
+    public int deleteById(Long id) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+            return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("deleteById() - Failed to delete user by id " + id + " : ", e);
+        }
     }
 
     @Override
-    public User update(User user) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long id) throws DaoException {
-
+    public int restoreById(Long id) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(RESTORE_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+            return rowsUpdated;
+        } catch (SQLException e) {
+            throw new DaoException("deleteById() - Failed to restore user by id " + id + " : ", e);
+        }
     }
 
     @Override

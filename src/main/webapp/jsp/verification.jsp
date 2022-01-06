@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: natal
-  Date: 23/12/2021
-  Time: 15:44
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,10 +20,18 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
     <title>${title}</title>
 </head>
-<body>
-<div class="container">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<c:import url="fragment/header.jsp"/>
+
+<div class="container" style="height: 68vh">
     <div class="row">
         <div class="col-lg-5 offset-lg-1">
             <div class="main-title">
@@ -47,7 +48,7 @@
         </div>
     </div>
 </div>
-
+<c:import url="fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

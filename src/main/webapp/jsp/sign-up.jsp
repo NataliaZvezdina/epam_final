@@ -28,10 +28,17 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
     <title>${title}</title>
 </head>
-<body>
-<c:import url="header.jsp"/>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<c:import url="fragment/header.jsp"/>
 
 <div class="container">
     <div class="row">
@@ -42,12 +49,16 @@
                     <label for="validationServer01">${login}</label>
                     <input type="text" name="login" class="form-control" id="validationServer01" required
                            pattern="[A-Za-z0-9]{3,20}">
+                    <small id="passwordHelpBlock0" class="form-text text-muted">
+                        Your login must be 3-20 characters long, contain letters or/and numbers, and must not contain
+                        spaces, special characters, or emoji.
+                    </small>
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer02">${password}</label>
                     <input type="password" name="password" class="form-control" id="validationServer02"
-                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
                     <small id="passwordHelpBlock" class="form-text text-muted">
                         Your password must be 8-20 characters long, contain letters and numbers, and must not contain
                         spaces, special characters, or emoji.
@@ -57,7 +68,7 @@
                 <div class="col-md-3 mb-3">
                     <label for="validationServer002">${confirm}</label>
                     <input type="password" name="repeatPassword" class="form-control" id="validationServer002"
-                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                           required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
 
                 </div>
             </div>
@@ -66,12 +77,21 @@
                     <label for="validationServer03">${name}</label>
                     <input type="text" name="firstName" class="form-control" id="validationServer03" required
                            pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                    <small id="passwordHelpBlockF" class="form-text text-muted">
+                        Your first name must be 2-20 characters long, start with capital letter, further contain only small letters and must not contain
+                        spaces, special characters, or emoji.
+                    </small>
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="validationServer04">${surname}</label>
-                    <input type="text" name="lastName" class="form-control" id="validationServer04" required
+                    <input type="text" name="lastName" class="form-control"
+                           id="validationServer04" required
                            pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                    <small id="passwordHelpBlockL" class="form-text text-muted">
+                        Your first name must be 2-20 characters long, start with capital letter, further contain only small letters and must not contain
+                        spaces, special characters, or emoji.
+                    </small>
 
                 </div>
                 <div class="col-md-3 mb-3">
@@ -100,7 +120,7 @@
     </div>
 </div>
 
-<c:import url="footer.jsp"/>
+<c:import url="fragment/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -114,14 +134,14 @@
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();

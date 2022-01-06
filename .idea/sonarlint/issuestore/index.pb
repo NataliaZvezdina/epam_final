@@ -1,53 +1,13 @@
 
-v
-Fsrc/main/java/by/zvezdina/bodyartsalon/command/impl/LogOutCommand.java,c\3\c31c9de42423f19b72d1470a42d1c64a6311734e
-T
-$src/main/webapp/jsp/verification.jsp,e\7\e785b387c6f0dd472d33ae8764a7f4417143f03e
-m
-=src/main/java/by/zvezdina/bodyartsalon/model/entity/User.java,1\9\190136025622d521aef8009b78a3c5bc36c3fea6
-v
-Fsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/UserDaoImpl.java,1\f\1f477364ffc9fd12afa5ea7a6dbdde70e5c0e642
-v
-Fsrc/main/java/by/zvezdina/bodyartsalon/command/impl/VerifyCommand.java,a\f\af0a4dc6163242596112f5bd475cd2833552883c
-z
-Jsrc/main/java/by/zvezdina/bodyartsalon/command/impl/AddJewelryCommand.java,3\5\35c5546b3bef6e9df34e83a7c3df0c63ae6aee7c
-O
-src/main/webapp/jsp/welcome.jsp,d\7\d71cf94fcd0e8f7402192b9c38b0a4cd6bbe8609
-u
-Esrc/main/java/by/zvezdina/bodyartsalon/controller/MainController.java,0\1\015330b84876538f67e986442e4243f1a4a1149a
-u
-Esrc/main/java/by/zvezdina/bodyartsalon/model/dao/TableColumnName.java,b\4\b4b284dd381fde322a6cc20078dd6f375bfdcf68
-s
-Csrc/main/java/by/zvezdina/bodyartsalon/model/entity/UserStatus.java,d\4\d4da6c06542d83854a4e51b039b1378d69ee95b1
-t
-Dsrc/main/java/by/zvezdina/bodyartsalon/model/entity/OrderStatus.java,a\7\a71468d7f6aebe5e94692a2524fab4a59c0a4310
-r
-Bsrc/main/java/by/zvezdina/bodyartsalon/model/entity/OrderItem.java,4\5\45a5a5a557ecb91ca329453676fabda9aa5157e8
-O
-src/main/webapp/jsp/sign-up.jsp,0\6\0652323df1cba810bf6868d82daef882166d0bc0
-}
-Msrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToLoginPageCommand.java,8\c\8cc48daccf527f11398c497f227789522411e48b
-
-Osrc/main/java/by/zvezdina/bodyartsalon/command/impl/GoToProfilePageCommand.java,f\5\f55af4c89bcc8514842a0d3f928c790dadceead5
-y
-Isrc/main/java/by/zvezdina/bodyartsalon/command/impl/LoginUserCommand.java,b\4\b44b0dbae9e01406a0119e5ec131db2c668a0385
-}
-Msrc/main/java/by/zvezdina/bodyartsalon/command/impl/DeleteJewelryCommand.java,3\b\3be0be64f2fc1aac77342d23a49723addd44e33c
-t
-Dsrc/main/java/by/zvezdina/bodyartsalon/command/RequestParameter.java,4\3\43115b5be420b21053251a3e0ed840d5a12ba5cc
 n
 >src/main/java/by/zvezdina/bodyartsalon/model/dao/OrderDao.java,a\5\a526957dc6c4b4cd366afa40788c07be7918ea22
 w
 Gsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/OrderDaoImpl.java,d\4\d407fba1b33c7e43951904c6d1d54a70621f59fe
-o
-?src/main/java/by/zvezdina/bodyartsalon/model/dao/ClientDao.java,0\5\056732395c88bd5fd3d358a3b29a2971a5966ac3
-x
-Hsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/ClientDaoImpl.java,0\2\02550b310f56c7cb217e47d5b6d31fceac56e7d7
-w
-Gsrc/main/java/by/zvezdina/bodyartsalon/model/service/ClientService.java,e\0\e0dfc108988ef51fa66688a35d17f6de4d6105f8
-€
-Psrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/ClientServiceImpl.java,5\c\5c30a6b78f3dd88a151cb7afd8d304d81308d893
 
 Osrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/OrderServiceImpl.java,a\7\a70a7be8b20e5beed4c4566644723ef6fc42129c
-z
-Jsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/FeedbackDaoImpl.java,0\e\0e3bccf5c3cf7a1e391e4a6e26090fa3f2a96443
+m
+=src/main/java/by/zvezdina/bodyartsalon/model/entity/User.java,1\9\190136025622d521aef8009b78a3c5bc36c3fea6
+P
+ src/main/webapp/jsp/error404.jsp,7\0\704847ffb8605b55338e2b07ee02d93060fe9445
+P
+ src/main/webapp/jsp/error500.jsp,9\5\9594abe2cf92f465f0991d0ae48c8df99aa1c5f1

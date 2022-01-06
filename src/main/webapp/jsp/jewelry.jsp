@@ -26,6 +26,7 @@
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -34,7 +35,7 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <div class="sign" style="height: 67vh">
-    <c:import url="header.jsp"/>
+    <c:import url="fragment/header.jsp"/>
 
     <table class="table table-striped" style="height: inherit">
         <thead>
@@ -84,8 +85,9 @@
                 <c:if test="${sessionScope.userRole=='CLIENT'}">
                     <c:choose>
                         <c:when test="${element.available}">
-<%--                            <td>&#10010;</td>--%>
-                            <td><a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.jewelryId}&page=${requestScope.page}">&#10010;</a></td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.jewelryId}&page=${requestScope.page}">&#10010;</a>
+                            </td>
                         </c:when>
                         <c:otherwise>
                             <td>Not available</td>
@@ -212,7 +214,7 @@
         </div>
     </c:if>
 
-    <c:import url="footer.jsp"/>
+    <c:import url="fragment/footer.jsp"/>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

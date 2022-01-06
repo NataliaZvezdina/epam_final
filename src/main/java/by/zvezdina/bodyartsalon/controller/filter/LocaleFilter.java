@@ -1,6 +1,6 @@
 package by.zvezdina.bodyartsalon.controller.filter;
 
-import by.zvezdina.bodyartsalon.command.RequestAttribute;
+import by.zvezdina.bodyartsalon.controller.command.RequestAttribute;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;

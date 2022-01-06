@@ -5,12 +5,15 @@ import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.dao.ClientDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.ClientDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.Client;
+import by.zvezdina.bodyartsalon.model.entity.Discount;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
 import by.zvezdina.bodyartsalon.model.util.MailSender;
 import by.zvezdina.bodyartsalon.model.util.PasswordEncoder;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
     private static final Logger logger = LogManager.getLogger();
@@ -80,5 +83,32 @@ public class ClientServiceImpl implements ClientService {
         } catch (DaoException e) {
             throw new ServiceException("Failed to find client's discount by id " + id, e);
         }
+    }
+
+    @Override
+    public List<Discount> findAllDiscounts() throws ServiceException {
+        List<Discount> discounts;
+        try {
+            discounts = clientDao.findAllDiscounts();
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to find all discounts ", e);
+        }
+
+        logger.log(Level.DEBUG, "All discounts found: {}", discounts);
+        return discounts;
+    }
+
+    @Override
+    public boolean updateClientDiscount(long clientId, long discountId) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = clientDao.updateClientDiscount(clientId, discountId);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to update client discount ", e);
+        }
+
+        logger.log(Level.DEBUG, "Client by id {} was updated, new discount id {} : {}",
+                clientId, discountId, rowsUpdated == 1);
+        return rowsUpdated == 1;
     }
 }

@@ -28,7 +28,7 @@
     <title>${gallery}</title>
 </head>
 <body>
-<c:import url="header.jsp"/>
+<c:import url="fragment/header.jsp"/>
 
 <section class="gallery">
     <div class="container">
@@ -80,7 +80,7 @@
     </div>
 </section>
 
-<c:import url="footer.jsp"/>
+<c:import url="fragment/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

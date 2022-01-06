@@ -1,6 +1,6 @@
 package by.zvezdina.bodyartsalon.controller;
 
-import by.zvezdina.bodyartsalon.command.RequestParameter;
+import by.zvezdina.bodyartsalon.controller.command.RequestParameter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

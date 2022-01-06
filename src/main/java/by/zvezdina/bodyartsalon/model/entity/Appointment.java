@@ -1,6 +1,5 @@
 package by.zvezdina.bodyartsalon.model.entity;
 
-
 import java.sql.Timestamp;
 
 public class Appointment extends AbstractEntity {

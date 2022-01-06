@@ -1,7 +1,6 @@
 package by.zvezdina.bodyartsalon.controller;
 
-import by.zvezdina.bodyartsalon.command.*;
-
+import by.zvezdina.bodyartsalon.controller.command.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
