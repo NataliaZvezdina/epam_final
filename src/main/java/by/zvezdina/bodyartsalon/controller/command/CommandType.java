@@ -30,9 +30,5 @@ public enum CommandType {
 
     MAKE_APPOINTMENT,
 
-    GO_TO_LOGIN,
-    LOGIN_USER,
-    GO_TO_PROFILE,
-
     DEFAULT
 }

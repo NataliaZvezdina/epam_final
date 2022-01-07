@@ -39,9 +39,6 @@ public class CommandProvider {
         commands.put(CommandType.MAKE_APPOINTMENT, new MakeAppointmentCommand());
 
         commands.put(CommandType.DEFAULT, new DefaultCommand());
-
-        commands.put(CommandType.LOGIN_USER, new LoginUserCommand());
-
     }
 
     public static CommandProvider getInstance() {

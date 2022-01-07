@@ -1,20 +1,26 @@
 package by.zvezdina.bodyartsalon.model.service.impl;
 
+import by.zvezdina.bodyartsalon.controller.command.RequestParameter;
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.dao.JewelryDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.JewelryDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.service.JewelryService;
+import by.zvezdina.bodyartsalon.model.util.FormValidator;
+import by.zvezdina.bodyartsalon.model.util.XssDefender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class JewelryServiceImpl implements JewelryService {
     private static final Logger logger = LogManager.getLogger();
+    private static final String EMPTY_STRING = "";
+    private static final String REPLACEMENT_FOR_INVALID_PRICE = "0";
     private static JewelryServiceImpl instance;
     private JewelryDao jewelryDao = JewelryDaoImpl.getInstance();
 
@@ -102,5 +108,35 @@ public class JewelryServiceImpl implements JewelryService {
 
         logger.log(Level.DEBUG, "Jewelry by id {} was restored: ", rowsUpdated == 1);
         return rowsUpdated == 1;
+    }
+
+    @Override
+    public boolean validateInputData(Map<String, String> formData) {
+        XssDefender xssDefender = XssDefender.getInstance();
+        String safeType = xssDefender.safeFormData(formData.get(RequestParameter.TYPE));
+        formData.put(RequestParameter.TYPE, safeType);
+
+        String safeManufacturer = xssDefender.safeFormData(formData.get(RequestParameter.MANUFACTURER));
+        formData.put(RequestParameter.MANUFACTURER, safeManufacturer);
+
+        String safeDescription = xssDefender.safeFormData(formData.get(RequestParameter.DESCRIPTION));
+        formData.put(RequestParameter.DESCRIPTION, safeDescription);
+
+        FormValidator validator = FormValidator.getInstance();
+        boolean isDataValid = true;
+
+        String url = formData.get(RequestParameter.IMAGE_URL);
+        if (!validator.checkImageUrl(url)) {
+            formData.put(RequestParameter.IMAGE_URL, EMPTY_STRING);
+            isDataValid = false;
+        }
+
+        String price = formData.get(RequestParameter.PRICE);
+        if (!validator.checkMoney(price)) {
+            formData.put(RequestParameter.PRICE, REPLACEMENT_FOR_INVALID_PRICE);
+            isDataValid = false;
+        }
+
+        return isDataValid;
     }
 }

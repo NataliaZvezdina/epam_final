@@ -25,11 +25,6 @@ public final class PagePath {
     public static final String OPEN_USER_PROFILE = "jsp/admin/user-profile.jsp";
     public static final String RETURN_TO_CLIENT_PROFILE = "controller?command=open_profile&userRole=CLIENT&userId=";
 
-    public static final String LOGIN_PAGE = "jsp/sign-in.jsp";
-    public static final String PROFILE = "jsp/profile.jsp";
-    public static final String GO_TO_PROFILE = "controller?command=go_to_profile";
-    public static final String GO_TO_LOGIN = "controller?command=go_to_login";
-
     private PagePath() {
     }
 }
