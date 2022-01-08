@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,11 @@ public class ClientDaoImpl implements ClientDao {
     private static final String UPDATE_CLIENT_DISCOUNT = """
             UPDATE clients 
             SET discount_id = ? 
+            WHERE client_id = ?;""";
+
+    private static final String UPDATE_CLIENT_BALANCE = """
+            UPDATE clients 
+            SET money = money + ? 
             WHERE client_id = ?;""";
 
     private ClientDaoImpl() {
@@ -227,6 +233,22 @@ public class ClientDaoImpl implements ClientDao {
         } catch (SQLException e) {
             throw new DaoException("updateClientDiscount() - Failed to update client discount ", e);
         }
+    }
+
+    @Override
+    public int updateClientBalance(long clientId, BigDecimal money) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENT_BALANCE)) {
+            statement.setBigDecimal(1, money);
+            statement.setLong(2, clientId);
+            rowsUpdated = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DaoException("updateClientDiscount() - Failed to update client balance ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     private Client extract(ResultSet resultSet) throws SQLException {

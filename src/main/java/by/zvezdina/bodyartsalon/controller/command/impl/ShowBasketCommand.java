@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.*;
 
 public class ShowBasketCommand implements Command {
@@ -43,7 +44,7 @@ public class ShowBasketCommand implements Command {
                         .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
             }
 
-            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);
+            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost.round(MathContext.DECIMAL32));
             request.setAttribute(RequestAttribute.BASKET_ITEMS_LIST, basketItems);
             router = new Router(PagePath.BASKET, Router.RouterType.FORWARD);
         } catch (ServiceException e) {

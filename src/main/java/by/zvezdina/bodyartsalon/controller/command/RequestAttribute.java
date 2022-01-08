@@ -22,6 +22,10 @@ public final class RequestAttribute {
 
     public static final String BASKET_ITEMS_LIST = "basketItemsList";
     public static final String TOTAL_COST = "totalCost";
+    public static final String ORDER_COST = "orderCost";
+    public static final String NEGATIVE_NOTIFICATION = "negativeNotification";
+    public static final String ORDER_CREATED = "orderCreated";
+
 
     public static final String USERS_LIST = "usersList";
     public static final String ADMIN = "admin";

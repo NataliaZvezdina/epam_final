@@ -4,6 +4,7 @@ import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Client;
 import by.zvezdina.bodyartsalon.model.entity.Discount;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ClientService {
@@ -14,4 +15,6 @@ public interface ClientService {
     int findDiscountByClientId(long id) throws ServiceException;
     List<Discount> findAllDiscounts() throws ServiceException;
     boolean updateClientDiscount(long clientId, long discountId) throws ServiceException;
+    boolean validateMoneyToAdd(String money);
+    boolean updateBalance(long clientId, BigDecimal money) throws ServiceException;
 }

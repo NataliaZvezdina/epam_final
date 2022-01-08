@@ -1,8 +1,4 @@
 
-n
->src/main/java/by/zvezdina/bodyartsalon/model/dao/OrderDao.java,a\5\a526957dc6c4b4cd366afa40788c07be7918ea22
-w
-Gsrc/main/java/by/zvezdina/bodyartsalon/model/dao/impl/OrderDaoImpl.java,d\4\d407fba1b33c7e43951904c6d1d54a70621f59fe
 m
 =src/main/java/by/zvezdina/bodyartsalon/model/entity/User.java,1\9\190136025622d521aef8009b78a3c5bc36c3fea6
 P

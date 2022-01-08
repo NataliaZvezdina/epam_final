@@ -17,7 +17,7 @@ public class ChangeClientDiscountCommand implements Command {
 
         try {
             clientService.updateClientDiscount(clientId, discountId);
-            router = new Router(PagePath.RETURN_TO_CLIENT_PROFILE + clientId, Router.RouterType.FORWARD);
+            router = new Router(PagePath.RETURN_TO_CLIENT_PROFILE + clientId, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);

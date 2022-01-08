@@ -7,12 +7,15 @@ import by.zvezdina.bodyartsalon.model.dao.impl.ClientDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.Client;
 import by.zvezdina.bodyartsalon.model.entity.Discount;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
+import by.zvezdina.bodyartsalon.model.util.FormValidator;
 import by.zvezdina.bodyartsalon.model.util.MailSender;
 import by.zvezdina.bodyartsalon.model.util.PasswordEncoder;
+import by.zvezdina.bodyartsalon.model.util.XssDefender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
@@ -109,6 +112,31 @@ public class ClientServiceImpl implements ClientService {
 
         logger.log(Level.DEBUG, "Client by id {} was updated, new discount id {} : {}",
                 clientId, discountId, rowsUpdated == 1);
+        return rowsUpdated == 1;
+    }
+
+    @Override
+    public boolean validateMoneyToAdd(String money) {
+        FormValidator validator = FormValidator.getInstance();
+        boolean isValid = validator.checkMoney(money);
+
+        logger.log(Level.DEBUG, isValid ? "Input money {} to add are valid " :
+                "Input money {} to add are valid", money);
+        return isValid;
+    }
+
+    @Override
+    public boolean updateBalance(long clientId, BigDecimal money) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = clientDao.updateClientBalance(clientId, money);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to update client balance ", e);
+        }
+
+        logger.log(Level.DEBUG, rowsUpdated == 1 ?
+                        "Client by id {} was updated, money added to balance: {}" :
+                        "Failed to update client's balance", clientId, money);
         return rowsUpdated == 1;
     }
 }

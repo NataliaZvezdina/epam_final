@@ -2,6 +2,8 @@ package by.zvezdina.bodyartsalon.controller.command;
 
 import by.zvezdina.bodyartsalon.controller.command.impl.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.admin.*;
+import by.zvezdina.bodyartsalon.controller.command.impl.client.CreateOrderCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.client.TopUpBalanceCommand;
 
 import java.util.EnumMap;
 
@@ -35,6 +37,8 @@ public class CommandProvider {
         commands.put(CommandType.RESTORE_USER, new RestoreUserCommand());
         commands.put(CommandType.OPEN_PROFILE, new OpenProfileCommand());
         commands.put(CommandType.CHANGE_CLIENT_DISCOUNT, new ChangeClientDiscountCommand());
+
+        commands.put(CommandType.TOP_UP_BALANCE, new TopUpBalanceCommand());
 
         commands.put(CommandType.MAKE_APPOINTMENT, new MakeAppointmentCommand());
 

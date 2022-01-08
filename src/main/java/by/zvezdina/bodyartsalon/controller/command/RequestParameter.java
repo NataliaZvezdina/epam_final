@@ -31,6 +31,9 @@ public final class RequestParameter {
     public static final String PRICE = "price";
     public static final String IS_AVAILABLE = "isAvailable";
 
+    public static final String MONEY_TO_ADD = "moneyToAdd";
+    public static final String ORDER_COST = "orderCost";
+
     private RequestParameter() {
     }
 }

@@ -16,6 +16,8 @@
 <fmt:message key="navigation.signUp" var="signUp"/>
 <fmt:message key="navigation.language" var="language"/>
 <fmt:message key="navigation.profile" var="profile"/>
+<fmt:message key="client.header.balance" var="balance"/>
+<fmt:message key="client.topUpBalance" var="topUpBalance"/>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -51,12 +53,13 @@
             <ul>
                 <c:if test="${sessionScope.authorization}">
                     <li class="nav-item">
-                        <p>${sessionScope.userName} ${sessionScope.userLastName} ${sessionScope.userRole}</p>
+                        ${sessionScope.userName} ${sessionScope.userLastName} ${sessionScope.userRole}
                     </li>
                     <c:if test="${sessionScope.userRole == 'CLIENT'}">
                         <li class="nav-item">
-                            <p>Balance: ${sessionScope.userMoney} £ <a href="${pageContext.request.contextPath}/controller?command=show_basket">&#128722</a>
-                            </p>
+                            ${balance}: ${sessionScope.userMoney} £ <a
+                                    href="${pageContext.request.contextPath}/controller?command=show_basket">&#128722</a>
+
                         </li>
                         <c:if test="${sessionScope.userDiscount != 0}">
                             <li class="nav-item">
@@ -64,16 +67,23 @@
                             </li>
                         </c:if>
                     </c:if>
-                    <li class="nav-item">
-                        <c:choose>
-                            <c:when test="${sessionScope.userRole=='ADMIN'}">
+                    <li class="nav-item" style="lighting-color: darkgrey"><hr/></li>
+                    <c:choose>
+                        <c:when test="${sessionScope.userRole=='ADMIN'}">
+                            <li class="nav-item">
                                 <a href="${pageContext.request.contextPath}/jsp/admin/admin-profile.jsp">${profile}</a>
-                            </c:when>
-                            <c:when test="${sessionScope.userRole=='CLIENT'}">
-                                <a href="${pageContext.request.contextPath}/jsp/client-profile.jsp">${profile}</a>
-                            </c:when>
-                        </c:choose>
-                    </li>
+                            </li>
+                        </c:when>
+                        <c:when test="${sessionScope.userRole=='CLIENT'}">
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/jsp/client/top-up-balance.jsp">${topUpBalance}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/jsp/client/client-profile.jsp">${profile}</a>
+                            </li>
+                        </c:when>
+                    </c:choose>
+
                 </c:if>
             </ul>
 

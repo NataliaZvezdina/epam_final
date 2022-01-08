@@ -94,9 +94,20 @@
             <p align="center">${totalCost}: ${requestScope.totalCost} £</p>
             <div class="container">
                 <div class="row" style="justify-content: center">
-                    <a class="btn btn-primary" style="justify-content: center"
-                       href="${pageContext.request.contextPath}/controller?command=create_order"
-                       role="button">${makeOrder}</a>
+                        <%--                    <a class="btn btn-primary" style="justify-content: center"--%>
+                        <%--                       href="${pageContext.request.contextPath}/controller?command=create_order"--%>
+                        <%--                       role="button">${makeOrder}</a>--%>
+
+                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                        <input type="hidden" name="command" value="create_order">
+                        <input type="hidden" name="orderCost" value="${requestScope.totalCost}">
+
+                        <div class="form-group col-md-2">
+                            <button type="submit" class="btn btn-primary"
+                                    style="background-color: forestgreen;border-color: darkgreen">
+                                    ${makeOrder}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </c:if>

@@ -17,13 +17,20 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
-    <title>${profile}</title>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+    <title>${profile}}</title>
 </head>
-<body>
-<c:import url="fragment/header.jsp"/>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+<c:import url="../fragment/header.jsp"/>
 
 
-<c:import url="fragment/footer.jsp"/>
+<c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

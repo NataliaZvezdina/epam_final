@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +40,11 @@ public class RecountOrderWhileAddingItemCommand implements Command {
             BigDecimal totalCost = new BigDecimal(0);
 
             for (Jewelry item: basketItems) {
-                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d)).multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
+                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d))
+                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
             }
 
-            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);
+            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost.round(MathContext.DECIMAL32));
             request.setAttribute(RequestAttribute.BASKET_ITEMS_LIST, basketItems);
             router = new Router(PagePath.BASKET, Router.RouterType.FORWARD);
         } catch (ServiceException e) {

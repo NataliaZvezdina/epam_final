@@ -18,12 +18,15 @@ public final class PagePath {
 
     public static final String ORDERS = "jsp/orders.jsp";
     public static final String BASKET = "jsp/basket.jsp";
-    public static final String ORDER_CREATED_NOTIFICATION = "jsp/order-created-notification.jsp";
+    public static final String ORDER_CREATED_NOTIFICATION = "jsp/client/order-created-notification.jsp";
 
     public static final String ALL_USERS = "jsp/admin/users.jsp";
     public static final String GO_TO_UPDATED_USERS_LIST = "controller?command=show_all_users";
     public static final String OPEN_USER_PROFILE = "jsp/admin/user-profile.jsp";
     public static final String RETURN_TO_CLIENT_PROFILE = "controller?command=open_profile&userRole=CLIENT&userId=";
+
+    public static final String TOP_UP_BALANCE = "jsp/client/top-up-balance.jsp";
+    public static final String CLIENT_PROFILE = "jsp/client/client-profile.jsp";
 
     private PagePath() {
     }

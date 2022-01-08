@@ -28,6 +28,8 @@ public enum CommandType {
     OPEN_PROFILE,
     CHANGE_CLIENT_DISCOUNT,
 
+    TOP_UP_BALANCE,
+
     MAKE_APPOINTMENT,
 
     DEFAULT
