@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditJewelryCommand implements Command {
+    private static final String INVALID_INPUT = "inputData.invalid";
     private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
 
     @Override
@@ -50,7 +51,8 @@ public class EditJewelryCommand implements Command {
         if (!isFormValid) {
             request.setAttribute(RequestAttribute.JEWELRY_TO_EDIT, jewelryToUpdate);
             request.setAttribute(RequestAttribute.PAGE, page);
-            return new Router(PagePath.EDIT_JEWELRY, Router.RouterType.FORWARD);  // todo add error message
+            request.setAttribute(RequestAttribute.ERROR_MESSAGE, INVALID_INPUT);
+            return new Router(PagePath.EDIT_JEWELRY, Router.RouterType.FORWARD);
         }
 
         try {

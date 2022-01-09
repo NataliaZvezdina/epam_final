@@ -16,7 +16,7 @@ public class DeleteJewelryCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         int jewelryId = Integer.parseInt(request.getParameter(RequestParameter.JEWELRY_ID));
-        //boolean deleted = false;
+
         try {
             jewelryService.deleteById(jewelryId);
         } catch (ServiceException e) {
@@ -26,13 +26,8 @@ public class DeleteJewelryCommand implements Command {
         }
 
         String page = request.getParameter(RequestParameter.PAGE);
-        int currentPage = 0;
-        if (page != null) {
-            currentPage = Integer.parseInt(page);
-        } else {
-            currentPage = 1;
-        }
-        // todo debug returned page
+        int currentPage = page != null ? Integer.parseInt(page) : 1;
+
         return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPage, Router.RouterType.FORWARD);
     }
 }

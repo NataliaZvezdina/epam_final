@@ -33,6 +33,10 @@ public class JewelryDaoImpl implements JewelryDao {
             FROM jewelry 
             WHERE jewelry_id = ?;""";
 
+    private static final String CREATE_QUERY = """
+            INSERT INTO jewelry (type, image_url, manufacturer, jewelry_description, price, is_available) 
+            VALUES (?, ?, ?, ?, ?, ?);""";
+
     private static final String UPDATE_QUERY = """
             UPDATE jewelry 
             SET type = ?, image_url = ?, manufacturer = ?, jewelry_description = ?, price = ?, is_available = ? 
@@ -115,6 +119,32 @@ public class JewelryDaoImpl implements JewelryDao {
         }
         logger.log(Level.DEBUG, "Found jewelry by id {}: {}", id, foundJewelry);
         return foundJewelry;
+    }
+
+    @Override
+    public Jewelry create(Jewelry jewelry) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, jewelry.getType());
+            statement.setString(2, jewelry.getImageUrl());
+            statement.setString(3, jewelry.getManufacturer());
+            statement.setString(4, jewelry.getDescription());
+            statement.setBigDecimal(5, jewelry.getPrice());
+            statement.setBoolean(6, jewelry.isAvailable());
+
+            statement.executeUpdate();
+            try (ResultSet resultSet = statement.getGeneratedKeys();) {
+                if (resultSet.next()) {
+                    long jewelryId = resultSet.getLong(1);
+                    jewelry.setJewelryId(jewelryId);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("create() - Failed to create jewelry: ", e);
+        }
+        logger.log(Level.DEBUG, "Jewelry created: {}", jewelry);
+        return jewelry;
     }
 
     @Override

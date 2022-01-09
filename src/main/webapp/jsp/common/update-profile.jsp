@@ -12,7 +12,6 @@
 <fmt:message key="allUsers.email" var="email"/>
 <fmt:message key="update.profile.button" var="button"/>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -60,7 +59,7 @@
                 <input type="text" class="form-control" id="exampleInputEmail3"
                        name="email" value="${requestScope.userToUpdate.email}"
 <%--                       required pattern="(?=^.{1,100}$)([A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})">--%>
-                       required pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$">
+                       required pattern="^(?=.{1,45}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$">
 
 <%--                       required pattern="[_0-9a-z][-_.0-9a-z]*@[0-9a-z][-.0-9a-z]*[0-9a-z]\.[a-z]{2,}">--%>
             </div>

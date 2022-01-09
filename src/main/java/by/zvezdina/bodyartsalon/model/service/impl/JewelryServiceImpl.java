@@ -74,6 +74,18 @@ public class JewelryServiceImpl implements JewelryService {
     }
 
     @Override
+    public Jewelry create(Jewelry jewelry) throws ServiceException {
+        Jewelry createdJewelry;
+        try {
+            createdJewelry = jewelryDao.create(jewelry);
+        } catch (DaoException e) {
+            throw new ServiceException("create() - Failed to create jewelry ", e);
+        }
+        logger.log(Level.DEBUG, "Jewelry was created: {}", createdJewelry);
+        return createdJewelry;
+    }
+
+    @Override
     public Jewelry update(Jewelry jewelry) throws ServiceException {
         try {
             jewelryDao.update(jewelry);
@@ -122,6 +134,9 @@ public class JewelryServiceImpl implements JewelryService {
         String safeDescription = xssDefender.safeFormData(formData.get(RequestParameter.DESCRIPTION));
         formData.put(RequestParameter.DESCRIPTION, safeDescription);
 
+        String safeUrl = xssDefender.safeFormData(formData.get(RequestParameter.IMAGE_URL));
+        formData.put(RequestParameter.IMAGE_URL, safeUrl);
+
         FormValidator validator = FormValidator.getInstance();
         boolean isDataValid = true;
 
@@ -137,6 +152,7 @@ public class JewelryServiceImpl implements JewelryService {
             isDataValid = false;
         }
 
+        System.out.println("---data valid? -->" + isDataValid);
         return isDataValid;
     }
 }

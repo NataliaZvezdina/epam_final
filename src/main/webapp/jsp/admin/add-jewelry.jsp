@@ -1,18 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
-<fmt:message key="editJewelry.title" var="title"/>
-<fmt:message key="jewelry.image" var="image"/>
-<fmt:message key="jewelry.type" var="type"/>
-<fmt:message key="jewelry.description" var="description"/>
-<fmt:message key="jewelry.manufacturer" var="manufacturer"/>
-<fmt:message key="jewelry.price" var="price"/>
-<fmt:message key="editJewelry.id" var="id"/>
-<fmt:message key="editJewelry" var="update"/>
+<fmt:message key="add.jewelry.page" var="title"/>
+<fmt:message key="add.jewelry.button" var="add"/>
+<fmt:message key="add.jewelry.path" var="image"/>
+<fmt:message key="add.jewelry.type" var="type"/>
+<fmt:message key="add.description" var="description"/>
+<fmt:message key="add.manufacturer" var="manufacturer"/>
+<fmt:message key="add.price" var="price"/>
+<fmt:message key="add.price.helper" var="helperPrice"/>
 
 <!doctype html>
 <html lang="en">
@@ -38,38 +38,41 @@
 
 <div class="container">
     <form action="${pageContext.request.contextPath}/controller" method="post">
-        <input type="hidden" name="command" value="edit_jewelry">
-        <input type="hidden" name="isAvailable" value="${requestScope.jewelryToEdit.available}">
-        <input type="hidden" name="page" value="${requestScope.page}">
-        <div class="form-group">
-            <label for="readOnlyInput">${id}</label>
-            <input class="form-control" type="number" id="readOnlyInput" name="jewelryId"
-                   value="${requestScope.jewelryToEdit.jewelryId}" readonly>
-        </div>
+        <input type="hidden" name="command" value="add_jewelry">
         <div class="form-group">
             <label for="exampleFormControlInput1">${image}</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="imageUrl"
-                   value="${requestScope.jewelryToEdit.imageUrl}">
+            <c:if test="${requestScope.jewelryToAdd != null}">
+                   value="${requestScope.jewelryToAdd['imageUrl']}"</c:if>
+                   required pattern="([^\s]+(\.(?i)(jpe?g|png|gif|bmp))$)">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${type}</label>
             <input type="text" class="form-control" id="exampleFormControlInput2" name="type"
-                   value="${requestScope.jewelryToEdit.type}">
+            <c:if test="${requestScope.jewelryToAdd != null}">
+                   value="${requestScope.jewelryToAdd['type']}"</c:if>>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${manufacturer}</label>
             <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"
-                   value="${requestScope.jewelryToEdit.manufacturer}">
+            <c:if test="${requestScope.jewelryToAdd != null}">
+                   value="${requestScope.jewelryToAdd['manufacturer']}"</c:if>>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput4">${price}</label>
             <input type="number" step="0.01" class="form-control" id="exampleFormControlInput4" name="price"
-                   value="${requestScope.jewelryToEdit.price}">
+            <c:if test="${requestScope.jewelryToAdd != null}">
+                   value="${requestScope.jewelryToAdd['price']}"</c:if>
+                   required pattern="^[0-9]{1,4}(\.[0-9]{1,2})?$">
+            <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">
+                ${helperPrice}
+            </small>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${description}</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">
-                ${requestScope.jewelryToEdit.description}</textarea>
+                <c:if test="${requestScope.jewelryToAdd != null}">
+                    ${requestScope.jewelryToAdd['description']}</c:if></textarea>
         </div>
         <c:if test="${requestScope.errorMessage != null}">
             <div class="form-group form-check" style="color: red">
@@ -82,10 +85,11 @@
         </c:if>
         <div class="form-group col-md-10" style="justify-content: center">
             <button type="submit" class="btn btn-primary"
-                    style="background-color: forestgreen; border-color: forestgreen; justify-content: center">${update}</button>
+                    style="background-color: forestgreen; border-color: forestgreen; justify-content: center">${add}</button>
         </div>
     </form>
 </div>
+
 
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -97,5 +101,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
+</body>
 </body>
 </html>

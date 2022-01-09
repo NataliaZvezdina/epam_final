@@ -15,6 +15,7 @@
 <fmt:message key="jewelry.restore" var="restore"/>
 <fmt:message key="jewelry.deleted" var="deleted"/>
 <fmt:message key="jewelry.edit" var="edit"/>
+<fmt:message key="jewelry.addNew" var="newOne"/>
 
 <!doctype html>
 <html lang="en">
@@ -74,18 +75,18 @@
                 </c:choose>
                 <c:if test="${sessionScope.userRole=='ADMIN'}">
                     <td>
-                    <c:choose>
-                        <c:when test="${element.available}">
+                        <c:choose>
+                            <c:when test="${element.available}">
                                 <a href="${pageContext.request.contextPath}/controller?command=delete_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}"
                                    style="color: crimson">
                                         ${delete}</a>
-                        </c:when>
-                        <c:otherwise>
+                            </c:when>
+                            <c:otherwise>
                                 <a href="${pageContext.request.contextPath}/controller?command=restore_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}"
                                    style="color: darkslateblue">
                                         ${restore}</a>
-                        </c:otherwise>
-                    </c:choose>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_jewelry&jewelryId=${element.jewelryId}&page=${requestScope.page}">
@@ -146,6 +147,12 @@
     </div>
 
     <br/>
+    <c:if test="${sessionScope.userRole=='ADMIN'}">
+        <h3 align="center">
+            <a href="${pageContext.request.contextPath}/jsp/admin/add-jewelry.jsp"
+            style="color: darkgreen">${newOne}</a>
+        </h3>
+    </c:if>
 
     <c:import url="fragment/footer.jsp"/>
 </div>

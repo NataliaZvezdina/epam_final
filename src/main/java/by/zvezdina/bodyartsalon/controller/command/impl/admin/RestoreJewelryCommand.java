@@ -26,12 +26,7 @@ public class RestoreJewelryCommand implements Command {
         }
 
         String page = request.getParameter(RequestParameter.PAGE);
-        int currentPage = 0;
-        if (page != null) {
-            currentPage = Integer.parseInt(page);
-        } else {
-            currentPage = 1;
-        }
+        int currentPage = page != null ? Integer.parseInt(page) : 1;
 
         return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPage, Router.RouterType.FORWARD);
     }
