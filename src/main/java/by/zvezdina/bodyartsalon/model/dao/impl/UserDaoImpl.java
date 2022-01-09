@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static final String FIND_BY_ID_QUERY = """
-            SELECT user_id, login, password, first_name, last_name, email, phone, role, status, is_verified 
+            SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified 
             FROM users 
             WHERE user_id = ?;""";
 
@@ -43,6 +43,17 @@ public class UserDaoImpl implements UserDao {
             FROM users 
             WHERE login = ?;""";
 
+    private static final String FIND_BY_EMAIL_QUERY = """
+            SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified  
+            FROM users  
+            WHERE email = ?;""";
+
+    private static final String UPDATE_QUERY = """
+            UPDATE users  
+            SET login = ?, password = ?, first_name = ?, last_name = ?, email = ?, role = ?, 
+                status = ?, is_verified = ? 
+            WHERE user_id = ?;""";
+
     private static final String DELETE_BY_ID_QUERY = """
             UPDATE users 
             SET status = 'inactive' 
@@ -51,6 +62,11 @@ public class UserDaoImpl implements UserDao {
     private static final String RESTORE_BY_ID_QUERY = """
             UPDATE users 
             SET status = 'active' 
+            WHERE user_id = ?;""";
+
+    private static final String UPDATE_PASSWORD_QUERY = """
+            UPDATE users 
+            SET password = ?  
             WHERE user_id = ?;""";
 
     private static UserDaoImpl instance;
@@ -127,6 +143,30 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User update(User user) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setString(5, user.getEmail());
+            statement.setString(6, user.getRole().toString().toLowerCase());
+            statement.setString(7, user.getUserStatus().toString().toLowerCase());
+            statement.setBoolean(8, user.isVerified());
+            statement.setLong(9, user.getUserId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DaoException("Failed to update user: ", e);
+        }
+
+        logger.log(Level.DEBUG, "User updated: {}", user);
+        return user;
+    }
+
+    @Override
     public int deleteById(Long id) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
@@ -168,6 +208,39 @@ public class UserDaoImpl implements UserDao {
         }
         logger.log(Level.DEBUG, "Found user: {}", foundUser);
         return foundUser;
+    }
+
+    @Override
+    public User findByEmail(String email) throws DaoException {
+        User foundUser = null;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL_QUERY)) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    foundUser = extract(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findByEmail() - Failed to find user: ", e);
+        }
+        logger.log(Level.DEBUG, "Found user: {}", foundUser);
+        return foundUser;
+    }
+
+    @Override
+    public int updatePassword(Long id, String password) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PASSWORD_QUERY)) {
+            statement.setString(1, password);
+            statement.setLong(2, id);
+            rowsUpdated = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("updatePassword() - Failed to update user's password ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     private User extract(ResultSet resultSet) throws SQLException {

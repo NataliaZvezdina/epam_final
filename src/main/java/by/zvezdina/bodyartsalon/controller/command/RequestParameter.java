@@ -34,6 +34,10 @@ public final class RequestParameter {
     public static final String MONEY_TO_ADD = "moneyToAdd";
     public static final String ORDER_COST = "orderCost";
 
+    public static final String OLD_PASSWORD = "oldPassword";
+    public static final String NEW_PASSWORD = "newPassword";
+
+
     private RequestParameter() {
     }
 }

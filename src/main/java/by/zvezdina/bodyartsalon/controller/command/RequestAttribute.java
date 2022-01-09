@@ -33,6 +33,13 @@ public final class RequestAttribute {
     public static final String DISCOUNT = "discount";
     public static final String DISCOUNT_LIST = "discountList";
 
+    public static final String OLD_PASSWORD = "oldPassword";
+    public static final String NEW_PASSWORD = "newPassword";
+    public static final String REPEAT_PASSWORD = "repeatPassword";
+    public static final String PASSWORD_UPDATED = "passwordUpdated";
+
+    public static final String USER_TO_UPDATE = "userToUpdate";
+
     private RequestAttribute() {
     }
 }

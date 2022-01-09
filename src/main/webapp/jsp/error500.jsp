@@ -34,12 +34,12 @@ ${servlet} ${pageContext.errorData.servletName} <br/>
 <hr/>
 ${code} ${pageContext.errorData.statusCode} <br/>
 <hr/>
-${exception} ${pageContext.exception} <br/>
+${exception} ${requestScope.exception} <br/>
 <hr/>
-${message} ${pageContext.exception.message} <br/>
+${message} ${requestScope.exception.message} <br/>
 <hr/>
 ${stackTrace} <br/>
-<c:forEach var="stackTraceElement" items="${pageContext.exception.stackTrace}">
+<c:forEach var="stackTraceElement" items="${requestScope.exception.stackTrace}">
     <c:out value="${stackTraceElement}"/><br/>
 </c:forEach><br/>
 <hr/>

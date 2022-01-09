@@ -28,6 +28,11 @@ public final class PagePath {
     public static final String TOP_UP_BALANCE = "jsp/client/top-up-balance.jsp";
     public static final String CLIENT_PROFILE = "jsp/client/client-profile.jsp";
 
+    public static final String UPDATE_PASSWORD = "jsp/update-password.jsp";
+    public static final String ADMIN_PROFILE = "jsp/admin/admin-profile.jsp";
+    public static final String PASSWORD_CHANGED = "jsp/common/password-changed.jsp";
+    public static final String UPDATE_PROFILE = "jsp/common/update-profile.jsp";
+
     private PagePath() {
     }
 }

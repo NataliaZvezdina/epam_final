@@ -1,5 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="bundle/locale"/>
+
+<fmt:message key="client.profile.page" var="profile"/>
+<fmt:message key="allUsers.id" var="id"/>
+<fmt:message key="allUsers.firstName" var="name"/>
+<fmt:message key="allUsers.lastName" var="surname"/>
+<fmt:message key="allUsers.login" var="login"/>
+<fmt:message key="allUsers.email" var="email"/>
+<fmt:message key="allUsers.role" var="role"/>
+<fmt:message key="admin.goToLink" var="goTo"/>
+<fmt:message key="admin.updateProfile" var="updateProfile"/>
+<fmt:message key="admin.updatePassword" var="updatePassword"/>
+<fmt:message key="admin.showAllUsers" var="showAllUsers"/>
+<fmt:message key="admin.showAllOrders" var="showAllOrders"/>
 
 <!doctype html>
 <html lang="en">
@@ -18,17 +35,64 @@
             window.history.forward();
         }
     </script>
-    <title>Title</title>
+    <title>${profile}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 67vh">
-
+<div class="container" style="height: 80vh; color: black; font-size: 18px">
     <div class="row">
-        <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
-           style="color: black; font-size: 18px">Show all users</a>
+        <dl class="row">
+            <dt class="col-sm-3">${role}</dt>
+            <dd class="col-sm-9" style="font-size: 20px">${sessionScope.userRole}</dd>
+
+            <dt class="col-sm-3">${id}</dt>
+            <dd class="col-sm-9">${sessionScope.userId}</dd>
+
+            <dt class="col-sm-3">${name}</dt>
+            <dd class="col-sm-9">${sessionScope.userName}</dd>
+
+            <dt class="col-sm-3">${surname}</dt>
+            <dd class="col-sm-9">${sessionScope.userLastName}</dd>
+
+            <dt class="col-sm-3">${login}</dt>
+            <dd class="col-sm-9">${sessionScope.userLogin}</dd>
+
+            <dt class="col-sm-3">${email}</dt>
+            <dd class="col-sm-9">${sessionScope.userEmail}</dd>
+
+            <dt class="col-sm-3"></dt>
+            <dd class="col-sm-9">
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=go_to_update_profile"
+                                                      style="color: black; font-size: 18px">${updateProfile}</a></dt>
+                </dl>
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
+                                                      style="color: black; font-size: 18px">${updatePassword}</a></dt>
+                </dl>
+            </dd>
+
+            <dt class="col-sm-3">---------------------</dt>
+            <dd class="col-sm-9"><dl class="row"><dt class="col-sm-4">------------------------</dt></dl></dd>
+
+            <dt class="col-sm-3">${goTo}</dt>
+            <dd class="col-sm-9">
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
+                                                      style="color: black; font-size: 18px">${showAllUsers}</a></dt>
+                </dl>
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
+                                                      style="color: black; font-size: 18px">${showAllOrders}</a></dt>
+                </dl>
+            </dd>
+        </dl>
     </div>
+<%--    <div class="row">--%>
+    <%--        &#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"--%>
+    <%--                   style="color: black; font-size: 18px">${showAllUsers}</a>--%>
+    <%--    </div>--%>
 </div>
 
 <c:import url="../fragment/footer.jsp"/>

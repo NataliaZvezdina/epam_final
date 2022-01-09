@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditJewelryCommand implements Command {
-    JewelryService jewelryService = JewelryServiceImpl.getInstance();
+    private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) {

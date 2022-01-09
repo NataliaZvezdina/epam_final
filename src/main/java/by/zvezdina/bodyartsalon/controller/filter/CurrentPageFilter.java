@@ -27,7 +27,6 @@ public class CurrentPageFilter implements Filter {
             currentPage = currentPage.substring(index) + "?" + httpRequest.getQueryString();
             httpRequest.getSession().setAttribute(SessionAttribute.CURRENT_PAGE, currentPage);
         }
-
         filterChain.doFilter(httpRequest, servletResponse);
     }
 }

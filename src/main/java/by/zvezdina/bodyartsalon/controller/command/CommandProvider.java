@@ -4,6 +4,8 @@ import by.zvezdina.bodyartsalon.controller.command.impl.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.admin.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.client.CreateOrderCommand;
 import by.zvezdina.bodyartsalon.controller.command.impl.client.TopUpBalanceCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.common.UpdatePasswordCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.common.UpdateProfileCommand;
 
 import java.util.EnumMap;
 
@@ -32,6 +34,9 @@ public class CommandProvider {
         commands.put(CommandType.RECOUNT_ORDER_WHILE_ADDING_ITEM, new RecountOrderWhileAddingItemCommand());
         commands.put(CommandType.RECOUNT_ORDER_WHILE_REMOVING_ITEM, new RecountOrderWhileRemovingItemCommand());
 
+        commands.put(CommandType.UPDATE_PASSWORD, new UpdatePasswordCommand());
+        commands.put(CommandType.UPDATE_PROFILE, new UpdateProfileCommand());
+        commands.put(CommandType.GO_TO_UPDATE_PROFILE, new GoToUpdateProfileCommand());
         commands.put(CommandType.SHOW_ALL_USERS, new ShowAllUsersCommand());
         commands.put(CommandType.DELETE_USER, new DeleteUserCommand());
         commands.put(CommandType.RESTORE_USER, new RestoreUserCommand());
