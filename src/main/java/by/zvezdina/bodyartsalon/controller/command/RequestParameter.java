@@ -38,6 +38,10 @@ public final class RequestParameter {
     public static final String NEW_PASSWORD = "newPassword";
 
     public static final String FACILITY_ID = "facilityId";
+    public static final String NAME = "name";
+    public static final String FACILITY_DESCRIPTION = "facilityDescription";
+    public static final String FACILITY_PRICE = "facilityPrice";
+    public static final String IS_ACCESSIBLE = "isAccessible";
 
 
     private RequestParameter() {

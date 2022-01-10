@@ -53,7 +53,7 @@
         </div>
         <div class="form-group mx-sm-3 mb-2">
             <label for="inputPassword2" class="sr-only">Password</label>
-            <input type="number" name="moneyToAdd" step="0.01" min="0" max="1000"
+            <input type="number" name="moneyToAdd" step="0.01" min="0" max="999.99"
                    class="form-control" id="inputPassword2" placeholder="0.0"
                    pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">
             <%--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--%>

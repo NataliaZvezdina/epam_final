@@ -9,10 +9,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +18,7 @@ import static by.zvezdina.bodyartsalon.model.dao.TableColumnName.*;
 public class FacilityDaoImpl implements FacilityDao {
     private static final Logger logger = LogManager.getLogger();
 
-//    private static final String FIND_BY_ID_QUERY = """
-//            SELECT service_id, name, service_description
-//            FROM services
-//            WHERE service_id = ?;""";
-//
-//    private static final String FIND_ALL_QUERY = """
+    //    private static final String FIND_ALL_QUERY = """
 //            SELECT service_id, name, service_description
 //            FROM services;""";
 
@@ -42,16 +34,15 @@ public class FacilityDaoImpl implements FacilityDao {
             FROM facilities   
             WHERE facility_id = ?;""";
 
+    private static final String CREATE_QUERY = """
+            INSERT INTO facilities (name, facility_description, facility_price, is_accessible) 
+            VALUES (?, ?, ?, ?);""";
 
-    //    private static final String CREATE_QUERY = """
-//            INSERT INTO services (name, service_description)
-//            VALUES (?, ?);""";
-//
-//    private static final String UPDATE_QUERY = """
-//            UPDATE serveces
-//            SET name = ?, service_description = ?
-//            WHERE service_id = ?;""";
-//
+    private static final String UPDATE_QUERY = """
+            UPDATE facilities  
+            SET name = ?, facility_description = ?, facility_price = ?, is_accessible = ?  
+            WHERE facility_id = ?;""";
+
     private static final String DELETE_BY_ID_QUERY = """
             UPDATE facilities  
             SET is_accessible = false 
@@ -131,35 +122,49 @@ public class FacilityDaoImpl implements FacilityDao {
         return foundFacility;
     }
 
-    //    @Override
-//    public Facility create(Facility facility) throws DaoException {
-//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-//        PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
-//            statement.setString(1, facility.getName());
-//            statement.setString(2, facility.getDescription());
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new DaoException("create() - Failed to create services: ", e);
-//        }
-//
-//        logger.log(Level.DEBUG, "Service created: {}", facility);
-//        return facility;
-//    }
+    @Override
+    public Facility create(Facility facility) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, facility.getName());
+            statement.setString(2, facility.getDescription());
+            statement.setBigDecimal(3, facility.getPrice());
+            statement.setBoolean(4, facility.isAccessible());
 
-//    @Override
-//    public Facility update(Facility facility) throws DaoException {
-//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-//        PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-//            statement.setString(1, facility.getName());
-//            statement.setString(2, facility.getDescription());
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new DaoException("update() - Failed to update service: ", e);
-//        }
-//
-//        logger.log(Level.DEBUG, "Service updated: {}", facility);
-//        return facility;
-//    }
+            statement.executeUpdate();
+            try (ResultSet resultSet = statement.getGeneratedKeys();) {
+                if (resultSet.next()) {
+                    long facilityId = resultSet.getLong(1);
+                    facility.setFacilityId(facilityId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("create() - Failed to create facility: ", e);
+        }
+        logger.log(Level.DEBUG, "Facility created: {}", facility);
+        return facility;
+    }
+
+    @Override
+    public Facility update(Facility facility) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+            statement.setString(1, facility.getName());
+            statement.setString(2, facility.getDescription());
+            statement.setBigDecimal(3, facility.getPrice());
+            statement.setBoolean(4, facility.isAccessible());
+            statement.setLong(5, facility.getFacilityId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Failed to update facility: ", e);
+        }
+
+        logger.log(Level.DEBUG, "Facility updated: {}", facility);
+        return facility;
+    }
 
     @Override
     public int deleteById(long id) throws DaoException {

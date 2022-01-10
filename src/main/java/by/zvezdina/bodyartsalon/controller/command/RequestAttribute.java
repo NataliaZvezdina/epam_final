@@ -23,6 +23,7 @@ public final class RequestAttribute {
 
     public static final String FACILITIES_LIST = "facilitiesList";
     public static final String FACILITY_TO_EDIT = "facilityToEdit";
+    public static final String FACILITY_TO_ADD = "facilityToAdd";
 
     public static final String BASKET_ITEMS_LIST = "basketItemsList";
     public static final String TOTAL_COST = "totalCost";

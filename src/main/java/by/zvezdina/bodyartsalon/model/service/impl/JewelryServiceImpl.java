@@ -152,7 +152,6 @@ public class JewelryServiceImpl implements JewelryService {
             isDataValid = false;
         }
 
-        System.out.println("---data valid? -->" + isDataValid);
         return isDataValid;
     }
 }

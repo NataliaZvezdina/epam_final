@@ -60,10 +60,10 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput4">${price}</label>
-            <input type="number" step="0.01" class="form-control" id="exampleFormControlInput4" name="price"
+            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4" name="price"
             <c:if test="${requestScope.jewelryToAdd != null}">
                    value="${requestScope.jewelryToAdd['price']}"</c:if>
-                   required pattern="^[0-9]{1,4}(\.[0-9]{1,2})?$">
+                   required pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">
             <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">
                 ${helperPrice}
             </small>

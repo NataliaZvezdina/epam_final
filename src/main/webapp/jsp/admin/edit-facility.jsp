@@ -6,7 +6,11 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="editFacility.title" var="title"/>
-
+<fmt:message key="facilities.name" var="name"/>
+<fmt:message key="facilities.description" var="description"/>
+<fmt:message key="facilities.price" var="price"/>
+<fmt:message key="editFacility.id" var="id"/>
+<fmt:message key="editFacility" var="update"/>
 
 <!doctype html>
 <html lang="en">
@@ -29,6 +33,51 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
+
+<div class="container">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
+        <input type="hidden" name="command" value="edit_facility">
+        <input type="hidden" name="isAccessible" value="${requestScope.facilityToEdit.accessible}">
+        <input type="hidden" name="page" value="${requestScope.page}">
+        <div class="form-group">
+            <label for="readOnlyInput">${id}</label>
+            <input class="form-control" type="number" id="readOnlyInput" name="facilityId"
+                   value="${requestScope.facilityToEdit.facilityId}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput2">${name}</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" name="name"
+                   value="${requestScope.facilityToEdit.name}">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput4">${price}</label>
+            <input type="number" step="0.01" min="0" max="999.99" pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$"
+                   class="form-control" id="exampleFormControlInput4" name="facilityPrice"
+                   value="${requestScope.facilityToEdit.price}">
+            <small id="emailHelp" class="form-text text-muted" style="color: black">min 0 max 999.99</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">${description}</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="facilityDescription">
+                ${requestScope.facilityToEdit.description}</textarea>
+        </div>
+        <c:if test="${requestScope.errorMessage != null}">
+            <div class="form-group form-check" style="color: red">
+                <input type="hidden" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">
+                    <fmt:setBundle basename="bundle/locale" var="rb"/>
+                    <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
+                </label>
+            </div>
+        </c:if>
+        <div class="form-group col-md-10" style="justify-content: center">
+            <button type="submit" class="btn btn-primary"
+                    style="background-color: forestgreen; border-color: forestgreen; justify-content: center">${update}</button>
+        </div>
+    </form>
+</div>
 
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

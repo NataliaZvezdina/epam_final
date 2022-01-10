@@ -31,6 +31,8 @@ public class CommandProvider {
         commands.put(CommandType.DELETE_FACILITY, new DeleteFacilityCommand());
         commands.put(CommandType.RESTORE_FACILITY, new RestoreFacilityCommand());
         commands.put(CommandType.GO_TO_EDIT_FACILITY, new GoToEditFacilityCommand());
+        commands.put(CommandType.EDIT_FACILITY, new EditFacilityCommand());
+        commands.put(CommandType.ADD_FACILITY, new AddFacilityCommand());
 
         commands.put(CommandType.SHOW_ALL_ORDERS, new ShowAllOrdersCommand());
         commands.put(CommandType.ADD_ITEM_TO_BASKET, new AddItemToBasketCommand());

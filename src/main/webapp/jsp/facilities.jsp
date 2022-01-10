@@ -9,9 +9,13 @@
 <fmt:message key="facilities.name" var="name"/>
 <fmt:message key="facilities.description" var="description"/>
 <fmt:message key="facilities.price" var="price"/>
+<fmt:message key="facilities.appointment" var="appoint"/>
 <fmt:message key="facilities.delete" var="delete"/>
 <fmt:message key="facilities.restore" var="restore"/>
 <fmt:message key="facilities.edit" var="edit"/>
+<fmt:message key="facilities.add" var="newOne"/>
+<fmt:message key="facilities.makeAppointment" var="appointment"/>
+<fmt:message key="facilities.notAccessible" var="notAccess"/>
 
 <!doctype html>
 <html lang="en">
@@ -47,7 +51,7 @@
                 <th scope="col">${edit}</th>
             </c:if>
             <c:if test="${sessionScope.userRole=='CLIENT'}">
-                <th scope="col">Add to basket</th>
+                <th scope="col">${appoint}</th>
             </c:if>
         </tr>
         </thead>
@@ -90,11 +94,13 @@
                     <c:choose>
                         <c:when test="${element.accessible}">
                             <td>
-                                <a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.facilityId}&page=${requestScope.page}">&#10010;</a>
+                                <a style="color: midnightblue; font-weight: bold; font-size: 20px"
+                                   href="${pageContext.request.contextPath}/controller?command=make_appointment&facilityId=${element.facilityId}&page=${requestScope.page}">
+                                        ${appointment}</a>
                             </td>
                         </c:when>
                         <c:otherwise>
-                            <td>Not available</td>
+                            <td>${notAccess}</td>
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -138,13 +144,13 @@
         </div>
     </div>
 
-<%--    <br/>--%>
-<%--    <c:if test="${sessionScope.userRole=='ADMIN'}">--%>
-<%--        <h3 align="center">--%>
-<%--            <a href="${pageContext.request.contextPath}/jsp/admin/add-jewelry.jsp"--%>
-<%--               style="color: darkgreen">${newOne}</a>--%>
-<%--        </h3>--%>
-<%--    </c:if>--%>
+    <br/>
+    <c:if test="${sessionScope.userRole=='ADMIN'}">
+        <h3 align="center">
+            <a href="${pageContext.request.contextPath}/jsp/admin/add-facility.jsp"
+               style="color: darkgreen">${newOne}</a>
+        </h3>
+    </c:if>
 
     <c:import url="fragment/footer.jsp"/>
 </div>
