@@ -17,6 +17,10 @@ public final class PagePath {
     public static final String EDIT_JEWELRY = "jsp/admin/edit-jewelry.jsp";
     public static final String ADD_JEWELRY = "jsp/admin/add-jewelry.jsp";
 
+    public static final String FACILITIES = "jsp/facilities.jsp";
+    public static final String GO_TO_FACILITY_DEFINED_PAGE = "controller?command=show_all_facilities&page=";
+    public static final String EDIT_FACILITY = "jsp/admin/edit-facility.jsp";
+
     public static final String ORDERS = "jsp/orders.jsp";
     public static final String BASKET = "jsp/basket.jsp";
     public static final String ORDER_CREATED_NOTIFICATION = "jsp/client/order-created-notification.jsp";

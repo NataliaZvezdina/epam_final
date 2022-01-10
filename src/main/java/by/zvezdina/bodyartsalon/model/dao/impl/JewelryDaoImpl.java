@@ -170,28 +170,30 @@ public class JewelryDaoImpl implements JewelryDao {
 
     @Override
     public int deleteById(long id) throws DaoException {
+        int rowsUpdated = 0;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
             statement.setLong(1, id);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("deleteById() - Failed to delete jewelry by id " + id + " : ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     @Override
     public int restoreById(long id) throws DaoException {
+        int rowsUpdated = 0;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(RESTORE_BY_ID_QUERY)) {
             statement.setLong(1, id);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("restoreById() - Failed to restore jewelry by id " + id + " : ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     private Jewelry extract(ResultSet resultSet) throws SQLException {

@@ -135,7 +135,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 .appointmentId(resultSet.getLong(APPOINTMENT_ID))
                 .datetime(resultSet.getTimestamp(DATE_TIME))
                 .notes(resultSet.getString(NOTES))
-                .serviceId(resultSet.getLong(SERVICE_ID))
+                .serviceId(resultSet.getLong(FACILITY_ID))
                 .clientId(resultSet.getLong(CLIENT_ID))
                 .piercerId(resultSet.getLong(PIERCER_ID))
                 .build();

@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ShowAllJewelryCommand implements Command {
-
     private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
 
     @Override
@@ -28,6 +27,7 @@ public class ShowAllJewelryCommand implements Command {
             request.setAttribute(RequestAttribute.PAGE, currentPageNumber);
 
         } catch (ServiceException e) {
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
         return new Router(PagePath.JEWELRY, Router.RouterType.FORWARD);

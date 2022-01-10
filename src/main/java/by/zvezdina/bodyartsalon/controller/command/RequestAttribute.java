@@ -21,6 +21,9 @@ public final class RequestAttribute {
     public static final String JEWELRY_TO_EDIT = "jewelryToEdit";
     public static final String JEWELRY_TO_ADD = "jewelryToAdd";
 
+    public static final String FACILITIES_LIST = "facilitiesList";
+    public static final String FACILITY_TO_EDIT = "facilityToEdit";
+
     public static final String BASKET_ITEMS_LIST = "basketItemsList";
     public static final String TOTAL_COST = "totalCost";
     public static final String ORDER_COST = "orderCost";

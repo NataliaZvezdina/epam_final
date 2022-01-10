@@ -37,6 +37,8 @@ public final class RequestParameter {
     public static final String OLD_PASSWORD = "oldPassword";
     public static final String NEW_PASSWORD = "newPassword";
 
+    public static final String FACILITY_ID = "facilityId";
+
 
     private RequestParameter() {
     }

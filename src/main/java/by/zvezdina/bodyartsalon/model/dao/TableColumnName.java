@@ -34,9 +34,11 @@ public final class TableColumnName {
     public static final String DATE_TIME = "datetime";
     public static final String NOTES = "notes";
 
-    public static final String SERVICE_ID = "service_id";
+    public static final String FACILITY_ID = "facility_id";
     public static final String NAME = "name";
-    public static final String SERVICE_DESCRIPTION = "service_description";
+    public static final String FACILITY_DESCRIPTION = "facility_description";
+    public static final String FACILITY_PRICE = "facility_price";
+    public static final String IS_ACCESSIBLE = "is_accessible";
 
     public static final String ORDER_ID = "order_id";
     public static final String ORDER_DATE = "order_date";

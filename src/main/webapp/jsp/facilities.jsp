@@ -6,6 +6,12 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="facilities.title" var="title"/>
+<fmt:message key="facilities.name" var="name"/>
+<fmt:message key="facilities.description" var="description"/>
+<fmt:message key="facilities.price" var="price"/>
+<fmt:message key="facilities.delete" var="delete"/>
+<fmt:message key="facilities.restore" var="restore"/>
+<fmt:message key="facilities.edit" var="edit"/>
 
 <!doctype html>
 <html lang="en">
@@ -27,11 +33,121 @@
     <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-<c:import url="fragment/header.jsp"/>
-facilities///
-<a href="${pageContext.request.contextPath}/controller=make_appointment">Make appointment</a>
+<div class="sign" style="height: 67vh">
+    <c:import url="fragment/header.jsp"/>
 
-<c:import url="fragment/footer.jsp"/>
+    <table class="table table-striped" style="height: inherit">
+        <thead>
+        <tr>
+            <th scope="col">${name}</th>
+            <th scope="col">${description}</th>
+            <th scope="col">${price}</th>
+            <c:if test="${sessionScope.userRole=='ADMIN'}">
+                <th scope="col">${delete} / ${restore}</th>
+                <th scope="col">${edit}</th>
+            </c:if>
+            <c:if test="${sessionScope.userRole=='CLIENT'}">
+                <th scope="col">Add to basket</th>
+            </c:if>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach var="element" items="${requestScope.facilitiesList}">
+            <tr>
+                <td>${element.name}</td>
+                <td>${element.description}</td>
+                <c:choose>
+                    <c:when test="${element.accessible}">
+                        <td>${element.price}</td>
+                    </c:when>
+                    <c:when test="${!element.accessible}">
+                        <td>-</td>
+                    </c:when>
+                </c:choose>
+                <c:if test="${sessionScope.userRole=='ADMIN'}">
+                    <td>
+                        <c:choose>
+                            <c:when test="${element.accessible}">
+                                <a href="${pageContext.request.contextPath}/controller?command=delete_facility&facilityId=${element.facilityId}&page=${requestScope.page}"
+                                   style="color: crimson">
+                                        ${delete}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/controller?command=restore_facility&facilityId=${element.facilityId}&page=${requestScope.page}"
+                                   style="color: darkslateblue">
+                                        ${restore}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_facility&facilityId=${element.facilityId}&page=${requestScope.page}">
+                            &#9998;
+                        </a>
+                    </td>
+                </c:if>
+                <c:if test="${sessionScope.userRole=='CLIENT'}">
+                    <c:choose>
+                        <c:when test="${element.accessible}">
+                            <td>
+                                <a href="${pageContext.request.contextPath}/controller?command=add_item_to_basket&jewelryId=${element.facilityId}&page=${requestScope.page}">&#10010;</a>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>Not available</td>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <div class="container">
+        <div class="row" style="justify-content: center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <c:choose>
+                            <c:when test="${requestScope.page > 1}">
+                                <a class="page-link"
+                                   href="${pageContext.request.contextPath}/controller?command=show_all_facilities&page=${requestScope.page-1}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link"
+                                   href="#"
+                                   aria-label="Previous" hidden>
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </li>
+                    <li class="page-item"><span class="page-link">${requestScope.page}</span></li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="${pageContext.request.contextPath}/controller?command=show_all_facilities&page=${requestScope.page+1}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+<%--    <br/>--%>
+<%--    <c:if test="${sessionScope.userRole=='ADMIN'}">--%>
+<%--        <h3 align="center">--%>
+<%--            <a href="${pageContext.request.contextPath}/jsp/admin/add-jewelry.jsp"--%>
+<%--               style="color: darkgreen">${newOne}</a>--%>
+<%--        </h3>--%>
+<%--    </c:if>--%>
+
+    <c:import url="fragment/footer.jsp"/>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

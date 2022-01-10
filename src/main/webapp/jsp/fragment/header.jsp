@@ -38,7 +38,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/jsp/facilities.jsp">${facilities}</a>
+                       href="${pageContext.request.contextPath}/controller?command=show_all_facilities">${facilities}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
