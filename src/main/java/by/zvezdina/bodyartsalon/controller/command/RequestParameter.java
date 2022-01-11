@@ -43,6 +43,7 @@ public final class RequestParameter {
     public static final String FACILITY_PRICE = "facilityPrice";
     public static final String IS_ACCESSIBLE = "isAccessible";
 
+    public static final String ORDER_ID = "orderId";
 
     private RequestParameter() {
     }

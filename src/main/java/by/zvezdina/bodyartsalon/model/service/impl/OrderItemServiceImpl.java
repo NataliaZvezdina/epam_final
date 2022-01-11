@@ -10,10 +10,13 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderItemServiceImpl implements OrderItemService {
     private static final Logger logger = LogManager.getLogger();
     private static OrderItemServiceImpl instance;
-    private OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
+    private final OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
 
     private OrderItemServiceImpl() {
     }
@@ -23,6 +26,20 @@ public class OrderItemServiceImpl implements OrderItemService {
             instance = new OrderItemServiceImpl();
         }
         return instance;
+    }
+
+    @Override
+    public List<OrderItem> findAllByOrderId(long orderId) throws ServiceException {
+        List<OrderItem> ordersItems = new ArrayList<>();
+        try {
+            ordersItems = orderItemDao.findAllByOrderId(orderId);
+        } catch (DaoException e) {
+            throw new ServiceException("findAll() - Failed to find all orderItems by orderId "
+                    + orderId, e);
+        }
+
+        logger.log(Level.DEBUG, "All found orderItems by orderId {}: {}", orderId, ordersItems);
+        return ordersItems;
     }
 
     @Override

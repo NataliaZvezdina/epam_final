@@ -35,6 +35,7 @@ public class CommandProvider {
         commands.put(CommandType.ADD_FACILITY, new AddFacilityCommand());
 
         commands.put(CommandType.SHOW_ALL_ORDERS, new ShowAllOrdersCommand());
+        commands.put(CommandType.OPEN_ORDER, new OpenOrderCommand());
         commands.put(CommandType.ADD_ITEM_TO_BASKET, new AddItemToBasketCommand());
         commands.put(CommandType.SHOW_BASKET, new ShowBasketCommand());
         commands.put(CommandType.CREATE_ORDER, new CreateOrderCommand());

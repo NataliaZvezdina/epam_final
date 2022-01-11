@@ -8,7 +8,7 @@ import by.zvezdina.bodyartsalon.model.service.ClientService;
 import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
-import by.zvezdina.bodyartsalon.model.util.FormValidator;
+import by.zvezdina.bodyartsalon.util.FormValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Level;

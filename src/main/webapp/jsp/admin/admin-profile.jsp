@@ -83,7 +83,7 @@
                                                       style="color: black; font-size: 18px">${showAllUsers}</a></dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_orders"
                                                       style="color: black; font-size: 18px">${showAllOrders}</a></dt>
                 </dl>
             </dd>

@@ -23,6 +23,7 @@ public enum CommandType {
     ADD_FACILITY,
 
     SHOW_ALL_ORDERS,
+    OPEN_ORDER,
     ADD_ITEM_TO_BASKET,
     SHOW_BASKET,
     CREATE_ORDER,

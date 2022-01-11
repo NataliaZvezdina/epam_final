@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.model.util;
+package by.zvezdina.bodyartsalon.util;
 
 public class FormValidator {
 

@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.model.util;
+package by.zvezdina.bodyartsalon.util;
 
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import org.apache.logging.log4j.Level;

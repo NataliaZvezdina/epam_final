@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
 public class TopUpBalanceCommand implements Command {
-    private ClientService clientService = ClientServiceImpl.getInstance();
+    private final ClientService clientService = ClientServiceImpl.getInstance();
     private static final String MESSAGE_FOR_INVALID_INPUT_DATA = "invalid.amount.input";
 
     @Override

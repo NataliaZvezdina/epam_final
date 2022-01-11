@@ -14,6 +14,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Custom connection pool.
+ */
 public class CustomConnectionPool {
     private static final Logger logger = LogManager.getLogger();
 
@@ -55,6 +58,11 @@ public class CustomConnectionPool {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CustomConnectionPool getInstance() {
         if (!isInstanceCreated.get()) {
             try {
@@ -70,6 +78,20 @@ public class CustomConnectionPool {
         return instance;
     }
 
+    /**
+     * Gets free connections number.
+     *
+     * @return the free connections number
+     */
+    public int getFreeConnectionsNumber() {
+        return freeConnections.size();
+    }
+
+    /**
+     * Take connection.
+     *
+     * @return the connection
+     */
     public Connection takeConnection() {
         ProxyConnection connection = null;
         try {
@@ -83,6 +105,12 @@ public class CustomConnectionPool {
         return connection;
     }
 
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     * @throws CustomPoolException the custom pool exception
+     */
     public void releaseConnection(Connection connection) throws CustomPoolException {
         if (connection.getClass() != ProxyConnection.class) {
             throw new CustomPoolException("Wrong type of connection");
@@ -98,6 +126,9 @@ public class CustomConnectionPool {
         logger.log(Level.DEBUG, "Released connection");
     }
 
+    /**
+     * Destroy pool.
+     */
     public void destroyPool() {
         for (int i = 0; i < POOL_SIZE; i++) {
 
@@ -113,6 +144,9 @@ public class CustomConnectionPool {
         deregisterDrivers();
     }
 
+    /**
+     * Deregister drivers.
+     */
     public void deregisterDrivers() {
         DriverManager.drivers().forEach(d -> {
             try {

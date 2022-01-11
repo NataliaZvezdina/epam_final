@@ -22,7 +22,7 @@ public final class PagePath {
     public static final String EDIT_FACILITY = "jsp/admin/edit-facility.jsp";
     public static final String ADD_FACILITY = "jsp/admin/add-facility.jsp";
 
-    public static final String ORDERS = "jsp/orders.jsp";
+    public static final String ORDERS = "jsp/admin/orders.jsp";
     public static final String BASKET = "jsp/basket.jsp";
     public static final String ORDER_CREATED_NOTIFICATION = "jsp/client/order-created-notification.jsp";
 

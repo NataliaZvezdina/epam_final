@@ -5,7 +5,7 @@ import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Client;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
 import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
-import by.zvezdina.bodyartsalon.model.util.FormValidator;
+import by.zvezdina.bodyartsalon.util.FormValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
