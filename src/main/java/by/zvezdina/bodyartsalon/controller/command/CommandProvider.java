@@ -63,6 +63,7 @@ public class CommandProvider {
         commands.put(CommandType.CANCEL_APPOINTMENT, new CancelAppointmentCommand());
         commands.put(CommandType.OPEN_SINGLE_APPOINTMENT, new OpenSingleAppointmentCommand());
         commands.put(CommandType.SHOW_ALL_ACTIVE_PIERCERS, new ShowAllActivePiercersCommand());
+        commands.put(CommandType.ADD_ADMIN, new AddAdminCommand());
 
         commands.put(CommandType.DEFAULT, new DefaultCommand());
     }

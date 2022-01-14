@@ -17,6 +17,7 @@
 <fmt:message key="admin.updatePassword" var="updatePassword"/>
 <fmt:message key="admin.showAllUsers" var="showAllUsers"/>
 <fmt:message key="admin.showAllOrders" var="showAllOrders"/>
+<fmt:message key="adminProfile.addAdmin" var="addAdmin"/>
 
 <!doctype html>
 <html lang="en">
@@ -71,6 +72,21 @@
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
                                                       style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>
                 </dl>
+            </dd>
+
+            <dt class="col-sm-3">---------------------</dt>
+            <dd class="col-sm-9"><dl class="row"><dt class="col-sm-4">------------------------</dt></dl></dd>
+
+            <dt class="col-sm-3"></dt>
+            <dd class="col-sm-9">
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/admin/add-admin.jsp"
+                                                      style="color: midnightblue; font-size: 18px">${addAdmin}</a></dt>
+                </dl>
+<%--                <dl class="row">--%>
+<%--                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"--%>
+<%--                                                      style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>--%>
+<%--                </dl>--%>
             </dd>
 
             <dt class="col-sm-3">---------------------</dt>

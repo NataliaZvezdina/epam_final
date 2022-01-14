@@ -42,6 +42,7 @@ public class OpenProfileCommand implements Command {
                     request.setAttribute(RequestAttribute.DISCOUNT_LIST, discounts);
                     router = new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
                 }
+                // todo
             }
         } catch (ServiceException e) {
             request.setAttribute(RequestAttribute.EXCEPTION, e);

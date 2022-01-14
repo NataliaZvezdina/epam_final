@@ -49,6 +49,7 @@ public enum CommandType {
     CANCEL_APPOINTMENT,
 
     SHOW_ALL_ACTIVE_PIERCERS,
+    ADD_ADMIN,
 
     DEFAULT
 }

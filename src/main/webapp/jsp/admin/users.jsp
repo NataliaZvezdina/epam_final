@@ -41,7 +41,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 68vh">
+<div class="container" style="height: 160vh">
     <div class="row">
         <table class="table table-striped" style="height: inherit">
             <thead>

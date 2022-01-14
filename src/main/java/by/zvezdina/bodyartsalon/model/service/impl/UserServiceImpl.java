@@ -81,6 +81,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User createAdmin(User user) throws ServiceException {
+        User createdAdmin = null;
+
+        user.setPassword(PasswordEncoder.encode(user.getPassword()));
+        try {
+            createdAdmin = userDao.createAdmin(user);
+            System.out.println("created admin: " + createdAdmin);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to create admin: ", e);
+        }
+        return createdAdmin;
+    }
+
+    @Override
     public User update(User user) throws ServiceException {
         User updatedUser;
         try {

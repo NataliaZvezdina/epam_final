@@ -12,6 +12,7 @@ public interface UserDao {
     User findById(Long id) throws DaoException;
     List<User> findAll() throws DaoException;
     List<User> findAll(int page) throws DaoException;
+    User createAdmin(User user) throws DaoException;
     User update(User user) throws DaoException;
     int deleteById(Long id) throws DaoException;
     int restoreById(Long id) throws DaoException;

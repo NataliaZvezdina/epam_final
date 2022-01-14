@@ -10,10 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +44,10 @@ public class UserDaoImpl implements UserDao {
             SELECT user_id, login, password, first_name, last_name, email, role, status, is_verified  
             FROM users  
             WHERE email = ?;""";
+
+    private static final String CREATE_ADMIN_QUERY = """
+            INSERT INTO users (login, password, first_name, last_name, email, role, status, is_verified) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
 
     private static final String UPDATE_QUERY = """
             UPDATE users  
@@ -140,6 +141,35 @@ public class UserDaoImpl implements UserDao {
 
         logger.log(Level.DEBUG, "All users on page {}: {}", page, allUsers);
         return allUsers;
+    }
+
+    @Override
+    public User createAdmin(User user) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_ADMIN_QUERY,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setString(5, user.getEmail());
+            statement.setString(6, user.getRole().toString().toLowerCase());
+            statement.setString(7, user.getUserStatus().toString().toLowerCase());
+            statement.setBoolean(8, user.isVerified());
+
+            statement.executeUpdate();
+            try (ResultSet resultSet = statement.getGeneratedKeys();) {
+                if (resultSet.next()) {
+                    long userId = resultSet.getLong(1);
+                    user.setUserId(userId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("create() - Failed to create admin: ", e);
+        }
+        logger.log(Level.DEBUG, "New admin created: {}", user);
+        return user;
     }
 
     @Override

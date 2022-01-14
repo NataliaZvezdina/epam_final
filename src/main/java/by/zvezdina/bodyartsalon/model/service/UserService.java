@@ -12,6 +12,7 @@ public interface UserService {
     Optional<User> login(String login, String password) throws ServiceException;
     List<User> findAll() throws ServiceException;
     User findById(Long id) throws ServiceException;
+    User createAdmin(User user) throws ServiceException;
     User update(User user) throws ServiceException;
     boolean deleteById(Long id) throws ServiceException;
     boolean restoreById(Long id) throws ServiceException;
