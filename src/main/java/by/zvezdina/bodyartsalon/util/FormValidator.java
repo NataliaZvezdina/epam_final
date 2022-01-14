@@ -8,7 +8,8 @@ public class FormValidator {
 
     private static final String CHECK_FIRST_AND_LAST_NAME = "^[A-ZА-Я]{1}[a-zа-я]{2,20}$";
 
-    private static final String CHECK_EMAIL_REGEX = "^(?=.{1,45}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    private static final String CHECK_EMAIL_REGEX =
+            "^(?=.{1,45}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
     private static final String CHECK_IMAGE_URL = "([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)";
 

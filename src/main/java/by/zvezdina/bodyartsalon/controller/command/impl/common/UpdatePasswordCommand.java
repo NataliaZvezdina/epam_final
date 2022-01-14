@@ -19,7 +19,6 @@ public class UpdatePasswordCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        System.out.println("inside update password command");
         String oldPassword = request.getParameter(RequestParameter.OLD_PASSWORD);
         String newPassword = request.getParameter(RequestParameter.NEW_PASSWORD);
         String repeatPassword = request.getParameter(RequestParameter.REPEAT_PASSWORD);

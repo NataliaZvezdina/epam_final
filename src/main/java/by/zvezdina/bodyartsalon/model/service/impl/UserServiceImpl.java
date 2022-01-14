@@ -173,7 +173,6 @@ public class UserServiceImpl implements UserService {
 
         if (formData.containsKey(RequestParameter.PASSWORD)) {
             String password = formData.get(RequestParameter.PASSWORD);
-            System.out.println(password);
             if (!validator.checkPassword(password)) {
                 formData.put(RequestParameter.PASSWORD, EMPTY_STRING);
                 isDataValid = false;

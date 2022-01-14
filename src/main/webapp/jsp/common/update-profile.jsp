@@ -8,9 +8,12 @@
 <fmt:message key="update.profile.page" var="title"/>
 <fmt:message key="allUsers.firstName" var="name"/>
 <fmt:message key="allUsers.lastName" var="surname"/>
+<fmt:message key="update.nameHelper" var="nameHelper"/>
 <fmt:message key="allUsers.login" var="login"/>
+<fmt:message key="update.loginHelper" var="loginHelper"/>
 <fmt:message key="allUsers.email" var="email"/>
 <fmt:message key="update.profile.button" var="button"/>
+
 
 <!doctype html>
 <html lang="en">
@@ -33,35 +36,37 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
-<br/>
-<div class="container" style="height: 66vh">
+
+<div class="container" style="height: 75vh">
     <div class="row" style="justify-content: center">
         <form style="justify-content: center" action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="update_profile">
             <div class="form-group">
                 <label for="exampleInputPassword0">${name}</label>
                 <input type="text" class="form-control" id="exampleInputPassword0" aria-describedby="emailHelp"
-                       name="firstName" value="${requestScope.userToUpdate.firstName}" required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                       name="firstName" value="${requestScope.userToUpdate.firstName}"
+                       required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                <small id="emailHelp1" style="color: black" class="form-text text-muted">${nameHelper}</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">${surname}</label>
                 <input type="text" class="form-control" id="exampleInputPassword1"
-                       name="lastName" value="${requestScope.userToUpdate.lastName}" required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
-<%--                <small id="emailHelp" class="form-text text-muted">${helper}</small>--%>
+                       name="lastName" value="${requestScope.userToUpdate.lastName}"
+                       required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$">
+                <small id="emailHelp2" style="color: black" class="form-text text-muted">${nameHelper}</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword2">${login}</label>
                 <input type="text" class="form-control" id="exampleInputPassword2"
-                       name="login" value="${requestScope.userToUpdate.login}" required pattern="[A-Za-z0-9]{3,20}">
+                       name="login" value="${requestScope.userToUpdate.login}"
+                       required pattern="[A-Za-z0-9]{3,20}">
+                <small id="emailHelp3" style="color: black" class="form-text text-muted">${loginHelper}</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail3">${email}</label>
                 <input type="text" class="form-control" id="exampleInputEmail3"
                        name="email" value="${requestScope.userToUpdate.email}"
-<%--                       required pattern="(?=^.{1,100}$)([A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})">--%>
-                       required pattern="^(?=.{1,45}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$">
-
-<%--                       required pattern="[_0-9a-z][-_.0-9a-z]*@[0-9a-z][-.0-9a-z]*[0-9a-z]\.[a-z]{2,}">--%>
+                       required pattern="^(?=.{1,45}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$">
             </div>
             <c:if test="${requestScope.errorMessage != null}">
                 <div class="form-group form-check" style="color: red">

@@ -33,7 +33,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="fragment/header.jsp"/>
 
-<div class="container" style="height: 68vh">
+<div class="container" style="height: 70vh">
     <p>${registration} ${sessionScope.userName} ${sessionScope.userLastName}</p>
     <p>${role} ${sessionScope.userRole}</p>
     <br/>

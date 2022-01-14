@@ -45,9 +45,6 @@
             <dt class="col-sm-3">${role}</dt>
             <dd class="col-sm-9" style="font-size: 20px">${sessionScope.userRole}</dd>
 
-<%--            <dt class="col-sm-3">${id}</dt>--%>
-<%--            <dd class="col-sm-9">${sessionScope.userId}</dd>--%>
-
             <dt class="col-sm-3">${name}</dt>
             <dd class="col-sm-9">${sessionScope.userName}</dd>
 

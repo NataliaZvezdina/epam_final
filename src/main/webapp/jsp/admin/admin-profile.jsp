@@ -65,11 +65,11 @@
             <dd class="col-sm-9">
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=go_to_update_profile"
-                                                      style="color: black; font-size: 18px">${updateProfile}</a></dt>
+                                                      style="color: midnightblue; font-size: 18px">${updateProfile}</a></dt>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
-                                                      style="color: black; font-size: 18px">${updatePassword}</a></dt>
+                                                      style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>
                 </dl>
             </dd>
 
@@ -80,11 +80,11 @@
             <dd class="col-sm-9">
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
-                                                      style="color: black; font-size: 18px">${showAllUsers}</a></dt>
+                                                      style="color: midnightblue; font-size: 18px">${showAllUsers}</a></dt>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_orders"
-                                                      style="color: black; font-size: 18px">${showAllOrders}</a></dt>
+                                                      style="color: midnightblue; font-size: 18px">${showAllOrders}</a></dt>
                 </dl>
             </dd>
         </dl>

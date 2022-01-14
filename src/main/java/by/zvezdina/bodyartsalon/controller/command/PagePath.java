@@ -41,6 +41,7 @@ public final class PagePath {
 
     public static final String SINGLE_ORDER_DETAILS = "jsp/admin/single-order-details.jsp";
     public static final String PIERCERS = "jsp/content/piercers.jsp";
+    public static final String PIERCER_PROFILE = "jsp/piercer/piercer-profile.jsp";
 
     public static final String MAKE_APPOINTMENT = "jsp/client/make-appointment.jsp";
     public static final String RELEVANT_APPOINTMENTS_BY_PIERCER = "jsp/piercer/relevant-appointments.jsp";

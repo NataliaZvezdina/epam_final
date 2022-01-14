@@ -95,7 +95,13 @@ public class UpdateProfileCommand implements Command {
             session.setAttribute(SessionAttribute.USER_LAST_NAME, userToUpdate.getLastName());
             session.setAttribute(SessionAttribute.USER_LOGIN, userToUpdate.getLogin());
             session.setAttribute(SessionAttribute.USER_EMAIL, userToUpdate.getEmail());
-            return new Router(PagePath.ADMIN_PROFILE, Router.RouterType.REDIRECT);
+            switch (userToUpdate.getRole()) {
+                case ADMIN -> {return new Router(PagePath.ADMIN_PROFILE, Router.RouterType.REDIRECT);}
+                case CLIENT -> {return new Router(PagePath.CLIENT_PROFILE, Router.RouterType.REDIRECT);}
+
+                case PIERCER -> {return new Router(PagePath.PIERCER_PROFILE, Router.RouterType.REDIRECT);}
+                default -> {return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.FORWARD);}
+            }
         } catch (ServiceException e) {
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
