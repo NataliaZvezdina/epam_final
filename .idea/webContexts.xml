@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/admin/add-jewelry.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/jewelry.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/piercer/piercer-profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/piercer" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/sign-up.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp" />
       </map>
     </option>
   </component>

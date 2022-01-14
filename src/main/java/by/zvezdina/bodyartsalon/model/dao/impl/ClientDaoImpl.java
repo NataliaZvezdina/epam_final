@@ -23,30 +23,30 @@ public class ClientDaoImpl implements ClientDao {
     private static ClientDaoImpl instance;
 
     private static final String CREATE_USER_QUERY = """
-            INSERT INTO users (login, password, first_name, last_name, email) 
-            VALUES (?, ?, ?, ?, ?);""";
+            INSERT INTO users (login, password, first_name, last_name, email, role, status, is_verified) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);""";
 
     private static final String CREATE_CLIENT_QUERY = """
             INSERT INTO clients (client_id) 
             VALUES (?);""";
 
     private static final String FIND_BY_ID_QUERY = """
-            SELECT client_id, login, password, first_name, last_name, email, role, status, money, discount_id   
+            SELECT client_id, login, password, first_name, last_name, email, role, status, is_verified, money, discount_id   
             FROM users JOIN clients 
             ON users.user_id = clients.client_id 
             WHERE client_id = ?;""";
 
-    private static final String FIND_ALL_QUERY = """
-            SELECT client_id, login, password, first_name, last_name, email, phone, role, status,  
-                registration_date, birth_date, money, discount_id   
-            FROM users JOIN clients 
-            ON users.user_id = clients.client_id;""";
+//    private static final String FIND_ALL_QUERY = """
+//            SELECT client_id, login, password, first_name, last_name, email, phone, role, status,
+//                 money, discount_id
+//            FROM users JOIN clients
+//            ON users.user_id = clients.client_id;""";
 
 
 
     private static final String VERIFY_QUERY = """
             UPDATE users 
-            SET is_verified = true 
+            SET is_verified = true AND status = 'active' 
             WHERE user_id = ? AND is_verified = false;""";
 
     private static final String FIND_DISCOUNT_BY_CLIENT_ID = """
@@ -79,7 +79,7 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public Client findById(Long id) throws DaoException {
+    public Client findById(long id) throws DaoException {
         Client foundClient = null;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
@@ -96,29 +96,23 @@ public class ClientDaoImpl implements ClientDao {
         return foundClient;
     }
 
-    @Override
-    public List<Client> findAll() throws DaoException {
-        List<Client> allClients = new ArrayList<>();
-        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                Client foundClient = extract(resultSet);
-                allClients.add(foundClient);
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Failed to find all clients: ", e);
-        }
-
-        logger.log(Level.DEBUG, "All clients: {}", allClients);
-        return allClients;
-    }
-
-    @Override
-    public List<Client> findAll(int page) throws DaoException {
-
-        return null;
-    }
+//    @Override
+//    public List<Client> findAll() throws DaoException {
+//        List<Client> allClients = new ArrayList<>();
+//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+//             PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
+//             ResultSet resultSet = statement.executeQuery()) {
+//            while (resultSet.next()) {
+//                Client foundClient = extract(resultSet);
+//                allClients.add(foundClient);
+//            }
+//        } catch (SQLException e) {
+//            throw new DaoException("Failed to find all clients: ", e);
+//        }
+//
+//        logger.log(Level.DEBUG, "All clients: {}", allClients);
+//        return allClients;
+//    }
 
     @Override
     public Client create(Client client) throws DaoException {
@@ -135,6 +129,9 @@ public class ClientDaoImpl implements ClientDao {
                 userStatement.setString(3, client.getFirstName());
                 userStatement.setString(4, client.getLastName());
                 userStatement.setString(5, client.getEmail());
+                userStatement.setString(6, client.getRole().toString().toLowerCase());
+                userStatement.setString(7, client.getUserStatus().toString().toLowerCase());
+                userStatement.setBoolean(8, client.isVerified());
 
                 userStatement.executeUpdate();
                 try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
@@ -149,7 +146,6 @@ public class ClientDaoImpl implements ClientDao {
                 }
             } catch (SQLException e) {
                 connection.rollback();
-                System.out.println("failed to create client");
                 throw new DaoException("Failed to create client: " + client, e);
             } finally {
                 connection.setAutoCommit(true);
@@ -163,26 +159,18 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public Client update(Client client) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long id) throws DaoException {
-
-    }
-
-    @Override
     public int verify(long id) throws DaoException {
+        int rowsUpdated = 0;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_QUERY)) {
             statement.setLong(1, id);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new DaoException("verify() - Failed to verify client: ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+        return rowsUpdated;
     }
 
     @Override
@@ -196,11 +184,11 @@ public class ClientDaoImpl implements ClientDao {
                     discount = resultSet.getInt(VALUE);
                 }
             }
-            logger.log(Level.DEBUG, "Discount of client with id {}: {}", id, discount);
-            return discount;
         } catch (SQLException e) {
             throw new DaoException("verify() - Failed to verify client: ", e);
         }
+        logger.log(Level.DEBUG, "Discount of client with id {}: {}", id, discount);
+        return discount;
     }
 
     @Override
@@ -263,6 +251,7 @@ public class ClientDaoImpl implements ClientDao {
                 .email(resultSet.getString(EMAIL))
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
+                .isVerified(resultSet.getBoolean(IS_VERIFIED))
                 .money(resultSet.getBigDecimal(MONEY))
                 .discountId(resultSet.getLong(DISCOUNT_ID))
                 .build();

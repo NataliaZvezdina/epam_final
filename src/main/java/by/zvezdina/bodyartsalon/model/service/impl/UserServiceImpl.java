@@ -150,6 +150,7 @@ public class UserServiceImpl implements UserService {
         if (!validator.checkFirstName(firstName)) {
             formData.put(RequestParameter.FIRST_NAME, EMPTY_STRING);
             isDataValid = false;
+
         }
 
         String lastName = formData.get(RequestParameter.LAST_NAME);
@@ -170,6 +171,22 @@ public class UserServiceImpl implements UserService {
             isDataValid = false;
         }
 
+        if (formData.containsKey(RequestParameter.PASSWORD)) {
+            String password = formData.get(RequestParameter.PASSWORD);
+            System.out.println(password);
+            if (!validator.checkPassword(password)) {
+                formData.put(RequestParameter.PASSWORD, EMPTY_STRING);
+                isDataValid = false;
+            }
+        }
+
+        if (formData.containsKey(RequestParameter.REPEAT_PASSWORD)) {
+            String repeatPassword = formData.get(RequestParameter.REPEAT_PASSWORD);
+            if (!validator.checkPassword(repeatPassword)) {
+                formData.put(RequestParameter.REPEAT_PASSWORD, EMPTY_STRING);
+                isDataValid = false;
+            }
+        }
         return isDataValid;
     }
 

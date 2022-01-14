@@ -103,5 +103,10 @@ public class Client extends User {
     }
 
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Client{");
+        sb.append('}');
+        return sb.toString();
+    }
 }

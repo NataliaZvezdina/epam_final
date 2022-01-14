@@ -13,6 +13,7 @@ public class XssFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
 
-        filterChain.doFilter(new XssRequestWrapper((HttpServletRequest) servletRequest), servletResponse);
+        filterChain.doFilter(new XssRequestWrapper((HttpServletRequest) servletRequest),
+                servletResponse);
     }
 }

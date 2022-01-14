@@ -2,10 +2,8 @@ package by.zvezdina.bodyartsalon.controller.command;
 
 public final class RequestAttribute {
 
-    public static final String CONTROLLER_URL = "controller?";
     public static final String LOCALE = "locale";
     public static final String CURRENT_PAGE = "current_page";
-    public static final String PREVIOUS_REQUEST = "previous_request";
 
     public static final String EXCEPTION = "exception";
     public static final String MESSAGE = "message";
@@ -14,6 +12,7 @@ public final class RequestAttribute {
     public static final String USER = "user";
     public static final String LOGIN = "login";
     public static final String VERIFICATION = "verification";
+    public static final String FORM_DATA = "formData";
 
     public static final String JEWELRY_LIST = "jewelryList";
     public static final String PAGE = "page";

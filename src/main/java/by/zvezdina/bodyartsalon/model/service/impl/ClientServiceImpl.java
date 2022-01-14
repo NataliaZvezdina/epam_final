@@ -46,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
 
         MailSender mailSender = new MailSender();
         String message = "To verify account follow the link: " +
-                "<a href='http://localhost:8080/bodyartsalon_war_exploded/controller?command=verify&id=" +
+                "<a href='http://localhost:8082/bodyartsalon_war_exploded/controller?command=verify&id=" +
                 client.getUserId() + "'>verification</a>";
         mailSender.send(client.getEmail(), message);
         return createdClient;

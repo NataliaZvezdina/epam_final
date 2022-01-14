@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class UpdateProfileCommand implements Command {
     private static final String INVALID_INPUT = "inputData.invalid";
-    private static final String LOGIN_NOT_EMPTY = "update.profile.login.notFree";
-    private static final String EMAIL_NOT_EMPTY = "update.profile.email.notFree";
+    private static final String LOGIN_IS_NOT_FREE = "update.profile.login.notFree";
+    private static final String EMAIL_IS_NOT_FREE = "update.profile.email.notFree";
     private static final String EMPTY_INPUT = "";
     private final UserService userService = UserServiceImpl.getInstance();
 
@@ -66,7 +66,7 @@ public class UpdateProfileCommand implements Command {
             if (loginExist) {
                 userToUpdate.setLogin(EMPTY_INPUT);
                 request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
-                request.setAttribute(RequestAttribute.ERROR_MESSAGE, LOGIN_NOT_EMPTY);
+                request.setAttribute(RequestAttribute.ERROR_MESSAGE, LOGIN_IS_NOT_FREE);
                 return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
             }
         }
@@ -84,7 +84,7 @@ public class UpdateProfileCommand implements Command {
             if (emailExist) {
                 userToUpdate.setEmail(EMPTY_INPUT);
                 request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
-                request.setAttribute(RequestAttribute.ERROR_MESSAGE, EMAIL_NOT_EMPTY);
+                request.setAttribute(RequestAttribute.ERROR_MESSAGE, EMAIL_IS_NOT_FREE);
                 return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
             }
         }

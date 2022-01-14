@@ -2,9 +2,11 @@ package by.zvezdina.bodyartsalon.controller.filter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
-import org.apache.commons.text.StringEscapeUtils;
 
 public class XssRequestWrapper extends HttpServletRequestWrapper {
+    private static final String CLOSE_TAG = ">";
+    private static final String OPEN_TAG = "<";
+    private static final String EMPTY_STRING = "";
 
     public XssRequestWrapper(HttpServletRequest request) {
         super(request);
@@ -37,9 +39,9 @@ public class XssRequestWrapper extends HttpServletRequestWrapper {
     }
 
     private String stripXSS(String value) {
-        value = StringEscapeUtils.escapeEcmaScript(value);
-        value = StringEscapeUtils.escapeJson(value);
-        value = StringEscapeUtils.escapeXml11(value);
-        return value;
+        if (value == null) {
+            return null;
+        }
+        return value.replace(OPEN_TAG, EMPTY_STRING).replace(CLOSE_TAG, EMPTY_STRING);
     }
 }

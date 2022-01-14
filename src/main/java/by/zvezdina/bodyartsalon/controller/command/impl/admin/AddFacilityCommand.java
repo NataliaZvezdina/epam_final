@@ -53,6 +53,5 @@ public class AddFacilityCommand implements Command {
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
-
     }
 }

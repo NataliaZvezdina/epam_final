@@ -156,7 +156,6 @@ public class AdminDaoImpl implements AdminDao {
                 .firstName(resultSet.getString(FIRST_NAME))
                 .lastName(resultSet.getString(LAST_NAME))
                 .email(resultSet.getString(EMAIL))
-
                 .role(Role.valueOf(resultSet.getString(ROLE).toUpperCase()))
                 .userStatus(UserStatus.valueOf(resultSet.getString(STATUS).toUpperCase()))
                 .build();
