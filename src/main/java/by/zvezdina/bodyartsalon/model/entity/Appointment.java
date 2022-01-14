@@ -1,25 +1,25 @@
 package by.zvezdina.bodyartsalon.model.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Appointment extends AbstractEntity {
 
     private long appointmentId;
-    private Timestamp dateTime;
+    private LocalDateTime dateTime;
     private String notes;
-    private long serviceId;
+    private long facilityId;
     private long clientId;
     private long piercerId;
 
     public Appointment() {
     }
 
-    public Appointment(long appointmentId, Timestamp dateTime, String notes, long serviceId, long clientId,
+    public Appointment(long appointmentId, LocalDateTime dateTime, String notes, long facilityId, long clientId,
                        long piercerId) {
         this.appointmentId = appointmentId;
         this.dateTime = dateTime;
         this.notes = notes;
-        this.serviceId = serviceId;
+        this.facilityId = facilityId;
         this.clientId = clientId;
         this.piercerId = piercerId;
     }
@@ -32,7 +32,7 @@ public class Appointment extends AbstractEntity {
             return this;
         }
 
-        public Builder datetime(Timestamp dateTime) {
+        public Builder datetime(LocalDateTime dateTime) {
             appointment.dateTime = dateTime;
             return this;
         }
@@ -42,8 +42,8 @@ public class Appointment extends AbstractEntity {
             return this;
         }
 
-        public Builder serviceId(long serviceId) {
-            appointment.serviceId = serviceId;
+        public Builder facilityId(long facilityId) {
+            appointment.facilityId = facilityId;
             return this;
         }
 
@@ -70,11 +70,11 @@ public class Appointment extends AbstractEntity {
         this.appointmentId = appointmentId;
     }
 
-    public Timestamp getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Timestamp dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -86,12 +86,12 @@ public class Appointment extends AbstractEntity {
         this.notes = notes;
     }
 
-    public long getServiceId() {
-        return serviceId;
+    public long getFacilityId() {
+        return facilityId;
     }
 
-    public void setServiceId(long serviceId) {
-        this.serviceId = serviceId;
+    public void setFacilityId(long facilityId) {
+        this.facilityId = facilityId;
     }
 
     public long getClientId() {
@@ -118,7 +118,7 @@ public class Appointment extends AbstractEntity {
         Appointment that = (Appointment) o;
 
         if (appointmentId != that.appointmentId) return false;
-        if (serviceId != that.serviceId) return false;
+        if (facilityId != that.facilityId) return false;
         if (clientId != that.clientId) return false;
         if (piercerId != that.piercerId) return false;
         if (dateTime != null ? !dateTime.equals(that.dateTime) : that.dateTime != null) return false;
@@ -130,7 +130,7 @@ public class Appointment extends AbstractEntity {
         int result = (int) (appointmentId ^ (appointmentId >>> 32));
         result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
         result = 31 * result + (notes != null ? notes.hashCode() : 0);
-        result = 31 * result + (int) (serviceId ^ (serviceId >>> 32));
+        result = 31 * result + (int) (facilityId ^ (facilityId >>> 32));
         result = 31 * result + (int) (clientId ^ (clientId >>> 32));
         result = 31 * result + (int) (piercerId ^ (piercerId >>> 32));
         return result;
@@ -142,7 +142,7 @@ public class Appointment extends AbstractEntity {
         sb.append("appointmentId=").append(appointmentId);
         sb.append(", dateTime=").append(dateTime);
         sb.append(", notes='").append(notes).append('\'');
-        sb.append(", serviceId=").append(serviceId);
+        sb.append(", facilityId=").append(facilityId);
         sb.append(", clientId=").append(clientId);
         sb.append(", piercerId=").append(piercerId);
         sb.append('}');

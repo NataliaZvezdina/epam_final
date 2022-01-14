@@ -42,6 +42,8 @@ public class ClientDaoImpl implements ClientDao {
             FROM users JOIN clients 
             ON users.user_id = clients.client_id;""";
 
+
+
     private static final String VERIFY_QUERY = """
             UPDATE users 
             SET is_verified = true 

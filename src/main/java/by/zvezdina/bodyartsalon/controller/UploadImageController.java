@@ -24,5 +24,4 @@ public class UploadImageController extends HttpServlet {
         response.setContentLength(imageBytes.length);
         response.getOutputStream().write(imageBytes);
     }
-
 }

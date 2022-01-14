@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,20 +18,33 @@ import static by.zvezdina.bodyartsalon.model.dao.TableColumnName.*;
 public class AppointmentDaoImpl implements AppointmentDao {
     private static final Logger logger = LogManager.getLogger();
 
+    private static final String CREATE_QUERY = """
+            INSERT INTO appointments (datetime, notes, facility_id, client_id, piercer_id) 
+            VALUES (?, ?, ?, ?, ?);""";
+
     private static final String FIND_BY_ID_QUERY = """
-            SELECT appointment_id, datetime, notes, service_id, client_id, piercer_id 
-            FROM appointments 
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
+            FROM appointments
             WHERE appointment_id = ?;""";
 
-    private static final String FIND_BY_DATE_QUERY = """
-            SELECT appointment_id, datetime, notes, service_id, client_id, piercer_id 
-            FROM appointments 
-            WHERE DATE(datetime) = ?;""";
-
     private static final String FIND_ALL_BY_PIERCER_ID = """
-            SELECT appointment_id, datetime, notes, service_id, client_id, piercer_id
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
             FROM appointments 
-            WHERE piercer_id = ? AND DATE(datetime) >= CURRENT_DATE();""";
+            WHERE piercer_id = ? AND datetime >= CURRENT_TIME();""";
+
+    private static final String FIND_ALL_BY_PIERCER_ID_FOR_CURRENT_DATE = """
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
+            FROM appointments 
+            WHERE piercer_id = ? AND DATE(datetime) = CURRENT_DATE();""";
+
+    private static final String FIND_ALL_BY_CLIENT_ID = """
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
+            FROM appointments 
+            WHERE client_id = ? AND datetime >= CURRENT_TIME();""";
+
+    private static final String DELETE_BY_ID_QUERY = """
+            DELETE FROM appointments 
+            WHERE appointment_id = ?;""";
 
     private static AppointmentDaoImpl instance;
 
@@ -45,7 +59,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public Appointment findById(Long id) throws DaoException {
+    public Appointment findById(long id) throws DaoException {
         Appointment foundAppointment = null;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
@@ -64,52 +78,33 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public List<Appointment> findAll() throws DaoException {
-        return null;
-    }
-
-    @Override
-    public List<Appointment> findAll(int page) throws DaoException {
-        return null;
-    }
-
-    @Override
     public Appointment create(Appointment appointment) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public Appointment update(Appointment appointment) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long id) throws DaoException {
-
-    }
-
-    @Override
-    public List<Appointment> findAllByDate(Date date) throws DaoException {
-        List<Appointment> appointments = new ArrayList<>();
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_DATE_QUERY)) {
-            statement.setDate(1, date);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Appointment foundAppointment = extract(resultSet);
-                    appointments.add(foundAppointment);
+             PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            statement.setTimestamp(1, Timestamp.valueOf(appointment.getDateTime()));
+            statement.setString(2, appointment.getNotes());
+            statement.setLong(3, appointment.getFacilityId());
+            statement.setLong(4, appointment.getClientId());
+            statement.setLong(5, appointment.getPiercerId());
+
+            statement.executeUpdate();
+            try (ResultSet resultSet = statement.getGeneratedKeys();) {
+                if (resultSet.next()) {
+                    long appointmentId = resultSet.getLong(1);
+                    appointment.setAppointmentId(appointmentId);
                 }
             }
         } catch (SQLException e) {
-            throw new DaoException("findAllByDate() - Failed to find appointments by date: " + date, e);
+            e.printStackTrace();
+            throw new DaoException("create() - Failed to create appointment: ", e);
         }
-
-        logger.log(Level.DEBUG, "All found appointments by date {}: {}", date, appointments);
-        return appointments;
+        logger.log(Level.DEBUG, "Appointment created: {}", appointment);
+        return appointment;
     }
 
     @Override
-    public List<Appointment> findAllActualByPiercerId(long piercerId) throws DaoException {
+    public List<Appointment> findAllRelevantByPiercerId(long piercerId) throws DaoException {
         List<Appointment> appointments = new ArrayList<>();
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_BY_PIERCER_ID)) {
@@ -125,17 +120,75 @@ public class AppointmentDaoImpl implements AppointmentDao {
                     + piercerId, e);
         }
 
-        logger.log(Level.DEBUG, "All actual found appointments by piercerId {}: {}",
+        logger.log(Level.DEBUG, "All relevant found appointments by piercerId {}: {}",
                 piercerId, appointments);
         return appointments;
+    }
+
+    @Override
+    public List<Appointment> findAllRelevantByClientId(long clientId) throws DaoException {
+        List<Appointment> appointments = new ArrayList<>();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_BY_CLIENT_ID)) {
+            statement.setLong(1, clientId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Appointment foundAppointment = extract(resultSet);
+                    appointments.add(foundAppointment);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findAllActualByPiercerId() - Failed to find appointments by clientId: "
+                    + clientId, e);
+        }
+
+        logger.log(Level.DEBUG, "All relevant found appointments by clientId {}: {}",
+                clientId, appointments);
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> findAllByPiercerIdForCurrentDate(long piercerId) throws DaoException {
+        List<Appointment> appointments = new ArrayList<>();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_BY_PIERCER_ID_FOR_CURRENT_DATE)) {
+            statement.setLong(1, piercerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Appointment foundAppointment = extract(resultSet);
+                    appointments.add(foundAppointment);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findAllActualByPiercerId() - Failed to find appointments by piercerId: "
+                    + piercerId, e);
+        }
+
+        logger.log(Level.DEBUG, "All relevant found appointments by piercerId {}: {}",
+                piercerId, appointments);
+        return appointments;
+    }
+
+    @Override
+    public int deleteById(long id) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            rowsUpdated = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("deleteById() - Failed to delete appointment by id " + id + " : ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     private Appointment extract(ResultSet resultSet) throws SQLException {
         return new Appointment.Builder()
                 .appointmentId(resultSet.getLong(APPOINTMENT_ID))
-                .datetime(resultSet.getTimestamp(DATE_TIME))
+                .datetime(resultSet.getTimestamp(DATE_TIME).toLocalDateTime())
                 .notes(resultSet.getString(NOTES))
-                .serviceId(resultSet.getLong(FACILITY_ID))
+                .facilityId(resultSet.getLong(FACILITY_ID))
                 .clientId(resultSet.getLong(CLIENT_ID))
                 .piercerId(resultSet.getLong(PIERCER_ID))
                 .build();

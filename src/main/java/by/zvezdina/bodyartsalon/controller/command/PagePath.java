@@ -39,6 +39,15 @@ public final class PagePath {
     public static final String PASSWORD_CHANGED = "jsp/common/password-changed.jsp";
     public static final String UPDATE_PROFILE = "jsp/common/update-profile.jsp";
 
+    public static final String SINGLE_ORDER_DETAILS = "jsp/admin/single-order-details.jsp";
+    public static final String PIERCERS = "jsp/content/piercers.jsp";
+
+    public static final String MAKE_APPOINTMENT = "jsp/client/make-appointment.jsp";
+    public static final String RELEVANT_APPOINTMENTS_BY_PIERCER = "jsp/piercer/relevant-appointments.jsp";
+    public static final String SINGLE_APPOINTMENT = "jsp/common/single-appointment.jsp";
+    public static final String RELEVANT_APPOINTMENTS_BY_CLIENT = "jsp/client/relevant-appointments.jsp";
+    public static final String APPOINTMENT_DELETED = "jsp/common/appointment-deleted.jsp";
+
     private PagePath() {
     }
 }

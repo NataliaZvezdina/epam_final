@@ -3,6 +3,7 @@ package by.zvezdina.bodyartsalon.model.service;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -16,5 +17,5 @@ public interface JewelryService {
     boolean deleteById(long id) throws ServiceException;
     boolean restoreById(long id) throws ServiceException;
     boolean validateInputData(Map<String, String> formData);
-
+    BigDecimal calculateJewelrySet(Map<Long, Integer> items, int clientDiscount) throws ServiceException;
 }

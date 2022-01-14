@@ -31,6 +31,8 @@ public final class RequestAttribute {
     public static final String NEGATIVE_NOTIFICATION = "negativeNotification";
     public static final String ORDER_CREATED = "orderCreated";
     public static final String ALL_ORDERS = "allOrders";
+    public static final String ORDER = "singleOrder";
+    public static final String ITEMS_LIST = "itemsList";
 
     public static final String USERS_LIST = "usersList";
     public static final String ADMIN = "admin";
@@ -44,6 +46,18 @@ public final class RequestAttribute {
     public static final String PASSWORD_UPDATED = "passwordUpdated";
 
     public static final String USER_TO_UPDATE = "userToUpdate";
+    public static final String PIERCERS_LIST = "piercersList";
+
+    public static final String FACILITY_ID = "facilityId";
+    public static final String FACILITY_NAME = "facilityName";
+
+    public static final String APPOINTMENT_DATA = "appointmentData";
+    public static final String NOTES = "notes";
+    public static final String FACILITY = "facility";
+    public static final String APPOINTMENT = "appointment";
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
+    public static final String PIERCER_FULL_NAME = "fullName";
 
     private RequestAttribute() {
     }

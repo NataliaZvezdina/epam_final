@@ -3,10 +3,13 @@ package by.zvezdina.bodyartsalon.controller.command.impl;
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Client;
+import by.zvezdina.bodyartsalon.model.entity.Piercer;
 import by.zvezdina.bodyartsalon.model.entity.User;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
+import by.zvezdina.bodyartsalon.model.service.PiercerService;
 import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
+import by.zvezdina.bodyartsalon.model.service.impl.PiercerServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import by.zvezdina.bodyartsalon.util.FormValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ public class SignInCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     private final UserService userService = UserServiceImpl.getInstance();
     private final ClientService clientService = ClientServiceImpl.getInstance();
+    private final PiercerService piercerService = PiercerServiceImpl.getInstance();
     private final FormValidator validator = FormValidator.getInstance();
 
     @Override
@@ -65,6 +69,14 @@ public class SignInCommand implements Command {
                         session.setAttribute(SessionAttribute.USER_DISCOUNT, discount);
                         return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);
                     }
+                    case PIERCER -> {
+                        Piercer piercer = piercerService.findById(user.getUserId());
+                        return new Router(PagePath.WELCOME, Router.RouterType.REDIRECT);
+                    }
+                    default -> {
+                        logger.log(Level.ERROR, "Failed to sign in by user with unknown role");
+                        return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.FORWARD);
+                    }
                 }
             } else {
                 logger.log(Level.ERROR, "Failed to execute request LoginUserCommand: Invalid login or password");
@@ -78,6 +90,5 @@ public class SignInCommand implements Command {
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
 
-        return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
     }
 }

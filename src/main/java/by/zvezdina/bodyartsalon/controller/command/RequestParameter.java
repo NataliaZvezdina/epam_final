@@ -45,6 +45,13 @@ public final class RequestParameter {
 
     public static final String ORDER_ID = "orderId";
 
+    public static final String DATE = "date";
+    public static final String HOUR = "hour";
+    public static final String PIERCER_ID = "piercerId";
+    public static final String NOTES = "notes";
+    public static final String APPOINTMENT_ID = "appointmentId";
+
+
     private RequestParameter() {
     }
 }

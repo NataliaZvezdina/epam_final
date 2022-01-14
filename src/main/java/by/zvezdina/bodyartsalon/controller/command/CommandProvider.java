@@ -2,10 +2,10 @@ package by.zvezdina.bodyartsalon.controller.command;
 
 import by.zvezdina.bodyartsalon.controller.command.impl.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.admin.*;
-import by.zvezdina.bodyartsalon.controller.command.impl.client.CreateOrderCommand;
-import by.zvezdina.bodyartsalon.controller.command.impl.client.TopUpBalanceCommand;
-import by.zvezdina.bodyartsalon.controller.command.impl.common.UpdatePasswordCommand;
-import by.zvezdina.bodyartsalon.controller.command.impl.common.UpdateProfileCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.client.*;
+import by.zvezdina.bodyartsalon.controller.command.impl.common.*;
+import by.zvezdina.bodyartsalon.controller.command.impl.piercer.ShowAllRelevantAppointmentsByPiercerCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.piercer.ShowAppointmentsForTodayCommand;
 
 import java.util.EnumMap;
 
@@ -53,7 +53,16 @@ public class CommandProvider {
 
         commands.put(CommandType.TOP_UP_BALANCE, new TopUpBalanceCommand());
 
+        commands.put(CommandType.GO_TO_MAKE_APPOINTMENT, new GoToMakeAppointmentCommand());
         commands.put(CommandType.MAKE_APPOINTMENT, new MakeAppointmentCommand());
+        commands.put(CommandType.SHOW_ALL_RELEVANT_APPOINTMENTS_BY_PIERCER,
+                new ShowAllRelevantAppointmentsByPiercerCommand());
+        commands.put(CommandType.SHOW_APPOINTMENTS_FOR_TODAY, new ShowAppointmentsForTodayCommand());
+        commands.put(CommandType.SHOW_ALL_RELEVANT_APPOINTMENTS_BY_CLIENT,
+                new ShowAllRelevantAppointmentsByClientCommand());
+        commands.put(CommandType.CANCEL_APPOINTMENT, new CancelAppointmentCommand());
+        commands.put(CommandType.OPEN_SINGLE_APPOINTMENT, new OpenSingleAppointmentCommand());
+        commands.put(CommandType.SHOW_ALL_ACTIVE_PIERCERS, new ShowAllActivePiercersCommand());
 
         commands.put(CommandType.DEFAULT, new DefaultCommand());
     }

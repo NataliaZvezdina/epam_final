@@ -8,6 +8,7 @@
 <fmt:message key="navigation.home" var="home"/>
 <fmt:message key="navigation.jewelry" var="jewelry"/>
 <fmt:message key="navigation.facilities" var="facilities"/>
+<fmt:message key="navigation.piercers" var="piercers"/>
 <fmt:message key="navigation.gallery" var="gallery"/>
 <fmt:message key="navigation.contacts" var="contacts"/>
 <fmt:message key="navigation.about" var="about"/>
@@ -39,6 +40,10 @@
                 <li class="nav-item">
                     <a class="nav-link active"
                        href="${pageContext.request.contextPath}/controller?command=show_all_facilities">${facilities}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="${pageContext.request.contextPath}/controller?command=show_all_active_piercers">${piercers}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
@@ -80,6 +85,11 @@
                             </li>
                             <li class="nav-item">
                                 <a href="${pageContext.request.contextPath}/jsp/client/client-profile.jsp">${profile}</a>
+                            </li>
+                        </c:when>
+                        <c:when test="${sessionScope.userRole=='PIERCER'}">
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/jsp/piercer/piercer-profile.jsp">${profile}</a>
                             </li>
                         </c:when>
                     </c:choose>

@@ -6,6 +6,17 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="client.profile.page" var="profile"/>
+<fmt:message key="allUsers.firstName" var="name"/>
+<fmt:message key="allUsers.lastName" var="surname"/>
+<fmt:message key="allUsers.login" var="login"/>
+<fmt:message key="allUsers.email" var="email"/>
+<fmt:message key="allUsers.role" var="role"/>
+<fmt:message key="allUsers.balance" var="balance"/>
+<fmt:message key="allUsers.discount" var="discount"/>
+<fmt:message key="admin.goToLink" var="goTo"/>
+<fmt:message key="admin.updateProfile" var="updateProfile"/>
+<fmt:message key="admin.updatePassword" var="updatePassword"/>
+<fmt:message key="client.relevantAppointments" var="relevantApp"/>
 
 <!doctype html>
 <html lang="en">
@@ -28,39 +39,63 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
-
-<div class="container" style="color: black; height: 67vh">
+<div class="container" style="height: 80vh; color: black; font-size: 18px">
     <div class="row">
         <dl class="row">
-            <dt class="col-sm-3">id</dt>
-            <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
+            <dt class="col-sm-3">${role}</dt>
+            <dd class="col-sm-9" style="font-size: 20px">${sessionScope.userRole}</dd>
 
-            <dt class="col-sm-3">Term</dt>
-            <dd class="col-sm-9">
-                <p>Definition for the term.</p>
-                <p>And some more placeholder definition text.</p>
-            </dd>
+<%--            <dt class="col-sm-3">${id}</dt>--%>
+<%--            <dd class="col-sm-9">${sessionScope.userId}</dd>--%>
 
-            <dt class="col-sm-3">Another term</dt>
-            <dd class="col-sm-9">This definition is short, so no extra paragraphs or anything.</dd>
+            <dt class="col-sm-3">${name}</dt>
+            <dd class="col-sm-9">${sessionScope.userName}</dd>
 
-            <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>
-            <dd class="col-sm-9">This can be useful when space is tight. Adds an ellipsis at the end.</dd>
+            <dt class="col-sm-3">${surname}</dt>
+            <dd class="col-sm-9">${sessionScope.userLastName}</dd>
 
-            <dt class="col-sm-3">Look through</dt>
+            <dt class="col-sm-3">${login}</dt>
+            <dd class="col-sm-9">${sessionScope.userLogin}</dd>
+
+            <dt class="col-sm-3">${email}</dt>
+            <dd class="col-sm-9">${sessionScope.userEmail}</dd>
+
+            <dt class="col-sm-3">${balance}</dt>
+            <dd class="col-sm-9">${sessionScope.userMoney} £</dd>
+
+            <dt class="col-sm-3">${discount}</dt>
+            <dd class="col-sm-9">${sessionScope.userDiscount} %</dd>
+
+
+            <dt class="col-sm-3"></dt>
             <dd class="col-sm-9">
                 <dl class="row">
-                    <dt class="col-sm-4">All orders</dt>
-<%--                    <dd class="col-sm-8">I heard you like definition lists. Let me put a definition list inside your definition list.</dd>--%>
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=go_to_update_profile"
+                                                      style="color: midnightblue; font-size: 18px">${updateProfile}</a></dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">All active appointments</dt>
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
+                                                      style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>
+                </dl>
+            </dd>
+
+            <dt class="col-sm-3">---------------------</dt>
+            <dd class="col-sm-9"><dl class="row"><dt class="col-sm-4">------------------------</dt></dl></dd>
+
+            <dt class="col-sm-3">${goTo}</dt>
+            <dd class="col-sm-9">
+<%--                <dl class="row">--%>
+<%--                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"--%>
+<%--                                                      style="color: black; font-size: 18px">${showAllUsers}</a></dt>--%>
+<%--                </dl>--%>
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_relevant_appointments_by_client"
+                                                      style="color: midnightblue; font-size: 18px">${relevantApp}</a></dt>
                 </dl>
             </dd>
         </dl>
     </div>
 </div>
-
 
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

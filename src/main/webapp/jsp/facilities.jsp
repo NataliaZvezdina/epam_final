@@ -95,7 +95,7 @@
                         <c:when test="${element.accessible}">
                             <td>
                                 <a style="color: midnightblue; font-weight: bold; font-size: 20px"
-                                   href="${pageContext.request.contextPath}/controller?command=make_appointment&facilityId=${element.facilityId}&page=${requestScope.page}">
+                                   href="${pageContext.request.contextPath}/controller?command=go_to_make_appointment&facilityId=${element.facilityId}&page=${requestScope.page}">
                                         ${appointment}</a>
                             </td>
                         </c:when>

@@ -13,9 +13,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class JewelryServiceImpl implements JewelryService {
     private static final Logger logger = LogManager.getLogger();
@@ -153,5 +155,37 @@ public class JewelryServiceImpl implements JewelryService {
         }
 
         return isDataValid;
+    }
+
+    @Override
+    public BigDecimal calculateJewelrySet(Map<Long, Integer> items, int clientDiscount) throws ServiceException {
+        Set<Long> idSet = items.keySet();
+        List<Jewelry> jewelryList = new ArrayList<>();
+
+        for (long id : idSet) {
+            Jewelry jewelry = null;
+            try {
+                jewelry = jewelryDao.findById(id);
+            } catch (DaoException e) {
+                throw new ServiceException("findById() - Failed to find jewelry by id " + id, e);
+            }
+            jewelryList.add(jewelry);
+        }
+
+        BigDecimal totalCost = new BigDecimal(0);
+        for (Jewelry jewelry: jewelryList) {
+            totalCost = totalCost.add(jewelry.getPrice().multiply(BigDecimal.valueOf(1d - clientDiscount / 100d))
+                    .multiply(BigDecimal.valueOf(items.get(jewelry.getJewelryId()))));
+        }
+
+//        items.keySet().forEach(id -> {
+//            try {
+//                jewelryList.add(jewelryDao.findById(id));
+//            } catch (DaoException e) {
+//                throw new ServiceException("findById() - Failed to find jewelry by id " + id, e);
+//            }
+//        });
+
+            return totalCost;
     }
 }

@@ -15,8 +15,8 @@
 <fmt:message key="admin.goToLink" var="goTo"/>
 <fmt:message key="admin.updateProfile" var="updateProfile"/>
 <fmt:message key="admin.updatePassword" var="updatePassword"/>
-<fmt:message key="admin.showAllUsers" var="showAllUsers"/>
-<fmt:message key="admin.showAllOrders" var="showAllOrders"/>
+<fmt:message key="relevant.showAll" var="showAllRevevant"/>
+<fmt:message key="relevant.showForToday" var="showForToday"/>
 
 <!doctype html>
 <html lang="en">
@@ -79,20 +79,21 @@
             <dt class="col-sm-3">${goTo}</dt>
             <dd class="col-sm-9">
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"
-                                                      style="color: black; font-size: 18px">${showAllUsers}</a></dt>
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_relevant_appointments_by_piercer"
+                                                      style="color: midnightblue; font-size: 18px">${showAllRevevant}</a></dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_orders"
-                                                      style="color: black; font-size: 18px">${showAllOrders}</a></dt>
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_appointments_for_today"
+                                                      style="color: midnightblue; font-size: 18px">${showForToday}</a></dt>
                 </dl>
             </dd>
         </dl>
     </div>
 </div>
 
-<c:import url="../fragment/footer.jsp"/>
 
+
+<c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

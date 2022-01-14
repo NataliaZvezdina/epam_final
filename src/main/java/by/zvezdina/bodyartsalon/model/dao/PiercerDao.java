@@ -1,8 +1,14 @@
 package by.zvezdina.bodyartsalon.model.dao;
 
+import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.entity.Piercer;
 
+import java.util.List;
 
-public interface PiercerDao extends BaseDao <Long, Piercer> {
+
+public interface PiercerDao {
+
+    List<Piercer> findAllActive() throws DaoException;
+    Piercer findById(long id) throws DaoException;
 
 }

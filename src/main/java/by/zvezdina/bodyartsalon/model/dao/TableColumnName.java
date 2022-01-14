@@ -20,8 +20,7 @@ public final class TableColumnName {
 
     public static final String PIERCER_ID = "piercer_id";
     public static final String PHOTO_URL = "photo_url";
-    public static final String CATEGORY = "category";
-    public static final String RATING = "rating";
+    public static final String INFO_ABOUT = "info_about";
 
     public static final String DISCOUNT_ID = "discount_id";
     public static final String VALUE = "value";
