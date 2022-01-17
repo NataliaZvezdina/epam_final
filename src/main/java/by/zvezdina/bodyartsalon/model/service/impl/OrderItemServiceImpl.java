@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,20 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
+    public BigDecimal calculateItemsCostByOrderId(long orderId) throws ServiceException {
+        BigDecimal totalCost;
+        try {
+            totalCost = orderItemDao.calculateItemsCostByOrderId(orderId);
+        } catch (DaoException e) {
+            throw new ServiceException("calculateItemsCostByOrderId() - Failed to calculate cost by orderId "
+                    + orderId, e);
+        }
+
+        logger.log(Level.DEBUG, "Total cost of orderItems by orderId {}: {}", orderId, totalCost);
+        return totalCost;
+    }
+
+    @Override
     public OrderItem create(OrderItem orderItem) throws ServiceException {
         OrderItem createdOrderItem;
         try {
@@ -50,7 +65,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         } catch (DaoException e) {
             throw new ServiceException("create() - Failed to create orderItem ", e);
         }
-        logger.log(Level.DEBUG, "OrderItem created: {}", orderItem);
-        return orderItem;
+        logger.log(Level.DEBUG, "OrderItem created: {}", createdOrderItem);
+        return createdOrderItem;
     }
 }

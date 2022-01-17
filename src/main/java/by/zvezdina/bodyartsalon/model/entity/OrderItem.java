@@ -1,18 +1,22 @@
 package by.zvezdina.bodyartsalon.model.entity;
 
+import java.math.BigDecimal;
+
 public class OrderItem {
 
     private long orderId;
     private long jewelryId;
     private int quantity;
+    private BigDecimal itemPrice;
 
     public OrderItem() {
     }
 
-    public OrderItem(long orderId, long jewelryId, int quantity) {
+    public OrderItem(long orderId, long jewelryId, int quantity, BigDecimal itemPrice) {
         this.orderId = orderId;
         this.jewelryId = jewelryId;
         this.quantity = quantity;
+        this.itemPrice = itemPrice;
     }
 
     public static class Builder {
@@ -30,6 +34,11 @@ public class OrderItem {
 
         public Builder quantity(int quantity) {
             orderItem.quantity = quantity;
+            return this;
+        }
+
+        public Builder itemPrice(BigDecimal itemPrice) {
+            orderItem.itemPrice = itemPrice;
             return this;
         }
 
@@ -62,6 +71,14 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,7 +88,8 @@ public class OrderItem {
 
         if (orderId != orderItem.orderId) return false;
         if (jewelryId != orderItem.jewelryId) return false;
-        return quantity == orderItem.quantity;
+        if (quantity != orderItem.quantity) return false;
+        return itemPrice != null ? itemPrice.equals(orderItem.itemPrice) : orderItem.itemPrice == null;
     }
 
     @Override
@@ -79,6 +97,7 @@ public class OrderItem {
         int result = (int) (orderId ^ (orderId >>> 32));
         result = 31 * result + (int) (jewelryId ^ (jewelryId >>> 32));
         result = 31 * result + quantity;
+        result = 31 * result + (itemPrice != null ? itemPrice.hashCode() : 0);
         return result;
     }
 
@@ -88,6 +107,7 @@ public class OrderItem {
         sb.append("orderId=").append(orderId);
         sb.append(", jewelryId=").append(jewelryId);
         sb.append(", quantity=").append(quantity);
+        sb.append(", itemPrice=").append(itemPrice);
         sb.append('}');
         return sb.toString();
     }

@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.controller.command.impl;
+package by.zvezdina.bodyartsalon.controller.command.impl.common;
 
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;

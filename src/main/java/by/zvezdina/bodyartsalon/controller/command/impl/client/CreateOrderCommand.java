@@ -2,14 +2,13 @@ package by.zvezdina.bodyartsalon.controller.command.impl.client;
 
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
-import by.zvezdina.bodyartsalon.model.entity.Client;
-import by.zvezdina.bodyartsalon.model.entity.Order;
-import by.zvezdina.bodyartsalon.model.entity.OrderItem;
-import by.zvezdina.bodyartsalon.model.entity.OrderStatus;
+import by.zvezdina.bodyartsalon.model.entity.*;
 import by.zvezdina.bodyartsalon.model.service.ClientService;
+import by.zvezdina.bodyartsalon.model.service.JewelryService;
 import by.zvezdina.bodyartsalon.model.service.OrderItemService;
 import by.zvezdina.bodyartsalon.model.service.OrderService;
 import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
+import by.zvezdina.bodyartsalon.model.service.impl.JewelryServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.OrderItemServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -28,12 +28,13 @@ public class CreateOrderCommand implements Command {
     public static final String ORDER_CREATED_NOTIFICATION = "order.created";
     private final OrderService orderService = OrderServiceImpl.getInstance();
     private final OrderItemService orderItemService = OrderItemServiceImpl.getInstance();
+    private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
     private final ClientService clientService = ClientServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) {
         String orderCost = request.getParameter(RequestParameter.ORDER_COST);
-        BigDecimal cost = new  BigDecimal(orderCost);
+        BigDecimal cost = new BigDecimal(orderCost);
 
         HttpSession session = request.getSession();
 
@@ -54,14 +55,18 @@ public class CreateOrderCommand implements Command {
                 .build();
 
         try {
+            int discount = clientService.findDiscountByClientId(clientId);
             Order createdOrder = orderService.create(order);
             for (var entry : basket.entrySet()) {
                 Long jewelryId = entry.getKey();
                 Integer quantity = entry.getValue();
+                Jewelry jewelry = jewelryService.findById(jewelryId);
+                BigDecimal price = jewelry.getPrice();
                 OrderItem orderItem = new OrderItem.Builder()
                         .orderId(createdOrder.getOrderId())
                         .jewelryId(jewelryId)
                         .quantity(quantity)
+                        .itemPrice(price.multiply(BigDecimal.valueOf(1d - discount / 100d), MathContext.DECIMAL32))
                         .build();
                 orderItemService.create(orderItem);
             }
@@ -72,12 +77,11 @@ public class CreateOrderCommand implements Command {
 
             basket.clear();
 
-            request.setAttribute(RequestAttribute.ORDER_COST, orderCost);
-            return new Router(PagePath.ORDER_CREATED_NOTIFICATION, Router.RouterType.FORWARD);
+            //request.setAttribute(RequestAttribute.ORDER_COST, orderCost);
+            return new Router(PagePath.ORDER_CREATED_NOTIFICATION, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
+            logger.log(Level.ERROR, "Failed to execute CreateOrderCommand", e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
         }
-
     }
 }

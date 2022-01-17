@@ -16,6 +16,7 @@
 <fmt:message key="admin.goToLink" var="goTo"/>
 <fmt:message key="admin.updateProfile" var="updateProfile"/>
 <fmt:message key="admin.updatePassword" var="updatePassword"/>
+<fmt:message key="client.profile.showOrders" var="showOrders"/>
 <fmt:message key="client.relevantAppointments" var="relevantApp"/>
 
 <!doctype html>
@@ -81,10 +82,10 @@
 
             <dt class="col-sm-3">${goTo}</dt>
             <dd class="col-sm-9">
-<%--                <dl class="row">--%>
-<%--                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_users"--%>
-<%--                                                      style="color: black; font-size: 18px">${showAllUsers}</a></dt>--%>
-<%--                </dl>--%>
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_orders_by_client"
+                                                      style="color: midnightblue; font-size: 18px">${showOrders}</a></dt>
+                </dl>
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_relevant_appointments_by_client"
                                                       style="color: midnightblue; font-size: 18px">${relevantApp}</a></dt>

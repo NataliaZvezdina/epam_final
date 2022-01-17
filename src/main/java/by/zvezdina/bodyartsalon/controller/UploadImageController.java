@@ -18,7 +18,7 @@ public class UploadImageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getParameter(RequestParameter.JEWELRY_IMAGE_PATH);
+        String path = request.getParameter(RequestParameter.IMAGE_PATH);
         byte[] imageBytes = Files.readAllBytes(Paths.get(path));
         response.setContentType(CONTENT_TYPE);
         response.setContentLength(imageBytes.length);

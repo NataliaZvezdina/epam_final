@@ -15,6 +15,6 @@ public interface ClientService {
     int findDiscountByClientId(long id) throws ServiceException;
     List<Discount> findAllDiscounts() throws ServiceException;
     boolean updateClientDiscount(long clientId, long discountId) throws ServiceException;
-    boolean validateMoneyToAdd(String money);
+    boolean validateMoneyToAdd(String money, BigDecimal balance);
     boolean updateBalance(long clientId, BigDecimal money) throws ServiceException;
 }

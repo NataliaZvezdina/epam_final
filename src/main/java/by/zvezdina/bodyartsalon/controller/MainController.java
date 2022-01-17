@@ -16,9 +16,6 @@ import java.io.IOException;
 public class MainController extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
 
-    public void init() {
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doRequest(req, resp);
@@ -35,22 +32,19 @@ public class MainController extends HttpServlet {
         Router router = command.execute(request);
 
         switch (router.getRouterType()) {
-            case FORWARD:
+            case FORWARD -> {
                 request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                logger.log(Level.DEBUG, "forward to " + router.getPagePath());
-                break;
-            case REDIRECT:
+                logger.log(Level.DEBUG, "forward to {}", router.getPagePath());
+            }
+            case REDIRECT -> {
                 response.sendRedirect(router.getPagePath());
-                logger.log(Level.DEBUG, "redirect to " + router.getPagePath());
-                break;
-            default:
+                logger.log(Level.DEBUG, "redirect to {}", router.getPagePath());
+            }
+            default -> {
                 logger.log(Level.ERROR, "incorrect router type: {}", router.getRouterType());
                 response.sendRedirect(PagePath.ERROR_500_PAGE);
-                logger.log(Level.DEBUG, "redirect to " + router.getPagePath());
-                break;
+                logger.log(Level.DEBUG, "redirect to {}", router.getPagePath());
+            }
         }
-    }
-
-    public void destroy() {
     }
 }

@@ -24,6 +24,12 @@ public class OrderDaoImpl implements OrderDao {
             FROM orders  
             LIMIT ?, ?;""";
 
+    private static final String FIND_ALL_BY_CLIENT_ID_QUERY = """
+            SELECT order_id, order_date, order_status, client_id   
+            FROM orders  
+            WHERE client_id = ? AND order_status IN('ACCEPTED', 'RECEIVED')
+            LIMIT ?, ?;""";
+
     private static final int ELEMENTS_ON_PAGE = 10;
 
     private static final String FIND_BY_ID_QUERY = """
@@ -34,6 +40,16 @@ public class OrderDaoImpl implements OrderDao {
     private static final String CREATE_QUERY = """
             INSERT INTO orders (order_date, order_status, client_id) 
             VALUES (?, ?, ?);""";
+
+    private static final String UPDATE_STATUS_BY_ID_QUERY = """
+            UPDATE orders
+            SET order_status = 'RECEIVED' 
+            WHERE order_id = ?;""";
+
+    private static final String DELETE_BY_ID_QUERY = """
+            UPDATE orders
+            SET order_status = 'CANCELLED' 
+            WHERE order_id = ?;""";
 
     private static OrderDaoImpl instance;
 
@@ -66,6 +82,29 @@ public class OrderDaoImpl implements OrderDao {
 
         logger.log(Level.DEBUG, "All orders on page {}: {}", page, ordersOnPage);
         return ordersOnPage;
+    }
+
+    @Override
+    public List<Order> findAllByClientId(int page, long clientId) throws DaoException {
+        List<Order> clientOrders = new ArrayList<>();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_BY_CLIENT_ID_QUERY)) {
+            statement.setLong(1, clientId);
+            statement.setInt(2, ELEMENTS_ON_PAGE * (page - 1));
+            statement.setInt(3, ELEMENTS_ON_PAGE);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order foundOrder = extract(resultSet);
+                    clientOrders.add(foundOrder);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findAllByClientId() - Failed to find all client orders(clientId {}) "
+                    + clientId, e);
+        }
+
+        logger.log(Level.DEBUG, "All client orders: {}", clientOrders);
+        return clientOrders;
     }
 
     @Override
@@ -106,6 +145,35 @@ public class OrderDaoImpl implements OrderDao {
         }
         logger.log(Level.DEBUG, "Order created: {}", order);
         return order;
+    }
+
+    @Override
+    public int updateStatusByOrderId(long id) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            rowsUpdated = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("updateStatusByOrderId() - Failed to update order status by id " +
+                    id + " : ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
+    }
+
+    @Override
+    public int deleteById(long id) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            rowsUpdated = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("deleteById() - Failed to delete order by id " + id + " : ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     private Order extract(ResultSet resultSet) throws SQLException {

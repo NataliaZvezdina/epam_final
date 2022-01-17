@@ -36,7 +36,7 @@
     <c:if test="${requestScope.errorMessage != null}">
         <div class="form-group">
             <div class="col-md-6 mb-3">
-                <div class="err-message-from-server">
+                <div class="err-message-from-server" style="text-align: center; color: red">
                     <fmt:setBundle basename="bundle/locale" var="rb"/>
                     <fmt:message key="${requestScope.errorMessage}" bundle="${rb}"/>
                 </div>
@@ -52,11 +52,10 @@
             <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="${message}">
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <label for="inputPassword2" class="sr-only">Password</label>
-            <input type="number" name="moneyToAdd" step="0.01" min="0" max="999.99"
+            <label for="inputPassword2" class="sr-only"></label>
+            <input type="number" name="moneyToAdd" step="0.01" min="0" max="99.99"
                    class="form-control" id="inputPassword2" placeholder="0.0"
-                   pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">
-            <%--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--%>
+                   pattern="^[0-9]{1,2}(\.[0-9]{1,2})?$">
         </div>
         <button type="submit" class="btn btn-primary mb-2">${button}</button>
     </form>

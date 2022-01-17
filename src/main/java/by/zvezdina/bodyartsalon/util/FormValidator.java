@@ -15,6 +15,8 @@ public class FormValidator {
 
     private static final String CHECK_MONEY_REGEX = "^[0-9]{1,4}(\\.[0-9]{1,2})?$";
 
+    private static final int MAX_STRING_LENGTH = 90;
+
     private static FormValidator instance;
 
     private FormValidator() {

@@ -64,7 +64,7 @@
         <div class="form-group">
             <label for="exampleFormControlInput4">${price}</label>
             <input type="number" step="0.01" min="0" max="999.99" pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$"
-                   class="form-control" id="exampleFormControlInput4" name="price"
+                   class="form-control" id="exampleFormControlInput4" name="price" required
                    value="${requestScope.jewelryToEdit.price}">
         </div>
         <div class="form-group">

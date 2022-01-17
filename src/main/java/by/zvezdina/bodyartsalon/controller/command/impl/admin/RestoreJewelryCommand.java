@@ -11,23 +11,22 @@ import org.apache.logging.log4j.Logger;
 
 public class RestoreJewelryCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
-    private JewelryService jewelryService = JewelryServiceImpl.getInstance();
+    private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) {
         int jewelryId = Integer.parseInt(request.getParameter(RequestParameter.JEWELRY_ID));
-        try {
-            jewelryService.restoreById(jewelryId);
-        } catch (ServiceException e) {
-            logger.log(Level.ERROR, "Error to restore jewelry by id {} in RestoreJewelryCommand",
-                    jewelryId, e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
-        }
-
         String page = request.getParameter(RequestParameter.PAGE);
         int currentPage = page != null ? Integer.parseInt(page) : 1;
 
-        return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPage, Router.RouterType.FORWARD);
+        try {
+            jewelryService.restoreById(jewelryId);
+            return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPage,
+                    Router.RouterType.REDIRECT);
+        } catch (ServiceException e) {
+            logger.log(Level.ERROR, "Error to restore jewelry by id {} in RestoreJewelryCommand",
+                    jewelryId, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
+        }
     }
 }

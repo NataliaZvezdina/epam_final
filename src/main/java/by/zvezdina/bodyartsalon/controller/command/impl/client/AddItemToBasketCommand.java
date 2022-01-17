@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.controller.command.impl;
+package by.zvezdina.bodyartsalon.controller.command.impl.client;
 
 import by.zvezdina.bodyartsalon.controller.command.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,10 +26,10 @@ public class AddItemToBasketCommand implements Command {
         Integer currentItemQuantity = basket.get(jewelryId);
         basket.put(jewelryId, ++currentItemQuantity);
 
-
         String page = request.getParameter(RequestParameter.PAGE);
         int currentPageNumber = page != null ? Integer.parseInt(page) : 1;
 
-        return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPageNumber, Router.RouterType.FORWARD);
+        return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + currentPageNumber,
+                Router.RouterType.FORWARD);
     }
 }

@@ -15,10 +15,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
     private static final Logger logger = LogManager.getLogger();
+    private static final BigDecimal MAX_POSSIBLE_BALANCE = new BigDecimal("999.99");
     private static ClientServiceImpl instance;
     private ClientDao clientDao = ClientDaoImpl.getInstance();
 
@@ -115,9 +117,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean validateMoneyToAdd(String money) {
+    public boolean validateMoneyToAdd(String money, BigDecimal balance) {
         FormValidator validator = FormValidator.getInstance();
         boolean isValid = validator.checkMoney(money);
+
+        if (isValid) {
+            BigDecimal moneyToAdd = new BigDecimal(money);
+            isValid = moneyToAdd.compareTo(MAX_POSSIBLE_BALANCE.subtract(balance)) <= 0;
+        }
 
         logger.log(Level.DEBUG, isValid ? "Input money {} to add are valid " :
                 "Input money {} to add are valid", money);

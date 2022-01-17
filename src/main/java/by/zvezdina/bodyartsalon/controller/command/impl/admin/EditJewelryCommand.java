@@ -6,12 +6,16 @@ import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.service.JewelryService;
 import by.zvezdina.bodyartsalon.model.service.impl.JewelryServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditJewelryCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private static final String INVALID_INPUT = "inputData.invalid";
     private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
 
@@ -59,7 +63,7 @@ public class EditJewelryCommand implements Command {
             jewelryService.update(jewelryToUpdate);
             return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + page, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Error while updating jewelry ", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

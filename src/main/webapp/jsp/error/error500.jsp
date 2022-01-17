@@ -44,7 +44,7 @@ ${stackTrace} <br/>
 </c:forEach><br/>
 <hr/>
 
-<a href="${pageContext.request.contextPath}/index.jsp">${home}</a>
+<a style="height: 25px; color: midnightblue" href="${pageContext.request.contextPath}/index.jsp">${home}</a>
 
 </body>
 </html>

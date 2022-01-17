@@ -5,8 +5,8 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
-<fmt:message key="orderCreated" var="created"/>
-<fmt:message key="goToOrderList" var="toOrders"/>
+<fmt:message key="client.cancelOrder" var="title"/>
+<fmt:message key="orderCancelled.message" var="message"/>
 
 <!doctype html>
 <html lang="en">
@@ -18,7 +18,6 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
-
     <script type="text/javascript">
         window.history.forward();
 
@@ -32,24 +31,11 @@
 <c:import url="../fragment/header.jsp"/>
 
 <div class="container" style="height: 67vh">
-    <c:choose>
-        <c:when test="${requestScope.negativeNotification != null}">
-            <fmt:setBundle basename="bundle/locale" var="rb"/>
-            <fmt:message key="${requestScope.negativeNotification}" bundle="${rb}"/>
-        </c:when>
-        <c:otherwise>
-            <h2>${created}</h2>
-            <br/><br/>
-            <h4>
-                <a href="${pageContext.request.contextPath}/jsp/client/orders-list.jsp"
-                   style="color: midnightblue">
-                        ${toOrders}</a>
-            </h4>
-            <%--            order cost: ${requestScope.orderCost}--%>
-        </c:otherwise>
-    </c:choose>
+    <br/>
+    <h2 style="color: black; text-align: center">${message}</h2>
 
 </div>
+
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

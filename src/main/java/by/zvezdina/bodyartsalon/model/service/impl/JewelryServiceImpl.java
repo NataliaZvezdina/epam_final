@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -173,19 +174,11 @@ public class JewelryServiceImpl implements JewelryService {
         }
 
         BigDecimal totalCost = new BigDecimal(0);
-        for (Jewelry jewelry: jewelryList) {
+        for (Jewelry jewelry : jewelryList) {
             totalCost = totalCost.add(jewelry.getPrice().multiply(BigDecimal.valueOf(1d - clientDiscount / 100d))
-                    .multiply(BigDecimal.valueOf(items.get(jewelry.getJewelryId()))));
+                    .multiply(BigDecimal.valueOf(items.get(jewelry.getJewelryId()))),
+                    MathContext.DECIMAL32);
         }
-
-//        items.keySet().forEach(id -> {
-//            try {
-//                jewelryList.add(jewelryDao.findById(id));
-//            } catch (DaoException e) {
-//                throw new ServiceException("findById() - Failed to find jewelry by id " + id, e);
-//            }
-//        });
-
-            return totalCost;
+        return totalCost;
     }
 }

@@ -20,6 +20,7 @@ public class CommandProvider {
         commands.put(CommandType.LOGOUT, new LogOutCommand());
         commands.put(CommandType.SIGN_UP, new SignUpCommand());
         commands.put(CommandType.VERIFY, new VerifyCommand());
+
         commands.put(CommandType.SHOW_ALL_JEWELRY, new ShowAllJewelryCommand());
         commands.put(CommandType.ADD_JEWELRY, new AddJewelryCommand());
         commands.put(CommandType.DELETE_JEWELRY, new DeleteJewelryCommand());
@@ -41,6 +42,9 @@ public class CommandProvider {
         commands.put(CommandType.CREATE_ORDER, new CreateOrderCommand());
         commands.put(CommandType.RECOUNT_ORDER_WHILE_ADDING_ITEM, new RecountOrderWhileAddingItemCommand());
         commands.put(CommandType.RECOUNT_ORDER_WHILE_REMOVING_ITEM, new RecountOrderWhileRemovingItemCommand());
+        commands.put(CommandType.SHOW_ORDERS_BY_CLIENT, new ShowOrdersByClientCommand());
+        commands.put(CommandType.CANCEL_ORDER, new CancelOrderCommand());
+        commands.put(CommandType.MARK_ORDER_AS_RECEIVED, new MarkOrderAsReceivedCommand());
 
         commands.put(CommandType.UPDATE_PASSWORD, new UpdatePasswordCommand());
         commands.put(CommandType.UPDATE_PROFILE, new UpdateProfileCommand());
@@ -65,7 +69,7 @@ public class CommandProvider {
         commands.put(CommandType.SHOW_ALL_ACTIVE_PIERCERS, new ShowAllActivePiercersCommand());
         commands.put(CommandType.ADD_ADMIN, new AddAdminCommand());
 
-        commands.put(CommandType.DEFAULT, new DefaultCommand());
+        commands.put(CommandType.NOT_FOUND_PAGE, new NotFoundPageCommand());
     }
 
     public static CommandProvider getInstance() {
@@ -77,14 +81,14 @@ public class CommandProvider {
 
     public Command getCommand(String commandName) {
         if (commandName == null) {
-            return commands.get(CommandType.DEFAULT);
+            return commands.get(CommandType.NOT_FOUND_PAGE);
         }
 
         CommandType commandType;
         try {
             commandType = CommandType.valueOf(commandName.toUpperCase());
         } catch (IllegalArgumentException e) {
-            commandType = CommandType.DEFAULT;
+            commandType = CommandType.NOT_FOUND_PAGE;
         }
 
         return commands.get(commandType);

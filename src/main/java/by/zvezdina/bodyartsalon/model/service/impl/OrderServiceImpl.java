@@ -43,6 +43,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findAllByClientId(int page, long clientId) throws ServiceException {
+        List<Order> cclientOrders = new ArrayList<>();
+        try {
+            cclientOrders = orderDao.findAllByClientId(page, clientId);
+        } catch (DaoException e) {
+            throw new ServiceException("findAllByClientId() - Failed to find all client orders: ", e);
+        }
+
+        logger.log(Level.DEBUG, "All found orders for client by id {}: {}", clientId, cclientOrders);
+        return cclientOrders;
+    }
+
+    @Override
     public Order findById(long id) throws ServiceException {
         Order order = null;
         try {
@@ -63,7 +76,33 @@ public class OrderServiceImpl implements OrderService {
         } catch (DaoException e) {
             throw new ServiceException("create() - Failed to create order ", e);
         }
-        logger.log(Level.DEBUG, "Order created: {}", order);
-        return order;
+        logger.log(Level.DEBUG, "Order created: {}", createdOrder);
+        return createdOrder;
+    }
+
+    @Override
+    public boolean updateStatusByOrderId(long id) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = orderDao.updateStatusByOrderId(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to update order status by id " + id, e);
+        }
+
+        logger.log(Level.DEBUG, "Order by id {} was updated: ", rowsUpdated == 1);
+        return rowsUpdated == 1;
+    }
+
+    @Override
+    public boolean deleteById(long id) throws ServiceException {
+        int rowsUpdated = 0;
+        try {
+            rowsUpdated = orderDao.deleteById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Failed to delete order by id " + id, e);
+        }
+
+        logger.log(Level.DEBUG, "Order by id {} was deleted: ", rowsUpdated == 1);
+        return rowsUpdated == 1;
     }
 }

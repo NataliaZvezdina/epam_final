@@ -6,7 +6,7 @@ import by.zvezdina.bodyartsalon.controller.command.Router;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-public class DefaultCommand implements Command {
+public class NotFoundPageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {

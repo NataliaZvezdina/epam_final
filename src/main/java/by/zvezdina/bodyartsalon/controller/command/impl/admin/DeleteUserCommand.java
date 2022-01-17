@@ -5,21 +5,25 @@ import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DeleteUserCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) {
         long userId = Long.parseLong(request.getParameter(RequestParameter.USER_ID));
-        Router router;
+
         try {
             userService.deleteById(userId);
-            router = new Router(PagePath.GO_TO_UPDATED_USERS_LIST, Router.RouterType.FORWARD);
+            return new Router(PagePath.GO_TO_UPDATED_USERS_LIST, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
-            router = new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
+            logger.log(Level.ERROR, "Error to delete user by id {} in DeleteUserCommand",
+                    userId, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
         }
-        return router;
     }
 }

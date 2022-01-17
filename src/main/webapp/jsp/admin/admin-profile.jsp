@@ -83,10 +83,7 @@
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/admin/add-admin.jsp"
                                                       style="color: midnightblue; font-size: 18px">${addAdmin}</a></dt>
                 </dl>
-<%--                <dl class="row">--%>
-<%--                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"--%>
-<%--                                                      style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>--%>
-<%--                </dl>--%>
+
             </dd>
 
             <dt class="col-sm-3">---------------------</dt>

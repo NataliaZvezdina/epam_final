@@ -62,7 +62,7 @@
                     </li>
                     <c:if test="${sessionScope.userRole == 'CLIENT'}">
                         <li class="nav-item">
-                            ${balance}: ${sessionScope.userMoney} £ <a
+                            ${balance}: ${sessionScope.userMoney} £ <a style="height: 30px"
                                     href="${pageContext.request.contextPath}/controller?command=show_basket">&#128722</a>
 
                         </li>

@@ -51,8 +51,8 @@ public final class TableColumnName {
     public static final String PRICE = "price";
     public static final String IS_AVAILABLE = "is_available";
 
-
     public static final String QUANTITY = "quantity";
+    public static final String ITEM_PRICE = "item_price";
 
     private TableColumnName() {
     }

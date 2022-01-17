@@ -15,6 +15,8 @@
 <fmt:message key="jewelry.restore" var="restore"/>
 <fmt:message key="jewelry.deleted" var="deleted"/>
 <fmt:message key="jewelry.edit" var="edit"/>
+<fmt:message key="jewelry.addToBasket" var="addToBasket"/>
+<fmt:message key="jewelry.notAvailable" var="notAvailable"/>
 <fmt:message key="jewelry.addNew" var="newOne"/>
 
 <!doctype html>
@@ -38,7 +40,7 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <div class="sign" style="height: 67vh">
-    <c:import url="fragment/header.jsp"/>
+    <c:import url="../fragment/header.jsp"/>
 
     <table class="table table-striped" style="height: inherit">
         <thead>
@@ -53,7 +55,7 @@
                 <th scope="col">${edit}</th>
             </c:if>
             <c:if test="${sessionScope.userRole=='CLIENT'}">
-                <th scope="col">Add to basket</th>
+                <th scope="col">${addToBasket}</th>
             </c:if>
         </tr>
         </thead>
@@ -102,7 +104,7 @@
                             </td>
                         </c:when>
                         <c:otherwise>
-                            <td>Not available</td>
+                            <td>${notAvailable}</td>
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -154,7 +156,7 @@
         </h3>
     </c:if>
 
-    <c:import url="fragment/footer.jsp"/>
+    <c:import url="../fragment/footer.jsp"/>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

@@ -11,6 +11,7 @@ public class DeleteFacilityCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
+
         int facilityId = Integer.parseInt(request.getParameter(RequestParameter.FACILITY_ID));
         try {
             facilityService.deleteById(facilityId);

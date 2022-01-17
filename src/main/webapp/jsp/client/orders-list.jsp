@@ -10,11 +10,9 @@
 <fmt:message key="orders.date" var="date"/>
 <fmt:message key="orders.status" var="status"/>
 <fmt:message key="orders.clientId" var="clientId"/>
+<fmt:message key="orders.Show" var="show"/>
 <fmt:message key="client.cancelOrder" var="cancel"/>
 <fmt:message key="client.cancelOrder.button" var="button"/>
-<fmt:message key="orders.mark" var="mark"/>
-<fmt:message key="orders.mark.button" var="buttonMark"/>
-<fmt:message key="orders.Show" var="show"/>
 <fmt:message key="orders.open" var="open"/>
 
 <!doctype html>
@@ -29,6 +27,7 @@
     <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
     <script type="text/javascript">
         window.history.forward();
+
         function noBack() {
             window.history.forward();
         }
@@ -37,29 +36,24 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <div class="sign" style="height: 100vh">
-<c:import url="../fragment/header.jsp"/>
+    <c:import url="../fragment/header.jsp"/>
 
-    <div class="container" style="height: 90vh">
+    <div class="container" style="height: 110vh">
         <div class="row">
             <table class="table table-striped" style="height: inherit">
                 <thead>
                 <tr>
-                    <th scope="col">${id}</th>
                     <th scope="col">${date}</th>
                     <th scope="col">${status}</th>
-                    <th scope="col">${clientId}</th>
                     <th scope="col">${cancel}</th>
-                    <th scope="col">${mark}</th>
                     <th scope="col">${show}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="element" items="${requestScope.allOrders}">
                     <tr>
-                        <td>${element.orderId}</td>
                         <td>${element.date}</td>
                         <td>${element.status}</td>
-                        <td>${element.clientId}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${element.status == 'ACCEPTED'}">
@@ -72,24 +66,10 @@
                                 <c:otherwise>-</c:otherwise>
                             </c:choose>
                         </td>
-
-                        <td>
-                            <c:choose>
-                                <c:when test="${element.status == 'ACCEPTED'}">
-                                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                                        <input type="hidden" name="command" value="mark_order_as_received">
-                                        <input type="hidden" name="orderId" value="${element.orderId}">
-                                        <button type="submit" class="btn btn-primary">${buttonMark}</button>
-                                    </form>
-                                </c:when>
-                                <c:otherwise>-</c:otherwise>
-                            </c:choose>
-                        </td>
-
                         <td>
                             <a href="${pageContext.request.contextPath}/controller?command=open_order&orderId=${element.orderId}"
                                style="color: darkgreen">
-                                ${open}
+                                    ${open}
                             </a>
                         </td>
                     </tr>
