@@ -1,6 +1,6 @@
 package by.zvezdina.bodyartsalon.model.entity;
 
-public class User extends AbstractEntity {
+public class User {
 
     private long userId;
     private String login;

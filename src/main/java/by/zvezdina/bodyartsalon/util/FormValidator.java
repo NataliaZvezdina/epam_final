@@ -13,7 +13,9 @@ public class FormValidator {
 
     private static final String CHECK_IMAGE_URL = "([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)";
 
-    private static final String CHECK_MONEY_REGEX = "^[0-9]{1,4}(\\.[0-9]{1,2})?$";
+    private static final String CHECK_MONEY_REGEX = "^[0-9]{1,3}(\\.[0-9]{1,2})?$";
+
+    private static final String LIMIT_FOR_RECHARGED_MONEY_REGEX = "^[0-9]{1,2}(\\.[0-9]{1,2})?$";
 
     private static final int MAX_STRING_LENGTH = 90;
 
@@ -51,6 +53,10 @@ public class FormValidator {
 
     public boolean checkMoney(String money) {
         return money != null && money.matches(CHECK_MONEY_REGEX);
+    }
+
+    public boolean checkRechargedMoney(String money) {
+        return money != null && money.matches(LIMIT_FOR_RECHARGED_MONEY_REGEX);
     }
 
     public boolean checkImageUrl(String imageUrl) {

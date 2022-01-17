@@ -119,7 +119,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public boolean validateMoneyToAdd(String money, BigDecimal balance) {
         FormValidator validator = FormValidator.getInstance();
-        boolean isValid = validator.checkMoney(money);
+        boolean isValid = validator.checkRechargedMoney(money);
 
         if (isValid) {
             BigDecimal moneyToAdd = new BigDecimal(money);

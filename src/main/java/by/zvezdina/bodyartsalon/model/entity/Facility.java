@@ -2,7 +2,7 @@ package by.zvezdina.bodyartsalon.model.entity;
 
 import java.math.BigDecimal;
 
-public class Facility extends AbstractEntity {
+public class Facility {
 
     private long facilityId;
     private String name;

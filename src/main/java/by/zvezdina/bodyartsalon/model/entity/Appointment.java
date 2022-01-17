@@ -2,7 +2,7 @@ package by.zvezdina.bodyartsalon.model.entity;
 
 import java.time.LocalDateTime;
 
-public class Appointment extends AbstractEntity {
+public class Appointment {
 
     private long appointmentId;
     private LocalDateTime dateTime;
