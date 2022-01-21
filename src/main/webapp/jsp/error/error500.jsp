@@ -46,5 +46,12 @@ ${stackTrace} <br/>
 
 <a style="height: 25px; color: midnightblue" href="${pageContext.request.contextPath}/index.jsp">${home}</a>
 
+<script>
+    $(function () {
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    });
+</script>
 </body>
 </html>

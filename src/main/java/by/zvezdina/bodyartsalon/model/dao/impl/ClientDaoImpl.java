@@ -36,14 +36,6 @@ public class ClientDaoImpl implements ClientDao {
             ON users.user_id = clients.client_id 
             WHERE client_id = ?;""";
 
-//    private static final String FIND_ALL_QUERY = """
-//            SELECT client_id, login, password, first_name, last_name, email, phone, role, status,
-//                 money, discount_id
-//            FROM users JOIN clients
-//            ON users.user_id = clients.client_id;""";
-
-
-
     private static final String VERIFY_QUERY = """
             UPDATE users 
             SET is_verified = true AND status = 'active' 
@@ -95,24 +87,6 @@ public class ClientDaoImpl implements ClientDao {
         logger.log(Level.DEBUG, "Found client by id {}: {}", id, foundClient);
         return foundClient;
     }
-
-//    @Override
-//    public List<Client> findAll() throws DaoException {
-//        List<Client> allClients = new ArrayList<>();
-//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-//             PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
-//             ResultSet resultSet = statement.executeQuery()) {
-//            while (resultSet.next()) {
-//                Client foundClient = extract(resultSet);
-//                allClients.add(foundClient);
-//            }
-//        } catch (SQLException e) {
-//            throw new DaoException("Failed to find all clients: ", e);
-//        }
-//
-//        logger.log(Level.DEBUG, "All clients: {}", allClients);
-//        return allClients;
-//    }
 
     @Override
     public Client create(Client client) throws DaoException {

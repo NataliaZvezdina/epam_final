@@ -21,7 +21,7 @@ public class FacilityServiceImpl implements FacilityService {
     private static final Logger logger = LogManager.getLogger();
     private static final String REPLACEMENT_FOR_INVALID_PRICE = "0";
     private static FacilityServiceImpl instance;
-    private FacilityDao facilityDao = FacilityDaoImpl.getInstance();
+    private final FacilityDao facilityDao = FacilityDaoImpl.getInstance();
 
     private FacilityServiceImpl() {
     }
@@ -117,10 +117,13 @@ public class FacilityServiceImpl implements FacilityService {
 
         String safeDescription = xssDefender
                 .safeFormData(formData.get(RequestParameter.FACILITY_DESCRIPTION));
+        System.out.println("safe description ->" + safeDescription);
         formData.put(RequestParameter.FACILITY_DESCRIPTION, safeDescription);
 
         FormValidator validator = FormValidator.getInstance();
         boolean isDataValid = true;
+
+
 
         String price = formData.get(RequestParameter.FACILITY_PRICE);
         if (!validator.checkMoney(price)) {

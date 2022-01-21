@@ -54,10 +54,10 @@
                 </c:forEach>
             </select>
         </div>
-
         <div class="form-group">
             <label for="exampleFormControlInput2">${date}</label>
-            <input type="date" class="form-control" id="exampleFormControlInput2" name="date">
+            <input type="date" required
+                   class="form-control" id="exampleFormControlInput2" name="date">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">${hour}</label>

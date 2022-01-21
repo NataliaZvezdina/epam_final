@@ -53,7 +53,8 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput4">${price}</label>
-            <input type="number" step="0.01" min="0" max="999.99" pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$"
+            <input type="number" step="0.01" min="0" max="999.99"
+                   required pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$"
                    class="form-control" id="exampleFormControlInput4" name="facilityPrice"
                    value="${requestScope.facilityToEdit.price}">
             <small id="emailHelp" class="form-text text-muted" style="color: black">min 0 max 999.99</small>

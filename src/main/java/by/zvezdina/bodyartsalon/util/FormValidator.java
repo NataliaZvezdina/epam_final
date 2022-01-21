@@ -62,4 +62,8 @@ public class FormValidator {
     public boolean checkImageUrl(String imageUrl) {
         return imageUrl != null && imageUrl.matches(CHECK_IMAGE_URL);
     }
+
+    public boolean checkOnMaxLength(String field) {
+        return field != null && field.length() <= MAX_STRING_LENGTH;
+    }
 }

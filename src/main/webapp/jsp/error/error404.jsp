@@ -25,5 +25,12 @@
 <h1 align="center">${message}</h1><br/><br/>
 <h3 align="center"><a href="${pageContext.request.contextPath}/index.jsp">${home}</a></h3>
 
+<script>
+    $(function () {
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    });
+</script>
 </body>
 </html>

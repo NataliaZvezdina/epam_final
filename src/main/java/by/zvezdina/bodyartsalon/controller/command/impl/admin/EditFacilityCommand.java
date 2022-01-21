@@ -6,12 +6,16 @@ import by.zvezdina.bodyartsalon.model.entity.Facility;
 import by.zvezdina.bodyartsalon.model.service.FacilityService;
 import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditFacilityCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private static final String INVALID_INPUT = "inputData.invalid";
     private final FacilityService facilityService = FacilityServiceImpl.getInstance();
 
@@ -54,8 +58,8 @@ public class EditFacilityCommand implements Command {
             facilityService.update(facilityToUpdate);
             return new Router(PagePath.GO_TO_FACILITY_DEFINED_PAGE + page, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
+            logger.log(Level.ERROR, "Failed to execute EditFacilityCommand", e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
         }
     }
 }
