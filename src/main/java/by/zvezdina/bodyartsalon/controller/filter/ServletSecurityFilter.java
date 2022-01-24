@@ -95,6 +95,7 @@ public class ServletSecurityFilter implements Filter {
             SHOW_ALL_ACTIVE_PIERCERS,
             SHOW_ALL_RELEVANT_APPOINTMENTS_BY_PIERCER,
             SHOW_APPOINTMENTS_FOR_TODAY,
+            OPEN_SINGLE_APPOINTMENT,
             UPDATE_PASSWORD,
             UPDATE_PROFILE,
             GO_TO_UPDATE_PROFILE);
