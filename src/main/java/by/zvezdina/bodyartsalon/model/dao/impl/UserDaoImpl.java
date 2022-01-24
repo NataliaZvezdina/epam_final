@@ -188,7 +188,6 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(9, user.getUserId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
             throw new DaoException("Failed to update user: ", e);
         }
 

@@ -57,6 +57,9 @@ public class ServletSecurityFilter implements Filter {
             CHANGE_CLIENT_DISCOUNT,
             SHOW_ALL_ACTIVE_PIERCERS,
             ADD_ADMIN,
+            ADD_PIERCER,
+            GO_TO_EDIT_PIERCER_WORKING_INFO,
+            EDIT_PIERCER_WORKING_INFO,
             NOT_FOUND_PAGE);
 
     private final EnumSet<CommandType> clientCommands = EnumSet.of(
@@ -89,6 +92,7 @@ public class ServletSecurityFilter implements Filter {
             LOGOUT,
             SHOW_ALL_JEWELRY,
             SHOW_ALL_FACILITIES,
+            SHOW_ALL_ACTIVE_PIERCERS,
             SHOW_ALL_RELEVANT_APPOINTMENTS_BY_PIERCER,
             SHOW_APPOINTMENTS_FOR_TODAY,
             UPDATE_PASSWORD,

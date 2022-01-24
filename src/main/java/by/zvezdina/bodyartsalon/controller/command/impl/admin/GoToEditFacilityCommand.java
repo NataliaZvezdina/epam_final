@@ -3,11 +3,8 @@ package by.zvezdina.bodyartsalon.controller.command.impl.admin;
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.entity.Facility;
-import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.service.FacilityService;
-import by.zvezdina.bodyartsalon.model.service.JewelryService;
 import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
-import by.zvezdina.bodyartsalon.model.service.impl.JewelryServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class GoToEditFacilityCommand implements Command {

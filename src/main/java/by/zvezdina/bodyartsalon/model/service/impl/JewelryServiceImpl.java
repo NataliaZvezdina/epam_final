@@ -25,7 +25,7 @@ public class JewelryServiceImpl implements JewelryService {
     private static final String EMPTY_STRING = "";
     private static final String REPLACEMENT_FOR_INVALID_PRICE = "0";
     private static JewelryServiceImpl instance;
-    private JewelryDao jewelryDao = JewelryDaoImpl.getInstance();
+    private final JewelryDao jewelryDao = JewelryDaoImpl.getInstance();
 
     private JewelryServiceImpl() {
     }

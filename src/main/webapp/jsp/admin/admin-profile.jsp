@@ -18,6 +18,7 @@
 <fmt:message key="admin.showAllUsers" var="showAllUsers"/>
 <fmt:message key="admin.showAllOrders" var="showAllOrders"/>
 <fmt:message key="adminProfile.addAdmin" var="addAdmin"/>
+<fmt:message key="adminProfile.addPiercer" var="addPiercer"/>
 
 <!doctype html>
 <html lang="en">
@@ -41,7 +42,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 80vh; color: black; font-size: 18px">
+<div class="container" style="height: 100vh; color: black; font-size: 18px">
     <div class="row">
         <dl class="row">
             <dt class="col-sm-3">${role}</dt>
@@ -83,7 +84,10 @@
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/admin/add-admin.jsp"
                                                       style="color: midnightblue; font-size: 18px">${addAdmin}</a></dt>
                 </dl>
-
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/admin/add-piercer.jsp"
+                                                      style="color: midnightblue; font-size: 18px">${addPiercer}</a></dt>
+                </dl>
             </dd>
 
             <dt class="col-sm-3">---------------------</dt>
@@ -114,6 +118,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

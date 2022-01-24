@@ -5,7 +5,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
-<fmt:message key="addAdmin.page" var="title"/>
+<fmt:message key="addPiercer.page" var="title"/>
 <fmt:message key="signUp.page.login" var="login"/>
 <fmt:message key="update.loginHelper" var="loginHelper"/>
 <fmt:message key="signUp.page.password" var="password"/>
@@ -15,6 +15,8 @@
 <fmt:message key="update.nameHelper" var="nameHelper"/>
 <fmt:message key="signUp.page.lastName" var="surname"/>
 <fmt:message key="signUp.page.email" var="email"/>
+<fmt:message key="addPiercer.InfoAbout" var="description"/>
+<fmt:message key="addPiercer.Image" var="photo"/>
 
 <fmt:message key="addAdminPiercer.button" var="add"/>
 
@@ -40,9 +42,9 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 80vh">
+<div class="container" style="height: 150vh">
     <form action="${pageContext.request.contextPath}/controller" method="post">
-        <input type="hidden" name="command" value="add_admin">
+        <input type="hidden" name="command" value="add_piercer">
 
         <div class="form-group">
             <label for="exampleFormControlInput2">${login}</label>
@@ -98,6 +100,21 @@
                    name="email" required
                    pattern="^(?=.{1,45}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$"
                    value="${requestScope.formData['email']}">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput9">${photo}</label>
+            <input type="text" class="form-control" id="exampleFormControlInput9"
+                   name="imageUrl" required
+                   pattern="([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)"
+                   value="${requestScope.formData['imageUrl']}">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">${description}</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="infoAbout" required>
+                ${requestScope.formData['infoAbout']}
+            </textarea>
         </div>
 
         <c:if test="${requestScope.errorMessage != null}">

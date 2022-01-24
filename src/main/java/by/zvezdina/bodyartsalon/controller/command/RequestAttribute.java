@@ -36,6 +36,7 @@ public final class RequestAttribute {
     public static final String USERS_LIST = "usersList";
     public static final String ADMIN = "admin";
     public static final String CLIENT = "client";
+    public static final String PIERCER = "piercer";
     public static final String DISCOUNT = "discount";
     public static final String DISCOUNT_LIST = "discountList";
 
@@ -57,6 +58,8 @@ public final class RequestAttribute {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
     public static final String PIERCER_FULL_NAME = "fullName";
+
+    public static final String PIERCER_TO_EDIT = "piercerToEdit";
 
     private RequestAttribute() {
     }

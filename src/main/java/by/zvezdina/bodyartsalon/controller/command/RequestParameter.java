@@ -51,6 +51,7 @@ public final class RequestParameter {
     public static final String NOTES = "notes";
     public static final String APPOINTMENT_ID = "appointmentId";
 
+    public static final String INFO_ABOUT = "infoAbout";
 
     private RequestParameter() {
     }

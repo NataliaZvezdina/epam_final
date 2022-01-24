@@ -59,7 +59,7 @@
         <tbody>
         <c:forEach var="element" items="${requestScope.facilitiesList}">
             <tr>
-                <td>${element.name}</td>
+                <td style="font-weight: bold">${element.name}</td>
                 <td>${element.description}</td>
                 <c:choose>
                     <c:when test="${element.accessible}">

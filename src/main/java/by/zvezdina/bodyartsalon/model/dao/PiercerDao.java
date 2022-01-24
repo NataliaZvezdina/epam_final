@@ -10,5 +10,7 @@ public interface PiercerDao {
 
     List<Piercer> findAllActive() throws DaoException;
     Piercer findById(long id) throws DaoException;
+    Piercer create(Piercer piercer) throws DaoException;
+    int updateWorkingInfo(Piercer piercer) throws DaoException;
 
 }

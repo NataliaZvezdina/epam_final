@@ -3,7 +3,6 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.FacilityDao;
 import by.zvezdina.bodyartsalon.model.entity.Facility;
-import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -17,10 +16,6 @@ import static by.zvezdina.bodyartsalon.model.dao.TableColumnName.*;
 
 public class FacilityDaoImpl implements FacilityDao {
     private static final Logger logger = LogManager.getLogger();
-
-    //    private static final String FIND_ALL_QUERY = """
-//            SELECT service_id, name, service_description
-//            FROM services;""";
 
     private static final String FIND_PAGE_QUERY = """
             SELECT facility_id, name, facility_description, facility_price, is_accessible   
@@ -64,24 +59,6 @@ public class FacilityDaoImpl implements FacilityDao {
         }
         return instance;
     }
-
-//    @Override
-//    public List<Facility> findAll() throws DaoException {
-//        List<Facility> allFacilities = new ArrayList<>();
-//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-//        PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
-//        ResultSet resultSet = statement.executeQuery()) {
-//            while (resultSet.next()) {
-//                Facility foundFacility = extract(resultSet);
-//                allFacilities.add(foundFacility);
-//            }
-//        } catch (SQLException e) {
-//            throw new DaoException("findAll() - Failed to find all services: ", e);
-//        }
-//
-//        logger.log(Level.DEBUG, "All services: {}", allFacilities);
-//        return allFacilities;
-//    }
 
     @Override
     public List<Facility> findAll(int page) throws DaoException {

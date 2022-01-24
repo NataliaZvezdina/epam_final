@@ -47,6 +47,9 @@ public final class PagePath {
     public static final String PIERCERS = "jsp/content/piercers.jsp";
     public static final String PIERCER_PROFILE = "jsp/piercer/piercer-profile.jsp";
     public static final String ADD_ADMIN = "jsp/admin/add-admin.jsp";
+    public static final String ADD_PIERCER = "jsp/admin/add-piercer.jsp";
+    public static final String EDIT_PIERCER_WORKING_INFO = "jsp/admin/edit-piercer-info.jsp";
+
 
     public static final String MAKE_APPOINTMENT = "jsp/client/make-appointment.jsp";
     public static final String RELEVANT_APPOINTMENTS_BY_PIERCER = "jsp/piercer/relevant-appointments.jsp";

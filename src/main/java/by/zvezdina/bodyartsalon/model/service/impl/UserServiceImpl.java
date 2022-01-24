@@ -9,6 +9,7 @@ import by.zvezdina.bodyartsalon.model.entity.User;
 import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.util.FormValidator;
 import by.zvezdina.bodyartsalon.util.PasswordEncoder;
+import by.zvezdina.bodyartsalon.util.XssDefender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -87,7 +88,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(PasswordEncoder.encode(user.getPassword()));
         try {
             createdAdmin = userDao.createAdmin(user);
-            System.out.println("created admin: " + createdAdmin);
         } catch (DaoException e) {
             throw new ServiceException("Failed to create admin: ", e);
         }
@@ -200,6 +200,23 @@ public class UserServiceImpl implements UserService {
                 isDataValid = false;
             }
         }
+
+        XssDefender xssDefender = null;
+        if (formData.containsKey(RequestParameter.IMAGE_URL)) {
+            xssDefender = XssDefender.getInstance();
+            String safeUrl = xssDefender.safeFormData(formData.get(RequestParameter.IMAGE_URL));
+            formData.put(RequestParameter.IMAGE_URL, safeUrl);
+            if (!validator.checkImageUrl(safeUrl)) {
+                formData.put(RequestParameter.IMAGE_URL, EMPTY_STRING);
+                isDataValid = false;
+            }
+        }
+
+        if (formData.containsKey(RequestParameter.INFO_ABOUT)) {
+            String safeInfo = xssDefender.safeFormData(formData.get(RequestParameter.INFO_ABOUT));
+            formData.put(RequestParameter.INFO_ABOUT, safeInfo);
+        }
+
         return isDataValid;
     }
 

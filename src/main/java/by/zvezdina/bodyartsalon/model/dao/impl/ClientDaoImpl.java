@@ -187,16 +187,18 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public int updateClientDiscount(long clientId, long discountId) throws DaoException {
+        int rowsUpdated = 0;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENT_DISCOUNT)) {
             statement.setLong(1, discountId);
             statement.setLong(2, clientId);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new DaoException("updateClientDiscount() - Failed to update client discount ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     @Override

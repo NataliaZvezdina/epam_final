@@ -68,6 +68,9 @@ public class CommandProvider {
         commands.put(CommandType.OPEN_SINGLE_APPOINTMENT, new OpenSingleAppointmentCommand());
         commands.put(CommandType.SHOW_ALL_ACTIVE_PIERCERS, new ShowAllActivePiercersCommand());
         commands.put(CommandType.ADD_ADMIN, new AddAdminCommand());
+        commands.put(CommandType.ADD_PIERCER, new AddPiercerCommand());
+        commands.put(CommandType.GO_TO_EDIT_PIERCER_WORKING_INFO, new GoToEditPiercerWorkingInfoCommand());
+        commands.put(CommandType.EDIT_PIERCER_WORKING_INFO, new EditPiercerWorkingInfoCommand());
 
         commands.put(CommandType.NOT_FOUND_PAGE, new NotFoundPageCommand());
     }

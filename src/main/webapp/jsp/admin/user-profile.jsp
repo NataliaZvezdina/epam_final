@@ -18,7 +18,9 @@
 <fmt:message key="allUsers.chooseDiscount" var="choose"/>
 <fmt:message key="allUsers.updateDiscount" var="update"/>
 <fmt:message key="allUsers.userProfile" var="title"/>
-
+<fmt:message key="openProfile.piercer.imagePath" var="photoPath"/>
+<fmt:message key="openProfile.piercer.infoAbout" var="info"/>
+<fmt:message key="openProfile.piercer.goToEditWorkingInfo" var="goToEdit"/>
 
 <!doctype html>
 <html lang="en">
@@ -43,7 +45,7 @@
 <c:import url="../fragment/header.jsp"/>
 <br/>
 
-<div class="container">
+<div class="container" style="height: 180vh">
     <div class="row">
         <c:choose>
             <c:when test="${requestScope.client != null}">
@@ -74,8 +76,8 @@
                         <p>${requestScope.discount} %</p>
                         <p>
                         <form action="${pageContext.request.contextPath}/controller" method="post">
-                        <input type="hidden" name="command" value="change_client_discount">
-                        <input type="hidden" name="clientId" value="${requestScope.client.userId}">
+                            <input type="hidden" name="command" value="change_client_discount">
+                            <input type="hidden" name="clientId" value="${requestScope.client.userId}">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="inputState">${choose}</label>
@@ -118,6 +120,66 @@
                     </dd>
                 </dl>
             </c:when>
+            <c:when test="${requestScope.admin != null}">
+                <dl class="row">
+                    <dt class="col-sm-3">${id}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.userId}</dd>
+
+                    <dt class="col-sm-3">${login}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.login}</dd>
+
+                    <dt class="col-sm-3">${name} ${surname}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.firstName} ${requestScope.admin.lastName}</dd>
+
+                    <dt class="col-sm-3">${email}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.email}</dd>
+
+                    <dt class="col-sm-3">${status}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.userStatus}</dd>
+
+                    <dt class="col-sm-3">${role}</dt>
+                    <dd class="col-sm-9">${requestScope.admin.role}</dd>
+                </dl>
+            </c:when>
+            <c:when test="${requestScope.piercer != null}">
+                <dl class="row">
+                    <dt class="col-sm-3">${id}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.userId}</dd>
+
+                    <dt class="col-sm-3">${login}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.login}</dd>
+
+                    <dt class="col-sm-3">${name} ${surname}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.firstName} ${requestScope.piercer.lastName}</dd>
+
+                    <dt class="col-sm-3">${email}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.email}</dd>
+
+                    <dt class="col-sm-3">${status}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.userStatus}</dd>
+
+                    <dt class="col-sm-3">${role}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.role}</dd>
+
+                    <dt class="col-sm-3">${photoPath}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.photoUrl}</dd>
+
+                    <dt class="col-sm-3">${info}</dt>
+                    <dd class="col-sm-9">${requestScope.piercer.infoAbout}</dd>
+
+                    <dt class="col-sm-3">---------------------</dt>
+                    <dd class="col-sm-9"><dl class="row"><dt class="col-sm-4">------------------------</dt></dl></dd>
+
+                    <dt class="col-sm-3"></dt>
+                    <dd class="col-sm-9">
+                        <dl class="row">
+                            <dt class="col-sm-4">&#9679;
+                                <a href="${pageContext.request.contextPath}/controller?command=go_to_edit_piercer_working_info&piercerId=${requestScope.piercer.userId}"
+                                                              style="color: midnightblue; font-size: 18px">${goToEdit}</a></dt>
+                        </dl>
+                    </dd>
+                </dl>
+            </c:when>
         </c:choose>
     </div>
 </div>
@@ -132,6 +194,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

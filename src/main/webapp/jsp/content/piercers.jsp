@@ -5,6 +5,8 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
+<fmt:message key="piercers.page" var="title"/>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,14 +30,9 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<table class="table table-borderless">
+<table class="table table-borderless" style="height: 180">
     <thead>
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Some words about</th>
-<%--        <th scope="col">Last</th>--%>
-<%--        <th scope="col">Handle</th>--%>
-    </tr>
+    <tr></tr>
     </thead>
 
     <tbody>
@@ -44,23 +41,10 @@
             <th scope="row"><img width="100"
                                  src="${pageContext.request.contextPath}/uploadImage?imagePath=${element.photoUrl}"
                                  alt="" style="border-radius: 100px;"></th>
-            <td>${element.firstName} ${element.lastName}<br/>
+            <td><span style="font-weight: bold">${element.firstName} ${element.lastName}</span><br/>
                     "${element.infoAbout}"
             </td>
-<%--            <td>Otto</td>--%>
-<%--            <td>@mdo</td>--%>
         </tr>
-<%--        <tr>--%>
-<%--            <th scope="row">2</th>--%>
-<%--            <td>Jacob</td>--%>
-<%--            <td>Thornton</td>--%>
-<%--            <td>@fat</td>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <th scope="row">3</th>--%>
-<%--            <td colspan="2">Larry the Bird</td>--%>
-<%--            <td>@twitter</td>--%>
-<%--        </tr>--%>
     </c:forEach>
     </tbody>
 </table>
@@ -74,6 +58,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

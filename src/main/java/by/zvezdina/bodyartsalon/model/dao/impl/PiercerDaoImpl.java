@@ -2,9 +2,10 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 
 
 import by.zvezdina.bodyartsalon.exception.DaoException;
-import by.zvezdina.bodyartsalon.model.dao.FacilityDao;
 import by.zvezdina.bodyartsalon.model.dao.PiercerDao;
-import by.zvezdina.bodyartsalon.model.entity.*;
+import by.zvezdina.bodyartsalon.model.entity.Piercer;
+import by.zvezdina.bodyartsalon.model.entity.Role;
+import by.zvezdina.bodyartsalon.model.entity.UserStatus;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -19,13 +20,18 @@ import static by.zvezdina.bodyartsalon.model.dao.TableColumnName.*;
 public class PiercerDaoImpl implements PiercerDao {
     private static final Logger logger = LogManager.getLogger();
 
-//    private static final String CREATE_USER_QUERY = """
-//            INSERT INTO users (login, password, first_name, last_name, email, phone, role, status)
-//            VALUES(?, ?, ?, ?, ?, ?, ?, ?);""";
-//
-//    private static final String CREATE_PIERCER_QUERY = """
-//            INSERT INTO piercers (piercer_id, photo_url, category, rating)
-//            VALUES(?, ?, ?, ?);""";
+    private static final String CREATE_USER_QUERY = """
+            INSERT INTO users (login, password, first_name, last_name, email, role, status, is_verified)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?);""";
+
+    private static final String CREATE_PIERCER_QUERY = """
+            INSERT INTO piercers (piercer_id, photo_url, info_about)
+            VALUES(?, ?, ?);""";
+
+    private static final String UPDATE_WORKING_INFO = """
+            UPDATE piercers 
+            SET photo_url = ?, info_about = ? 
+            WHERE piercer_id = ?;""";
 
     private static final String FIND_BY_ID_QUERY = """
             SELECT piercer_id, login, password, first_name, last_name, email, role, status, is_verified,
@@ -88,65 +94,68 @@ public class PiercerDaoImpl implements PiercerDao {
         return allActivePiercers;
     }
 
-//    @Override
-//    public List<Piercer> findAll(int page) throws DaoException {
-//        return null;
-//    }
+    @Override
+    public Piercer create(Piercer piercer) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement userStatement = connection.prepareStatement(CREATE_USER_QUERY,
+                     Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement piercerStatement = connection.prepareStatement(CREATE_PIERCER_QUERY)) {
 
-//    @Override
-//    public Piercer create(Piercer piercer) throws DaoException {
-//        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
-//             PreparedStatement userStatement = connection.prepareStatement(CREATE_USER_QUERY,
-//                     Statement.RETURN_GENERATED_KEYS);
-//             PreparedStatement piercerStatement = connection.prepareStatement(CREATE_PIERCER_QUERY)) {
-//
-//            try {
-//                connection.setAutoCommit(false);
-//                userStatement.setString(1, piercer.getLogin());
-//                userStatement.setString(2, piercer.getPassword());
-//                userStatement.setString(3, piercer.getFirstName());
-//                userStatement.setString(4, piercer.getLastName());
-//                userStatement.setString(5, piercer.getEmail());
-//
-//                userStatement.setString(6, piercer.getRole().name());
-//                userStatement.setString(7, piercer.getUserStatus().name());
-//                userStatement.execute();
-//
-//                try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
-//                    if (resultSet.next()) {
-//                        long piercerId = resultSet.getLong(1);
-//                        piercer.setUserId(piercerId);
-//                    }
-//                    piercerStatement.setLong(1, piercer.getUserId());
-//                    piercerStatement.setString(2, piercer.getPhotoUrl());
-//                    piercerStatement.setString(3, piercer.getCategory().name().toLowerCase());
-//                    piercerStatement.setInt(4, piercer.getRating());
-//                    piercerStatement.execute();
-//                    connection.commit();
-//                }
-//            } catch (SQLException e) {
-//                connection.rollback();
-//                throw new DaoException("Failed to create piercer: ", e);
-//            } finally {
-//                connection.setAutoCommit(true);
-//            }
-//        } catch (SQLException e) {
-//            throw new DaoException("Failed to create piercer: ", e);
-//        }
-//
-//        logger.log(Level.DEBUG, "Piercer created: {}", piercer);
-//        return piercer;
-//    }
+            try {
+                connection.setAutoCommit(false);
+                userStatement.setString(1, piercer.getLogin());
+                userStatement.setString(2, piercer.getPassword());
+                userStatement.setString(3, piercer.getFirstName());
+                userStatement.setString(4, piercer.getLastName());
+                userStatement.setString(5, piercer.getEmail());
+                userStatement.setString(6, piercer.getRole().toString().toLowerCase());
+                userStatement.setString(7, piercer.getUserStatus().toString().toLowerCase());
+                userStatement.setBoolean(8, piercer.isVerified());
+                userStatement.executeUpdate();
 
-//    @Override
-//    public Piercer update(Piercer piercer) throws DaoException {
-//        return null;
-//    }
-//
-//    @Override
-//    public void deleteById(Long id) throws DaoException {
-//
-//    }
+                try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        long piercerId = resultSet.getLong(1);
+                        piercer.setUserId(piercerId);
+                    }
+                    piercerStatement.setLong(1, piercer.getUserId());
+                    piercerStatement.setString(2, piercer.getPhotoUrl());
+                    piercerStatement.setString(3, piercer.getInfoAbout());
+
+                    piercerStatement.executeUpdate();
+                    connection.commit();
+                }
+            } catch (SQLException e) {
+                connection.rollback();
+                throw new DaoException("Failed to create piercer: ", e);
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Failed to create piercer: ", e);
+        }
+
+        logger.log(Level.DEBUG, "Piercer created: {}", piercer);
+        return piercer;
+    }
+
+
+    @Override
+    public int updateWorkingInfo(Piercer piercer) throws DaoException {
+        int rowsUpdated = 0;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_WORKING_INFO)) {
+            statement.setString(1, piercer.getPhotoUrl());
+            statement.setString(2, piercer.getInfoAbout());
+            statement.setLong(3, piercer.getUserId());
+            rowsUpdated = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DaoException("updateWorkingInfo() - Failed to update piercer working info: ", e);
+        }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
+    }
 
     private Piercer extract(ResultSet resultSet) throws SQLException {
         return new Piercer.Builder()
