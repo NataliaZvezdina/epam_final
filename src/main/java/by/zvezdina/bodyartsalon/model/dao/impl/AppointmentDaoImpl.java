@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,12 @@ public class AppointmentDaoImpl implements AppointmentDao {
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
             FROM appointments
             WHERE appointment_id = ?;""";
+
+    private static final String FIND_BY_PIERCER_ID_AND_DATETIME = """
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id 
+            FROM appointments 
+            WHERE piercer_id = ? AND datetime = ?;""";
+
 
     private static final String FIND_ALL_BY_PIERCER_ID = """
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
@@ -73,6 +80,28 @@ public class AppointmentDaoImpl implements AppointmentDao {
         }
 
         logger.log(Level.DEBUG, "Found appointment by id {}: {}", id, foundAppointment);
+        return foundAppointment;
+    }
+
+    @Override
+    public Appointment findByPiercerIdAndDatetime(long piercerId, LocalDateTime dateTime)
+            throws DaoException {
+        Appointment foundAppointment = null;
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_PIERCER_ID_AND_DATETIME)) {
+            statement.setLong(1, piercerId);
+            statement.setTimestamp(2, Timestamp.valueOf(dateTime));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    foundAppointment = extract(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findByPiercerIdAndDatetime() - Failed to find appointment: ", e);
+        }
+
+        logger.log(Level.DEBUG, "Found appointment by piercer id {} and datetime {}: {}",
+                piercerId, dateTime, foundAppointment);
         return foundAppointment;
     }
 

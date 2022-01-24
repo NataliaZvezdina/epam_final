@@ -10,17 +10,21 @@ import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.PiercerServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class GoToMakeAppointmentCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private final FacilityService facilityService = FacilityServiceImpl.getInstance();
     private final PiercerService piercerService = PiercerServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
+        //Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
         long facilityId = Long.parseLong(request.getParameter(RequestParameter.FACILITY_ID));
 
         try {
@@ -32,7 +36,7 @@ public class GoToMakeAppointmentCommand implements Command {
             request.setAttribute(RequestAttribute.PIERCERS_LIST, piercers);
             return new Router(PagePath.MAKE_APPOINTMENT, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Failed to execute GoToMakeAppointmentCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

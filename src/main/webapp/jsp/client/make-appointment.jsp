@@ -43,21 +43,23 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">${chosen}</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="facilityName"
-            value="${requestScope.facilityName}" readonly>
+                   value="${requestScope.facilityName}" readonly>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlSelect1">${pierce}</label>
-            <select class="form-control" id="exampleFormControlSelect1" name="piercerId">
+            <select class="form-control" id="exampleFormControlSelect1" name="piercerId" required>
                 <c:forEach var="piercer" items="${requestScope.piercersList}">
-                <option value="${piercer.userId}">${piercer.firstName} ${piercer.lastName}</option>
+                    <option value="${piercer.userId}">${piercer.firstName} ${piercer.lastName}</option>
                 </c:forEach>
             </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${date}</label>
-            <input type="date" required
-                   class="form-control" id="exampleFormControlInput2" name="date">
+            <jsp:useBean id="day" class="java.util.Date"/>
+            <input type="date" min="${day}" required
+                   class="form-control" id="exampleFormControlInput2" name="date"
+                   value="${requestScope.formData['date']}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">${hour}</label>
@@ -75,35 +77,36 @@
                 <option value="20">20.00</option>
             </select>
         </div>
-<%--        <div class="form-group">--%>
-<%--            <label for="exampleFormControlInput3">${date}</label>--%>
-<%--            <input type="number" min="10" max="20" step="1" class="form-control" id="exampleFormControlInput3" name="hour">--%>
-<%--        </div>--%>
+        <%--        <div class="form-group">--%>
+        <%--            <label for="exampleFormControlInput3">${date}</label>--%>
+        <%--            <input type="number" min="10" max="20" step="1" class="form-control" id="exampleFormControlInput3" name="hour">--%>
+        <%--        </div>--%>
 
-<%--        <div class="form-group">--%>
-<%--            <label for="exampleFormControlInput3">${manufacturer}</label>--%>
-<%--            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"--%>
-<%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
-<%--                   value="${requestScope.jewelryToAdd['manufacturer']}"</c:if>>--%>
-<%--        </div>--%>
-<%--        <div class="form-group">--%>
-<%--            <label for="exampleFormControlInput4">${price}</label>--%>
-<%--            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4" name="price"--%>
-<%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
-<%--                   value="${requestScope.jewelryToAdd['price']}"</c:if>--%>
-<%--                   required pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">--%>
-<%--            <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">--%>
-<%--                ${helperPrice}--%>
-<%--            </small>--%>
-<%--        </div>--%>
+        <%--        <div class="form-group">--%>
+        <%--            <label for="exampleFormControlInput3">${manufacturer}</label>--%>
+        <%--            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"--%>
+        <%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
+        <%--                   value="${requestScope.jewelryToAdd['manufacturer']}"</c:if>>--%>
+        <%--        </div>--%>
+        <%--        <div class="form-group">--%>
+        <%--            <label for="exampleFormControlInput4">${price}</label>--%>
+        <%--            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4" name="price"--%>
+        <%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
+        <%--                   value="${requestScope.jewelryToAdd['price']}"</c:if>--%>
+        <%--                   required pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">--%>
+        <%--            <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">--%>
+        <%--                ${helperPrice}--%>
+        <%--            </small>--%>
+        <%--        </div>--%>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${notices}</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="notes">
 <%--                <c:if test="${requestScope.jewelryToAdd != null}">--%>
-<%--                    ${requestScope.jewelryToAdd['description']}</c:if>--%>
-
+                <%--                    ${requestScope.jewelryToAdd['description']}</c:if>--%>
+                ${requestScope.formData['notes']}
             </textarea>
         </div>
+
         <c:if test="${requestScope.errorMessage != null}">
             <div class="form-group form-check" style="color: red">
                 <input type="hidden" class="form-check-input" id="exampleCheck1">
@@ -130,6 +133,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

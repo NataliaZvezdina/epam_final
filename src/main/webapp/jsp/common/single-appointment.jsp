@@ -61,20 +61,6 @@
             <dt class="col-sm-3">${notes}</dt>
             <dd class="col-sm-9">${requestScope.appointment.notes}</dd>
 
-
-<%--            <dt class="col-sm-3"></dt>--%>
-<%--            <dd class="col-sm-9">--%>
-<%--                <dl class="row">--%>
-<%--                    <dt class="col-sm-4">&#9679; <a--%>
-<%--                            href="${pageContext.request.contextPath}/controller?command=go_to_update_profile"--%>
-<%--                            style="color: black; font-size: 18px">${updateProfile}</a></dt>--%>
-<%--                </dl>--%>
-<%--                <dl class="row">--%>
-<%--                    <dt class="col-sm-4">&#9679; <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"--%>
-<%--                                                    style="color: black; font-size: 18px">${updatePassword}</a></dt>--%>
-<%--                </dl>--%>
-<%--            </dd>--%>
-
             <dt class="col-sm-3">---------------------</dt>
             <dd class="col-sm-9">
                 <dl class="row">
@@ -82,24 +68,19 @@
                 </dl>
             </dd>
 
-                        <dt class="col-sm-3"></dt>
-                        <dd class="col-sm-9">
-                            <c:if test="${sessionScope.userRole == 'CLIENT' || sessionScope.userRole == 'ADMIN'}">
-                            <dl class="row">
-                                <dt class="col-sm-4">&#9679;
-                                    <a href="${pageContext.request.contextPath}/controller?command=cancel_appointment&appointmentId=${requestScope.appointment.appointmentId}"
-                                                                  style="color: midnightblue; font-size: 18px">${cancell}</a></dt>
-                            </dl>
-                            </c:if>
-                            <dl class="row">
-                                <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_orders"
-                                                                  style="color: midnightblue; font-size: 18px">${showAllOrders}</a></dt>
-                            </dl>
-                        </dd>
+            <dt class="col-sm-3"></dt>
+            <dd class="col-sm-9">
+                <c:if test="${sessionScope.userRole == 'CLIENT' || sessionScope.userRole == 'ADMIN'}">
+                    <dl class="row">
+                        <dt class="col-sm-4">&#9679;
+                            <a href="${pageContext.request.contextPath}/controller?command=cancel_appointment&appointmentId=${requestScope.appointment.appointmentId}"
+                               style="color: midnightblue; font-size: 18px">${cancell}</a></dt>
+                    </dl>
+                </c:if>
+            </dd>
         </dl>
     </div>
 </div>
-
 
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -110,6 +91,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

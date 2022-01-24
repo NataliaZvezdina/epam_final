@@ -5,8 +5,8 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
-<fmt:message key="appointment.deleted.title" var="title"/>
-<fmt:message key="appointment.deleted" var="message"/>
+<fmt:message key="appointment.created.title" var="title"/>
+<fmt:message key="appointment.created" var="message"/>
 
 
 <!doctype html>
