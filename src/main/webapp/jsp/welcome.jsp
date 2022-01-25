@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/welcomeTag.tld" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
@@ -33,10 +34,10 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="fragment/header.jsp"/>
 
-<div class="container" style="height: 70vh">
-    <p>${registration} ${sessionScope.userName} ${sessionScope.userLastName}</p>
-    <p>${role} ${sessionScope.userRole}</p>
-    <br/>
+<div class="container" style="height: 73vh">
+    <%--    <p>${registration} ${sessionScope.userName} ${sessionScope.userLastName}</p>--%>
+    <%--    <p>${role} ${sessionScope.userRole}</p>--%>
+    <ctg:welcome/>
 </div>
 
 <c:import url="fragment/footer.jsp"/>
