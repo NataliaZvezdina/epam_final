@@ -56,6 +56,8 @@ public class ServletSecurityFilter implements Filter {
             OPEN_PROFILE,
             CHANGE_CLIENT_DISCOUNT,
             SHOW_ALL_ACTIVE_PIERCERS,
+            SHOW_ALL_APPOINTMENTS_BY_ADMIN,
+            OPEN_SINGLE_APPOINTMENT,
             ADD_ADMIN,
             ADD_PIERCER,
             GO_TO_EDIT_PIERCER_WORKING_INFO,

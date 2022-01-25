@@ -55,6 +55,7 @@ public final class PagePath {
     public static final String RELEVANT_APPOINTMENTS_BY_PIERCER = "jsp/piercer/relevant-appointments.jsp";
     public static final String SINGLE_APPOINTMENT = "jsp/common/single-appointment.jsp";
     public static final String RELEVANT_APPOINTMENTS_BY_CLIENT = "jsp/client/relevant-appointments.jsp";
+    public static final String ALL_APPOINTMENTS = "jsp/admin/appointments.jsp";
     public static final String APPOINTMENT_DELETED = "jsp/common/appointment-deleted.jsp";
     public static final String APPOINTMENT_CREATED = "jsp/client/appointment-created.jsp";
 

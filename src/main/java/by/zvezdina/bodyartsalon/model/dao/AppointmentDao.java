@@ -10,6 +10,7 @@ public interface AppointmentDao {
 
     Appointment findById(long id) throws DaoException;
     Appointment findByPiercerIdAndDatetime(long piercerId, LocalDateTime dateTime) throws DaoException;
+    List<Appointment> findAll(int page) throws DaoException;
     List<Appointment> findAllRelevantByPiercerId(long piercerId) throws DaoException;
     List<Appointment> findAllRelevantByClientId(long clientId) throws DaoException;
     List<Appointment> findAllByPiercerIdForCurrentDate(long piercerId) throws DaoException;

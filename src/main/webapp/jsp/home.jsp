@@ -40,21 +40,21 @@
 <%--    </ol>--%>
 <%--    <div class="carousel-inner">--%>
 <%--        <div class="carousel-item active">--%>
-<%--            <img src="http://lavzjewellery.ru/upload/iblock/32e/Cover.jpg" class="d-block w-100" alt="...">--%>
+<%--            <img src="https://artofpain.ru/sites/default/files/blog/pirsing003.jpg" class="d-block w-100" alt="...">--%>
 <%--            <div class="carousel-caption d-none d-md-block">--%>
 <%--                <h5>First slide label</h5>--%>
 <%--                <p>Some representative placeholder content for the first slide.</p>--%>
 <%--            </div>--%>
 <%--        </div>--%>
 <%--        <div class="carousel-item">--%>
-<%--            <img src="http://lavzjewellery.ru/upload/iblock/32e/Cover.jpg" class="d-block w-100" alt="...">--%>
+<%--            <img src="https://static.baza.farpost.ru/v/1548341871817_bulletin" class="d-block w-100" alt="...">--%>
 <%--            <div class="carousel-caption d-none d-md-block">--%>
 <%--                <h5>Second slide label</h5>--%>
 <%--                <p>Some representative placeholder content for the second slide.</p>--%>
 <%--            </div>--%>
 <%--        </div>--%>
 <%--        <div class="carousel-item">--%>
-<%--            <img src="http://lavzjewellery.ru/upload/iblock/32e/Cover.jpg" class="d-block w-100" alt="...">--%>
+<%--            <img src="https://artofpain.ru/sites/default/files/blog/pirsing003.jpg" class="d-block w-100" alt="...">--%>
 <%--            <div class="carousel-caption d-none d-md-block">--%>
 <%--                <h5>Third slide label</h5>--%>
 <%--                <p>Some representative placeholder content for the third slide.</p>--%>
@@ -71,7 +71,8 @@
 <%--    </button>--%>
 <%--</div>--%>
 
-<div class="container">
+<div class="container" style="height: 67vh">
+    <br/>
     <div class="row" style="justify-content: space-between">
         <div class="card" style="width: 15rem;">
             <img src="https://i.ebayimg.com/thumbs/images/g/bI4AAOSwq4VejxQO/s-l300.jpg" class="card-img-top" alt="...">

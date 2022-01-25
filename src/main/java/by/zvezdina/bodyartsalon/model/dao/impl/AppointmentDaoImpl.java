@@ -27,6 +27,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
             FROM appointments
             WHERE appointment_id = ?;""";
 
+    private static final String FIND_ALL_QUERY = """
+            SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
+            FROM appointments
+            ORDER BY datetime  
+            LIMIT ?, ?;""";
+
+    private static final int ELEMENTS_ON_PAGE = 10;
+
     private static final String FIND_BY_PIERCER_ID_AND_DATETIME = """
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id 
             FROM appointments 
@@ -36,17 +44,20 @@ public class AppointmentDaoImpl implements AppointmentDao {
     private static final String FIND_ALL_BY_PIERCER_ID = """
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
             FROM appointments 
-            WHERE piercer_id = ? AND datetime >= CURRENT_TIME();""";
+            WHERE piercer_id = ? AND datetime >= CURRENT_TIME() 
+            ORDER BY datetime;""";
 
     private static final String FIND_ALL_BY_PIERCER_ID_FOR_CURRENT_DATE = """
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
             FROM appointments 
-            WHERE piercer_id = ? AND DATE(datetime) = CURRENT_DATE();""";
+            WHERE piercer_id = ? AND DATE(datetime) = CURRENT_DATE() 
+            ORDER BY datetime;""";
 
     private static final String FIND_ALL_BY_CLIENT_ID = """
             SELECT appointment_id, datetime, notes, facility_id, client_id, piercer_id
             FROM appointments 
-            WHERE client_id = ? AND datetime >= CURRENT_TIME();""";
+            WHERE client_id = ? AND datetime >= CURRENT_TIME() 
+            ORDER BY datetime;""";
 
     private static final String DELETE_BY_ID_QUERY = """
             DELETE FROM appointments 
@@ -103,6 +114,28 @@ public class AppointmentDaoImpl implements AppointmentDao {
         logger.log(Level.DEBUG, "Found appointment by piercer id {} and datetime {}: {}",
                 piercerId, dateTime, foundAppointment);
         return foundAppointment;
+    }
+
+    @Override
+    public List<Appointment> findAll(int page) throws DaoException {
+        List<Appointment> appointments = new ArrayList<>();
+        try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY)) {
+            statement.setInt(1, ELEMENTS_ON_PAGE * (page - 1));
+            statement.setInt(2, ELEMENTS_ON_PAGE);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Appointment foundAppointment = extract(resultSet);
+                    appointments.add(foundAppointment);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DaoException("findAll() - Failed to find all appointments: ", e);
+        }
+
+        logger.log(Level.DEBUG, "All found appointments: {}", appointments);
+        return appointments;
     }
 
     @Override

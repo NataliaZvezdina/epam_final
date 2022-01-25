@@ -5,6 +5,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="bundle/locale"/>
 
+<fmt:message key="singleAppointment.page" var="title"/>
 <fmt:message key="single.appointment.datetime" var="datetime"/>
 <fmt:message key="relevantAppointments.facility" var="facility"/>
 <fmt:message key="single.appointment.price" var="price"/>
@@ -46,14 +47,14 @@
             <dt class="col-sm-3">${facility}</dt>
             <dd class="col-sm-9">${requestScope.facility.name}</dd>
 
-            <c:if test="${sessionScope.userRole == 'CLIENT'}">
+            <c:if test="${sessionScope.userRole == 'CLIENT' || sessionScope.userRole == 'ADMIN'}">
                 <dt class="col-sm-3">${price}</dt>
                 <dd class="col-sm-9">${requestScope.facility.price}</dd>
                 <dt class="col-sm-3">${piercer}</dt>
                 <dd class="col-sm-9">${requestScope.fullName}</dd>
             </c:if>
 
-            <c:if test="${sessionScope.userRole == 'PIERCER'}">
+            <c:if test="${sessionScope.userRole == 'PIERCER' || sessionScope.userRole == 'ADMIN'}">
                 <dt class="col-sm-3">${client}</dt>
                 <dd class="col-sm-9">${requestScope.lastName} ${requestScope.firstName}</dd>
             </c:if>

@@ -17,6 +17,7 @@
 <fmt:message key="admin.updatePassword" var="updatePassword"/>
 <fmt:message key="admin.showAllUsers" var="showAllUsers"/>
 <fmt:message key="admin.showAllOrders" var="showAllOrders"/>
+<fmt:message key="admin.showAllAppointments" var="showAllAppointments"/>
 <fmt:message key="adminProfile.addAdmin" var="addAdmin"/>
 <fmt:message key="adminProfile.addPiercer" var="addPiercer"/>
 
@@ -102,6 +103,10 @@
                 <dl class="row">
                     <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_orders"
                                                       style="color: midnightblue; font-size: 18px">${showAllOrders}</a></dt>
+                </dl>
+                <dl class="row">
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/controller?command=show_all_appointments_by_admin"
+                                                      style="color: midnightblue; font-size: 18px">${showAllAppointments}</a></dt>
                 </dl>
             </dd>
         </dl>

@@ -64,6 +64,7 @@ public class CommandProvider {
         commands.put(CommandType.SHOW_APPOINTMENTS_FOR_TODAY, new ShowAppointmentsForTodayCommand());
         commands.put(CommandType.SHOW_ALL_RELEVANT_APPOINTMENTS_BY_CLIENT,
                 new ShowAllRelevantAppointmentsByClientCommand());
+        commands.put(CommandType.SHOW_ALL_APPOINTMENTS_BY_ADMIN, new ShowAllAppointmentsByAdminCommand());
         commands.put(CommandType.CANCEL_APPOINTMENT, new CancelAppointmentCommand());
         commands.put(CommandType.OPEN_SINGLE_APPOINTMENT, new OpenSingleAppointmentCommand());
         commands.put(CommandType.SHOW_ALL_ACTIVE_PIERCERS, new ShowAllActivePiercersCommand());

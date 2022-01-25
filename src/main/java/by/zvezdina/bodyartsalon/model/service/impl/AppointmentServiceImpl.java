@@ -65,8 +65,21 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> findAll(int page) throws ServiceException {
+        List<Appointment> appointments;
+        try {
+            appointments = appointmentDao.findAll(page);
+        } catch (DaoException e) {
+            throw new ServiceException("findAll() - Failed to find all appointments:", e);
+        }
+
+        logger.log(Level.DEBUG, "All found appointments: {}", appointments);
+        return appointments;
+    }
+
+    @Override
     public List<Appointment> findAllRelevantByPiercerId(long piercerId) throws ServiceException {
-        List<Appointment> appointments = new ArrayList<>();
+        List<Appointment> appointments;
         try {
             appointments = appointmentDao.findAllRelevantByPiercerId(piercerId);
         } catch (DaoException e) {
@@ -80,7 +93,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> findAllByPiercerIdForCurrentDate(long piercerId) throws ServiceException {
-        List<Appointment> appointments = new ArrayList<>();
+        List<Appointment> appointments;
         try {
             appointments = appointmentDao.findAllByPiercerIdForCurrentDate(piercerId);
         } catch (DaoException e) {
@@ -95,7 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> findAllRelevantByClientId(long clientId) throws ServiceException {
-        List<Appointment> appointments = new ArrayList<>();
+        List<Appointment> appointments;
         try {
             appointments = appointmentDao.findAllRelevantByClientId(clientId);
         } catch (DaoException e) {
