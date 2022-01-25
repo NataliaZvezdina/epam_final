@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class ShowAllAppointmentsByAdminCommand implements Command {
         int currentPage = page != null ? Integer.parseInt(page) : 1;
         try {
             List<Appointment> appointments = appointmentService.findAll(currentPage);
-            Map<Appointment, Facility> appointmentData = new HashMap<>();
+            Map<Appointment, Facility> appointmentData = new LinkedHashMap<>();
             for (Appointment appointment : appointments) {
                 long facilityId = appointment.getFacilityId();
                 appointmentData.put(appointment, facilityService.findById(facilityId));
