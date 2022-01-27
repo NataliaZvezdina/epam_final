@@ -31,7 +31,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="${pageContext.request.contextPath}/jsp/home.jsp">${home}</a>
+                       href="${pageContext.request.contextPath}/jsp/guest/home.jsp">${home}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
@@ -47,11 +47,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
-                       href="${pageContext.request.contextPath}/jsp/gallery.jsp">${gallery}</a>
+                       href="${pageContext.request.contextPath}/jsp/content/gallery.jsp">${gallery}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="${pageContext.request.contextPath}/jsp/contacts.jsp">${contacts}</a>
+                       href="${pageContext.request.contextPath}/jsp/content/contacts.jsp">${contacts}</a>
                 </li>
             </ul>
 
@@ -107,10 +107,10 @@
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-in.jsp">${signIn}</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/guest/sign-in.jsp">${signIn}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/sign-up.jsp">${signUp}</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/jsp/guest/sign-up.jsp">${signUp}</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

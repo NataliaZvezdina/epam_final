@@ -61,7 +61,8 @@ public class UpdatePasswordCommand implements Command {
                 return new Router(PagePath.UPDATE_PASSWORD, Router.RouterType.FORWARD);
             }
             userService.updatePassword(userId, newPasswordValidated);
-            return new Router(PagePath.PASSWORD_CHANGED, Router.RouterType.REDIRECT);
+            session.invalidate();
+            return new Router(PagePath.SIGN_IN, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);

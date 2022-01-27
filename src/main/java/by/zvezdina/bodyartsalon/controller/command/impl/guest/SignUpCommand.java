@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.controller.command.impl;
+package by.zvezdina.bodyartsalon.controller.command.impl.guest;
 
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
@@ -10,6 +10,7 @@ import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -83,10 +84,10 @@ public class SignUpCommand implements Command {
                     .userStatus(UserStatus.INACTIVE)
                     .isVerified(false)
                     .build();
-            Client created = clientService.create(client);
+            clientService.create(client);
             return new Router(PagePath.NEW_CLIENT_SIGNED_UP, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Error to execute SignUpCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

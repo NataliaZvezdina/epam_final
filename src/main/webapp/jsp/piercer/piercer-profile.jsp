@@ -68,7 +68,7 @@
                                                       style="color: black; font-size: 18px">${updateProfile}</a></dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/common/update-password.jsp"
                                                       style="color: black; font-size: 18px">${updatePassword}</a></dt>
                 </dl>
             </dd>

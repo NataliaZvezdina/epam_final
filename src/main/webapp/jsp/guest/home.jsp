@@ -6,15 +6,6 @@
 <fmt:setBundle basename="bundle/locale"/>
 
 <fmt:message key="navigation.homePage" var="homePage"/>
-<%--<fmt:message key="navigation.home" var="home"/>--%>
-<%--<fmt:message key="navigation.jewelry" var="jewelry"/>--%>
-<%--<fmt:message key="navigation.facilities" var="facilities"/>--%>
-<%--<fmt:message key="navigation.contacts" var="contacts"/>--%>
-<%--<fmt:message key="navigation.about" var="about"/>--%>
-<%--<fmt:message key="navigation.logOut" var="logOut"/>--%>
-<%--<fmt:message key="navigation.signIn" var="signIn"/>--%>
-<%--<fmt:message key="navigation.signUp" var="signUp"/>--%>
-<%--<fmt:message key="navigation.language" var="language"/>--%>
 
 <!doctype html>
 <html lang="en">
@@ -30,47 +21,7 @@
 </head>
 <body>
 
-<c:import url="fragment/header.jsp"/>
-
-<%--<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">--%>
-<%--    <ol class="carousel-indicators">--%>
-<%--        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>--%>
-<%--        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>--%>
-<%--        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>--%>
-<%--    </ol>--%>
-<%--    <div class="carousel-inner">--%>
-<%--        <div class="carousel-item active">--%>
-<%--            <img src="https://artofpain.ru/sites/default/files/blog/pirsing003.jpg" class="d-block w-100" alt="...">--%>
-<%--            <div class="carousel-caption d-none d-md-block">--%>
-<%--                <h5>First slide label</h5>--%>
-<%--                <p>Some representative placeholder content for the first slide.</p>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="carousel-item">--%>
-<%--            <img src="https://static.baza.farpost.ru/v/1548341871817_bulletin" class="d-block w-100" alt="...">--%>
-<%--            <div class="carousel-caption d-none d-md-block">--%>
-<%--                <h5>Second slide label</h5>--%>
-<%--                <p>Some representative placeholder content for the second slide.</p>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="carousel-item">--%>
-<%--            <img src="https://artofpain.ru/sites/default/files/blog/pirsing003.jpg" class="d-block w-100" alt="...">--%>
-<%--            <div class="carousel-caption d-none d-md-block">--%>
-<%--                <h5>Third slide label</h5>--%>
-<%--                <p>Some representative placeholder content for the third slide.</p>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">--%>
-<%--        <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
-<%--        <span class="sr-only">Previous</span>--%>
-<%--    </button>--%>
-<%--    <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">--%>
-<%--        <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
-<%--        <span class="sr-only">Next</span>--%>
-<%--    </button>--%>
-<%--</div>--%>
-
+<c:import url="../fragment/header.jsp"/>
 <div class="container" style="height: 67vh">
     <br/>
     <div class="row" style="justify-content: space-between">
@@ -101,7 +52,7 @@
     </div>
 </div>
 
-<c:import url="fragment/footer.jsp"/>
+<c:import url="../fragment/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

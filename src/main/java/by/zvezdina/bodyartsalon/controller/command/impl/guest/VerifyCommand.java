@@ -1,4 +1,4 @@
-package by.zvezdina.bodyartsalon.controller.command.impl;
+package by.zvezdina.bodyartsalon.controller.command.impl.guest;
 
 import by.zvezdina.bodyartsalon.controller.command.*;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
@@ -16,7 +16,7 @@ public class VerifyCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         int clientId = Integer.parseInt(request.getParameter(RequestParameter.ID));
-        boolean verified = false;
+        boolean verified;
         try {
             verified = clientService.verify(clientId);
         } catch (ServiceException e) {

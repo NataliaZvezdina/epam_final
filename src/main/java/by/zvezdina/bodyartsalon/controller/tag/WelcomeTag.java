@@ -1,7 +1,6 @@
 package by.zvezdina.bodyartsalon.controller.tag;
 
 import by.zvezdina.bodyartsalon.controller.command.SessionAttribute;
-import com.oracle.wls.shaded.org.apache.xalan.lib.sql.ConnectionPool;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.JspWriter;
@@ -25,7 +24,7 @@ public class WelcomeTag extends TagSupport {
         HttpSession session = pageContext.getSession();
         String language = String.valueOf(session.getAttribute(SessionAttribute.LOCALE));
         ResourceBundle bundle = null;
-        InputStream stream = ConnectionPool.class.getClassLoader()
+        InputStream stream = WelcomeTag.class.getClassLoader()
                 .getResourceAsStream("bundle/locale_" + language + ".properties");
         if (stream != null) {
             try (stream) {

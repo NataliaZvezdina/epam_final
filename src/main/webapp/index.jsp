@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<c:redirect url="jsp/home.jsp"/>
+<c:redirect url="jsp/guest/home.jsp"/>
 
 </body>
 </html>

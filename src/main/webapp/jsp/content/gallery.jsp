@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: natal
-  Date: 25/12/2021
-  Time: 00:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -28,7 +21,7 @@
     <title>${gallery}</title>
 </head>
 <body>
-<c:import url="fragment/header.jsp"/>
+<c:import url="../fragment/header.jsp"/>
 
 <section class="gallery">
     <div class="container">
@@ -80,7 +73,7 @@
     </div>
 </section>
 
-<c:import url="fragment/footer.jsp"/>
+<c:import url="../fragment/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

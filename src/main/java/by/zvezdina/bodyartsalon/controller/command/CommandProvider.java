@@ -1,9 +1,11 @@
 package by.zvezdina.bodyartsalon.controller.command;
 
-import by.zvezdina.bodyartsalon.controller.command.impl.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.admin.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.client.*;
 import by.zvezdina.bodyartsalon.controller.command.impl.common.*;
+import by.zvezdina.bodyartsalon.controller.command.impl.guest.SignInCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.guest.SignUpCommand;
+import by.zvezdina.bodyartsalon.controller.command.impl.guest.VerifyCommand;
 import by.zvezdina.bodyartsalon.controller.command.impl.piercer.ShowAllRelevantAppointmentsByPiercerCommand;
 import by.zvezdina.bodyartsalon.controller.command.impl.piercer.ShowAppointmentsForTodayCommand;
 

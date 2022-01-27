@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> login(String login, String password) throws ServiceException;
+    Optional<User> sighIn(String login, String password) throws ServiceException;
     List<User> findAll() throws ServiceException;
     User findById(Long id) throws ServiceException;
     User createAdmin(User user) throws ServiceException;

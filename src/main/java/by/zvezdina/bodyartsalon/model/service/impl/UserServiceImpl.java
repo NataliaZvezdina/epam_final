@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> login(String login, String password) throws ServiceException {
+    public Optional<User> sighIn(String login, String password) throws ServiceException {
         User foundUser;
         try {
             foundUser = userDao.findByLogin(login);

@@ -43,7 +43,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 100vh; color: black; font-size: 18px">
+<div class="container" style="height: 115vh; color: black; font-size: 18px">
     <div class="row">
         <dl class="row">
             <dt class="col-sm-3">${role}</dt>
@@ -71,7 +71,7 @@
                                                       style="color: midnightblue; font-size: 18px">${updateProfile}</a></dt>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/update-password.jsp"
+                    <dt class="col-sm-4">&#9679;   <a href="${pageContext.request.contextPath}/jsp/common/update-password.jsp"
                                                       style="color: midnightblue; font-size: 18px">${updatePassword}</a></dt>
                 </dl>
             </dd>

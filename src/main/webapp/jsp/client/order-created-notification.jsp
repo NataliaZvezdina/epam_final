@@ -41,11 +41,10 @@
             <h2>${created}</h2>
             <br/><br/>
             <h4>
-                <a href="${pageContext.request.contextPath}/jsp/client/orders-list.jsp"
+                <a href="${pageContext.request.contextPath}/controller?command=show_orders_by_client"
                    style="color: midnightblue">
                         ${toOrders}</a>
             </h4>
-            <%--            order cost: ${requestScope.orderCost}--%>
         </c:otherwise>
     </c:choose>
 

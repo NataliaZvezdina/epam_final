@@ -11,7 +11,6 @@ import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

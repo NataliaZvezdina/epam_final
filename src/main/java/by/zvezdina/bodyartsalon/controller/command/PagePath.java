@@ -6,11 +6,12 @@ public final class PagePath {
     public static final String ERROR_500_PAGE = "jsp/error/error500.jsp";
 
     public static final String INDEX = "index.jsp";
-    public static final String HOME = "jsp/home.jsp";
-    public static final String SIGN_UP = "jsp/sign-up.jsp";
-    public static final String NEW_CLIENT_SIGNED_UP = "jsp/new-client-signed-up.jsp";
-    public static final String VERIFICATION = "jsp/verification.jsp";
-    public static final String WELCOME = "jsp/welcome.jsp";
+    public static final String HOME = "jsp/guest/home.jsp";
+    public static final String SIGN_IN = "jsp/guest/sign-in.jsp";
+    public static final String SIGN_UP = "jsp/guest/sign-up.jsp";
+    public static final String NEW_CLIENT_SIGNED_UP = "jsp/guest/new-client-signed-up.jsp";
+    public static final String VERIFICATION = "jsp/guest/verification.jsp";
+    public static final String WELCOME = "jsp/common/welcome.jsp";
 
     public static final String JEWELRY = "jsp/content/jewelry.jsp";
     public static final String GO_TO_JEWELRY_DEFINED_PAGE = "controller?command=show_all_jewelry&page=";
@@ -23,7 +24,7 @@ public final class PagePath {
     public static final String ADD_FACILITY = "jsp/admin/add-facility.jsp";
 
     public static final String ORDERS = "jsp/admin/orders.jsp";
-    public static final String BASKET = "jsp/basket.jsp";
+    public static final String BASKET = "jsp/client/basket.jsp";
     public static final String ORDER_CREATED_NOTIFICATION = "jsp/client/order-created-notification.jsp";
     public static final String CLIENT_ORDERS_LIST = "jsp/client/orders-list.jsp";
     public static final String ORDER_CANCELLED = "jsp/common/order-cancelled.jsp";
@@ -43,7 +44,7 @@ public final class PagePath {
     public static final String PASSWORD_CHANGED = "jsp/common/password-changed.jsp";
     public static final String UPDATE_PROFILE = "jsp/common/update-profile.jsp";
 
-    public static final String SINGLE_ORDER_DETAILS = "jsp/admin/single-order-details.jsp";
+    public static final String SINGLE_ORDER_DETAILS = "jsp/common/single-order-details.jsp";
     public static final String PIERCERS = "jsp/content/piercers.jsp";
     public static final String PIERCER_PROFILE = "jsp/piercer/piercer-profile.jsp";
     public static final String ADD_ADMIN = "jsp/admin/add-admin.jsp";
