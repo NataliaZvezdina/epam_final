@@ -36,13 +36,6 @@ public class ShowBasketCommand implements Command {
             }
 
             int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
-//            BigDecimal totalCost = new BigDecimal(0);
-//
-//            for (Jewelry item: basketItems) {
-//                totalCost = totalCost.add(item.getPrice()
-//                        .multiply(BigDecimal.valueOf(1d - discount / 100d))
-//                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
-//            }
             BigDecimal totalCost = jewelryService.calculateJewelrySet(basket, discount);
 
             request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);

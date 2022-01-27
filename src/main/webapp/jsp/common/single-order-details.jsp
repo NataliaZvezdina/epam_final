@@ -43,7 +43,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="color: black; font-size: 18px">
+<div class="container" style="color: black; font-size: 18px;">
     <div class="row">
         <dl class="row">
             <c:if test="${sessionScope.userRole == 'ADMIN'}">
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<div class="container" style="height: 70vh">
+<div class="container" style="height: 170vh">
     <div class="row">
         <table class="table table-striped" style="height: inherit">
             <thead>

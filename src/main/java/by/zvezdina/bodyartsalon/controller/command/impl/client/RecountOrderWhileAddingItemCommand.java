@@ -28,8 +28,9 @@ public class RecountOrderWhileAddingItemCommand implements Command {
         Map<Long, Integer> basket = (Map<Long, Integer>) session.getAttribute(SessionAttribute.BASKET);
 
         Long jewelryId = Long.parseLong(request.getParameter(RequestParameter.JEWELRY_ID));
-        Integer currentItemQuantity = basket.get(jewelryId);
-        basket.put(jewelryId, ++currentItemQuantity);
+//        Integer currentItemQuantity = basket.get(jewelryId);
+//        basket.put(jewelryId, ++currentItemQuantity);
+        basket.compute(jewelryId, (a, b) -> b + 1);
 
         Set<Long> itemIdSet = basket.keySet();
         List<Jewelry> basketItems = new ArrayList<>();
@@ -41,12 +42,6 @@ public class RecountOrderWhileAddingItemCommand implements Command {
             }
 
             int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
-//            BigDecimal totalCost = new BigDecimal(0);
-//
-//            for (Jewelry item: basketItems) {
-//                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d))
-//                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
-//            }
             BigDecimal totalCost = jewelryService.calculateJewelrySet(basket, discount);
 
             request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);

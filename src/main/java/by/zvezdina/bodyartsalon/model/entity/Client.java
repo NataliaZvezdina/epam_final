@@ -1,13 +1,11 @@
 package by.zvezdina.bodyartsalon.model.entity;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
 public class Client extends User {
 
     private BigDecimal money;
     private long discountId;
-
 
     public Client() {
     }

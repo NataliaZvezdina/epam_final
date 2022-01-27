@@ -10,13 +10,16 @@ import by.zvezdina.bodyartsalon.model.service.impl.AppointmentServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShowAppointmentsForTodayCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private final AppointmentService appointmentService = AppointmentServiceImpl.getInstance();
     private final FacilityService facilityService = FacilityServiceImpl.getInstance();
 
@@ -37,7 +40,7 @@ public class ShowAppointmentsForTodayCommand implements Command {
             request.setAttribute(RequestAttribute.APPOINTMENT_DATA, appointmentData);
             return new Router(PagePath.RELEVANT_APPOINTMENTS_BY_PIERCER, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Failed to execute ShowAppointmentsForTodayCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

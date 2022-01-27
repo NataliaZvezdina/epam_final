@@ -20,11 +20,7 @@ public class AddItemToBasketCommand implements Command {
         }
 
         Long jewelryId = Long.parseLong(request.getParameter(RequestParameter.JEWELRY_ID));
-        if (!basket.containsKey(jewelryId)) {
-            basket.put(jewelryId, 0);
-        }
-        Integer currentItemQuantity = basket.get(jewelryId);
-        basket.put(jewelryId, ++currentItemQuantity);
+        basket.merge(jewelryId, 1, (a, b) -> a + 1);
 
         String page = request.getParameter(RequestParameter.PAGE);
         int currentPageNumber = page != null ? Integer.parseInt(page) : 1;

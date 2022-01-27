@@ -6,11 +6,15 @@ import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdatePasswordCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private static final String EMPTY_INPUT = "";
     private static final String INVALID_INPUT_DATA = "inputData.invalid";
     private static final String NOT_MATCHING_PASSWORDS = "input.notMatching";
@@ -64,7 +68,7 @@ public class UpdatePasswordCommand implements Command {
             session.invalidate();
             return new Router(PagePath.SIGN_IN, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Failed to execute UpdatePasswordCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

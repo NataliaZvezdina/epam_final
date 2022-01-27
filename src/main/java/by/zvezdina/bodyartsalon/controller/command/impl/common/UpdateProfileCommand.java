@@ -7,11 +7,15 @@ import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateProfileCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private static final String INVALID_INPUT = "inputData.invalid";
     private static final String LOGIN_IS_NOT_FREE = "update.profile.login.notFree";
     private static final String EMAIL_IS_NOT_FREE = "update.profile.email.notFree";
@@ -98,12 +102,11 @@ public class UpdateProfileCommand implements Command {
             switch (userToUpdate.getRole()) {
                 case ADMIN -> {return new Router(PagePath.ADMIN_PROFILE, Router.RouterType.REDIRECT);}
                 case CLIENT -> {return new Router(PagePath.CLIENT_PROFILE, Router.RouterType.REDIRECT);}
-
                 case PIERCER -> {return new Router(PagePath.PIERCER_PROFILE, Router.RouterType.REDIRECT);}
                 default -> {return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.FORWARD);}
             }
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Failed to execute UpdateProfileCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

@@ -15,8 +15,12 @@ import by.zvezdina.bodyartsalon.model.service.impl.ClientServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import by.zvezdina.bodyartsalon.model.service.impl.PiercerServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OpenSingleAppointmentCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private final AppointmentService appointmentService = AppointmentServiceImpl.getInstance();
     private final FacilityService facilityService = FacilityServiceImpl.getInstance();
     private final ClientService clientService = ClientServiceImpl.getInstance();
@@ -44,7 +48,7 @@ public class OpenSingleAppointmentCommand implements Command {
             request.setAttribute(RequestAttribute.FACILITY, facility);
             return new Router(PagePath.SINGLE_APPOINTMENT, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            logger.log(Level.ERROR, "Failed to execute OpenSingleAppointmentCommand", e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

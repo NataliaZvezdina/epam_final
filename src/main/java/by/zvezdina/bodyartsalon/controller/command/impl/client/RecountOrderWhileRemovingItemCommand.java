@@ -43,16 +43,18 @@ public class RecountOrderWhileRemovingItemCommand implements Command {
                 Jewelry jewelry = jewelryService.findById(id);
                 basketItems.add(jewelry);
             }
-
             int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
-            BigDecimal totalCost = new BigDecimal(0);
+            BigDecimal totalCost = jewelryService.calculateJewelrySet(basket, discount);
 
-            for (Jewelry item: basketItems) {
-                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d))
-                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
-            }
+//            int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
+//            BigDecimal totalCost = new BigDecimal(0);
+//
+//            for (Jewelry item: basketItems) {
+//                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d))
+//                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
+//            }
 
-            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost.round(MathContext.DECIMAL32));
+            request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);
             request.setAttribute(RequestAttribute.BASKET_ITEMS_LIST, basketItems);
             return new Router(PagePath.BASKET, Router.RouterType.FORWARD);
         } catch (ServiceException e) {

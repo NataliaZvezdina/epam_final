@@ -41,7 +41,7 @@
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 
-<div class="container" style="height: 100vh">
+<div class="container" style="height: 180vh">
     <div class="row">
         </br></br>
         <c:choose>
