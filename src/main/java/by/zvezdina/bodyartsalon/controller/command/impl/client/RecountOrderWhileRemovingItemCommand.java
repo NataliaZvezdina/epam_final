@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,14 +44,6 @@ public class RecountOrderWhileRemovingItemCommand implements Command {
             }
             int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
             BigDecimal totalCost = jewelryService.calculateJewelrySet(basket, discount);
-
-//            int discount = (Integer) session.getAttribute(SessionAttribute.USER_DISCOUNT);
-//            BigDecimal totalCost = new BigDecimal(0);
-//
-//            for (Jewelry item: basketItems) {
-//                totalCost = totalCost.add(item.getPrice().multiply(BigDecimal.valueOf(1d - discount / 100d))
-//                        .multiply(BigDecimal.valueOf(basket.get(item.getJewelryId()))));
-//            }
 
             request.setAttribute(RequestAttribute.TOTAL_COST, totalCost);
             request.setAttribute(RequestAttribute.BASKET_ITEMS_LIST, basketItems);

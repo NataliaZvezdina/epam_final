@@ -28,8 +28,6 @@ public class RecountOrderWhileAddingItemCommand implements Command {
         Map<Long, Integer> basket = (Map<Long, Integer>) session.getAttribute(SessionAttribute.BASKET);
 
         Long jewelryId = Long.parseLong(request.getParameter(RequestParameter.JEWELRY_ID));
-//        Integer currentItemQuantity = basket.get(jewelryId);
-//        basket.put(jewelryId, ++currentItemQuantity);
         basket.compute(jewelryId, (a, b) -> b + 1);
 
         Set<Long> itemIdSet = basket.keySet();
