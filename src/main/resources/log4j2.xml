@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Configuration status="WARN">
     <Properties>
         <property name="LOG_FOLDER">logs</property>
@@ -7,11 +7,11 @@
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${pattern_cmd}"/>
+            <PatternLayout pattern="${pattern_cmd}" charset="UTF-8"/>
         </Console>
-        <RollingFile name="LogFile" fileName="${LOG_FOLDER}/log-${date:yyyy_MM_dd HH.mm.ss}.log"
-                     filePattern="${LOG_FOLDER}/log-%d{yyyy_MM_dd HH.mm.ss} - %i.log" >
-            <PatternLayout pattern="${pattern_file}"/>
+        <RollingFile name="LogFile" fileName="C:/Users/natal/IdeaProjects/bodyartsalon/${LOG_FOLDER}/log-${date:yyyy_MM_dd HH.mm.ss}.log"
+                     filePattern="C:/Users/natal/IdeaProjects/bodyartsalon/${LOG_FOLDER}/log-%d{yyyy_MM_dd HH.mm.ss} - %i.log" >
+            <PatternLayout pattern="${pattern_file}" charset="UTF-8"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 KB" />

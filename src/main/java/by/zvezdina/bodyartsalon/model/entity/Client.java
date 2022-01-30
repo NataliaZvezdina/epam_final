@@ -15,14 +15,15 @@ public class Client extends User {
         this.discountId = discountId;
     }
 
-    public Client(long userId, String login, String password, String firstName, String lastName, String email, Role role, UserStatus userStatus, boolean isVerified, BigDecimal money, long discountId) {
+    public Client(long userId, String login, String password, String firstName, String lastName, String email,
+                  Role role, UserStatus userStatus, boolean isVerified, BigDecimal money, long discountId) {
         super(userId, login, password, firstName, lastName, email, role, userStatus, isVerified);
         this.money = money;
         this.discountId = discountId;
     }
 
     public static class Builder {
-        private Client client = new Client();
+        private final Client client = new Client();
 
         public Builder clientId(long clientId) {
             client.setUserId(clientId);
@@ -100,10 +101,39 @@ public class Client extends User {
         this.discountId = discountId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Client client = (Client) o;
+
+        if (discountId != client.discountId) return false;
+        return money != null ? money.equals(client.money) : client.money == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (money != null ? money.hashCode() : 0);
+        result = 31 * result + (int) (discountId ^ (discountId >>> 32));
+        return result;
+    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Client{");
+        sb.append("clientId=").append(getUserId());
+        sb.append(", login='").append(getLogin()).append('\'');
+        sb.append(", firstName='").append(getFirstName()).append('\'');
+        sb.append(", lastName='").append(getLastName()).append('\'');
+        sb.append(", email='").append(getEmail()).append('\'');
+        sb.append(", role=").append(getRole());
+        sb.append(", userStatus=").append(getUserStatus());
+        sb.append(", isVerified=").append(isVerified());
+        sb.append("money=").append(money);
+        sb.append(", discountId=").append(discountId);
         sb.append('}');
         return sb.toString();
     }

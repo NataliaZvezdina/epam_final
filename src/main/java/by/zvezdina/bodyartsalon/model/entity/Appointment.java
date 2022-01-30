@@ -14,8 +14,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(long appointmentId, LocalDateTime dateTime, String notes, long facilityId, long clientId,
-                       long piercerId) {
+    public Appointment(long appointmentId, LocalDateTime dateTime, String notes, long facilityId,
+                       long clientId, long piercerId) {
         this.appointmentId = appointmentId;
         this.dateTime = dateTime;
         this.notes = notes;
@@ -25,7 +25,7 @@ public class Appointment {
     }
 
     public static class Builder {
-        private Appointment appointment = new Appointment();
+        private final Appointment appointment = new Appointment();
 
         public Builder appointmentId(long appointmentId) {
             appointment.appointmentId = appointmentId;

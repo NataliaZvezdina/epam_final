@@ -20,7 +20,7 @@ public class Order {
     }
 
     public static class Builder {
-        private Order order = new Order();
+        private final Order order = new Order();
 
         public Builder orderId(long orderId) {
             order.orderId = orderId;

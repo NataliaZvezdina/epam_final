@@ -29,7 +29,7 @@ public class User {
     }
 
     public static class Builder {
-        private User user = new User();
+        private final User user = new User();
 
         public Builder userId(long userId) {
             user.userId = userId;
@@ -161,6 +161,7 @@ public class User {
         User user = (User) o;
 
         if (userId != user.userId) return false;
+        if (isVerified != user.isVerified) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
@@ -180,6 +181,7 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (userStatus != null ? userStatus.hashCode() : 0);
+        result = 31 * result + (isVerified ? 1 : 0);
         return result;
     }
 
@@ -188,12 +190,12 @@ public class User {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("userId=").append(userId);
         sb.append(", login='").append(login).append('\'');
-        sb.append(", password='").append("********").append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", role=").append(role);
         sb.append(", userStatus=").append(userStatus);
+        sb.append(", isVerified=").append(isVerified);
         sb.append('}');
         return sb.toString();
     }

@@ -22,7 +22,7 @@ public class Facility {
     }
 
     public static class Builder {
-        private Facility facility = new Facility();
+        private final Facility facility = new Facility();
 
         public Builder facilityId(long facilityId) {
             facility.facilityId = facilityId;

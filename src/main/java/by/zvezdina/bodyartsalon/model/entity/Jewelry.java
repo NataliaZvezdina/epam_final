@@ -27,7 +27,7 @@ public class Jewelry {
     }
 
     public static class Builder {
-        private Jewelry jewelry = new Jewelry();
+        private final Jewelry jewelry = new Jewelry();
 
         public Builder jewelryId(long id) {
             jewelry.jewelryId = id;

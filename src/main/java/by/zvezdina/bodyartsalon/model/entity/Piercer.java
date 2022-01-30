@@ -13,14 +13,15 @@ public class Piercer extends User {
         this.infoAbout = infoAbout;
     }
 
-    public Piercer(long userId, String login, String password, String firstName, String lastName, String email, Role role, UserStatus userStatus, boolean isVerified, String photoUrl, String infoAbout) {
+    public Piercer(long userId, String login, String password, String firstName, String lastName, String email,
+                   Role role, UserStatus userStatus, boolean isVerified, String photoUrl, String infoAbout) {
         super(userId, login, password, firstName, lastName, email, role, userStatus, isVerified);
         this.photoUrl = photoUrl;
         this.infoAbout = infoAbout;
     }
 
     public static class Builder {
-        private Piercer piercer = new Piercer();
+        private final Piercer piercer = new Piercer();
 
         public Builder piercerId(long id) {
             piercer.setUserId(id);
@@ -121,7 +122,15 @@ public class Piercer extends User {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Piercer{");
-        sb.append("photoUrl='").append(photoUrl).append('\'');
+        sb.append("piercerId=").append(getUserId());
+        sb.append(", login='").append(getLogin()).append('\'');
+        sb.append(", firstName='").append(getFirstName()).append('\'');
+        sb.append(", lastName='").append(getLastName()).append('\'');
+        sb.append(", email='").append(getEmail()).append('\'');
+        sb.append(", role=").append(getRole());
+        sb.append(", userStatus=").append(getUserStatus());
+        sb.append(", isVerified=").append(isVerified());
+        sb.append(", photoUrl='").append(photoUrl).append('\'');
         sb.append(", infoAbout='").append(infoAbout).append('\'');
         sb.append('}');
         return sb.toString();
