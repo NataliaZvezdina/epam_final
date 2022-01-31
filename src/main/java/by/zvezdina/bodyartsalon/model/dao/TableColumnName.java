@@ -8,14 +8,11 @@ public final class TableColumnName {
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
     public static final String EMAIL = "email";
-    public static final String PHONE = "phone";
     public static final String ROLE = "role";
     public static final String STATUS = "status";
     public static final String IS_VERIFIED = "is_verified";
 
     public static final String CLIENT_ID = "client_id";
-    public static final String REGISTRATION_DATE = "registration_date";
-    public static final String BIRTH_DATE = "birth_date";
     public static final String MONEY = "money";
 
     public static final String PIERCER_ID = "piercer_id";
@@ -24,10 +21,6 @@ public final class TableColumnName {
 
     public static final String DISCOUNT_ID = "discount_id";
     public static final String VALUE = "value";
-
-    public static final String FEEDBACK_ID = "feedback_id";
-    public static final String CONTENT = "content";
-    public static final String CREATED_AT = "created_at";
 
     public static final String APPOINTMENT_ID = "appointment_id";
     public static final String DATE_TIME = "datetime";

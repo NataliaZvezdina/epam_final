@@ -2,7 +2,6 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.OrderDao;
-import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.entity.Order;
 import by.zvezdina.bodyartsalon.model.entity.OrderStatus;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;

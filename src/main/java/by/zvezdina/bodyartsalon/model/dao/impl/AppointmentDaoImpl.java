@@ -157,7 +157,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new DaoException("create() - Failed to create appointment: ", e);
         }
         logger.log(Level.DEBUG, "Appointment created: {}", appointment);
@@ -225,7 +224,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
                     + piercerId, e);
         }
 
-        logger.log(Level.DEBUG, "All relevant found appointments by piercerId {}: {}",
+        logger.log(Level.DEBUG, "All found appointments by piercerId {} for current date: {}",
                 piercerId, appointments);
         return appointments;
     }

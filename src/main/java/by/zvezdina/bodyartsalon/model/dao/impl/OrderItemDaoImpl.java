@@ -2,7 +2,6 @@ package by.zvezdina.bodyartsalon.model.dao.impl;
 
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.model.dao.OrderItemDao;
-import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.entity.OrderItem;
 import by.zvezdina.bodyartsalon.model.pool.CustomConnectionPool;
 import org.apache.logging.log4j.Level;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -117,7 +117,6 @@ public class FacilityDaoImpl implements FacilityDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new DaoException("create() - Failed to create facility: ", e);
         }
         logger.log(Level.DEBUG, "Facility created: {}", facility);

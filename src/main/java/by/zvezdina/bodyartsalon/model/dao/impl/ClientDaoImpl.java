@@ -90,7 +90,6 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public Client create(Client client) throws DaoException {
-
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement userStatement = connection.prepareStatement(CREATE_USER_QUERY,
                      Statement.RETURN_GENERATED_KEYS);
@@ -143,7 +142,7 @@ public class ClientDaoImpl implements ClientDao {
         } catch (SQLException e) {
             throw new DaoException("verify() - Failed to verify client: ", e);
         }
-        logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
         return rowsUpdated;
     }
 
