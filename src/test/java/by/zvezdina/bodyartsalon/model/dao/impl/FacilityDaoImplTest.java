@@ -18,96 +18,96 @@ class FacilityDaoImplTest {
     private static final int PAGE = 1;
     private static final long FACILITY_ID = 1;
 
-    private static final Facility FIRST_ELEMENT =
-            new Facility.Builder()
-                    .facilityId(1)
-                    .name("name")
-                    .description("some description")
-                    .price(BigDecimal.valueOf(99.99))
-                    .accessible(true)
-                    .build();
-
-    private static final Facility SECOND_ELEMENT =
-            new Facility.Builder()
-                    .facilityId(2)
-                    .name("name")
-                    .description("some description")
-                    .price(BigDecimal.valueOf(69.99))
-                    .accessible(false)
-                    .build();
-
-    private static final List<Facility> EXPECTED_ON_DEFINED_PAGE =
-            List.of(FIRST_ELEMENT, SECOND_ELEMENT);
-
-    private static final Facility FACILITY_TO_CREATE =
-            new Facility.Builder()
-                    .name("name")
-                    .description("some description")
-                    .price(BigDecimal.valueOf(9.99))
-                    .accessible(true)
-                    .build();
-
-    private static final Facility EXPECTED_CREATED =
-            new Facility.Builder()
-                    .facilityId(3)
-                    .name("name")
-                    .description("some description")
-                    .price(BigDecimal.valueOf(9.99))
-                    .accessible(true)
-                    .build();
-
-    private static final Facility FACILITY_TO_UPDATE =
-            new Facility.Builder()
-                    .facilityId(4)
-                    .name("name")
-                    .description("some description")
-                    .price(BigDecimal.valueOf(19.99))
-                    .accessible(true)
-                    .build();
-
-    private static final Facility EXPECTED_UPDATED =
-            new Facility.Builder()
-                    .facilityId(4)
-                    .name("name")
-                    .description("updated description")
-                    .price(BigDecimal.valueOf(9.99))
-                    .accessible(true)
-                    .build();
-
     @Mock
     private FacilityDaoImpl facilityDaoMock;
+    private Facility firstElement;
+    private Facility secondElement;
+    private List<Facility> expectedOnDefinedPage;
+    private Facility facilityToCreate;
+    private Facility expectedCreated;
+    private Facility facilityToUpdate;
+    private Facility expectedUpdated;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        firstElement = new Facility.Builder()
+                .facilityId(1)
+                .name("name")
+                .description("some description")
+                .price(BigDecimal.valueOf(99.99))
+                .accessible(true)
+                .build();
+
+        secondElement = new Facility.Builder()
+                .facilityId(2)
+                .name("name")
+                .description("some description")
+                .price(BigDecimal.valueOf(69.99))
+                .accessible(false)
+                .build();
+
+        facilityToCreate = new Facility.Builder()
+                .name("name")
+                .description("some description")
+                .price(BigDecimal.valueOf(9.99))
+                .accessible(true)
+                .build();
+
+        expectedCreated = new Facility.Builder()
+                .facilityId(3)
+                .name("name")
+                .description("some description")
+                .price(BigDecimal.valueOf(9.99))
+                .accessible(true)
+                .build();
+
+        facilityToUpdate = new Facility.Builder()
+                .facilityId(4)
+                .name("name")
+                .description("some description")
+                .price(BigDecimal.valueOf(19.99))
+                .accessible(true)
+                .build();
+
+        expectedUpdated = new Facility.Builder()
+                .facilityId(4)
+                .name("name")
+                .description("updated description")
+                .price(BigDecimal.valueOf(9.99))
+                .accessible(true)
+                .build();
+
+        expectedOnDefinedPage = List.of(firstElement, secondElement);
     }
 
     @Test
     public void findAllTest() throws DaoException {
-        when(facilityDaoMock.findAll(PAGE)).thenReturn(EXPECTED_ON_DEFINED_PAGE);
+        when(facilityDaoMock.findAll(PAGE)).thenReturn(expectedOnDefinedPage);
         List<Facility> actual = facilityDaoMock.findAll(PAGE);
-        assertThat(actual).containsExactly(FIRST_ELEMENT, SECOND_ELEMENT);
+        assertThat(actual).containsExactly(firstElement, secondElement);
     }
 
     @Test
     public void findByIdTest() throws DaoException {
-        when(facilityDaoMock.findById(FACILITY_ID)).thenReturn(FIRST_ELEMENT);
+        when(facilityDaoMock.findById(FACILITY_ID)).thenReturn(firstElement);
         Facility actual = facilityDaoMock.findById(FACILITY_ID);
-        assertThat(actual).isEqualTo(FIRST_ELEMENT);
+        assertThat(actual).isEqualTo(firstElement);
     }
 
     @Test
     public void createTest() throws DaoException {
-        when(facilityDaoMock.create(FACILITY_TO_CREATE)).thenReturn(EXPECTED_CREATED);
-        Facility actual = facilityDaoMock.create(FACILITY_TO_CREATE);
-        assertThat(actual).isEqualTo(EXPECTED_CREATED);
+        when(facilityDaoMock.create(facilityToCreate)).thenReturn(expectedCreated);
+        Facility actual = facilityDaoMock.create(facilityToCreate);
+        assertThat(actual).isEqualTo(expectedCreated);
     }
 
     @Test
     public void updateTest() throws DaoException {
-        when(facilityDaoMock.update(FACILITY_TO_UPDATE)).thenReturn(EXPECTED_UPDATED);
-        Facility actual = facilityDaoMock.update(FACILITY_TO_UPDATE);
-        assertThat(actual).isEqualTo(EXPECTED_UPDATED);
+        when(facilityDaoMock.update(facilityToUpdate)).thenReturn(expectedUpdated);
+        Facility actual = facilityDaoMock.update(facilityToUpdate);
+        assertThat(actual).isEqualTo(expectedUpdated);
     }
 
     @Test

@@ -15,103 +15,102 @@ import static org.mockito.Mockito.when;
 
 class AppointmentDaoImplTest {
 
-    private static final Appointment APPOINTMENT_TO_CREATE =
-            new Appointment.Builder()
-                    .clientId(5)
-                    .facilityId(3)
-                    .notes("some notes")
-                    .piercerId(7)
-                    .datetime(LocalDateTime.of(2021, 3, 15, 16, 0))
-                    .build();
-
-    private static final Appointment EXPECTED_APPOINTMENT =
-            new Appointment.Builder()
-                    .appointmentId(10)
-                    .clientId(5)
-                    .facilityId(3)
-                    .notes("some notes")
-                    .piercerId(7)
-                    .datetime(LocalDateTime.of(2021, 3, 15, 16, 0))
-                    .build();
-
+    private static final long APPOINTMENT_ID_TO_DELETE = 9;
     private static final long APPOINTMENT_ID_TO_FIND = 10;
     private static final int EXPECTED_ROWS_UPDATED = 1;
     private static final long PIERCER_ID = 5;
     private static final long CLIENT_ID = 4;
-    private static final Appointment FIRST_ELEMENT =
-            new Appointment.Builder()
-                    .appointmentId(6)
-                    .clientId(4)
-                    .facilityId(2)
-                    .notes("some another notes")
-                    .piercerId(5)
-                    .datetime(LocalDateTime.of(2021, 3, 22, 14, 0))
-                    .build();
-
-    private static final Appointment SECOND_ELEMENT =
-            new Appointment.Builder()
-                    .appointmentId(7)
-                    .clientId(5)
-                    .facilityId(2)
-                    .notes("some another notes")
-                    .piercerId(5)
-                    .datetime(LocalDateTime.of(2021, 3, 25, 14, 0))
-                    .build();
-    private static final List<Appointment> EXPECTED_RELEVANT_APPOINTMENTS_BY_PIERCER =
-            List.of(FIRST_ELEMENT, SECOND_ELEMENT);
-
-    private static final List<Appointment> EXPECTED_RELEVANT_APPOINTMENTS_BY_CLIENT =
-            List.of(FIRST_ELEMENT);
-
-    private static final List<Appointment> EXPECTED_APPOINTMENTS_FOR_CURRENT_DAY_BY_PIERCER =
-            List.of(SECOND_ELEMENT);
-
-    private static final long APPOINTMENT_ID_TO_DELETE = 9;
 
     @Mock
     private AppointmentDaoImpl appointmentDaoMock;
+    private Appointment toCreate;
+    private Appointment expected;
+    private Appointment firstElement;
+    private Appointment secondElement;
+    private List<Appointment> expectedRelevantByPiercer;
+    private List<Appointment> expectedRelevantByClient;
+    private List<Appointment> expectedRelevantForCurrentDayByPiercer;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        toCreate = new Appointment.Builder()
+                .clientId(5)
+                .facilityId(3)
+                .notes("some notes")
+                .piercerId(7)
+                .datetime(LocalDateTime.of(2021, 3, 15, 16, 0))
+                .build();
+
+        expected = new Appointment.Builder()
+                .appointmentId(10)
+                .clientId(5)
+                .facilityId(3)
+                .notes("some notes")
+                .piercerId(7)
+                .datetime(LocalDateTime.of(2021, 3, 15, 16, 0))
+                .build();
+
+        firstElement = new Appointment.Builder()
+                .appointmentId(6)
+                .clientId(4)
+                .facilityId(2)
+                .notes("some another notes")
+                .piercerId(5)
+                .datetime(LocalDateTime.of(2021, 3, 22, 14, 0))
+                .build();
+
+        secondElement = new Appointment.Builder()
+                .appointmentId(7)
+                .clientId(5)
+                .facilityId(2)
+                .notes("some another notes")
+                .piercerId(5)
+                .datetime(LocalDateTime.of(2021, 3, 25, 14, 0))
+                .build();
+
+        expectedRelevantByPiercer = List.of(firstElement, secondElement);
+        expectedRelevantByClient = List.of(firstElement);
+        expectedRelevantForCurrentDayByPiercer = List.of(secondElement);
     }
 
     @Test
     public void findByIdTest() throws DaoException {
-        when(appointmentDaoMock.findById(APPOINTMENT_ID_TO_FIND)).thenReturn(EXPECTED_APPOINTMENT);
-        Appointment actual = appointmentDaoMock.findById(EXPECTED_APPOINTMENT.getAppointmentId());
-        assertThat(actual).isEqualTo(EXPECTED_APPOINTMENT);
+        when(appointmentDaoMock.findById(APPOINTMENT_ID_TO_FIND)).thenReturn(expected);
+        Appointment actual = appointmentDaoMock.findById(expected.getAppointmentId());
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void createTest() throws DaoException {
-        when(appointmentDaoMock.create(APPOINTMENT_TO_CREATE)).thenReturn(EXPECTED_APPOINTMENT);
-        Appointment actual = appointmentDaoMock.create(APPOINTMENT_TO_CREATE);
-        assertThat(actual).isEqualTo(EXPECTED_APPOINTMENT);
+        when(appointmentDaoMock.create(toCreate)).thenReturn(expected);
+        Appointment actual = appointmentDaoMock.create(toCreate);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void findAllRelevantByPiercerIdTest() throws DaoException {
         when(appointmentDaoMock.findAllRelevantByPiercerId(PIERCER_ID))
-                .thenReturn(EXPECTED_RELEVANT_APPOINTMENTS_BY_PIERCER);
+                .thenReturn(expectedRelevantByPiercer);
         List<Appointment> actual = appointmentDaoMock.findAllRelevantByPiercerId(PIERCER_ID);
-        assertThat(actual).containsExactly(FIRST_ELEMENT, SECOND_ELEMENT);
+        assertThat(actual).containsExactly(firstElement, secondElement);
     }
 
     @Test
     public void findAllRelevantByClientIdTest() throws DaoException {
         when(appointmentDaoMock.findAllRelevantByClientId(CLIENT_ID))
-                .thenReturn(EXPECTED_RELEVANT_APPOINTMENTS_BY_CLIENT);
+                .thenReturn(expectedRelevantByClient);
         List<Appointment> actual = appointmentDaoMock.findAllRelevantByClientId(CLIENT_ID);
-        assertThat(actual).containsExactly(FIRST_ELEMENT);
+        assertThat(actual).containsExactly(firstElement);
     }
 
     @Test
     public void findAllByPiercerIdForCurrentDateTest() throws DaoException {
         when(appointmentDaoMock.findAllByPiercerIdForCurrentDate(PIERCER_ID))
-                .thenReturn(EXPECTED_APPOINTMENTS_FOR_CURRENT_DAY_BY_PIERCER);
+                .thenReturn(expectedRelevantForCurrentDayByPiercer);
         List<Appointment> actual = appointmentDaoMock.findAllByPiercerIdForCurrentDate(PIERCER_ID);
-        assertThat(actual).containsExactly(SECOND_ELEMENT);
+        assertThat(actual).containsExactly(secondElement);
     }
 
     @Test
