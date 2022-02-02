@@ -46,8 +46,8 @@ class ClientDaoImplTest {
                 .password("12345678Qwe")
                 .role(Role.CLIENT)
                 .userStatus(UserStatus.ACTIVE)
-                .discountId(2)
-                .money(BigDecimal.valueOf(55.99))
+                .discountId(1)
+                .money(BigDecimal.valueOf(0))
                 .isVerified(true)
                 .build();
 
@@ -59,8 +59,6 @@ class ClientDaoImplTest {
                 .password("12345678Qwe")
                 .role(Role.CLIENT)
                 .userStatus(UserStatus.ACTIVE)
-                .discountId(2)
-                .money(BigDecimal.valueOf(59.99))
                 .isVerified(true)
                 .build();
 
