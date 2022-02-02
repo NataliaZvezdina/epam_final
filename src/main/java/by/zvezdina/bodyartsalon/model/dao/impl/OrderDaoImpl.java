@@ -148,7 +148,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int updateStatusByOrderId(long id) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS_BY_ID_QUERY)) {
             statement.setLong(1, id);
@@ -163,7 +163,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int deleteById(long id) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
             statement.setLong(1, id);

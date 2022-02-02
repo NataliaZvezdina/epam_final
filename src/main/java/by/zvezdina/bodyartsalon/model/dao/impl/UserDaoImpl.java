@@ -108,11 +108,9 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 User foundUser = extract(resultSet);
-                System.out.println(foundUser);
                 allUsers.add(foundUser);
             }
         } catch (SQLException e) {
-            System.out.println(e);
             throw new DaoException("Failed to find all users: ", e);
         }
 
@@ -165,7 +163,6 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new DaoException("create() - Failed to create admin: ", e);
         }
         logger.log(Level.DEBUG, "New admin created: {}", user);
@@ -197,28 +194,30 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int deleteById(Long id) throws DaoException {
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
             statement.setLong(1, id);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("deleteById() - Failed to delete user by id " + id + " : ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     @Override
     public int restoreById(Long id) throws DaoException {
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(RESTORE_BY_ID_QUERY)) {
             statement.setLong(1, id);
-            int rowsUpdated = statement.executeUpdate();
-            logger.log(Level.DEBUG, "Number of rows updated", rowsUpdated);
-            return rowsUpdated;
+            rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("deleteById() - Failed to restore user by id " + id + " : ", e);
+            throw new DaoException("restoreById() - Failed to restore user by id " + id + " : ", e);
         }
+        logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
+        return rowsUpdated;
     }
 
     @Override
@@ -259,14 +258,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int updatePassword(Long id, String password) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PASSWORD_QUERY)) {
             statement.setString(1, password);
             statement.setLong(2, id);
             rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("updatePassword() - Failed to update user's password ", e);
+            throw new DaoException("updatePassword() - Failed to update user's password: ", e);
         }
         logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
         return rowsUpdated;

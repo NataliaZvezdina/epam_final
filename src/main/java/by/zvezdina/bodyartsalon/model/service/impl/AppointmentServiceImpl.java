@@ -4,15 +4,9 @@ import by.zvezdina.bodyartsalon.controller.command.RequestParameter;
 import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.dao.AppointmentDao;
-import by.zvezdina.bodyartsalon.model.dao.FacilityDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.AppointmentDaoImpl;
-import by.zvezdina.bodyartsalon.model.dao.impl.FacilityDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.Appointment;
-import by.zvezdina.bodyartsalon.model.entity.Facility;
-import by.zvezdina.bodyartsalon.model.entity.OrderItem;
-import by.zvezdina.bodyartsalon.model.entity.User;
 import by.zvezdina.bodyartsalon.model.service.AppointmentService;
-import by.zvezdina.bodyartsalon.model.service.FacilityService;
 import by.zvezdina.bodyartsalon.util.XssDefender;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -20,14 +14,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class AppointmentServiceImpl implements AppointmentService {
     private static final Logger logger = LogManager.getLogger();
     private static AppointmentServiceImpl instance;
-    private AppointmentDao appointmentDao = AppointmentDaoImpl.getInstance();
+    private final AppointmentDao appointmentDao = AppointmentDaoImpl.getInstance();
 
     private AppointmentServiceImpl() {
     }
@@ -53,7 +46,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment findById(long id) throws ServiceException {
-        Appointment appointment = null;
+        Appointment appointment;
         try {
             appointment = appointmentDao.findById(id);
         } catch (DaoException e) {
@@ -83,11 +76,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             appointments = appointmentDao.findAllRelevantByPiercerId(piercerId);
         } catch (DaoException e) {
-            throw new ServiceException("findAll() - Failed to find all appointments by piercerId "
+            throw new ServiceException("findAll() - Failed to find all relevant appointments by piercerId "
                     + piercerId, e);
         }
 
-        logger.log(Level.DEBUG, "All found appointments by piercerId {}: {}", piercerId, appointments);
+        logger.log(Level.DEBUG, "All found relevant appointments by piercerId {}: {}",
+                piercerId, appointments);
         return appointments;
     }
 
@@ -97,7 +91,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             appointments = appointmentDao.findAllByPiercerIdForCurrentDate(piercerId);
         } catch (DaoException e) {
-            throw new ServiceException("findAll() - Failed to find all appointments by piercerId "
+            throw new ServiceException("findAll() - Failed to find appointments for current date by piercerId "
                     + piercerId, e);
         }
 
@@ -116,7 +110,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                     + clientId, e);
         }
 
-        logger.log(Level.DEBUG, "All found appointments by clientId  {}: {}", clientId, appointments);
+        logger.log(Level.DEBUG, "All found appointments by clientId  {}: {}",
+                clientId, appointments);
         return appointments;
     }
 
@@ -145,25 +140,25 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         if (foundAppointment == null) {
-            logger.log(Level.DEBUG,"Appointment by datetime {} and by piercer id {} do not exist",
+            logger.log(Level.DEBUG, "Appointment by datetime {} and by piercer id {} do not exist",
                     dateTime, piercerId);
             return false;
         }
-        logger.log(Level.DEBUG,"Appointment by datetime {} and by piercer id {} has been already occupied",
+        logger.log(Level.DEBUG, "Appointment by datetime {} and by piercer id {} has been already occupied",
                 dateTime, piercerId);
         return true;
     }
 
     @Override
     public boolean deleteById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = appointmentDao.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to delete appointment by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Appointment by id {} was deleted: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Appointment by id {} was deleted: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 }

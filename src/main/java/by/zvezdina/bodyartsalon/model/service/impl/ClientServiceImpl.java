@@ -35,12 +35,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client create(Client client) throws ServiceException {
-        Client createdClient = null;
-
+        Client createdClient;
         client.setPassword(PasswordEncoder.encode(client.getPassword()));
         try {
             createdClient = clientDao.create(client);
-            System.out.println(createdClient);
         } catch (DaoException e) {
             throw new ServiceException("Failed to create client: ", e);
         }
@@ -55,14 +53,14 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public boolean verify(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = clientDao.verify(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to verify client by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Client by id {} was verified: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Client by id {} was verified: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
@@ -74,18 +72,21 @@ public class ClientServiceImpl implements ClientService {
         } catch (DaoException e) {
             throw new ServiceException("Failed to find client by id " + id, e);
         }
+        logger.log(Level.DEBUG, "Found client by id {}: {}", id, client);
         return client;
     }
 
     @Override
     public int findDiscountByClientId(long id) throws ServiceException {
+        int discount;
         try {
-            int discount = clientDao.findDiscountByClientId(id);
-            logger.log(Level.DEBUG, "Found discount of client with id {} : {}", id, discount);
-            return discount;
+            discount = clientDao.findDiscountByClientId(id);
+
         } catch (DaoException e) {
             throw new ServiceException("Failed to find client's discount by id " + id, e);
         }
+        logger.log(Level.DEBUG, "Found discount of client with id {} : {}", id, discount);
+        return discount;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public boolean updateClientDiscount(long clientId, long discountId) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = clientDao.updateClientDiscount(clientId, discountId);
         } catch (DaoException e) {
@@ -126,13 +127,13 @@ public class ClientServiceImpl implements ClientService {
         }
 
         logger.log(Level.DEBUG, isValid ? "Input money {} to add are valid " :
-                "Input money {} to add are valid", money);
+                "Input money {} to add are not valid", money);
         return isValid;
     }
 
     @Override
     public boolean updateBalance(long clientId, BigDecimal money) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = clientDao.updateClientBalance(clientId, money);
         } catch (DaoException e) {
@@ -140,8 +141,8 @@ public class ClientServiceImpl implements ClientService {
         }
 
         logger.log(Level.DEBUG, rowsUpdated == 1 ?
-                        "Client by id {} was updated, money added to balance: {}" :
-                        "Failed to update client's balance", clientId, money);
+                "Client by id {} was updated, money added to balance: {}" :
+                "Failed to update client's balance", clientId, money);
         return rowsUpdated == 1;
     }
 }

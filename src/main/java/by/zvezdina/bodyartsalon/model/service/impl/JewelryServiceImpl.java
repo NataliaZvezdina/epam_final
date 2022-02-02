@@ -52,7 +52,7 @@ public class JewelryServiceImpl implements JewelryService {
 
     @Override
     public List<Jewelry> findAll(int page) throws ServiceException {
-        List<Jewelry> jewelryOnPage = new ArrayList<>();
+        List<Jewelry> jewelryOnPage;
         try {
             jewelryOnPage = jewelryDao.findAll(page);
         } catch (DaoException e) {
@@ -65,7 +65,7 @@ public class JewelryServiceImpl implements JewelryService {
 
     @Override
     public Jewelry findById(long id) throws ServiceException {
-        Jewelry jewelry = null;
+        Jewelry jewelry;
         try {
             jewelry = jewelryDao.findById(id);
         } catch (DaoException e) {
@@ -101,27 +101,27 @@ public class JewelryServiceImpl implements JewelryService {
 
     @Override
     public boolean deleteById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = jewelryDao.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to delete jewelry by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Jewelry by id {} was deleted: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Jewelry by id {} was deleted: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
     @Override
     public boolean restoreById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = jewelryDao.restoreById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to restore jewelry by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Jewelry by id {} was restored: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Jewelry by id {} was restored: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
@@ -154,7 +154,8 @@ public class JewelryServiceImpl implements JewelryService {
             formData.put(RequestParameter.PRICE, REPLACEMENT_FOR_INVALID_PRICE);
             isDataValid = false;
         }
-
+        logger.log(Level.DEBUG, isDataValid ? "Input data are valid" :
+                "Input data are invalid");
         return isDataValid;
     }
 
@@ -164,7 +165,7 @@ public class JewelryServiceImpl implements JewelryService {
         List<Jewelry> jewelryList = new ArrayList<>();
 
         for (long id : idSet) {
-            Jewelry jewelry = null;
+            Jewelry jewelry;
             try {
                 jewelry = jewelryDao.findById(id);
             } catch (DaoException e) {
@@ -176,9 +177,10 @@ public class JewelryServiceImpl implements JewelryService {
         BigDecimal totalCost = new BigDecimal(0);
         for (Jewelry jewelry : jewelryList) {
             totalCost = totalCost.add(jewelry.getPrice().multiply(BigDecimal.valueOf(1d - clientDiscount / 100d))
-                    .multiply(BigDecimal.valueOf(items.get(jewelry.getJewelryId()))),
+                            .multiply(BigDecimal.valueOf(items.get(jewelry.getJewelryId()))),
                     MathContext.DECIMAL32);
         }
+        logger.log(Level.DEBUG, "Calculated cost of jewelry set: {}", totalCost);
         return totalCost;
     }
 }

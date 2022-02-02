@@ -70,7 +70,7 @@ public class PiercerDaoImpl implements PiercerDao {
                 }
             }
         } catch (SQLException e) {
-            throw new DaoException("Failed to find piercer: {}", e);
+            throw new DaoException("Failed to find piercer: ", e);
         }
         logger.log(Level.DEBUG, "Found piercer: {}", foundPiercer);
         return foundPiercer;
@@ -142,7 +142,7 @@ public class PiercerDaoImpl implements PiercerDao {
 
     @Override
     public int updateWorkingInfo(Piercer piercer) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_WORKING_INFO)) {
             statement.setString(1, piercer.getPhotoUrl());

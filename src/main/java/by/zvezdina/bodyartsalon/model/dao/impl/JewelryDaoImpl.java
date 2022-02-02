@@ -170,7 +170,7 @@ public class JewelryDaoImpl implements JewelryDao {
 
     @Override
     public int deleteById(long id) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)) {
             statement.setLong(1, id);
@@ -184,7 +184,7 @@ public class JewelryDaoImpl implements JewelryDao {
 
     @Override
     public int restoreById(long id) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(RESTORE_BY_ID_QUERY)) {
             statement.setLong(1, id);

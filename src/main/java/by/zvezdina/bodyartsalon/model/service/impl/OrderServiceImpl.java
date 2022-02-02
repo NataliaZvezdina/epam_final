@@ -4,14 +4,12 @@ import by.zvezdina.bodyartsalon.exception.DaoException;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.dao.OrderDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.OrderDaoImpl;
-import by.zvezdina.bodyartsalon.model.entity.Jewelry;
 import by.zvezdina.bodyartsalon.model.entity.Order;
 import by.zvezdina.bodyartsalon.model.service.OrderService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
@@ -31,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll(int page) throws ServiceException {
-        List<Order> ordersOnPage = new ArrayList<>();
+        List<Order> ordersOnPage;
         try {
             ordersOnPage = orderDao.findAll(page);
         } catch (DaoException e) {
@@ -44,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAllByClientId(int page, long clientId) throws ServiceException {
-        List<Order> cclientOrders = new ArrayList<>();
+        List<Order> cclientOrders;
         try {
             cclientOrders = orderDao.findAllByClientId(page, clientId);
         } catch (DaoException e) {
@@ -57,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(long id) throws ServiceException {
-        Order order = null;
+        Order order;
         try {
             order = orderDao.findById(id);
         } catch (DaoException e) {
@@ -82,27 +80,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean updateStatusByOrderId(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = orderDao.updateStatusByOrderId(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to update order status by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Order by id {} was updated: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Order by id {} was updated: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
     @Override
     public boolean deleteById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = orderDao.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to delete order by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Order by id {} was deleted: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Order by id {} was deleted: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 }

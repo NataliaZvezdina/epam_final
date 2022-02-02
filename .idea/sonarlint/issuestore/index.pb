@@ -3,10 +3,6 @@
 gsrc/main/java/by/zvezdina/bodyartsalon/controller/command/impl/admin/EditPiercerWorkingInfoCommand.java,0\1\015b9130043403dd27adf2935a78e2b2769a4247
 a
 1src/main/webapp/jsp/common/single-appointment.jsp,6\1\61422d8908b3614e03e7a0038dbf579b06a6d074
-|
-Lsrc/main/java/by/zvezdina/bodyartsalon/model/service/AppointmentService.java,4\4\44d808f38d7f0fc35c89edbdaec924c6f4946b94
-…
-Usrc/main/java/by/zvezdina/bodyartsalon/model/service/impl/AppointmentServiceImpl.java,c\2\c2220fadddbf1523ddcd6ea9df22e127007040bb
 @
 bodyartsalon.iml,8\f\8f7405e79fd0746de0b6b48e5048a17c49634368
 7

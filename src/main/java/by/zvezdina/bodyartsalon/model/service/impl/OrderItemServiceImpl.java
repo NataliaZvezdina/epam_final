@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemServiceImpl implements OrderItemService {
@@ -31,7 +30,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public List<OrderItem> findAllByOrderId(long orderId) throws ServiceException {
-        List<OrderItem> ordersItems = new ArrayList<>();
+        List<OrderItem> ordersItems;
         try {
             ordersItems = orderItemDao.findAllByOrderId(orderId);
         } catch (DaoException e) {

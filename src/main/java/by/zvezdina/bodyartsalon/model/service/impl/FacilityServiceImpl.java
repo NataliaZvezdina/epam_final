@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +34,10 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public List<Facility> findAll(int page) throws ServiceException {
-        List<Facility> facilities = new ArrayList<>();
+        List<Facility> facilities;
         try {
             facilities = facilityDao.findAll(page);
         } catch (DaoException e) {
-            e.printStackTrace();
             throw new ServiceException("findAll() - Failed to find all facilities on page " + page, e);
         }
 
@@ -49,7 +47,7 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public Facility findById(long id) throws ServiceException {
-        Facility facility = null;
+        Facility facility;
         try {
             facility = facilityDao.findById(id);
         } catch (DaoException e) {
@@ -85,27 +83,27 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public boolean deleteById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = facilityDao.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to delete facility by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Facility by id {} was deleted: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Facility by id {} was deleted: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
     @Override
     public boolean restoreById(long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = facilityDao.restoreById(id);
         } catch (DaoException e) {
             throw new ServiceException("Failed to restore facility by id " + id, e);
         }
 
-        logger.log(Level.DEBUG, "Facility by id {} was restored: ", rowsUpdated == 1);
+        logger.log(Level.DEBUG, "Facility by id {} was restored: {}", id, rowsUpdated == 1);
         return rowsUpdated == 1;
     }
 
@@ -117,12 +115,10 @@ public class FacilityServiceImpl implements FacilityService {
 
         String safeDescription = xssDefender
                 .safeFormData(formData.get(RequestParameter.FACILITY_DESCRIPTION));
-        System.out.println("safe description ->" + safeDescription);
         formData.put(RequestParameter.FACILITY_DESCRIPTION, safeDescription);
 
         FormValidator validator = FormValidator.getInstance();
         boolean isDataValid = true;
-
 
 
         String price = formData.get(RequestParameter.FACILITY_PRICE);
@@ -130,6 +126,8 @@ public class FacilityServiceImpl implements FacilityService {
             formData.put(RequestParameter.FACILITY_PRICE, REPLACEMENT_FOR_INVALID_PRICE);
             isDataValid = false;
         }
+        logger.log(Level.DEBUG, isDataValid ? "Input data are valid" :
+                "Input data are invalid");
         return isDataValid;
     }
 }

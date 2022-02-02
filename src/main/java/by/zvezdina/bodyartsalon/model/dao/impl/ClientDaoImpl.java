@@ -133,7 +133,7 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public int verify(long id) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_QUERY)) {
             statement.setLong(1, id);
@@ -186,7 +186,7 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public int updateClientDiscount(long clientId, long discountId) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENT_DISCOUNT)) {
             statement.setLong(1, discountId);
@@ -202,7 +202,7 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public int updateClientBalance(long clientId, BigDecimal money) throws DaoException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try (Connection connection = CustomConnectionPool.getInstance().takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENT_BALANCE)) {
             statement.setBigDecimal(1, money);
@@ -210,7 +210,7 @@ public class ClientDaoImpl implements ClientDao {
             rowsUpdated = statement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DaoException("updateClientDiscount() - Failed to update client balance ", e);
+            throw new DaoException("updateClientBalance() - Failed to update client balance ", e);
         }
         logger.log(Level.DEBUG, "Number of rows updated: {}", rowsUpdated);
         return rowsUpdated;

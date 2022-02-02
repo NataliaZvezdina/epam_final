@@ -83,14 +83,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createAdmin(User user) throws ServiceException {
-        User createdAdmin = null;
-
+        User createdAdmin;
         user.setPassword(PasswordEncoder.encode(user.getPassword()));
         try {
             createdAdmin = userDao.createAdmin(user);
         } catch (DaoException e) {
             throw new ServiceException("Failed to create admin: ", e);
         }
+        logger.log(Level.DEBUG, "Created admin: {}", createdAdmin);
         return createdAdmin;
     }
 
@@ -100,18 +100,15 @@ public class UserServiceImpl implements UserService {
         try {
             updatedUser = userDao.update(user);
         } catch (DaoException e) {
-            System.out.println("-----exception");
-            e.printStackTrace();
             throw new ServiceException("update() - Failed to update ", e);
         }
-
         logger.log(Level.DEBUG, "Updated user: {}", updatedUser);
         return updatedUser;
     }
 
     @Override
     public boolean deleteById(Long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = userDao.deleteById(id);
         } catch (DaoException e) {
@@ -124,7 +121,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean restoreById(Long id) throws ServiceException {
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = userDao.restoreById(id);
         } catch (DaoException e) {
@@ -151,7 +148,8 @@ public class UserServiceImpl implements UserService {
             formData.put(RequestParameter.NEW_PASSWORD, EMPTY_STRING);
             isDataValid = false;
         }
-
+        logger.log(Level.DEBUG, isDataValid ? "User's input passwords valid" :
+                "User's input data are invalid");
         return isDataValid;
     }
 
@@ -216,7 +214,8 @@ public class UserServiceImpl implements UserService {
             String safeInfo = xssDefender.safeFormData(formData.get(RequestParameter.INFO_ABOUT));
             formData.put(RequestParameter.INFO_ABOUT, safeInfo);
         }
-
+        logger.log(Level.DEBUG, isDataValid ? "User's input data are valid" :
+                "User's input data are invalid");
         return isDataValid;
     }
 
@@ -256,18 +255,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkUserPassword(Long id, String password) throws ServiceException {
-        User user = null;
+        User user;
         try {
             user = userDao.findById(id);
-            System.out.println(user);
         } catch (DaoException e) {
             throw new ServiceException("checkUserPassword() - Failed to check user's password': ", e);
         }
         String realPassword = user.getPassword();
         String passwordToCheck = PasswordEncoder.encode(password);
-
-        System.out.println("found user: " + user);
-        System.out.println("real password vs password to check " + realPassword.equals(passwordToCheck));
 
         return realPassword.equals(passwordToCheck);
     }
@@ -275,7 +270,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updatePassword(Long id, String password) throws ServiceException {
         String passwordToUpdate = PasswordEncoder.encode(password);
-        int rowsUpdated = 0;
+        int rowsUpdated;
         try {
             rowsUpdated = userDao.updatePassword(id, passwordToUpdate);
 
