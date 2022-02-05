@@ -36,7 +36,7 @@ public class AddPiercerCommand implements Command {
         String lastName = request.getParameter(RequestParameter.LAST_NAME);
         String email = request.getParameter(RequestParameter.EMAIL);
         String imageUrl = request.getParameter(RequestParameter.IMAGE_URL);
-        String infoAbout = request.getParameter(RequestParameter.INFO_ABOUT);
+        String infoAbout = request.getParameter(RequestParameter.INFO_ABOUT).strip();
 
         Map<String, String> formData = new HashMap<>();
         formData.put(RequestParameter.FIRST_NAME, firstName);
@@ -88,8 +88,8 @@ public class AddPiercerCommand implements Command {
                     .userStatus(UserStatus.ACTIVE)
                     .isVerified(true)
                     .photoUrl(formData.get(RequestParameter.IMAGE_URL))
-                            .infoAbout(formData.get(RequestParameter.INFO_ABOUT))
-                                    .build();
+                    .infoAbout(formData.get(RequestParameter.INFO_ABOUT))
+                    .build();
 
             piercerService.create(piercerToCreate);
             return new Router(PagePath.GO_TO_UPDATED_USERS_LIST, Router.RouterType.REDIRECT);

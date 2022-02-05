@@ -48,12 +48,13 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">${image}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="imageUrl"
+            <input type="text" class="form-control" id="exampleFormControlInput1"
+                   required pattern="([^\s]+(\.(?i)(jpe?g|png|gif|bmp))$)" name="imageUrl"
                    value="${requestScope.jewelryToEdit.imageUrl}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${type}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" name="type"
+            <input type="text" class="form-control" id="exampleFormControlInput2" required name="type"
                    value="${requestScope.jewelryToEdit.type}">
         </div>
         <div class="form-group">
@@ -69,7 +70,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${description}</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="description">
                 ${requestScope.jewelryToEdit.description}</textarea>
         </div>
         <c:if test="${requestScope.errorMessage != null}">
@@ -97,6 +98,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

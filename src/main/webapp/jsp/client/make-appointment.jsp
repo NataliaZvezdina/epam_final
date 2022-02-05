@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">${hour}</label>
-            <select class="form-control" id="exampleFormControlSelect2" name="hour">
+            <select class="form-control" id="exampleFormControlSelect2" required name="hour">
                 <option value="10">10.00</option>
                 <option value="11">11.00</option>
                 <option value="12">12.00</option>
@@ -77,32 +77,10 @@
                 <option value="20">20.00</option>
             </select>
         </div>
-        <%--        <div class="form-group">--%>
-        <%--            <label for="exampleFormControlInput3">${date}</label>--%>
-        <%--            <input type="number" min="10" max="20" step="1" class="form-control" id="exampleFormControlInput3" name="hour">--%>
-        <%--        </div>--%>
 
-        <%--        <div class="form-group">--%>
-        <%--            <label for="exampleFormControlInput3">${manufacturer}</label>--%>
-        <%--            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"--%>
-        <%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
-        <%--                   value="${requestScope.jewelryToAdd['manufacturer']}"</c:if>>--%>
-        <%--        </div>--%>
-        <%--        <div class="form-group">--%>
-        <%--            <label for="exampleFormControlInput4">${price}</label>--%>
-        <%--            <input type="number" step="0.01" min="0" max="999.99" class="form-control" id="exampleFormControlInput4" name="price"--%>
-        <%--            <c:if test="${requestScope.jewelryToAdd != null}">--%>
-        <%--                   value="${requestScope.jewelryToAdd['price']}"</c:if>--%>
-        <%--                   required pattern="^[0-9]{1,3}(\.[0-9]{1,2})?$">--%>
-        <%--            <small id="passwordHelpBlockF" class="form-text text-muted" style="color: black">--%>
-        <%--                ${helperPrice}--%>
-        <%--            </small>--%>
-        <%--        </div>--%>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${notices}</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="notes">
-<%--                <c:if test="${requestScope.jewelryToAdd != null}">--%>
-                <%--                    ${requestScope.jewelryToAdd['description']}</c:if>--%>
                 ${requestScope.formData['notes']}
             </textarea>
         </div>
@@ -122,7 +100,6 @@
         </div>
     </form>
 </div>
-
 
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

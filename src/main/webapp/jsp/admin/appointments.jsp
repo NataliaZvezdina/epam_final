@@ -36,14 +36,6 @@
 <div class="sign" style="height: 100vh">
     <c:import url="../fragment/header.jsp"/>
 
-    <%--<c:choose>--%>
-    <%--    <c:when test="empty ${requestScope.appointmentData}">--%>
-    <%--        <div class="container" style="height: 69vh">--%>
-    <%--            <br/><br/><h4 style="color: black">${emptyList}</h4>--%>
-    <%--        </div>--%>
-    <%--    </c:when>--%>
-    <%--    <c:otherwise>--%>
-
     <div class="container" style="height: 90vh">
         <div class="row">
             <table class="table table-striped" style="height: inherit">
@@ -111,10 +103,6 @@
             </nav>
         </div>
     </div>
-    <%--    </c:otherwise>--%>
-    <%--</c:choose>--%>
-
-
     <c:import url="../fragment/footer.jsp"/>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

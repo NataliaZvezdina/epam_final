@@ -1,6 +1,9 @@
 package by.zvezdina.bodyartsalon.controller.command.impl.admin;
 
-import by.zvezdina.bodyartsalon.controller.command.*;
+import by.zvezdina.bodyartsalon.controller.command.Command;
+import by.zvezdina.bodyartsalon.controller.command.PagePath;
+import by.zvezdina.bodyartsalon.controller.command.RequestParameter;
+import by.zvezdina.bodyartsalon.controller.command.Router;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
 import by.zvezdina.bodyartsalon.model.service.UserService;
 import by.zvezdina.bodyartsalon.model.service.impl.UserServiceImpl;

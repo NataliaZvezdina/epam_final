@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput2">${name}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" name="name"
+            <input type="text" class="form-control" id="exampleFormControlInput2" required name="name"
                    value="${requestScope.facilityToAdd['name']}">
         </div>
 
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${description}</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="facilityDescription">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="facilityDescription">
                 ${requestScope.facilityToAdd['facilityDescription']}
             </textarea>
         </div>

@@ -48,13 +48,13 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${type}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" name="type"
+            <input type="text" class="form-control" id="exampleFormControlInput2" required name="type"
             <c:if test="${requestScope.jewelryToAdd != null}">
                    value="${requestScope.jewelryToAdd['type']}"</c:if>>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${manufacturer}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"
+            <input type="text" class="form-control" id="exampleFormControlInput3" required name="manufacturer"
             <c:if test="${requestScope.jewelryToAdd != null}">
                    value="${requestScope.jewelryToAdd['manufacturer']}"</c:if>>
         </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">${description}</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="description">
                 <c:if test="${requestScope.jewelryToAdd != null}">
                     ${requestScope.jewelryToAdd['description']}</c:if></textarea>
         </div>
@@ -90,7 +90,6 @@
     </form>
 </div>
 
-
 <c:import url="../fragment/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -101,6 +100,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-</body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
 </body>
 </html>

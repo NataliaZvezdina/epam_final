@@ -42,10 +42,10 @@ public class OpenOrderCommand implements Command {
             List<OrderItem> orderItems = orderItemService.findAllByOrderId(orderId);
 
             Map<Jewelry, Integer> items = new HashMap<>();
-            for (int i = 0; i < orderItems.size(); i++) {
-                long jewelryId = orderItems.get(i).getJewelryId();
+            for (OrderItem orderItem : orderItems) {
+                long jewelryId = orderItem.getJewelryId();
                 Jewelry jewelry = jewelryService.findById(jewelryId);
-                int quantity = orderItems.get(i).getQuantity();
+                int quantity = orderItem.getQuantity();
                 items.put(jewelry, quantity);
             }
 

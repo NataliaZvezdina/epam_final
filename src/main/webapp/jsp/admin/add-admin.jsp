@@ -86,8 +86,7 @@
             <label for="exampleFormControlInput7">${surname}</label>
             <input type="text" class="form-control" id="exampleFormControlInput7"
                    name="lastName"
-                   required
-                   pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$"
+                   required pattern="^[A-ZА-Я]{1}[a-zа-я]{2,20}$"
                    value="${requestScope.formData['lastName']}">
             <small id="emailHelp4" style="color: black" class="form-text text-muted">${nameHelper}</small>
         </div>

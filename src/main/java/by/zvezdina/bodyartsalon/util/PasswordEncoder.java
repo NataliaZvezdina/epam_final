@@ -8,9 +8,19 @@ import org.apache.logging.log4j.Logger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * The type Password encoder.
+ */
 public class PasswordEncoder {
     private static final Logger logger = LogManager.getLogger();
 
+    /**
+     * Encode string.
+     *
+     * @param password the password
+     * @return the string
+     * @throws ServiceException the service exception
+     */
     public static String encode(String password) throws ServiceException {
         MessageDigest md5 = null;
         try {

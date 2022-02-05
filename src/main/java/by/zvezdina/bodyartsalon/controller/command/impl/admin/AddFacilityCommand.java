@@ -6,12 +6,16 @@ import by.zvezdina.bodyartsalon.model.entity.Facility;
 import by.zvezdina.bodyartsalon.model.service.FacilityService;
 import by.zvezdina.bodyartsalon.model.service.impl.FacilityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddFacilityCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     private static final String INVALID_INPUT = "inputData.invalid";
     private static final String FIRST_PAGE = "1";
     private final FacilityService facilityService = FacilityServiceImpl.getInstance();
@@ -21,7 +25,7 @@ public class AddFacilityCommand implements Command {
 
         String name = request.getParameter(RequestParameter.NAME);
         String priceString = request.getParameter(RequestParameter.FACILITY_PRICE);
-        String description = request.getParameter(RequestParameter.FACILITY_DESCRIPTION);
+        String description = request.getParameter(RequestParameter.FACILITY_DESCRIPTION).strip();
 
         Map<String, String> formData = new HashMap<>();
         formData.put(RequestParameter.NAME, name);
@@ -50,8 +54,8 @@ public class AddFacilityCommand implements Command {
             return new Router(PagePath.GO_TO_FACILITY_DEFINED_PAGE + FIRST_PAGE,
                     Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
+            logger.log(Level.ERROR, "Failed to execute AddFacilityCommand", e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
         }
     }
 }

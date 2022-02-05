@@ -79,15 +79,6 @@ public class CustomConnectionPool {
     }
 
     /**
-     * Gets free connections number.
-     *
-     * @return the free connections number
-     */
-    public int getFreeConnectionsNumber() {
-        return freeConnections.size();
-    }
-
-    /**
      * Take connection.
      *
      * @return the connection

@@ -120,7 +120,6 @@ public class FacilityServiceImpl implements FacilityService {
         FormValidator validator = FormValidator.getInstance();
         boolean isDataValid = true;
 
-
         String price = formData.get(RequestParameter.FACILITY_PRICE);
         if (!validator.checkMoney(price)) {
             formData.put(RequestParameter.FACILITY_PRICE, REPLACEMENT_FOR_INVALID_PRICE);

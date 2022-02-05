@@ -132,7 +132,7 @@ public class Client extends User {
         sb.append(", role=").append(getRole());
         sb.append(", userStatus=").append(getUserStatus());
         sb.append(", isVerified=").append(isVerified());
-        sb.append("money=").append(money);
+        sb.append(", money=").append(money);
         sb.append(", discountId=").append(discountId);
         sb.append('}');
         return sb.toString();

@@ -17,6 +17,9 @@ class FacilityDaoImplTest {
 
     private static final int PAGE = 1;
     private static final long FACILITY_ID = 1;
+    private static final long FACILITY_ID_TO_DELETE = 6;
+    private static final long FACILITY_ID_TO_RESTORE = 6;
+    private static final int EXPECTED_ROWS_UPDATED = 1;
 
     @Mock
     private FacilityDaoImpl facilityDaoMock;
@@ -71,13 +74,7 @@ class FacilityDaoImplTest {
                 .accessible(true)
                 .build();
 
-        expectedUpdated = new Facility.Builder()
-                .facilityId(4)
-                .name("name")
-                .description("updated description")
-                .price(BigDecimal.valueOf(9.99))
-                .accessible(true)
-                .build();
+        expectedUpdated = facilityToUpdate;
 
         expectedOnDefinedPage = List.of(firstElement, secondElement);
     }
@@ -111,10 +108,16 @@ class FacilityDaoImplTest {
     }
 
     @Test
-    void deleteById() {
+    public void deleteByIdTest() throws DaoException {
+        when(facilityDaoMock.deleteById(FACILITY_ID_TO_DELETE)).thenReturn(EXPECTED_ROWS_UPDATED);
+        int actual = facilityDaoMock.deleteById(FACILITY_ID_TO_DELETE);
+        assertThat(actual).isEqualTo(EXPECTED_ROWS_UPDATED);
     }
 
     @Test
-    void restoreById() {
+    public void restoreByIdTest() throws DaoException {
+        when(facilityDaoMock.restoreById(FACILITY_ID_TO_RESTORE)).thenReturn(EXPECTED_ROWS_UPDATED);
+        int actual = facilityDaoMock.restoreById(FACILITY_ID_TO_RESTORE);
+        assertThat(actual).isEqualTo(EXPECTED_ROWS_UPDATED);
     }
 }

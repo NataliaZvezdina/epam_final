@@ -12,28 +12,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-  <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
-  <script type="text/javascript">
-    window.history.forward();
+    <link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
 
-    function noBack() {
-      window.history.forward();
-    }
-  </script>
-  <title>${title}</title>
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+    <title>${title}</title>
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 <c:import url="../fragment/header.jsp"/>
 <br/>
 
 <div class="container" style="height: 68vh; color: black; justify-content: center">
-  <h3>${message}</h3>
+    <h3>${message}</h3>
 </div>
 
 
@@ -47,5 +47,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
         crossorigin="anonymous"></script>
-  </body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+</body>
 </html>
