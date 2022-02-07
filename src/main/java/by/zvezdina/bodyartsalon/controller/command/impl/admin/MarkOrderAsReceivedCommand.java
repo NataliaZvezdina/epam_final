@@ -1,10 +1,10 @@
 package by.zvezdina.bodyartsalon.controller.command.impl.admin;
 
-import by.zvezdina.bodyartsalon.controller.command.*;
+import by.zvezdina.bodyartsalon.controller.command.Command;
+import by.zvezdina.bodyartsalon.controller.command.PagePath;
+import by.zvezdina.bodyartsalon.controller.command.RequestParameter;
+import by.zvezdina.bodyartsalon.controller.command.Router;
 import by.zvezdina.bodyartsalon.exception.ServiceException;
-import by.zvezdina.bodyartsalon.model.entity.Client;
-import by.zvezdina.bodyartsalon.model.entity.Order;
-import by.zvezdina.bodyartsalon.model.entity.Role;
 import by.zvezdina.bodyartsalon.model.service.OrderService;
 import by.zvezdina.bodyartsalon.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.math.BigDecimal;
 
 public class MarkOrderAsReceivedCommand implements Command {
     private static final Logger logger = LogManager.getLogger();

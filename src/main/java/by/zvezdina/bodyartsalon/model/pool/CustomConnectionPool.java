@@ -122,16 +122,13 @@ public class CustomConnectionPool {
      */
     public void destroyPool() {
         for (int i = 0; i < POOL_SIZE; i++) {
-
             try {
                 freeConnections.take().reallyClose();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 logger.log(Level.ERROR, "Failed to destroy pool: ", e);
             }
-
         }
-
         deregisterDrivers();
     }
 

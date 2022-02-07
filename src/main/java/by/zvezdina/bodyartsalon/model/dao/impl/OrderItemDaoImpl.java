@@ -63,7 +63,7 @@ public class OrderItemDaoImpl implements OrderItemDao {
             throw new DaoException("findAll() - Failed to find all orderItems by orderId "
                     + orderId, e);
         }
-
+        orderItems.forEach(System.out::println);
         logger.log(Level.DEBUG, "All orderItems by orderId {}: {}", orderId, orderItems);
         return orderItems;
     }

@@ -63,13 +63,17 @@ public class MakeAppointmentCommand implements Command {
             if (!isDataValid) {
                 request.setAttribute(RequestAttribute.FACILITY_ID, facilityId);
                 request.setAttribute(RequestAttribute.FACILITY_NAME, facility.getName());
+                request.setAttribute(RequestAttribute.PIERCER, piercerId);
                 request.setAttribute(RequestAttribute.PIERCERS_LIST, piercers);
                 request.setAttribute(RequestAttribute.FORM_DATA, formData);
                 request.setAttribute(RequestAttribute.ERROR_MESSAGE, INVALID_INPUT);
                 return new Router(PagePath.MAKE_APPOINTMENT, Router.RouterType.FORWARD);
             }
 
-
+            String REGEXP = "(1[0-9])|20";
+            String parameter = request.getParameter(RequestParameter.HOUR);
+            System.out.println(parameter);
+            System.out.println("Matches -> " + request.getParameter(RequestParameter.HOUR).matches(REGEXP));
             LocalTime time = LocalTime.of(hour, 0);
             LocalDateTime localDateTime = LocalDateTime.of(date, time);
 

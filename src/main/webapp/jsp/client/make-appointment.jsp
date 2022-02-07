@@ -47,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlSelect1">${pierce}</label>
+            <label for="exampleFormControlSelect1">${pierce}</label>${requestScope.piercer}
             <select class="form-control" id="exampleFormControlSelect1" name="piercerId" required>
                 <c:forEach var="piercer" items="${requestScope.piercersList}">
                     <option value="${piercer.userId}">${piercer.firstName} ${piercer.lastName}</option>
@@ -56,8 +56,8 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput2">${date}</label>
-            <jsp:useBean id="day" class="java.util.Date"/>
-            <input type="date" min="${day}" required
+            <jsp:useBean id="now" class="java.util.Date"/>
+            <input type="date" min="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" required
                    class="form-control" id="exampleFormControlInput2" name="date"
                    value="${requestScope.formData['date']}">
         </div>
