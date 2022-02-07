@@ -133,6 +133,9 @@ ____
     -update password
     
     
+    ![Alt-текст](https://github.com/NataliaZvezdina/epam_final/blob/master/src/main/resources/database/body_art_salon.png)
+    
+    
     
     
     
