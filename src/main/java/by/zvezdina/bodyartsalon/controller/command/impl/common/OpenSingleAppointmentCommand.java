@@ -49,6 +49,7 @@ public class OpenSingleAppointmentCommand implements Command {
             return new Router(PagePath.SINGLE_APPOINTMENT, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute OpenSingleAppointmentCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

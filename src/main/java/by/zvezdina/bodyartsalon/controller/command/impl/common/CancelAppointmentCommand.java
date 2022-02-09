@@ -23,6 +23,7 @@ public class CancelAppointmentCommand implements Command {
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error to cancel appointment by id {} in RestoreJewelryCommand",
                     appointmentId, e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

@@ -67,7 +67,8 @@ public class SignInCommand implements Command {
                     }
                     default -> {
                         logger.log(Level.ERROR, "Failed to sign in by user with unknown role");
-                        return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.FORWARD);
+                        request.setAttribute(RequestAttribute.EXCEPTION, "Failed to sign in by user with unknown role");
+                        return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
                     }
                 }
             } else {
@@ -78,7 +79,8 @@ public class SignInCommand implements Command {
 
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute request SignInCommand: ", e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }
 }

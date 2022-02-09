@@ -95,7 +95,8 @@ public class AddPiercerCommand implements Command {
             return new Router(PagePath.GO_TO_UPDATED_USERS_LIST, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute AddPiercerCommand", e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }
 }

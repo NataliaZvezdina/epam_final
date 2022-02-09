@@ -19,6 +19,7 @@ import java.util.Map;
 public class FacilityServiceImpl implements FacilityService {
     private static final Logger logger = LogManager.getLogger();
     private static final String REPLACEMENT_FOR_INVALID_PRICE = "0";
+    private static final String EMPTY_STRING = "";
     private static FacilityServiceImpl instance;
     private final FacilityDao facilityDao = FacilityDaoImpl.getInstance();
 
@@ -125,6 +126,12 @@ public class FacilityServiceImpl implements FacilityService {
             formData.put(RequestParameter.FACILITY_PRICE, REPLACEMENT_FOR_INVALID_PRICE);
             isDataValid = false;
         }
+
+        if (!validator.checkOnMaxLength(safeName)) {
+            formData.put(RequestParameter.NAME, EMPTY_STRING);
+            isDataValid = false;
+        }
+
         logger.log(Level.DEBUG, isDataValid ? "Input data are valid" :
                 "Input data are invalid");
         return isDataValid;

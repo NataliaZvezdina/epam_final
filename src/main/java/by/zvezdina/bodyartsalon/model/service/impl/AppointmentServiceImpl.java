@@ -7,7 +7,9 @@ import by.zvezdina.bodyartsalon.model.dao.AppointmentDao;
 import by.zvezdina.bodyartsalon.model.dao.impl.AppointmentDaoImpl;
 import by.zvezdina.bodyartsalon.model.entity.Appointment;
 import by.zvezdina.bodyartsalon.model.service.AppointmentService;
+import by.zvezdina.bodyartsalon.util.FormValidator;
 import by.zvezdina.bodyartsalon.util.XssDefender;
+import com.oracle.wls.shaded.org.apache.regexp.RE;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 public class AppointmentServiceImpl implements AppointmentService {
     private static final Logger logger = LogManager.getLogger();
+    private static final String REPLACEMENT_FOR_INVALID_HOUR = "10";
     private static AppointmentServiceImpl instance;
     private final AppointmentDao appointmentDao = AppointmentDaoImpl.getInstance();
 
@@ -121,13 +124,23 @@ public class AppointmentServiceImpl implements AppointmentService {
         String safeNotes = xssDefender.safeFormData(formData.get(RequestParameter.NOTES));
         formData.put(RequestParameter.NOTES, safeNotes);
 
+        boolean isDataValid = true;
         String dateString = formData.get(RequestParameter.DATE);
         LocalDate date = LocalDate.parse(dateString);
         if (date.isBefore(LocalDate.now())) {
             formData.put(RequestParameter.DATE, LocalDate.now().toString());
-            return false;
+            isDataValid = false;
         }
-        return true;
+
+        FormValidator validator = FormValidator.getInstance();
+        String hour = formData.get(RequestParameter.HOUR);
+        if (!validator.checkHour(hour)) {
+            formData.put(RequestParameter.HOUR, REPLACEMENT_FOR_INVALID_HOUR);
+            isDataValid = false;
+        }
+        logger.log(Level.DEBUG, isDataValid ? "Input appointment data are valid" :
+                "Input appointment data are invalid");
+        return isDataValid;
     }
 
     @Override

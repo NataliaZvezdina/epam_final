@@ -87,7 +87,7 @@
                         <c:choose>
                             <c:when test="${requestScope.page > 1}">
                                 <a class="page-link"
-                                   href="${pageContext.request.contextPath}/controller?command=show_all_orders&page=${requestScope.page-1}"
+                                   href="${pageContext.request.contextPath}/controller?command=show_orders_by_client&page=${requestScope.page-1}"
                                    aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
@@ -104,7 +104,7 @@
                     <li class="page-item"><span class="page-link">${requestScope.page}</span></li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="${pageContext.request.contextPath}/controller?command=show_all_orders&page=${requestScope.page+1}"
+                           href="${pageContext.request.contextPath}/controller?command=show_orders_by_client&page=${requestScope.page+1}"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>

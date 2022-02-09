@@ -23,8 +23,6 @@ public class GoToMakeAppointmentCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        //Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
         long facilityId = Long.parseLong(request.getParameter(RequestParameter.FACILITY_ID));
 
         try {
@@ -37,6 +35,7 @@ public class GoToMakeAppointmentCommand implements Command {
             return new Router(PagePath.MAKE_APPOINTMENT, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute GoToMakeAppointmentCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

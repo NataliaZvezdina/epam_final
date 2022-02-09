@@ -37,23 +37,28 @@ public class MakeAppointmentCommand implements Command {
     public Router execute(HttpServletRequest request) {
         long facilityId = Long.parseLong(request.getParameter(RequestParameter.FACILITY_ID));
         String notes = request.getParameter(RequestParameter.NOTES).strip();
-        long piercerId = 0;
-        LocalDate date = null;
-        int hour = 0;
+        String paramDate = request.getParameter(RequestParameter.DATE);
+        String paramHour = request.getParameter(RequestParameter.HOUR);
+        String paramPiercerId = request.getParameter(RequestParameter.PIERCER_ID);
 
-        // todo needs validation
+        long piercerId;
+        LocalDate date;
+        int hour;
+
         try {
-            date = LocalDate.parse(request.getParameter(RequestParameter.DATE));
-            hour = Integer.parseInt(request.getParameter(RequestParameter.HOUR));
-            piercerId = Long.parseLong(request.getParameter(RequestParameter.PIERCER_ID));
+            date = LocalDate.parse(paramDate);
+            hour = Integer.parseInt(paramHour);
+            piercerId = Long.parseLong(paramPiercerId);
         } catch (DateTimeParseException | NumberFormatException e) {
             logger.log(Level.ERROR, "Failed to parse input data");
-            return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.REDIRECT);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
 
         Map<String, String> formData = new HashMap<>();
-        formData.put(RequestParameter.DATE, date.toString());
+        formData.put(RequestParameter.DATE, paramDate);
         formData.put(RequestParameter.NOTES, notes);
+        formData.put(RequestParameter.HOUR, paramHour);
 
         boolean isDataValid = appointmentService.validateInputData(formData);
 
@@ -63,17 +68,12 @@ public class MakeAppointmentCommand implements Command {
             if (!isDataValid) {
                 request.setAttribute(RequestAttribute.FACILITY_ID, facilityId);
                 request.setAttribute(RequestAttribute.FACILITY_NAME, facility.getName());
-                request.setAttribute(RequestAttribute.PIERCER, piercerId);
                 request.setAttribute(RequestAttribute.PIERCERS_LIST, piercers);
                 request.setAttribute(RequestAttribute.FORM_DATA, formData);
                 request.setAttribute(RequestAttribute.ERROR_MESSAGE, INVALID_INPUT);
                 return new Router(PagePath.MAKE_APPOINTMENT, Router.RouterType.FORWARD);
             }
 
-            String REGEXP = "(1[0-9])|20";
-            String parameter = request.getParameter(RequestParameter.HOUR);
-            System.out.println(parameter);
-            System.out.println("Matches -> " + request.getParameter(RequestParameter.HOUR).matches(REGEXP));
             LocalTime time = LocalTime.of(hour, 0);
             LocalDateTime localDateTime = LocalDateTime.of(date, time);
 
@@ -87,16 +87,12 @@ public class MakeAppointmentCommand implements Command {
                 return new Router(PagePath.MAKE_APPOINTMENT, Router.RouterType.FORWARD);
             }
 
-            System.out.println("date --> " + date);
-            System.out.println("time --> " + time);
-            System.out.println("LocalDateTime --> " + localDateTime);
-
             HttpSession session = request.getSession();
             Long clientId = (Long) session.getAttribute(SessionAttribute.USER_ID);
 
             Appointment appointment = new Appointment.Builder()
                     .facilityId(facilityId)
-                    .notes(notes)
+                    .notes(formData.get(RequestParameter.NOTES))
                     .datetime(localDateTime)
                     .clientId(clientId)
                     .piercerId(piercerId)

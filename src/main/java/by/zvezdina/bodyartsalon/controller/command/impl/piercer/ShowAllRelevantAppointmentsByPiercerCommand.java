@@ -40,6 +40,7 @@ public class ShowAllRelevantAppointmentsByPiercerCommand implements Command {
             return new Router(PagePath.RELEVANT_APPOINTMENTS_BY_PIERCER, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute ShowAllRelevantAppointmentsByPiercerCommand", e);
+            request.setAttribute(RequestAttribute.VERIFICATION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

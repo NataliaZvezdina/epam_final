@@ -143,8 +143,7 @@ public class JewelryServiceImpl implements JewelryService {
         FormValidator validator = FormValidator.getInstance();
         boolean isDataValid = true;
 
-        String url = formData.get(RequestParameter.IMAGE_URL);
-        if (!validator.checkImageUrl(url)) {
+        if (!validator.checkImageUrl(safeUrl)) {
             formData.put(RequestParameter.IMAGE_URL, EMPTY_STRING);
             isDataValid = false;
         }
@@ -154,6 +153,17 @@ public class JewelryServiceImpl implements JewelryService {
             formData.put(RequestParameter.PRICE, REPLACEMENT_FOR_INVALID_PRICE);
             isDataValid = false;
         }
+
+        if (!validator.checkOnMaxLength(safeType)) {
+            formData.put(RequestParameter.TYPE, EMPTY_STRING);
+            isDataValid = false;
+        }
+
+        if (!validator.checkOnMaxLength(safeManufacturer)) {
+            formData.put(RequestParameter.MANUFACTURER, EMPTY_STRING);
+            isDataValid = false;
+        }
+
         logger.log(Level.DEBUG, isDataValid ? "Input data are valid" :
                 "Input data are invalid");
         return isDataValid;

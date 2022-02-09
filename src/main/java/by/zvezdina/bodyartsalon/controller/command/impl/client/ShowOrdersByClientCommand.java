@@ -30,6 +30,7 @@ public class ShowOrdersByClientCommand implements Command {
             return new Router(PagePath.CLIENT_ORDERS_LIST, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error while finding orders by client: ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

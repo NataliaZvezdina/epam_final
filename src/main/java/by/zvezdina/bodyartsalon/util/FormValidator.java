@@ -20,6 +20,8 @@ public class FormValidator {
 
     private static final String LIMIT_FOR_RECHARGED_MONEY_REGEX = "^[0-9]{1,2}(\\.[0-9]{1,2})?$";
 
+    private static final String LIMIT_FOR_VALID_APPOINTMENT_HOURS = "(1[0-9])|20";
+
     private static final int MAX_STRING_LENGTH = 90;
 
     private static FormValidator instance;
@@ -127,5 +129,15 @@ public class FormValidator {
      */
     public boolean checkOnMaxLength(String field) {
         return field != null && field.length() <= MAX_STRING_LENGTH;
+    }
+
+    /**
+     * Check hour boolean.
+     *
+     * @param hour the hour
+     * @return the boolean
+     */
+    public boolean checkHour(String hour) {
+        return hour != null && hour.matches(LIMIT_FOR_VALID_APPOINTMENT_HOURS);
     }
 }

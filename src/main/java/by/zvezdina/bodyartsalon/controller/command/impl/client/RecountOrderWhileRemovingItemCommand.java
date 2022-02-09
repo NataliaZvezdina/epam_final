@@ -50,6 +50,7 @@ public class RecountOrderWhileRemovingItemCommand implements Command {
             return new Router(PagePath.BASKET, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error to recount order while removing item from basket: ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

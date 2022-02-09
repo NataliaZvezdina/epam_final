@@ -17,6 +17,5 @@ public class ChangeLocaleCommand implements Command {
         }
 
         return new Router((String) session.getAttribute(SessionAttribute.CURRENT_PAGE), Router.RouterType.FORWARD);
-
     }
 }

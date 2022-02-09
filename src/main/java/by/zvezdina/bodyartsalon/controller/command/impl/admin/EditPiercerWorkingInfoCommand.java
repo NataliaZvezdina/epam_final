@@ -21,7 +21,7 @@ public class EditPiercerWorkingInfoCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         String imageUrl = request.getParameter(RequestParameter.IMAGE_URL);
-        String infoAbout = request.getParameter(RequestParameter.INFO_ABOUT);
+        String infoAbout = request.getParameter(RequestParameter.INFO_ABOUT).strip();
 
         Map<String, String> formData = new HashMap<>();
         formData.put(RequestParameter.IMAGE_URL, imageUrl);

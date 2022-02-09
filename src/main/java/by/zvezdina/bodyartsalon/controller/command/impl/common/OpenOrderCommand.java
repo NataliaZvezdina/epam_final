@@ -60,6 +60,7 @@ public class OpenOrderCommand implements Command {
             return new Router(PagePath.SINGLE_ORDER_DETAILS, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute ShowOrderCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

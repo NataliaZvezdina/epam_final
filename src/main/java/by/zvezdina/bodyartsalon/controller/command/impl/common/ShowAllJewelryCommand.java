@@ -28,6 +28,7 @@ public class ShowAllJewelryCommand implements Command {
             return new Router(PagePath.JEWELRY, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute ShowAllJewelryCommand:", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

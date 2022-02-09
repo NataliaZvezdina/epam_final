@@ -23,10 +23,10 @@ public class EditJewelryCommand implements Command {
     public Router execute(HttpServletRequest request) {
         long jewelryId = Long.parseLong(request.getParameter(RequestParameter.JEWELRY_ID));
         String imageUrl = request.getParameter(RequestParameter.IMAGE_URL);
-        String type = request.getParameter(RequestParameter.TYPE);
-        String manufacturer = request.getParameter(RequestParameter.MANUFACTURER);
+        String type = request.getParameter(RequestParameter.TYPE).strip();
+        String manufacturer = request.getParameter(RequestParameter.MANUFACTURER).strip();
         String priceString = request.getParameter(RequestParameter.PRICE);
-        String description = request.getParameter(RequestParameter.DESCRIPTION);
+        String description = request.getParameter(RequestParameter.DESCRIPTION).strip();
         boolean isAvailable = Boolean.parseBoolean(request.getParameter(RequestParameter.IS_AVAILABLE));
         int page = Integer.parseInt(request.getParameter(RequestParameter.PAGE));
 
@@ -64,6 +64,7 @@ public class EditJewelryCommand implements Command {
             return new Router(PagePath.GO_TO_JEWELRY_DEFINED_PAGE + page, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error while updating jewelry ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

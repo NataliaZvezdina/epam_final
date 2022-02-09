@@ -23,7 +23,7 @@ public class AddFacilityCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
 
-        String name = request.getParameter(RequestParameter.NAME);
+        String name = request.getParameter(RequestParameter.NAME).strip();
         String priceString = request.getParameter(RequestParameter.FACILITY_PRICE);
         String description = request.getParameter(RequestParameter.FACILITY_DESCRIPTION).strip();
 
@@ -55,7 +55,8 @@ public class AddFacilityCommand implements Command {
                     Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute AddFacilityCommand", e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }
 }

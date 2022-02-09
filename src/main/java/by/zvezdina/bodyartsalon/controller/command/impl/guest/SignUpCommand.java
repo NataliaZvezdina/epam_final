@@ -88,6 +88,7 @@ public class SignUpCommand implements Command {
             return new Router(PagePath.NEW_CLIENT_SIGNED_UP, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error to execute SignUpCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

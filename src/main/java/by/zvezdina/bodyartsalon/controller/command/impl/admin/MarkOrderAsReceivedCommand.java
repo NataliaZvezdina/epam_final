@@ -20,7 +20,6 @@ public class MarkOrderAsReceivedCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         long orderId = Long.parseLong(request.getParameter(RequestParameter.ORDER_ID));
-        HttpSession session = request.getSession();
 
         try {
             orderService.updateStatusByOrderId(orderId);

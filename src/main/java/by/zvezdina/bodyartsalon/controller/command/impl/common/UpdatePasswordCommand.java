@@ -69,6 +69,7 @@ public class UpdatePasswordCommand implements Command {
             return new Router(PagePath.SIGN_IN, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute UpdatePasswordCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

@@ -19,11 +19,12 @@ public class VerifyCommand implements Command {
         boolean verified;
         try {
             verified = clientService.verify(clientId);
+            request.setAttribute(RequestAttribute.VERIFICATION, verified);
+            return new Router(PagePath.VERIFICATION, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error to verify client in VerifyCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
-        request.setAttribute(RequestAttribute.VERIFICATION, verified);
-        return new Router(PagePath.VERIFICATION, Router.RouterType.FORWARD);
     }
 }

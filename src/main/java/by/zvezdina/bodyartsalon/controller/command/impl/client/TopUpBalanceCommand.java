@@ -44,6 +44,7 @@ public class TopUpBalanceCommand implements Command {
             return new Router(PagePath.BALANCE_RECHARGED, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error while recharging balance: ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

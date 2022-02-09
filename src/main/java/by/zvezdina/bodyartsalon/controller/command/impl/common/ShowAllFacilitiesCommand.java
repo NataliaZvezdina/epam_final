@@ -28,6 +28,7 @@ public class ShowAllFacilitiesCommand implements Command {
             return new Router(PagePath.FACILITIES, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute ShowAllFacilitiesCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

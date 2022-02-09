@@ -23,8 +23,8 @@ public class EditFacilityCommand implements Command {
     public Router execute(HttpServletRequest request) {
         long facilityId = Long.parseLong(request.getParameter(RequestParameter.FACILITY_ID));
 
-        String name = request.getParameter(RequestParameter.NAME);
-        String facilityDescription = request.getParameter(RequestParameter.FACILITY_DESCRIPTION);
+        String name = request.getParameter(RequestParameter.NAME).strip();
+        String facilityDescription = request.getParameter(RequestParameter.FACILITY_DESCRIPTION).strip();
         String priceString = request.getParameter(RequestParameter.FACILITY_PRICE);
 
         boolean isAccessible = Boolean.parseBoolean(request.getParameter(RequestParameter.IS_ACCESSIBLE));
@@ -59,7 +59,8 @@ public class EditFacilityCommand implements Command {
             return new Router(PagePath.GO_TO_FACILITY_DEFINED_PAGE + page, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute EditFacilityCommand", e);
-            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.REDIRECT);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }
 }

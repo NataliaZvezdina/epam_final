@@ -24,7 +24,6 @@ public class OpenProfileCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router router = null;
         long userId = Long.parseLong(request.getParameter(RequestParameter.USER_ID));
         Role role = Role.valueOf(request.getParameter(RequestParameter.USER_ROLE));
 
@@ -36,7 +35,7 @@ public class OpenProfileCommand implements Command {
                 case ADMIN -> {
                     admin = userService.findById(userId);
                     request.setAttribute(RequestAttribute.ADMIN, admin);
-                    router = new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
+                    return new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
                 }
                 case CLIENT -> {
                     client = clientService.findById(userId);
@@ -45,22 +44,23 @@ public class OpenProfileCommand implements Command {
                     request.setAttribute(RequestAttribute.CLIENT, client);
                     request.setAttribute(RequestAttribute.DISCOUNT, discount);
                     request.setAttribute(RequestAttribute.DISCOUNT_LIST, discounts);
-                    router = new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
+                    return new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
                 }
                 case PIERCER -> {
                     piercer = piercerService.findById(userId);
                     request.setAttribute(RequestAttribute.PIERCER, piercer);
-                    router = new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
+                    return new Router(PagePath.OPEN_USER_PROFILE, Router.RouterType.FORWARD);
                 }
                 default -> {
                     logger.log(Level.ERROR, "Failed to open user profile with unknown role");
+                    request.setAttribute(RequestAttribute.EXCEPTION, "Failed to open user profile with unknown role");
                     return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
                 }
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute OpenProfileCommand: ", e);
-            router = new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
-        return router;
     }
 }

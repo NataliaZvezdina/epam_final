@@ -47,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlSelect1">${pierce}</label>${requestScope.piercer}
+            <label for="exampleFormControlSelect1">${pierce}</label>
             <select class="form-control" id="exampleFormControlSelect1" name="piercerId" required>
                 <c:forEach var="piercer" items="${requestScope.piercersList}">
                     <option value="${piercer.userId}">${piercer.firstName} ${piercer.lastName}</option>

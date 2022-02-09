@@ -40,7 +40,8 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput2">${name}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" required name="name"
+            <input type="text" minlength="1" maxlength="90"
+                   class="form-control" id="exampleFormControlInput2" required name="name"
                    value="${requestScope.facilityToAdd['name']}">
         </div>
 
@@ -85,6 +86,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
         integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 </body>
 </html>

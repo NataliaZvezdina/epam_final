@@ -24,6 +24,7 @@ public class GoToEditPiercerWorkingInfoCommand implements Command {
             return new Router(PagePath.EDIT_PIERCER_WORKING_INFO, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute GoToEditPiercerWorkingInfoCommand: ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

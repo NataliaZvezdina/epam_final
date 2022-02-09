@@ -41,6 +41,7 @@ public class UpdateProfileCommand implements Command {
         try {
             userToUpdate = userService.findById(userId);
         } catch (ServiceException e) {
+            logger.log(Level.ERROR, "Failed to execute UpdateProfileCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
@@ -57,56 +58,35 @@ public class UpdateProfileCommand implements Command {
             return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
         }
 
-        String initialLogin = (String) session.getAttribute(SessionAttribute.USER_LOGIN);
-        if (!initialLogin.equals(userToUpdate.getLogin())) {
-            boolean loginExist;
-            try {
-                loginExist = userService.checkIfLoginExist(userToUpdate.getLogin());
-            } catch (ServiceException e) {
-                request.setAttribute(RequestAttribute.EXCEPTION, e);
-                return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
-            }
-
-            if (loginExist) {
-                userToUpdate.setLogin(EMPTY_INPUT);
-                request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
-                request.setAttribute(RequestAttribute.ERROR_MESSAGE, LOGIN_IS_NOT_FREE);
-                return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
-            }
-        }
-
-        String initialEmail = (String) session.getAttribute(SessionAttribute.USER_EMAIL);
-        if (!initialEmail.equals(userToUpdate.getEmail())) {
-            boolean emailExist;
-            try {
-                emailExist = userService.checkIfEmailExist(userToUpdate.getEmail());
-            } catch (ServiceException e) {
-                request.setAttribute(RequestAttribute.EXCEPTION, e);
-                return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
-            }
-
-            if (emailExist) {
-                userToUpdate.setEmail(EMPTY_INPUT);
-                request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
-                request.setAttribute(RequestAttribute.ERROR_MESSAGE, EMAIL_IS_NOT_FREE);
-                return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
-            }
-        }
-
         try {
-            userService.update(userToUpdate);
-            session.setAttribute(SessionAttribute.USER_NAME, userToUpdate.getFirstName());
-            session.setAttribute(SessionAttribute.USER_LAST_NAME, userToUpdate.getLastName());
-            session.setAttribute(SessionAttribute.USER_LOGIN, userToUpdate.getLogin());
-            session.setAttribute(SessionAttribute.USER_EMAIL, userToUpdate.getEmail());
-            switch (userToUpdate.getRole()) {
-                case ADMIN -> {return new Router(PagePath.ADMIN_PROFILE, Router.RouterType.REDIRECT);}
-                case CLIENT -> {return new Router(PagePath.CLIENT_PROFILE, Router.RouterType.REDIRECT);}
-                case PIERCER -> {return new Router(PagePath.PIERCER_PROFILE, Router.RouterType.REDIRECT);}
-                default -> {return new Router(PagePath.ERROR_404_PAGE, Router.RouterType.FORWARD);}
+            String initialLogin = (String) session.getAttribute(SessionAttribute.USER_LOGIN);
+            if (!initialLogin.equals(userToUpdate.getLogin())) {
+                boolean loginExist = userService.checkIfLoginExist(userToUpdate.getLogin());
+                if (loginExist) {
+                    userToUpdate.setLogin(EMPTY_INPUT);
+                    request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
+                    request.setAttribute(RequestAttribute.ERROR_MESSAGE, LOGIN_IS_NOT_FREE);
+                    return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
+                }
             }
+
+            String initialEmail = (String) session.getAttribute(SessionAttribute.USER_EMAIL);
+            if (!initialEmail.equals(userToUpdate.getEmail())) {
+                boolean emailExist = userService.checkIfEmailExist(userToUpdate.getEmail());
+                if (emailExist) {
+                    userToUpdate.setEmail(EMPTY_INPUT);
+                    request.setAttribute(RequestAttribute.USER_TO_UPDATE, userToUpdate);
+                    request.setAttribute(RequestAttribute.ERROR_MESSAGE, EMAIL_IS_NOT_FREE);
+                    return new Router(PagePath.UPDATE_PROFILE, Router.RouterType.FORWARD);
+                }
+            }
+
+            userService.update(userToUpdate);
+            session.invalidate();
+            return new Router(PagePath.SIGN_IN, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute UpdateProfileCommand", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

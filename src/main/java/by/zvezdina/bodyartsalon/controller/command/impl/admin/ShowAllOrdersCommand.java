@@ -28,6 +28,7 @@ public class ShowAllOrdersCommand implements Command {
             return new Router(PagePath.ORDERS, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Error while finding all orders by admin: ", e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

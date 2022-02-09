@@ -25,7 +25,6 @@ import java.util.Map;
 public class CreateOrderCommand implements Command {
     public static final Logger logger = LogManager.getLogger();
     public static final String NEGATIVE_NOTIFICATION = "negative.notification";
-    public static final String ORDER_CREATED_NOTIFICATION = "order.created";
     private final OrderService orderService = OrderServiceImpl.getInstance();
     private final OrderItemService orderItemService = OrderItemServiceImpl.getInstance();
     private final JewelryService jewelryService = JewelryServiceImpl.getInstance();
@@ -76,8 +75,6 @@ public class CreateOrderCommand implements Command {
             session.setAttribute(SessionAttribute.USER_MONEY, client.getMoney());
 
             basket.clear();
-
-            //request.setAttribute(RequestAttribute.ORDER_COST, orderCost);
             return new Router(PagePath.ORDER_CREATED_NOTIFICATION, Router.RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute CreateOrderCommand", e);

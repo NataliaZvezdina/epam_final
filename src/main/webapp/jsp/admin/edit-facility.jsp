@@ -47,7 +47,8 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput2">${name}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" required name="name"
+            <input type="text" minlength="1" maxlength="90"
+                   class="form-control" id="exampleFormControlInput2" required name="name"
                    value="${requestScope.facilityToEdit.name}">
         </div>
 
