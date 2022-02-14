@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+/**
+ * Main controller.
+ */
 @WebServlet(name = "mainController", urlPatterns = {"/controller"})
 public class MainController extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();

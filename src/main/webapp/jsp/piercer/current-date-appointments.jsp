@@ -41,7 +41,7 @@
         </div>
     </c:when>
     <c:otherwise>
-        <div class="container" style="height: 69vh">
+        <div class="container" style="height: 100vh">
             <div class="row">
                 <table class="table table-striped" style="height: inherit">
                     <thead>

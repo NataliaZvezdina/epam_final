@@ -59,7 +59,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput3">${manufacturer}</label>
-            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer"
+            <input type="text" class="form-control" id="exampleFormControlInput3" name="manufacturer" required
                    value="${requestScope.jewelryToEdit.manufacturer}">
         </div>
         <div class="form-group">

@@ -26,28 +26,16 @@
     <br/>
     <div class="row" style="justify-content: space-between">
         <div class="card" style="width: 15rem;">
-            <img src="https://i.ebayimg.com/thumbs/images/g/bI4AAOSwq4VejxQO/s-l300.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <img src="https://media.istockphoto.com/vectors/tattoo-and-piercing-icons-vector-id481563106?k=20&m=481563106&s=612x612&w=0&h=W0Uwmjl-8Hdlz9975ACnWv_hkZszrw9VczVTmapxPE4=" class="card-img-top" alt="...">
         </div>
         <div class="card" style="width: 15rem;">
-            <img src="https://images.squarespace-cdn.com/content/v1/5546cbc9e4b08d5dd934fccc/1526100470195-TABC88QOJM1BUJLGPYVG/EarPiercingDiagram-Website.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD_fzkIn9_o8q6jNFJoUpFBtpVjJJ0WAVmmXmAU282ebI-jPosaS7EjRY7lpdVb0Lj7us&usqp=CAU" class="card-img-top" alt="...">
         </div>
         <div class="card" style="width: 15rem;">
-            <img src="https://cdn.shopify.com/s/files/1/0131/2368/2363/articles/Pierce_of_Art_Price_List_large_93837fcd-2cd1-4452-9f38-15f8f646c5d2_410x.jpg?v=1546814831" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <img src="https://m.media-amazon.com/images/I/71gGBOu6wsS._AC_UL320_.jpg" class="card-img-top" alt="...">
         </div>
         <div class="card" style="width: 15rem;">
-            <img src="https://ae01.alicdn.com/kf/H3d6c5c1961c148ba805760a8f80ea7fag/1PC-Disposable-Sterile-Ear-Piercing-Unit-For-Baby-Ear-Tragus-Piercing-Gun-Little-Children-NO-PAIN.jpg_Q90.jpg_.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
+            <img src="https://media.istockphoto.com/vectors/beauty-and-fashion-medical-vector-illustration-diagram-with-types-of-vector-id980179190?k=20&m=980179190&s=612x612&w=0&h=RrxzqJcAorvj9xWFJjKreo6-i_6_bUJ9Xd4M1FE1Kfw=" class="card-img-top" alt="...">
         </div>
     </div>
 </div>

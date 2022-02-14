@@ -41,7 +41,7 @@ public class ShowAppointmentsForTodayCommand implements Command {
             return new Router(PagePath.RELEVANT_APPOINTMENTS_BY_PIERCER, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Failed to execute ShowAppointmentsForTodayCommand", e);
-            request.setAttribute(RequestAttribute.VERIFICATION, e);
+            request.setAttribute(RequestAttribute.EXCEPTION, e);
             return new Router(PagePath.ERROR_500_PAGE, Router.RouterType.FORWARD);
         }
     }

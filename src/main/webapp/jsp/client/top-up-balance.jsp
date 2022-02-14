@@ -54,7 +54,7 @@
         <div class="form-group mx-sm-3 mb-2">
             <label for="inputPassword2" class="sr-only"></label>
             <input type="number" name="moneyToAdd" step="0.01" min="0" max="99.99"
-                   class="form-control" id="inputPassword2" placeholder="0.0"
+                   class="form-control" id="inputPassword2" placeholder="0.0" required
                    pattern="^[0-9]{1,2}(\.[0-9]{1,2})?$">
         </div>
         <button type="submit" class="btn btn-primary mb-2">${button}</button>
